@@ -1,0 +1,35 @@
+.alert {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-55%, -55%);
+  /* width: 40%; */
+  height: 25rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem;
+  border: 2px solid purple;
+  border-radius: 0.5rem;
+  opacity: 0;
+}
+
+.alert.show {
+  opacity: 1;
+}
+
+.alert > * + * {
+  margin-left: 2rem;
+}
+
+.alert > h4 {
+  font-size: 2rem;
+  color: #000;
+  text-align: center;
+}
+
+.alert > img {
+  width: 20rem;
+  flex-grow: 1;
+}

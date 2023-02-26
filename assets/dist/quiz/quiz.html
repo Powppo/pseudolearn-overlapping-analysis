@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/quiz.css" />
+    <link rel="stylesheet" href="./css/alert.css" />
+    <title>Quiz</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__profile"></div>
+    </header>
+    <main class="quiz">
+      <div class="quiz__description description">
+        <p class="description__question">
+          Studi Kasus: <br />
+          Bagun datar segitiga memiliki rumus luas yaitu L = (alas x tinggi)/2,
+          diketahui suatu segitiga memiliki alas = 5 dan tinggi = 10, berapa
+          luas segitiga tersebut.
+        </p>
+        <div class="description__algorithm algorithm">
+          <h4 class="algorithm__title">Algoritma</h4>
+          <ul class="algorithm__items">
+            <li class="algorithm__item"><button>write(luas)</button></li>
+            <li class="algorithm__item"><button>read(alas)</button></li>
+            <li class="algorithm__item">
+              <button>luas &#8592; 1/2 alas * tinggi</button>
+            </li>
+          </ul>
+        </div>
+        <div class="description__data-type data-type">
+          <h4 class="data-type__title">Tipe Data</h4>
+          <ul class="data-type__items">
+            <li class="data-type__item"><button>int</button></li>
+            <li class="data-type__item"><button>long</button></li>
+            <li class="data-type__item"><button>double</button></li>
+            <li class="data-type__item"><button>float</button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="quiz__answer answer">
+        <table class="answer__content">
+          <tbody>
+            <tr>
+              <th><span>Judul</span></th>
+              <td>hitung_luas_segitiga</td>
+            </tr>
+            <tr>
+              <th><span>Deklarasi</span></th>
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                      <th>luas</th>
+                      <td><span class="answer__item--user">float</span></td>
+                    </tr>
+                    <tr>
+                      <th>alas</th>
+                      <td><span class="answer__item--user">int</span></td>
+                    </tr>
+                    <tr>
+                      <th>tinggi</th>
+                      <td><span class="answer__item--user">int</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="answer__content">
+          <tbody>
+            <tr>
+              <th rowspan="4"><span>Deskripsi/Algoritma</span></th>
+              <td>
+                <span class="answer__item--user">read(alas)</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span>read(tinggi)</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="answer__item--user"
+                  >luas &#8592; 1/2 alas * tinggi</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><span class="answer__item--user">write(luas)</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="answer__tools tools">
+          <button class="tools__button tools__button--check" id="check">
+            Check
+          </button>
+          <button class="tools__button tools__button--submit" id="submit">
+            Submit
+          </button>
+        </div>
+      </div>
+      <!-- ALERT -->
+      <div id="success-alert" class="alert">
+        <h4>Jawaban anda benar, silahkan lanjut ke studi kasus berikutnya</h4>
+        <img src="./images/success.png" alt="success" />
+      </div>
+      <div id="fail-alert" class="alert">
+        <h4>Jawaban anda masih salah, silahkan menyusun ulang</h4>
+        <img src="./images/fail.jpeg" alt="fail" />
+      </div>
+    </main>
+
+    <script src="./js/quiz.js"></script>
+  </body>
+</html>

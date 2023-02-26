@@ -1,0 +1,561 @@
+<?php
+// if (time() >= $soal->waktu_habis) {
+//     //redirect('ujian/list', 'location', 301);
+// }
+?>
+<link rel="stylesheet" href="<?=base_url()?>template/css/base.css" />
+<link rel="stylesheet" href="<?=base_url()?>template/css/quiz.css" />
+<link rel="stylesheet" href="<?=base_url()?>template/css/alert.css" />
+<style>
+      .draggable {
+          background: #f08976;
+          border-radius: 10px;
+          border: 1px solid #eb7b6a;
+          width: 200px;
+          padding: 5px;
+          margin: 3px;
+          text-align:center;
+      }
+
+      .drop-zone {
+          width: 300px;
+          padding: 10px;
+          margin: 10px;
+          height: 20px;
+          background: #eee;
+          border: 2px solid #31364c;
+          min-height: 36px;
+      }
+
+      /* Dragged source element style */
+      .dragged {
+          opacity: .6;
+          border-style: dashed;
+      }
+
+      /* Drag feedback image style */
+      .drag-feedback {
+          background: lightskyblue;
+          border: 1px solid dodgerblue;
+      }
+
+      /* drop zone highlights */
+      .active-zone {
+          background: #fffad6;
+          border: 2px solid #aaa479;
+      }
+
+      .over-zone {
+          background: #ffc6c6;
+          border: 2px solid #931414;
+      }
+
+      /* Style for text drag test area */
+      .drag-text-test {
+          width: 300px;
+          margin: 10px;
+      }
+
+      .drag-text-test textarea {
+          width: 100%;
+          padding: 10px;
+          height: 36px;
+      }
+
+    </style>
+<div class="row">
+    <div class="col-sm-3">
+        
+        <!-- <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Navigasi Soal</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body text-center" id="tampil_jawaban">
+            </div>
+        </div> -->
+    </div>
+    <div class="col-sm-12">
+        <?= form_open('', array('id' => 'ujian')); ?>
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <!-- <h3 class="box-title"><span class="badge bg-blue">Soal #<span id="soalke"></span> </span></h3> -->
+                <div class="box-tools pull-right">
+                    <!-- <span class="badge bg-red">Sisa Waktu <span class="sisawaktu" data-time="<?= $soal->tgl_selesai ?>"></span></span> -->
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <?= $html ?>
+            </div>
+            <div class="box-footer text-center">
+                <a class="action back btn btn-info" rel="0" onclick="return back();"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+                <a class="check btn btn-success" rel="1" onclick="return check_jawaban();">Check</a>
+                <a class="check btn btn-danger" rel="1" onclick="return refresh();">Reload</a>
+                <a class="action next btn btn-info" rel="2" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
+                <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
+                <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
+            </div>
+        </div>
+        <?= form_close(); ?>
+    </div>
+</div>
+<script>
+
+      function check_jawaban() {
+        var err = 0
+        if($('#jenis_1').length > 0) {
+            if ($('#jenis_1 #opsi_jenis_1').length < 1) {
+                err = 1
+                // alert('Urutan Pertama salah')
+                $('#jenis_1').css('background', 'red')
+                alert("Tipe data yang dimasukkan pertama salah"); 
+            }else{
+                $('#jenis_1').css('background', '#efff00')
+            }
+        }
+
+        if($('#jenis_2').length > 0) {
+            if ($('#jenis_2 #opsi_jenis_2').length < 1) {
+                err = 1
+                // alert('Urutan Kedua salah')
+                $('#jenis_2').css('background', 'red')
+                alert("Tipe data yang dimasukkan kedua salah"); 
+            }else{
+                $('#jenis_2').css('background', '#efff00')
+            }
+        }
+
+        if($('#jenis_3').length > 0) {
+            if ($('#jenis_3 #opsi_jenis_3').length < 1) {
+                err = 1
+                // alert('Urutan ketiga salah')
+                $('#jenis_3').css('background', 'red')
+            }else{
+                $('#jenis_3').css('background', '#efff00')
+            }
+        }
+
+        if($('#jenis_4').length > 0) {
+            if ($('#jenis_4 #opsi_jenis_4').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jenis_4').css('background', 'red')
+            }else{
+                $('#jenis_4').css('background', '#efff00')
+            }
+        }
+
+        if($('#jenis_5').length > 0) {
+            if ($('#jenis_5 #opsi_jenis_5').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jenis_5').css('background', 'red')
+            }else{
+                $('#jenis_5').css('background', '#efff00')
+            }
+        }
+
+        if($('#jenis_6').length > 0) {
+            if ($('#jenis_6 #opsi_jenis_6').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jenis_6').css('background', 'red')
+            }else{
+                $('#jenis_6').css('background', '#efff00')
+            }
+        }
+
+        if($('#jenis_7').length > 0) {
+            if ($('#jenis_7 #opsi_jenis_7').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jenis_7').css('background', 'red')
+            }else{
+                $('#jenis_7').css('background', '#efff00')
+            }
+        }
+
+        if($('#jenis_8').length > 0) {
+            if ($('#jenis_8 #opsi_jenis_8').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jenis_8').css('background', 'red')
+            }else{
+                $('#jenis_8').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_a').length > 0) {
+            if ($('#jawaban_a #opsi_a').length < 1) {
+                err = 1
+                // alert('Urutan Pertama salah')
+                $('#jawaban_a').css('background', 'red')
+            }else{
+                $('#jawaban_a').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_b').length > 0) {
+            if ($('#jawaban_b #opsi_b').length < 1) {
+                err = 1
+                // alert('Urutan Kedua salah')
+                $('#jawaban_b').css('background', 'red')
+            }else{
+                $('#jawaban_b').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_c').length > 0) {
+            if ($('#jawaban_c #opsi_c').length < 1) {
+                err = 1
+                // alert('Urutan ketiga salah')
+                $('#jawaban_c').css('background', 'red')
+            }else{
+                $('#jawaban_c').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_d').length > 0) {
+            if ($('#jawaban_d #opsi_d').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_d').css('background', 'red')
+            }else{
+                $('#jawaban_d').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_e').length > 0) {
+            if ($('#jawaban_e #opsi_e').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_e').css('background', 'red')
+            }else{
+                $('#jawaban_e').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_f').length > 0) {
+            if ($('#jawaban_f #opsi_f').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_f').css('background', 'red')
+            }else{
+                $('#jawaban_f').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_g').length > 0) {
+            if ($('#jawaban_g #opsi_g').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_g').css('background', 'red')
+            }else{
+                $('#jawaban_g').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_h').length > 0) {
+            if ($('#jawaban_h #opsi_h').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_h').css('background', 'red')
+            }else{
+                $('#jawaban_h').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_i').length > 0) {
+            if ($('#jawaban_i #opsi_i').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_i').css('background', 'red')
+            }else{
+                $('#jawaban_i').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_j').length > 0) {
+            if ($('#jawaban_j #opsi_j').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_j').css('background', 'red')
+            }else{
+                $('#jawaban_j').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_k').length > 0) {
+            if ($('#jawaban_k #opsi_k').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_k').css('background', 'red')
+            }else{
+                $('#jawaban_k').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_l').length > 0) {
+            if ($('#jawaban_l #opsi_l').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_l').css('background', 'red')
+            }else{
+                $('#jawaban_l').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_m').length > 0) {
+            if ($('#jawaban_m #opsi_m').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_m').css('background', 'red')
+            }else{
+                $('#jawaban_m').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_n').length > 0) {
+            if ($('#jawaban_n #opsi_n').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_n').css('background', 'red')
+            }else{
+                $('#jawaban_n').css('background', '#efff00')
+            }
+        }
+
+        if($('#jawaban_o').length > 0) {
+            if ($('#jawaban_o #opsi_o').length < 1) {
+                err = 1
+                // alert('Urutan Keempat salah')
+                $('#jawaban_o').css('background', 'red')
+            }else{
+                $('#jawaban_o').css('background', '#efff00')
+            }
+        }
+        
+        if(err == 1) {
+            $('#fail-alert').css('display', 'flex');
+            $('#fail-alert').css('opacity', '1');
+        } else {
+            $('#success-alert').css('display', 'flex');
+            $('#success-alert').css('opacity', '1');
+        }
+        var idsoal = $('#id_soal').val();
+        var iduser = $('#id_user').val();
+        $.ajax({
+            url: base_url+'ujian/save_history/' + idsoal + '/' + iduser,
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    $(this).removeAttr('disabled');
+                    reload_ajax();
+                }
+            }
+        });
+      }
+
+    function refresh() {
+        location.reload();
+    }
+
+    function close_alert() {
+        $('#fail-alert').css('display', 'none');
+        $('#fail-alert').css('opacity', '0');
+    }
+
+    function submit_nilai(id, level) {
+        $.getJSON(base_url+'ujian/simpan_hasil/' + id, function (data) {
+            window.location.href = '<?php echo site_url("ujian/list_ujian"); ?>/'+level
+        });
+    }
+  initDragAndDrop();
+
+  function initDragAndDrop() {
+      // Collect all draggable elements and drop zones
+      let draggables = document.querySelectorAll(".draggable");
+      let dropZones = document.querySelectorAll(".drop-zone");
+      initDraggables(draggables);
+      initDropZones(dropZones);
+  }
+
+  function initDraggables(draggables) {
+      for (const draggable of draggables) {
+          initDraggable(draggable);
+      }
+  }
+
+  function initDropZones(dropZones) {
+      for (let dropZone of dropZones) {
+          initDropZone(dropZone);
+      }
+  }
+
+  /**
+   * Set all event listeners for draggable element
+   * https://developer.mozilla.org/en-US/docs/Web/API/DragEvent#Event_types
+   */
+  function initDraggable(draggable) {
+      draggable.addEventListener("dragstart", dragStartHandler);
+      draggable.addEventListener("drag", dragHandler);
+      draggable.addEventListener("dragend", dragEndHandler);
+
+      // set draggable elements to draggable
+      draggable.setAttribute("draggable", "true");
+  }
+
+  /**
+   * Set all event listeners for drop zone
+   * https://developer.mozilla.org/en-US/docs/Web/API/DragEvent#Event_types
+   */
+  function initDropZone(dropZone) {
+      dropZone.addEventListener("dragenter", dropZoneEnterHandler);
+      dropZone.addEventListener("dragover", dropZoneOverHandler);
+      dropZone.addEventListener("dragleave", dropZoneLeaveHandler);
+      dropZone.addEventListener("drop", dropZoneDropHandler);
+  }
+
+  /**
+   * Start of drag operation, highlight drop zones and mark dragged element
+   * The drag feedback image will be generated after this function
+   * https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Drag_operations#dragfeedback
+   */
+  function dragStartHandler(e) {
+      setDropZonesHighlight();
+      this.classList.add('dragged', 'drag-feedback');
+      // we use these data during the drag operation to decide
+      // if we handle this drag event or not
+      e.dataTransfer.setData("type/dragged-box", 'dragged');
+      e.dataTransfer.setData("text/plain", this.textContent.trim());
+      deferredOriginChanges(this, 'drag-feedback');
+  }
+
+  /**
+   * While dragging is active we can do something
+   */
+  function dragHandler() {
+      // do something... if you want
+  }
+
+  /**
+   * Very last step of the drag operation, remove all added highlights and others
+   */
+  function dragEndHandler() {
+      setDropZonesHighlight(false);
+      this.classList.remove('dragged');
+  }
+
+  /**
+   * When entering a drop zone check if it should be allowed to
+   * drop an element here and highlight the zone if needed
+   */
+  function dropZoneEnterHandler(e) {
+      // we can only check the data transfer type, not the value for security reasons
+      // https://www.w3.org/TR/html51/editing.html#drag-data-store-mode
+      if (e.dataTransfer.types.includes('type/dragged-box')) {
+          this.classList.add("over-zone");
+          // The default action of this event is to set the dropEffect to "none" this way
+          // the drag operation would be disallowed here we need to prevent that
+          // if we want to allow the dragged element to be drop here
+          // https://developer.mozilla.org/en-US/docs/Web/API/Document/dragenter_event
+          // https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect
+          e.preventDefault();
+      }
+  }
+
+  /**
+   * When moving inside a drop zone we can check if it should be
+   * still allowed to drop an element here
+   */
+  function dropZoneOverHandler(e) {
+      if (e.dataTransfer.types.includes('type/dragged-box')) {
+          // The default action is similar as above, we need to prevent it
+          e.preventDefault();
+      }
+  }
+
+  /**
+   * When we leave a drop zone we check if we should remove the highlight
+   */
+  function dropZoneLeaveHandler(e) {
+      if (e.dataTransfer.types.includes('type/dragged-box') &&
+          e.relatedTarget !== null &&
+          e.currentTarget !== e.relatedTarget.closest('.drop-zone')) {
+          // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/relatedTarget
+          this.classList.remove("over-zone");
+      }
+  }
+
+  /**
+   * On successful drop event, move the element
+   */
+  function dropZoneDropHandler(e) {
+      // We have checked in the "dragover" handler (dropZoneOverHandler) if it is allowed
+      // to drop here, so it should be ok to move the element without further checks
+      let draggedElement = document.querySelector('.dragged');
+      e.currentTarget.appendChild(draggedElement);
+
+      // We  drop default action (eg. move selected text)
+      // default actions detailed here:
+      // https://www.w3.org/TR/html51/editing.html#drag-and-drop-processing-model
+      e.preventDefault();
+
+  }
+
+
+  /**
+   * Highlight all drop zones or remove highlight
+   */
+  function setDropZonesHighlight(highlight = true) {
+      const dropZones = document.querySelectorAll(".drop-zone");
+      for (const dropZone of dropZones) {
+          if (highlight) {
+              dropZone.classList.add("active-zone");
+          } else {
+              dropZone.classList.remove("active-zone");
+              dropZone.classList.remove("over-zone");
+          }
+      }
+  }
+
+  /**
+   * After the drag feedback image has been generated we can remove the class we added
+   * for the image generation and/or change the originally dragged element
+   * https://javascript.info/settimeout-setinterval#zero-delay-settimeout
+   */
+  function deferredOriginChanges(origin, dragFeedbackClassName) {
+      setTimeout(() => {
+          origin.classList.remove(dragFeedbackClassName);
+      });
+  }
+
+  function checkOrder() {
+  listItems.forEach((listItem, index) => {
+    const personName = listItem.querySelector('.draggable').innerText.trim();
+    if (personName !== richestPeople[index]) {
+      listItem.classList.add('wrong');
+    } else {
+      listItem.classList.add('right');
+      listItem.classList.remove('wrong');
+    }
+  });
+}
+
+
+</script>
+<script src="<?=base_url()?>template/js/quiz.js"></script>
+<script type="text/javascript">
+    var base_url = "<?= base_url(); ?>";
+    var id_tes = "<?= $id_tes; ?>";
+    var widget = $(".step");
+    var total_widget = widget.length;
+</script>
+
+<script src="<?= base_url() ?>assets/dist/js/app/ujian/sheet.js"></script>

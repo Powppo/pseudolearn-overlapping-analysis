@@ -1,0 +1,43 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  list-style: none;
+}
+
+:root {
+  --header-bg: #201e46;
+  --disable: #c3c2c6;
+  --card-bg: #f8f8f8;
+  --completed-status: #2aac16;
+  --incompleted-status: #ffe3c5;
+  --quiz-algorithm: #dff3f3;
+  --header-answer: #314d63;
+  --answer-item: #b55b71;
+  --answer-heading: #f98082;
+  --check: #f2be53;
+  --submit: #37ab98;
+}
+
+body {
+  position: relative;
+  font-family: "Ebrima", Times, serif;
+}
+
+.header {
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 0.5rem 0.75rem;
+}
+
+.header__profile {
+  background-color: var(--disable);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}

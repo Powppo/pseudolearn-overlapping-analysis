@@ -1,0 +1,10 @@
+controller
+ujian.php
+soal.php
+
+view
+add.php
+detail.php
+edit.php
+sheet.php
+config.php

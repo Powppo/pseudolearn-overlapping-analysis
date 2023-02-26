@@ -1,0 +1,82 @@
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6rem;
+  width: 80%;
+  margin: 6rem auto;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  min-width: 250px;
+  height: 16rem;
+  margin: auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Ebrima", Times, serif;
+  background-color: var(--card-bg);
+  border-radius: 15px;
+}
+
+.card__title {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.card__title--lock {
+  pointer-events: none;
+}
+
+.card__image {
+  position: absolute;
+  object-fit: contain;
+  z-index: -1;
+  width: 100%;
+  transform: scale(0.6);
+  opacity: 0.5;
+}
+
+.card__image--completed {
+  opacity: 0;
+}
+
+.card__status {
+  position: absolute;
+  bottom: -1.5rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: bold;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+}
+.card__poin {
+  position: absolute;
+  bottom: -1.5rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: bold;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+}
+
+.card__status--completed {
+  color: white;
+  background-color: var(--completed-status);
+}
+
+.card__status--incompleted {
+  background-color: rgb(212, 0, 0);
+  color: white;
+}
