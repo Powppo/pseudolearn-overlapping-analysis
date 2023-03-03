@@ -42,9 +42,9 @@ class Users extends CI_Controller {
 			'judul'	=> 'User Management',
 			'subjudul'=> 'Data User'
 		];
-		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('_templates/dashboard/_appnew.php', $data);
 		$this->load->view('users/data');
-		$this->load->view('_templates/dashboard/_footer.php');
+		$this->load->view('_templates/dashboard/_footers.php');
 	}
 	
 	public function edit($id)

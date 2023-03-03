@@ -40,9 +40,9 @@ class Level extends CI_Controller
             'subjudul' => 'Kategori soal'
         ];
 
-        $this->load->view('_templates/dashboard/_header.php', $data);
+        $this->load->view('_templates/dashboard/_appnew.php', $data);
         $this->load->view('level/data');
-        $this->load->view('_templates/dashboard/_footer.php');
+        $this->load->view('_templates/dashboard/_footers.php');
     }
 
     public function detail($id)

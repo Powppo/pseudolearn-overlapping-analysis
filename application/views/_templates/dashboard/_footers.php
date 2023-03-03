@@ -1,7 +1,8 @@
-<footer class="page-footer">    
-        <div class="font-13">2018 © <b>AdminCAST</b> - All rights reserved.</div>
-            <a class="px-4" href="http://themeforest.net/item/adminca-responsive-bootstrap-4-3-angular-4-admin-dashboard-template/20912589" target="_blank">BUY PREMIUM</a>
-        <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
+<footer class="page-footer">
+                
+<div class="font-13">2018 © <b>AdminCAST</b> - All rights reserved.</div>
+    <a class="px-4" href="http://themeforest.net/item/adminca-responsive-bootstrap-4-3-angular-4-admin-dashboard-template/20912589" target="_blank">BUY PREMIUM</a>
+<div class="to-top"><i class="fa fa-angle-double-up"></i></div>
                 </footer>
             </div>
         </div>
@@ -142,6 +143,7 @@
         </div>
         <!-- END PAGA BACKDROPS-->
         <!-- CORE PLUGINS-->
+        
         <script src="<?= base_url() ?>assets/backend/html/dist/assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
         <script src="<?= base_url() ?>assets/backend/html/dist/assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
         <script src="<?= base_url() ?>assets/backend/html/dist/assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
@@ -156,6 +158,40 @@
         <script src="<?= base_url() ?>assets/backend/html/dist/assets/js/app.min.js" type="text/javascript"></script>
         <!-- PAGE LEVEL SCRIPTS-->
         <script src="<?= base_url() ?>assets/backend/html/dist/assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
-    </body>
-    
-    </html>
+        <!-- script -->
+        <script src=" https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src=" https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        
+    <!-- Custom JS -->
+			<script type="text/javascript">
+				$.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
+					return {
+						"iStart": oSettings._iDisplayStart,
+						"iEnd": oSettings.fnDisplayEnd(),
+						"iLength": oSettings._iDisplayLength,
+						"iTotal": oSettings.fnRecordsTotal(),
+						"iFilteredTotal": oSettings.fnRecordsDisplay(),
+						"iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+						"iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+					};
+				};
+
+				function ajaxcsrf() {
+					var csrfname = '<?= $this->security->get_csrf_token_name() ?>';
+					var csrfhash = '<?= $this->security->get_csrf_hash() ?>';
+					var csrf = {};
+					csrf[csrfname] = csrfhash;
+					$.ajaxSetup({
+						"data": csrf
+					});
+				}
+
+				function reload_ajax() {
+					table.ajax.reload(null, false);
+				}
+			</script>
+
+			
+			</body>
+
+			</html>

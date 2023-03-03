@@ -3968,6 +3968,7 @@ tbody.collapse.show {
   font-weight: bold;
   line-height: 1;
   color: #fff;
+  background-color: #777;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;

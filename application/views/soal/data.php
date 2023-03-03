@@ -1,15 +1,23 @@
-<div class="box">
-	<div class="box-header with-border">
-		<h3 class="box-title"><?= $subjudul ?></h3>
-		<div class="box-tools pull-right">
-			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-			</button>
-		</div>
-	</div>
-	<div class="box-body">
-		<div class="row">
+<div class="content-wrapper">
+            <!-- START PAGE CONTENT-->
+            <div class="page-heading">
+			<h1 class="page-title"><?= $judul ?>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html"><i class="la la-home font-20"></i></a>
+                    </li>
+                    <li class="breadcrumb-item"><?= $subjudul ?></li>
+                </ol>
+            </div>
+            <div class="page-content fade-in-up" style="width: 100%;">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Master <?= $subjudul ?></div>
+                    </div>
+                    <div class="box-body">
+		<div class="row" style="margin-top: 20px;">
 			<div class="col-sm-4">
-				<button type="button" onclick="bulk_delete()" class="btn btn-flat btn-sm bg-red"><i class="fa fa-trash"></i> Delete</button>
+				<button type="button" onclick="bulk_delete()" class="btn btn-flat btn-sm bg-red"  style="margin-left: 20px; color: #fff;"><i class="fa fa-trash" style="color: #fff;"></i> Delete</button>
 			</div>
 			<div class="form-group col-sm-4 text-center">
 				<?php if ($this->ion_auth->is_admin()) : ?>
@@ -22,8 +30,8 @@
 				<?php endif; ?>
 			</div>
 			<div class="col-sm-4">
-				<div class="pull-right">
-					<a href="<?= base_url('soal/add') ?>" class="btn bg-purple btn-flat btn-sm"><i class="fa fa-plus"></i> Buat Soal</a>
+				<div class="pull-right"  style="margin-right: 20px;">
+					<a href="<?= base_url('soal/add') ?>" class="btn bg-purple btn-flat btn-sm" style="color: #fff;"><i class="fa fa-plus" style="color: #fff;"></i> Buat Soal</a>
 					<button type="button" onclick="reload_ajax()" class="btn btn-flat btn-sm bg-maroon"><i class="fa fa-refresh"></i> Reload</button>
 				</div>
 			</div>

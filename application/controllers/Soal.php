@@ -40,9 +40,9 @@ class Soal extends CI_Controller
             $data['level'] = $this->db->query('select * from tb_level')->result();
         }
 
-        $this->load->view('_templates/dashboard/_header.php', $data);
+        $this->load->view('_templates/dashboard/_appnew.php', $data);
         $this->load->view('soal/data');
-        $this->load->view('_templates/dashboard/_footer.php');
+        $this->load->view('_templates/dashboard/_footers.php');
     }
 
     public function detail($id)
