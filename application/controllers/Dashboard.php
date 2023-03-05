@@ -53,8 +53,8 @@ class Dashboard extends CI_Controller {
 			$data['mahasiswa'] = $this->dashboard->get_where('mahasiswa a', 'nim', $user->username)->row();
 		}
 
-		$this->load->view('_templates/dashboard/_appnew.php', $data);
+		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('dashboard');
-		$this->load->view('_templates/dashboard/_footers.php');
+		$this->load->view('_templates/dashboard/_footer.php');
 	}
 }
