@@ -22,15 +22,12 @@
             <thead>
                 <tr>
                 <th style="text-align: center">No.</th>
-                <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">NIM</th>
-                <th style="text-align: center">Level</th>
+                <!-- <th style="text-align: center">Nama Mahasiswa</th>
+                <th style="text-align: center">NIM</th> -->
                 <th style="text-align: center">Sub Soal</th>
                 <th style="text-align: center">Soal</th>
-                <th style="text-align: center">Poin</th>
-                <th style="text-align: center">Jumlah Percobaan</th>
                 <th style="text-align: center">Confidence Tag</th>
-                <th style="text-align: center">Hasil Ujian</th>
+                <!-- <th style="text-align: center">Confidence Tag</th> -->
                 <!-- <th>Waktu</th>
                 <th>Tanggal</th> -->
                 <th class="text-center">
@@ -42,56 +39,22 @@
                 foreach($detail as $u){ 
                     echo '
                 <tr>
-                    <td style="text-align: center">'.$no++.'</td>     
-                    <td style="text-align: center">'.$u['nama'].'</td>
-                    <td style="text-align: center">'.$u['nim'].'</td>
-                    <td style="text-align: center">'.$u['levels'].'</td>
+                    <td style="text-align: center">'.$no++.'</td>  
                     <td style="text-align: center">'.$u['sub_soal'].'</td>
                     <td style="text-align: justify">'.$u['studi_kasus'].'</td>
-                    <td style="text-align: center">'.$u['poin'].'</td>
-                    <td style="text-align: center">'.$u['jumlah'].'</td>
-                    <td>
-                        <div class="text-center">
-                        <a class="btn btn-xs btn-warning" href="'.base_url().'hasilujian/detailConfidence/'.$u['iduser'].'/'.$u['idsoal'].'">
-                       Lihat
-                        </a> 
-                        </div>
-                    </td>
-                    <td style="text-align: center">';
-                    if ($u['poin'] == "20"){
-                        echo '
-                        <div class="text-center">
-                        <span class="badge bg-green">Sempurna!</span>
-                    </div>
-                            ';
-                           }else if ($u['poin'] <= "0"){
-                        echo '
-                        <div class="text-center">
-                        <span class="badge bg-red">Tingkatkan!</span>
-                    </div>';
-                           }else{
-                        echo '
-                        <div class="text-center">
-                        <span class="badge bg-yellow">Cukup!</span>
-                    </div>';
-                           }
-                        echo'
-                           </td>
+                    <td style="text-align: center">'.$u['confidence'].'</td>
                            </tr>';?>
                            <?php } ?>
             </thead>
         <tfoot>
             <tr>
-                <th style="text-align: center">No.</th>
-                <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">NIM</th>
-                <th style="text-align: center">Level</th>
+            <th style="text-align: center">No.</th>
+                <!-- <th style="text-align: center">Nama Mahasiswa</th>
+                <th style="text-align: center">NIM</th> -->
                 <th style="text-align: center">Sub Soal</th>
                 <th style="text-align: center">Soal</th>
-                <th style="text-align: center">Poin</th>
-                <th style="text-align: center">Jumlah Percobaan</th>
                 <th style="text-align: center">Confidence Tag</th>
-                <th style="text-align: center">Hasil Ujian</th>
+                <!-- <th style="text-align: center">Confidence Tag</th> -->
                 <!-- <th>Waktu</th>
                 <th>Tanggal</th> -->
                 <th class="text-center">

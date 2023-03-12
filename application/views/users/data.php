@@ -1,23 +1,15 @@
-<div class="content-wrapper">
-            <!-- START PAGE CONTENT-->
-            <div class="page-heading">
-                <h1 class="page-title">DataTables</h1>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="index.html"><i class="la la-home font-20"></i></a>
-                    </li>
-                    <li class="breadcrumb-item">DataTables</li>
-                </ol>
-            </div>
-            <div class="page-content fade-in-up" style="width: 100%;">
-                <div class="ibox">
-                    <div class="ibox-head">
-                        <div class="ibox-title">Data Table</div>
-                    </div>
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Master <?=$subjudul?></h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
     <div class="box-body">
         <div class="mt-2 mb-3">
-            <button type="button" onclick="reload_ajax()" class="btn btn-sm btn-flat bg-purple" style="color: #fff; margin-left: 20px;"><i class="fa fa-refresh" style="color: #fff;"></i> Reload</button>
-            <div class="pull-right" style="margin-right: 20px;">
+            <button type="button" onclick="reload_ajax()" class="btn btn-sm btn-flat bg-purple"><i class="fa fa-refresh"></i> Reload</button>
+            <div class="pull-right">
                 <label for="show_me">
                     <input type="checkbox" id="show_me">
                     Tampilkan saya

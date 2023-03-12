@@ -30,9 +30,9 @@ class Mahasiswa extends CI_Controller
 			'judul'	=> 'Mahasiswa',
 			'subjudul' => 'Data Mahasiswa'
 		];
-		$this->load->view('_templates/dashboard/_appnew.php', $data);
+		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('master/mahasiswa/data');
-		$this->load->view('_templates/dashboard/_footers.php');
+		$this->load->view('_templates/dashboard/_footer.php');
 	}
 
 	public function data()

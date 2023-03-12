@@ -94,7 +94,7 @@
             </div>
             <div class="box-footer text-center">
                 <a class="action back btn btn-info" rel="0" onclick="return back();"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
-                <a class="check btn btn-success" rel="1" onclick="return check_jawaban();">Check</a>
+                <a class="check btn btn-success" href="#" data-toggle="modal" data-target="#ModalaAdd" rel="1">Check</a>
                 <a class="check btn btn-danger" rel="1" onclick="return refresh();">Reload</a>
                 <a class="action next btn btn-info" rel="2" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
                 <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
@@ -104,8 +104,82 @@
         <?= form_close(); ?>
     </div>
 </div>
-<script>
 
+ <!-- MODAL ADD -->
+ <div class="modal fade" id="ModalaAdd" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog" style="width:500px; height:300px;">
+            <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel" style="font-family: cursive; font-size: 18px;">Apakah yakin dengan jawaban Anda ?</h4>
+                <center><img src="<?php echo base_url(); ?>template/images/image1.png" style="width:180px; height:180px; text-align:center"></center>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                    <div class="form-check">
+
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="ya" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8>
+                        </label>
+                    </div>
+                </div>
+            </div>
+ 
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true"><h8 style="font-family: cursive;">Tutup</h8></button>
+                    <button class="btn btn-info" id="btn_simpan" onclick="check_jawaban();"><h8 style="font-family: cursive;">Simpan</h8></button>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+        <!--END MODAL ADD-->
+<script>
+// function counterFunc(){
+
+//         var idsoal = $('#id_soal').val();
+//         var iduser = $('#id_user').val();
+//         $.ajax({
+//             url: base_url+'ujian/save_percobaan/' + idsoal + '/' + iduser,
+//             type: 'get',
+//             dataType: 'json',
+//             success: function (data) {
+//                 if (data.status) {
+//                     $(this).removeAttr('disabled');
+//                     reload_ajax();
+//                 }
+//             }
+//         });
+// }
+
+$(document).ready(function(){
+     //Simpan Barang
+     $('#btn_simpan').on('click',function(){ 
+         $('#ModalaAdd').modal('hide');
+            var id_user=$('#id_user').val();
+            var id_soal=$('#id_soal').val();
+            var confidence = $('#confidence:checked').val();
+            $.ajax({
+                type : "POST",
+                url: base_url+'ujian/save_confidence/' + id_soal + '/' + id_user,
+                dataType : "JSON",
+                data : {id_user:id_user ,id_soal:id_soal, confidence:confidence},
+                success: function(data){
+                    $('[name="id_user"]').val("");
+                    $('[name="id_soal"]').val("");
+                    // $('[name="confidence"]').val("");
+                  
+                }
+            });
+            return false;
+        });
+     });
       function check_jawaban() {
         var err = 0
         if($('#jenis_1').length > 0) {
@@ -113,7 +187,7 @@
                 err = 1
                 // alert('Urutan Pertama salah')
                 $('#jenis_1').css('background', 'red')
-                alert("Tipe data yang dimasukkan pertama salah"); 
+                // alert("Tipe data yang dimasukkan pertama salah"); 
             }else{
                 $('#jenis_1').css('background', '#efff00')
             }
@@ -124,7 +198,7 @@
                 err = 1
                 // alert('Urutan Kedua salah')
                 $('#jenis_2').css('background', 'red')
-                alert("Tipe data yang dimasukkan kedua salah"); 
+                // alert("Tipe data yang dimasukkan kedua salah"); 
             }else{
                 $('#jenis_2').css('background', '#efff00')
             }
@@ -360,7 +434,21 @@
                 }
             }
         });
+        var idsoal = $('#id_soal').val();
+        var iduser = $('#id_user').val();
+        $.ajax({
+            url: base_url+'ujian/save_percobaan/' + idsoal + '/' + iduser,
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    $(this).removeAttr('disabled');
+                    reload_ajax();
+                }
+            }
+        });
       }
+ 
 
     function refresh() {
         location.reload();

@@ -40,14 +40,49 @@ class HasilUjian extends CI_Controller {
 
 	public function index()
 	{
+		$results = $this->ujian->getLogAktivitas();
 		$data = [
 			'user' => $this->user,
+			'informasi' => $results,
 			'judul'	=> 'Ujian',
 			'subjudul'=> 'Hasil Ujian',
 		];
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('ujian/hasil');
 		$this->load->view('_templates/dashboard/_footer.php');
+	}
+
+	
+	public function detailLog($id) {
+
+		$detail_data = $this->ujian->detailLogAktivitas($id);
+		$data = [
+			'user' => $this->user,
+			'detail' => $detail_data,
+			'judul'	=> 'Ujian',
+			'subjudul'=> 'Hasil Ujian'
+		];
+
+		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('ujian/details_hasil');
+		$this->load->view('_templates/dashboard/_footer.php');
+
+	}
+
+	public function detailConfidence($id, $id_soal) {
+
+		$detail_conf = $this->ujian->detailLogConfidence($id, $id_soal);
+		$data = [
+			'user' => $this->user,
+			'detail' => $detail_conf,
+			'judul'	=> 'Ujian',
+			'subjudul'=> 'Hasil Ujian'
+		];
+
+		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('ujian/detail_conf');
+		$this->load->view('_templates/dashboard/_footer.php');
+
 	}
 	
 	public function detail($id)
@@ -101,5 +136,10 @@ class HasilUjian extends CI_Controller {
 
 		$this->load->view('ujian/cetak_detail', $data);
 	}
+
+	function get_datalog_json() { //data data produk by JSON object
+		header('Content-Type: application/json');
+		$this->output_json($this->ujian->get_all_datalog());
+	  }
 	
 }

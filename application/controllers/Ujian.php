@@ -318,16 +318,55 @@ class Ujian extends CI_Controller
 		$this->load->view('_templates/topnav/_footer.php');
 	}
 
-	public function save_history($id_soal, $id_user)
+	public function save_history($id_soal)
 	{
+		$id_user = $this->session->userdata('user_id');
+		$user = $this->db->query('select * from users where id = ?', $id_user)->row_array();
+		$soal = $this->db->query('select * from tb_soal where id_soal = ?', $id_soal)->row_array();
+		$point = $this->db->query('select * from nilai where id_soal = ?', $id_soal)->row_array();
 		$count_data = $this->db->query('SELECT * FROM history_ujian WHERE idsoal = ? and iduser = ?', [$id_soal, $id_user])->num_rows();
-		if ($count_data === 0) {
+		$count_datas = $this->db->query('SELECT * FROM nilai WHERE id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
+		$total = $this->db->query('select sum(nilai) as total from nilai where id_user = ?', $id_user)->row_array()['total']; 
+		if ($count_data === 0 & $count_datas === 0) {
 			$this->db->insert('history_ujian', [
 				'idsoal' => $id_soal,
-				'iduser' => $id_user
+				'iduser' => $id_user,
+				'poin' => $soal['bobot'],
+				'id_level' => $soal['id_level'],
+				'first_name' => $user['first_name'],
+				'last_name' => $user['last_name'],
+				'nim' => $user['username'],
+				'total_poin' => $total + 20,
+				'studi_kasus' => $soal['soal'],
+				'sub_soal' => $soal['judul'],
 			]);
 		}
 	}
+
+	public function save_percobaan($id_soal)
+	{
+		// Decrypt Id
+		$id_user = $this->session->userdata('user_id');
+		$click = $this->db->query('select * from history_percobaan where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
+		$data['id_user'] = $id_user;
+		$data['id_soal'] = $id_soal;
+		$data['jumlah'] = $click['jumlah'] + 1;
+			$this->db->insert('history_percobaan', $data);
+		
+		$this->output_json(['status' => true]);
+	}
+
+	function save_confidence($id_soal){
+		$id_user = $this->session->userdata('user_id');
+		$click = $this->db->query('select * from history_percobaan where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
+        $data['id_user'] = $id_user;
+		$data['id_soal'] = $id_soal;
+		$data['confidence'] = $this->input->post('confidence');
+		if ($cfd == 0) {
+			$this->db->insert('confidence_tag', $data);
+		}
+		$this->output_json(['status' => true]);
+    }
 
 	public function index()
 	{
@@ -731,6 +770,7 @@ class Ujian extends CI_Controller
 		$soal = $this->db->query('select * from tb_soal where id_soal = ?', $id)->row_array();
 		$data['id_user'] = $id_user;
 		$data['id_soal'] = $id;
+		$data['id_level'] = $soal['id_level'];
 		$data['nilai'] = $soal['bobot'];
 		$cek = $this->db->query('select * from nilai where id_user = ? and id_soal = ?', [$id_user, $id])->num_rows();
 		if ($cek == 0) {

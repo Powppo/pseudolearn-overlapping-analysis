@@ -94,6 +94,11 @@
 						<i class="fa fa-users"></i> <span>Manajemen Pengguna</span>
 					</a>
 				</li>
+				<li class="<?= $page === 'users' ? "active" : "" ?>">
+					<a href="<?= base_url('hasilujian') ?>" rel="noopener noreferrer">
+						<i class="fa fa-tasks"></i> <span>Log Aktivitas Mahasiswa</span>
+					</a>
+				</li>
 				<!-- <li class="<?= $page === 'settings' ? "active" : "" ?>">
 					<a href="<?= base_url('settings') ?>" rel="noopener noreferrer">
 						<i class="fa fa-cog"></i> <span>Pengaturan</span>
