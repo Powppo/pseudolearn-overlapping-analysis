@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="table-responsive px-4 pb-3" style="border: 0">
-        <table id="mytable" class="w-100 table table-striped table-bordered table-hover">
+        <table id="example" class="w-100 table table-striped table-bordered table-hover">
         <thead>
             <tr>
                 <th style="text-align: center">No.</th>
@@ -92,52 +92,8 @@
 <script src="<?=base_url()?>assets/dist/js/app/ujian/hasil.js"></script> -->
 
 <script>
-    //   $(document).ready(function(){
-        // Setup datatables
-    //     $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
-    //   {
-    //       return {
-    //           "iStart": oSettings._iDisplayStart,
-    //           "iEnd": oSettings.fnDisplayEnd(),
-    //           "iLength": oSettings._iDisplayLength,
-    //           "iTotal": oSettings.fnRecordsTotal(),
-    //           "iFilteredTotal": oSettings.fnRecordsDisplay(),
-    //           "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
-    //           "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
-    //       };
-    //   };
- 
-    //   var table = $("#mytable").dataTable({
-    //       initComplete: function() {
-    //           var api = this.api();
-    //           $('#mytable_filter input')
-    //               .off('.DT')
-    //               .on('input.DT', function() {
-    //                   api.search(this.value).draw();
-    //           });
-    //       },
-    //           oLanguage: {
-    //           sProcessing: "loading..."
-    //       },
-    //           processing: true,
-    //           serverSide: true,
-    //           ajax: {"url": "<?php echo base_url().'hasilujian/get_datalog_json'?>", "type": "POST"},
-    //                 columns: [
-    //                     {"data": "nim"},
-    //                     {"data": "first_name"},
-    //                     {"data": "last_name"},
-    //                     {"data": "total_poin"},
-    //               ],
-    //             order: [[1, 'asc']],
-    //       rowCallback: function(row, data, iDisplayIndex) {
-    //           var info = this.fnPagingInfo();
-    //           var page = info.iPage;
-    //           var length = info.iLength;
-    //           $('td:eq(0)', row).html();
-    //       }
- 
-    //   });
-            // end setup datatables
-    // });
+   $(document).ready(function () {
+    $('#example').DataTable();
+});
 </script>
     

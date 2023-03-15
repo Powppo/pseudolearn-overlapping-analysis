@@ -76,7 +76,8 @@ class HasilUjian extends CI_Controller {
 			'user' => $this->user,
 			'detail' => $detail_conf,
 			'judul'	=> 'Ujian',
-			'subjudul'=> 'Hasil Ujian'
+			'subjudul'=> 'Hasil Ujian',
+			'total' => $this->db->query('select sum(jumlah) as total from history_percobaan where id_user = ? and id_soal = ?', [$id, $id_soal])->row_array()['total'],
 		];
 
 		$this->load->view('_templates/dashboard/_header.php', $data);

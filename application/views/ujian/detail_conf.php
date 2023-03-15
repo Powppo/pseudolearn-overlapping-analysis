@@ -1,3 +1,12 @@
+<style type="text/css">
+<!-- Center Element Horizontal Vertical by igniel.com -->
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+</style>
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title"><?=$subjudul?></h3>
@@ -6,6 +15,15 @@
             </button>
         </div>
     </div>
+    <br>
+    <center><div class="center" style="margin-left: 400px;">
+        <div class="col-sm-5">
+        <div class="alert bg-green">
+            <h4>Jumlah Percobaan<i class="pull-right fa fa-check"></i></h4>
+            <center><span class="d-block"> <span><h4><?= $total ?></h4></span></span></center>
+        </div>
+    </div>
+</div> </center>
     <div class="box-body">
         <div class="row">
             <div class="col-sm-12 mb-4">
@@ -49,14 +67,9 @@
         <tfoot>
             <tr>
             <th style="text-align: center">No.</th>
-                <!-- <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">NIM</th> -->
                 <th style="text-align: center">Sub Soal</th>
                 <th style="text-align: center">Soal</th>
                 <th style="text-align: center">Confidence Tag</th>
-                <!-- <th style="text-align: center">Confidence Tag</th> -->
-                <!-- <th>Waktu</th>
-                <th>Tanggal</th> -->
                 <th class="text-center">
                     <i class="fa fa-search"></i>
                 </th>
@@ -65,5 +78,3 @@
         </table>
     </div>
 </div>
-<!-- 
-<script src="<?=base_url()?>assets/dist/js/app/ujian/hasil.js"></script> -->

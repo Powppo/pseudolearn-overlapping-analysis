@@ -434,6 +434,7 @@ $(document).ready(function(){
                 }
             }
         });
+       
         var idsoal = $('#id_soal').val();
         var iduser = $('#id_user').val();
         $.ajax({
