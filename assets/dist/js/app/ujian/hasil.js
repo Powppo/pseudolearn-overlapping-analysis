@@ -19,19 +19,19 @@ $(document).ready(function() {
     buttons: [
       {
         extend: "copy",
-        exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] }
+        exportOptions: { columns: [0, 1, 2, 3] }
       },
       {
         extend: "print",
-        exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] }
+        exportOptions: { columns: [0, 1, 2, 3] }
       },
       {
         extend: "excel",
-        exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] }
+        exportOptions: { columns: [0, 1, 2, 3] }
       },
       {
         extend: "pdf",
-        exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] }
+        exportOptions: { columns: [0, 1, 2, 3] }
       }
     ],
     oLanguage: {
@@ -45,16 +45,13 @@ $(document).ready(function() {
     },
     columns: [
       {
-        data: "id_ujian",
+        data: "iduser",
         orderable: false,
         searchable: false
       },
-      { data: "nama_ujian" },
-      { data: "nama_matkul" },
-      { data: "nama_dosen" },
-      { data: "jumlah_soal" },
-      { data: "waktu" },
-      { data: "tgl_mulai" },
+      { data: "nama" },
+      { data: "nim" },
+      { data: "total_poin" },
       {
         orderable: false,
         searchable: false
@@ -62,12 +59,12 @@ $(document).ready(function() {
     ],
     columnDefs: [
       {
-        targets: 7,
-        data: "id_ujian",
+        targets: 4,
+        data: "iduser",
         render: function(data, type, row, meta) {
           return `
                     <div class="text-center">
-                        <a class="btn btn-xs bg-maroon" href="${base_url}hasilujian/detail/${data}" >
+                        <a class="btn btn-xs bg-maroon" href="${base_url}hasilujian/detailLog/${data}" >
                             <i class="fa fa-search"></i> Lihat Hasil
                         </a>
                     </div>

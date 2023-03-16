@@ -8,28 +8,25 @@
     </div>
     <div class="box-body">
         <div class="row">
-            <div class="col-sm-4">
-                <button type="button" onclick="reload_ajax()" class="btn bg-purple btn-flat btn-sm"><i class="fa fa-refresh"></i> Reload</button>
-            </div>
+            <!-- <div class="col-sm-4">
+                <button type="button" class="btn bg-purple btn-flat btn-sm reload"><i class="fa fa-refresh"></i> Reload</button>
+            </div> -->
         </div>
     </div>
+  
     <div class="table-responsive px-4 pb-3" style="border: 0">
-        <table id="example" class="w-100 table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
+		<table id="example" class="w-100 table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
                 <th style="text-align: center">No.</th>
                 <th style="text-align: center">Nama Mahasiswa</th>
                 <th style="text-align: center">NIM</th>
-                <!-- <th>Level</th> -->
                 <th style="text-align: center">Total Poin</th>
                 <th style="text-align: center">Hasil Ujian</th>
-                <th style="text-align: center">Aksi</th>
-                <!-- <th>Waktu</th>
-                <th>Tanggal</th> -->
-                <th class="text-center">
-                    <i class="fa fa-search"></i>
-                </th>
-            </tr>   
+                <th style="text-align: center">Aksi</th>              
+                </tr>
+            </thead>
+            <tbody>
             <?php 
                 $no = 1;
                 foreach($informasi as $u){ 
@@ -67,25 +64,10 @@
                         </td>
                            </tr>';
                            ?>
-                           <?php } ?>
-            </thead>
-        <tfoot>
-            <tr>
-            <th style="text-align: center">No.</th>
-                <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">NIM</th>
-                <!-- <th>Level</th> -->
-                <th style="text-align: center">total Poin</th>
-                <th style="text-align: center">Hasil Ujian</th>
-                <th style="text-align: center">Aksi</th>
-                <!-- <th>Waktu</th>
-                <th>Tanggal</th> -->
-                <th class="text-center">
-                    <i class="fa fa-search"></i>
-                </th>
-            </tr>
-        </tfoot>
-        </table>
+                        <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <!-- 
@@ -93,7 +75,18 @@
 
 <script>
    $(document).ready(function () {
-    $('#example').DataTable();
-});
+    table = $('#example').DataTable( {
+        dom:
+      "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+      "<'row'<'col-sm-12'tr>>" +
+      "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [
+            'print',
+            'copy',
+            'excel',
+            'pdf'
+        ]
+    });
+ });
 </script>
     

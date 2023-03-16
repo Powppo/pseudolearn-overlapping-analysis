@@ -10,33 +10,27 @@
         <div class="row">
             <div class="col-sm-12 mb-4">
                 <a href="<?=base_url()?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
-                <button type="button" onclick="reload_ajax()" class="btn btn-flat btn-sm bg-purple"><i class="fa fa-refresh"></i> Reload</button>
-                <div class="pull-right">
+                <!-- <button type="button" onclick="reload_ajax()" class="btn btn-flat btn-sm bg-purple"><i class="fa fa-refresh"></i> Reload</button> -->
+                <!-- <div class="pull-right">
                     <a target="_blank" href="<?=base_url()?>hasilujian/cetak_detail/<?=$this->uri->segment(3)?>" class="btn bg-maroon btn-flat btn-sm">
                         <i class="fa fa-print"></i> Print
                     </a>
-                </div>
+                </div> -->
             </div>
             <div class="table-responsive px-4 pb-3" style="border: 0">
-            <table id="detail_hasil" class="w-100 table table-striped table-bordered table-hover">
+            <table id="details_hasil" class="w-100 table table-striped table-bordered table-hover">
             <thead>
                 <tr>
                 <th style="text-align: center">No.</th>
-                <!-- <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">NIM</th> -->
                 <th style="text-align: center">Level</th>
                 <th style="text-align: center">Sub Soal</th>
                 <th style="text-align: center">Soal</th>
                 <th style="text-align: center">Poin</th>
-                <!-- <th style="text-align: center">Jumlah Percobaan</th> -->
                 <th style="text-align: center">Confidence Tag</th>
                 <th style="text-align: center">Hasil Ujian</th>
-                <!-- <th>Waktu</th>
-                <th>Tanggal</th> -->
-                <th class="text-center">
-                    <i class="fa fa-search"></i>
-                </th>
-            </tr>   
+                </tr>
+            </thead>
+            <tbody>
             <?php 
                 $no = 1;
                 foreach($detail as $u){ 
@@ -74,28 +68,27 @@
                            }
                         echo'
                            </td>
-                           </tr>';?>
-                           <?php } ?>
-            </thead>
-        <tfoot>
-            <tr>
-                <th style="text-align: center">No.</th>
-                <!-- <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">NIM</th> -->
-                <th style="text-align: center">Level</th>
-                <th style="text-align: center">Sub Soal</th>
-                <th style="text-align: center">Soal</th>
-                <th style="text-align: center">Poin</th>
-                <!-- <th style="text-align: center">Jumlah Percobaan</th> -->
-                <th style="text-align: center">Confidence Tag</th>
-                <th style="text-align: center">Hasil Ujian</th>
-                <!-- <th>Waktu</th>
-                <th>Tanggal</th> -->
-                <th class="text-center">
-                    <i class="fa fa-search"></i>
-                </th>
-            </tr>   
-        </tfoot>
+                        </tr>';
+                        ?>
+                    <?php } ?>
+                </tbody>
         </table>
     </div>
 </div>
+
+<script>
+   $(document).ready(function () {
+    $('#details_hasil').DataTable( {
+        dom:
+      "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+      "<'row'<'col-sm-12'tr>>" +
+      "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [
+            'print',
+            'copy',
+            'excel',
+            'pdf'
+        ]
+    });
+});
+</script>
