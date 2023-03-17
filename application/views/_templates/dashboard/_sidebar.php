@@ -94,16 +94,13 @@
 						<i class="fa fa-users"></i> <span>Manajemen Pengguna</span>
 					</a>
 				</li>
-				<li class="<?= $page === 'users' ? "active" : "" ?>">
+				<?php endif; ?>
+				<?php if ($this->ion_auth->is_admin()) : ?>
+				<li class="<?= $page === 'hasilujian' ? "active" : "" ?>">
 					<a href="<?= base_url('hasilujian') ?>" rel="noopener noreferrer">
 						<i class="fa fa-tasks"></i> <span>Log Aktivitas Mahasiswa</span>
 					</a>
 				</li>
-				<!-- <li class="<?= $page === 'settings' ? "active" : "" ?>">
-					<a href="<?= base_url('settings') ?>" rel="noopener noreferrer">
-						<i class="fa fa-cog"></i> <span>Pengaturan</span>
-					</a>
-				</li> -->
 			<?php endif; ?>
 		</ul>
 

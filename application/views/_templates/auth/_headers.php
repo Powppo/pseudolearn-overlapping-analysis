@@ -6,7 +6,7 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
                 <li><a href="<?= base_url() ?>" class="nav-link">Home</a></li>
-                <li><a href="<?= base_url() ?>courses" class="nav-link">Courses</a></li>
+                <!-- <li><a href="<?= base_url() ?>courses" class="nav-link">Courses</a></li> -->
                 <li><a href="<?= base_url() ?>programs" class="nav-link">Programs</a></li>
                 <li><a href="<?= base_url() ?>messages" class="nav-link">Messages</a></li>
               </ul>

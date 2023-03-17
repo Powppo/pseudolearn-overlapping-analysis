@@ -83,11 +83,11 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <!-- <h3 class="box-title"><span class="badge bg-blue">Soal #<span id="soalke"></span> </span></h3> -->
-                <div class="box-tools pull-right">
+                <!-- <div class="box-tools pull-right">
                     <span class="badge bg-red">Sisa Waktu <span class="sisawaktu" data-time="<?= $soal->tgl_selesai ?>"></span></span>
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
-                </div>
+                </div> -->
             </div>
             <div class="box-body">
                 <?= $html ?>
@@ -636,8 +636,6 @@ $(document).ready(function(){
     }
   });
 }
-
-
 </script>
 <script src="<?=base_url()?>template/js/quiz.js"></script>
 <script type="text/javascript">

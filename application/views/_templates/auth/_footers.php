@@ -11,7 +11,7 @@
             <h3>Links</h3>
             <ul class="list-unstyled footer-links">
               <li><a href="<?= base_url() ?>">Home</a></li>
-              <li><a href="<?= base_url() ?>courses">Courses</a></li>
+              <!-- <li><a href="<?= base_url() ?>courses">Courses</a></li> -->
               <li><a href="<?= base_url() ?>programs">Programs</a></li>
               <li><a href="<?= base_url() ?>messages">Messages</a></li>
             </ul>
