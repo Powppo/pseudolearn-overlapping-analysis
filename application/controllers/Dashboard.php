@@ -44,7 +44,7 @@ class Dashboard extends CI_Controller {
 		$data = [
 			'user' 		=> $user,
 			'judul'		=> 'Dashboard',
-			'subjudul'	=> 'Data Mahasiswa',
+			'subjudul'	=> 'Data Statistik',
 		];
 
 		if ( $this->ion_auth->is_admin() ) {

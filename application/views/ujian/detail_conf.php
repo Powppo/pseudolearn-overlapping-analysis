@@ -74,11 +74,31 @@
       "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
       "<'row'<'col-sm-12'tr>>" +
       "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-        buttons: [
-            'print',
-            'copy',
-            'excel',
-            'pdf'
+      buttons: [
+            {
+                extend: 'print',
+                download: 'open',
+                title: 'Detail Confidence Tag',
+                filename: 'log_aktivitas_mhs_print'
+            },
+            {
+                extend: 'copy',
+                download: 'open',
+                title: 'Detail Confidence Tag',
+                filename: 'log_aktivitas_mhs_copy'
+            },
+            {
+                extend: 'excel',
+                download: 'open',
+                title: 'Detail Confidence Tag',
+                filename: 'log_aktivitas_mhs_excel'
+            },
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                title: 'Detail Confidence Tag',
+                filename: 'log_aktivitas_mhs_pdf'
+            }
         ]
     });
 });

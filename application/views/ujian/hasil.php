@@ -57,8 +57,8 @@
                         echo'
                         <td>
                         <div class="text-center">
-                        <a class="btn btn-xs btn-warning" href="'.base_url().'hasilujian/detailLog/'.$u['iduser'].'">
-                        <i class="fa fa-search"></i>
+                        <a class="btn btn-xs btn-warning" style="color: #fff;" href="'.base_url().'hasilujian/detailLog/'.$u['iduser'].'">
+                        <i class="fa fa-eye" style="color: #fff;"></i> Detail
                         </a> 
                         </div>
                         </td>
@@ -81,10 +81,30 @@
       "<'row'<'col-sm-12'tr>>" +
       "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         buttons: [
-            'print',
-            'copy',
-            'excel',
-            'pdf'
+            {
+                extend: 'print',
+                download: 'open',
+                title: 'Log Aktivitas Mahasiswa',
+                filename: 'log_aktivitas_mhs_print'
+            },
+            {
+                extend: 'copy',
+                download: 'open',
+                title: 'Log Aktivitas Mahasiswa',
+                filename: 'log_aktivitas_mhs_copy'
+            },
+            {
+                extend: 'excel',
+                download: 'open',
+                title: 'Log Aktivitas Mahasiswa',
+                filename: 'log_aktivitas_mhs_excel'
+            },
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                title: 'Log Aktivitas Mahasiswa',
+                filename: 'log_aktivitas_mhs_pdf'
+            }
         ]
     });
  });

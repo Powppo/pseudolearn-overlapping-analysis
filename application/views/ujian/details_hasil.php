@@ -43,8 +43,8 @@
                     <td style="text-align: center">'.$u['poin'].'</td>
                     <td>
                         <div class="text-center">
-                        <a class="btn btn-xs btn-warning" href="'.base_url().'hasilujian/detailConfidence/'.$u['iduser'].'/'.$u['idsoal'].'">
-                       Lihat
+                        <a class="btn btn-xs btn-warning" style="color: #fff;" href="'.base_url().'hasilujian/detailConfidence/'.$u['iduser'].'/'.$u['idsoal'].'">
+                        <i class="fa fa-eye" style="color: #fff;"></i> Detail
                         </a> 
                         </div>
                     </td>
@@ -83,11 +83,31 @@
       "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
       "<'row'<'col-sm-12'tr>>" +
       "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-        buttons: [
-            'print',
-            'copy',
-            'excel',
-            'pdf'
+      buttons: [
+            {
+                extend: 'print',
+                download: 'open',
+                title: 'Detail Log Aktivitas Mahasiswa',
+                filename: 'log_aktivitas_mhs_print'
+            },
+            {
+                extend: 'copy',
+                download: 'open',
+                title: 'Detail Log Aktivitas Mahasiswa',
+                filename: 'log_aktivitas_mhs_copy'
+            },
+            {
+                extend: 'excel',
+                download: 'open',
+                title: 'Detail Log Aktivitas Mahasiswa',
+                filename: 'log_aktivitas_mhs_excel'
+            },
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                title: 'Detail Log Aktivitas Mahasiswa',
+                filename: 'log_aktivitas_mhs_pdf'
+            }
         ]
     });
 });

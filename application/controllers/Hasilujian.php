@@ -44,8 +44,8 @@ class HasilUjian extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'informasi' => $results,
-			'judul'	=> 'Ujian',
-			'subjudul'=> 'Hasil Ujian',
+			'judul'	=> 'Hasil Ujian',
+			'subjudul'=> 'Log Aktivitas Mahasiswa',
 		];
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('ujian/hasil');
@@ -59,8 +59,8 @@ class HasilUjian extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_data,
-			'judul'	=> 'Ujian',
-			'subjudul'=> 'Hasil Ujian'
+			'judul'	=> 'Hasil Ujian',
+			'subjudul'=> 'Detail Log Aktivitas Mahasiswa',
 		];
 
 		$this->load->view('_templates/dashboard/_header.php', $data);
@@ -75,8 +75,8 @@ class HasilUjian extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_conf,
-			'judul'	=> 'Ujian',
-			'subjudul'=> 'Hasil Ujian',
+			'judul'	=> 'Hasil Ujian',
+			'subjudul'=> 'Detail Confidence Tag',
 			'total' => $this->db->query('select sum(jumlah) as total from history_percobaan where id_user = ? and id_soal = ?', [$id, $id_soal])->row_array()['total'],
 		];
 
