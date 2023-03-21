@@ -82,6 +82,36 @@
         <?= form_open('', array('id' => 'ujian')); ?>
         <div class="box box-primary">
             <div class="box-header with-border">
+            <label>Waktu Pengerjaan</label>
+            <label id="minutes">00</label>
+            <label id="colon">:</label>
+            <label id="seconds">00</label>
+            <script type="text/javascript">
+                var minutesLabel = document.getElementById("minutes");
+                var secondsLabel = document.getElementById("seconds");
+                var totalSeconds = 0;
+                setInterval(setTime, 1000);
+
+                function setTime()
+                {
+                    ++totalSeconds;
+                    secondsLabel.innerHTML = pad(totalSeconds%60);
+                    minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+                }
+
+                function pad(val)
+                {
+                    var valString = val + "";
+                    if(valString.length < 2)
+                    {
+                        return "0" + valString;
+                    }
+                    else
+                    {
+                        return valString;
+                    }
+                }
+            </script>
                 <!-- <h3 class="box-title"><span class="badge bg-blue">Soal #<span id="soalke"></span> </span></h3> -->
                 <!-- <div class="box-tools pull-right">
                     <span class="badge bg-red">Sisa Waktu <span class="sisawaktu" data-time="<?= $soal->tgl_selesai ?>"></span></span>

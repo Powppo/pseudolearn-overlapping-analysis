@@ -3433,6 +3433,7 @@ table.text-center th {
   background: #fff;
   padding: 20px;
   border-top: 0;
+  margin-top: 5px;
   color: #666;
 }
 .login-box-body .form-control-feedback,

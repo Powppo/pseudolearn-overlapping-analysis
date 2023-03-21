@@ -15,7 +15,7 @@
     <style>
     .blogbugabagi 
     {
-        background-image:url(<?= base_url('/assets/frontend/images/student.jpg') ?>);
+        background-image:url(<?= base_url('/assets/frontend/images/') ?>);
         background-size: cover;
             background-repeat: no-repeat;
             background-position: center;

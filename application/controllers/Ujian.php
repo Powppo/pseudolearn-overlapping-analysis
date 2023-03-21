@@ -380,7 +380,7 @@ class Ujian extends CI_Controller
 			foreach ($soal as $s) {
 				$soal_per = new stdClass();
 				$soal_per->id_soal 		= $s->id_soal;
-				$soal_per->id_level 		= $s->id_level;
+				$soal_per->id_level 	= $s->id_level;
 				$soal_per->soal 		= $s->soal;
 				$soal_per->judul 		= $s->judul;
 				$soal_per->opsi_a 		= $s->opsi_a;
@@ -681,13 +681,15 @@ class Ujian extends CI_Controller
 					</div>
 					<!-- ALERT -->
 					<div id="success-alert" class="alert" style="display: none;">
-						<h4>Jawaban anda benar, silahkan lanjut ke studi kasus berikutnya</h4>
+						<h4>Jawaban Anda benar. Silahkan lanjut ke studi kasus berikutnya!</h4>
 						<img src="'.base_url().'template/images/success.png" alt="success" />
+						<h3><b> POIN ANDA <b></h3>
 						<button type="button" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
 					</div>
 					<div id="fail-alert" class="alert" style="display: none;">
-						<h4>Jawaban anda masih salah, silahkan menyusun ulang</h4>
+						<h4>Jawaban Anda masih salah. Silahkan menyusun ulang!</h4>
 						<img src="'.base_url().'template/images/fail.jpeg" alt="fail" />
+						<h3><b> Anda Belum Mendapatkan Poin! <b></h3>
 						<button type="button" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>
 					</div>
 				</main>';

@@ -75,7 +75,7 @@
 			<?php if ($this->ion_auth->in_group('mahasiswa')) : ?>
 				<li class="<?= $page === 'ujian' ? "active" : "" ?>">
 					<a href="<?= base_url('ujian/list_level') ?>" rel="noopener noreferrer">
-						<i class="fa fa-chrome"></i> <span>Ujian</span>
+						<i class="fa fa-chrome"></i> <span>Latihan Soal</span>
 					</a>
 				</li>
 			<?php endif; ?>
