@@ -343,6 +343,18 @@ class Ujian extends CI_Controller
 		}
 	}
 
+	public function save_detail_confidence($id_soal)
+	{
+		$id_user = $this->session->userdata('user_id');
+		$confidence = $this->db->query('select c.confidence, cd.condition from confidence_tag c inner join conditions cd on c.id_soal = cd.id_soal')->num_rows();
+		$this->db->insert('detail_confidence_tag', [
+		'id_soal' => $id_soal,
+		'id_user' => $id_user,
+		'confidence' => $confidence['confidence'],
+		'status_jawaban' => $confidence['condition'],
+	]);
+}
+
 	public function save_percobaan($id_soal)
 	{
 		// Decrypt Id
@@ -358,15 +370,32 @@ class Ujian extends CI_Controller
 
 	function save_confidence($id_soal){
 		$id_user = $this->session->userdata('user_id');
-		$click = $this->db->query('select * from history_percobaan where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
+		$click = $this->db->query('select * from confidence_tag where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
         $data['id_user'] = $id_user;
 		$data['id_soal'] = $id_soal;
 		$data['confidence'] = $this->input->post('confidence');
-		if ($cfd == 0) {
+		$data['waktu'] = $this->input->post('waktu');
 			$this->db->insert('confidence_tag', $data);
-		}
 		$this->output_json(['status' => true]);
     }
+
+	function save_condition($id_soal){
+		$id_user = $this->session->userdata('user_id');
+		$click = $this->db->query('select * from users where id = ?', $id_user)->row_array();
+		$this->db->insert('conditions', [
+			'id_soal' => $id_soal,
+			'id_user' => $id_user,
+			'username' => $click['username'],
+			'status_jawaban' => $this->input->post('condition'),
+		]);
+		// $data['id_user'] => $click['username'];
+		// $data['id_soal'] = $id_soal;
+		// $data['condition'] = $this->input->post('condition');
+		// 	$this->db->insert('conditions', $data);
+		$this->output_json(['status' => true]);
+    }
+
+
 
 	public function index()
 	{
@@ -681,16 +710,14 @@ class Ujian extends CI_Controller
 					</div>
 					<!-- ALERT -->
 					<div id="success-alert" class="alert" style="display: none;">
-						<h4>Jawaban Anda benar. Silahkan lanjut ke studi kasus berikutnya!</h4>
+						<h4>Jawaban anda benar, silahkan lanjut ke studi kasus berikutnya</h4>
 						<img src="'.base_url().'template/images/success.png" alt="success" />
-						<h3><b> POIN ANDA <b></h3>
-						<button type="button" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
+						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
 					</div>
 					<div id="fail-alert" class="alert" style="display: none;">
-						<h4>Jawaban Anda masih salah. Silahkan menyusun ulang!</h4>
+						<h4>Jawaban anda masih salah, silahkan menyusun ulang</h4>
 						<img src="'.base_url().'template/images/fail.jpeg" alt="fail" />
-						<h3><b> Anda Belum Mendapatkan Poin! <b></h3>
-						<button type="button" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>
+						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>
 					</div>
 				</main>';
 			}

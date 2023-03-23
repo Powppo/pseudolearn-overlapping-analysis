@@ -14,6 +14,7 @@ class Mahasiswa extends CI_Controller
 		}
 		$this->load->library(['datatables', 'form_validation']); // Load Library Ignited-Datatables
 		$this->load->model('Master_model', 'master');
+		$this->load->model('Kelas_model', 'kelas');
 		$this->form_validation->set_error_delimiters('', '');
 	}
 
@@ -30,14 +31,20 @@ class Mahasiswa extends CI_Controller
 			'judul'	=> 'Mahasiswa',
 			'subjudul' => 'Data Mahasiswa'
 		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+        }
+
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('master/mahasiswa/data');
 		$this->load->view('_templates/dashboard/_footer.php');
 	}
 
-	public function data()
+	public function data($id = null)
 	{
-		$this->output_json($this->master->getDataMahasiswa(), false);
+		$this->output_json($this->master->getDataMahasiswa($id), false);
 	}
 
 	public function add()
@@ -47,6 +54,17 @@ class Mahasiswa extends CI_Controller
 			'judul'	=> 'Mahasiswa',
 			'subjudul' => 'Tambah Data Mahasiswa'
 		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            // $data['dosen'] = $this->soal->getAllDosen();
+            $data['tb_kelas'] = $this->kelas->getAllkelas();
+        } else {
+            //Jika bukan maka matkul dipilih otomatis sesuai matkul dosen
+            // $data['dosen'] = $this->soal->getMatkulDosen($user->username);
+            $data['tb_kelas'] = $this->kelas->getAllkelas();
+        }
+
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('master/mahasiswa/add');
 		$this->load->view('_templates/dashboard/_footer.php');
@@ -61,6 +79,17 @@ class Mahasiswa extends CI_Controller
 			'subjudul'	=> 'Edit Data Mahasiswa',
 			'mahasiswa' => $mhs
 		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            // $data['dosen'] = $this->soal->getAllDosen();
+            $data['tb_kelas'] = $this->kelas->getAllkelas();
+        } else {
+            //Jika bukan maka matkul dipilih otomatis sesuai matkul dosen
+            // $data['dosen'] = $this->soal->getMatkulDosen($user->username);
+            $data['tb_kelas'] = $this->kelas->getAllkelas();
+        }
+
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('master/mahasiswa/edit');
 		$this->load->view('_templates/dashboard/_footer.php');
@@ -109,6 +138,7 @@ class Mahasiswa extends CI_Controller
 				'email' 		=> $this->input->post('email', true),
 				'nama' 			=> $this->input->post('nama', true),
 				'jenis_kelamin' => $this->input->post('jenis_kelamin', true),
+				'id_kelas' => $this->input->post('id_kelas', true),
 			];
 			if ($method === 'add') {
 				$action = $this->master->create('mahasiswa', $input);
@@ -146,6 +176,7 @@ class Mahasiswa extends CI_Controller
 		$last_name = end($nama);
 		
 		$username = $data->nim;
+		// $kelas = $data->id_kelas;
 		$password = $data->nim;
 		$email = $data->email;
 		$additional_data = [
@@ -229,7 +260,7 @@ class Mahasiswa extends CI_Controller
 					'nama' => $sheetData[$i][1],
 					'email' => $sheetData[$i][2],
 					'jenis_kelamin' => $sheetData[$i][3],
-					'kelas_id' => $sheetData[$i][4]
+					'id_kelas' => $sheetData[$i][4]
 				];
 			}
 
@@ -249,7 +280,7 @@ class Mahasiswa extends CI_Controller
 				'nama' => $d->nama,
 				'email' => $d->email,
 				'jenis_kelamin' => $d->jenis_kelamin,
-				'kelas_id' => $d->kelas_id
+				'id_kelas' => $d->id_kelas
 			];
 		}
 

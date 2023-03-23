@@ -168,10 +168,12 @@ class Ujian_model extends CI_Model
     }
 
     public function detailLogAktivitas($id) {
-        $this->db->select('l.nama as levels, s.id_soal as idsoal, n.id_user as iduser, s.soal as studi_kasus, s.judul as sub_soal, n.nilai as poin, SUM(p.jumlah) AS jumlah');
+        $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
+        $this->db->select('u.username as nim, l.nama as levels, s.id_soal as idsoal, n.id_user as iduser, s.soal as studi_kasus, s.judul as sub_soal, n.nilai as poin, SUM(p.jumlah) AS jumlah');
         // $this->db->select_max('c.id');
         $this->db->from('history_percobaan p');
         $this->db->join('nilai n', 'n.id_soal= p.id_soal');
+        $this->db->join('users u', 'u.id = n.id_user');
         $this->db->join('tb_level l', 'n.id_level=l.id_level');
         $this->db->join('tb_soal s', 's.id_soal = n.id_soal');
         $this->db->where('n.id_user', $id);
@@ -195,9 +197,36 @@ class Ujian_model extends CI_Model
         $this->db->select('s.soal as studi_kasus, s.judul as sub_soal, c.confidence');
         // $this->db->select_max('c.id');
         $this->db->from('tb_soal as s');
-        $this->db->join('confidence_tag c', 's.id_soal = c.id_soal');
+        $this->db->join('confidence_tag c', 's.id_soal = c.id_soal', 'left');
+        // $this->db->join('conditions cd', 's.id_soal = cd.id_soal', 'left');
         $this->db->where('c.id_user', $id);
         $this->db->where('c.id_soal', $id_soal);
+        return $this->db->get()->result_array();
+    }
+
+    public function loghistory() {
+        $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
+        $this->db->distinct('l.nama');
+        $this->db->select('u.username as nim, l.nama as levels, l.id_level as id_level, m.id_kelas, k.nama as nama_kelas, s.id_soal as idsoal, n.id_user as iduser, s.soal as studi_kasus, s.judul as sub_soal, n.nilai as poin, SUM(p.jumlah) AS jumlah');
+        // $this->db->select_max('c.id');
+        $this->db->from('history_percobaan p');
+        $this->db->join('nilai n', 'n.id_soal= p.id_soal');
+        $this->db->join('users u', 'u.id = n.id_user');
+        $this->db->join('mahasiswa m', 'm.nim = u.username');
+        $this->db->join('tb_kelas k', 'm.id_kelas = k.id_kelas');
+        $this->db->join('tb_level l', 'n.id_level=l.id_level');
+        $this->db->join('tb_soal s', 's.id_soal = n.id_soal');
+        $this->db->group_by('p.id_user');
+        $this->db->group_by('p.id_soal');
+        return $this->db->get()->result_array();
+    }
+
+    public function detailLogConditions($id, $id_soal) {
+        $this->db->select('cd.status_jawaban as details');
+        $this->db->from('conditions cd');
+        $this->db->join('tb_soal s', 's.id_soal = cd.id_soal', 'left');
+        $this->db->where('cd.id_user', $id);
+        $this->db->where('cd.id_soal', $id_soal);
         return $this->db->get()->result_array();
     }
 

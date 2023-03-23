@@ -19,19 +19,19 @@ $(document).ready(function () {
     buttons: [
       {
         extend: "copy",
-        exportOptions: { columns: [1, 2, 3] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
       },
       {
         extend: "print",
-        exportOptions: { columns: [1, 2, 3] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
       },
       {
         extend: "excel",
-        exportOptions: { columns: [1, 2, 3] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
       },
       {
         extend: "pdf",
-        exportOptions: { columns: [1, 2, 3] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
       },
     ],
     oLanguage: {
@@ -51,13 +51,14 @@ $(document).ready(function () {
         searchable: false,
       },
       { data: "nim" },
+       { data: "kelas" },
       { data: "nama" },
       { data: "email" },
     ],
     columnDefs: [
       {
         searchable: false,
-        targets: 4,
+        targets: 5,
         data: {
           id_mahasiswa: "id_mahasiswa",
           ada: "ada",
@@ -80,7 +81,7 @@ $(document).ready(function () {
         },
       },
       {
-        targets: 5,
+        targets: 6,
         data: "id_mahasiswa",
         render: function (data, type, row, meta) {
           return `<div class="text-center">

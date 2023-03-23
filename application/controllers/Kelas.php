@@ -4,219 +4,215 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Kelas extends CI_Controller
 {
 
-	public function __construct()
-	{
-		parent::__construct();
-		if (!$this->ion_auth->logged_in()) {
-			redirect('auth');
-		} else if (!$this->ion_auth->is_admin()) {
-			show_error('Hanya Administrator yang diberi hak untuk mengakses halaman ini, <a href="' . base_url('dashboard') . '">Kembali ke menu awal</a>', 403, 'Akses Terlarang');
-		}
-		$this->load->library(['datatables', 'form_validation']); // Load Library Ignited-Datatables
-		$this->load->model('Master_model', 'master');
-		$this->form_validation->set_error_delimiters('', '');
-	}
+    public $mhs, $user;
 
-	public function output_json($data, $encode = true)
-	{
-		if ($encode) $data = json_encode($data);
-		$this->output->set_content_type('application/json')->set_output($data);
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth');
+        } else if (!$this->ion_auth->is_admin() && !$this->ion_auth->in_group('dosen') && !$this->ion_auth->in_group('mahasiswa')) {
+            show_error('Hanya Administrator dan dosen yang diberi hak untuk mengakses halaman ini, <a href="' . base_url('dashboard') . '">Kembali ke menu awal</a>', 403, 'Akses Terlarang');
+        }
+        $this->load->library(['datatables', 'form_validation']); // Load Library Ignited-Datatables
+        $this->load->helper('my'); // Load Library Ignited-Datatables
+        $this->load->model('Master_model', 'master');
+        $this->load->model('Kelas_model', 'kelas');
+        $this->load->model('Ujian_model', 'ujian');
 
-	public function index()
-	{
-		$data = [
-			'user' => $this->ion_auth->user()->row(),
-			'judul'	=> 'Kelas',
-			'subjudul' => 'Data Kelas'
-		];
-		$this->load->view('_templates/dashboard/_header.php', $data);
-		$this->load->view('master/kelas/data');
-		$this->load->view('_templates/dashboard/_footer.php');
-	}
+        $this->user = $this->ion_auth->user()->row();
 
-	public function data()
-	{
-		$this->output_json($this->master->getDataKelas(), false);
-	}
+        $this->form_validation->set_error_delimiters('', '');
+    }
 
-	public function add()
-	{
-		$data = [
-			'user' 		=> $this->ion_auth->user()->row(),
-			'judul'		=> 'Tambah Kelas',
-			'subjudul'	=> 'Tambah Data Kelas',
-			'banyak'	=> $this->input->post('banyak', true),
-			'jurusan'	=> $this->master->getAllJurusan()
-		];
-		$this->load->view('_templates/dashboard/_header.php', $data);
-		$this->load->view('master/kelas/add');
-		$this->load->view('_templates/dashboard/_footer.php');
-	}
+    public function output_json($data, $encode = true)
+    {
+        if ($encode) $data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($data);
+    }
 
-	public function edit()
-	{
-		$chk = $this->input->post('checked', true);
-		if (!$chk) {
-			redirect('admin/kelas');
-		} else {
-			$kelas = $this->master->getKelasById($chk);
-			$data = [
-				'user' 		=> $this->ion_auth->user()->row(),
-				'judul'		=> 'Edit Kelas',
-				'subjudul'	=> 'Edit Data Kelas',
-				'jurusan'	=> $this->master->getAllJurusan(),
-				'kelas'		=> $kelas
-			];
-			$this->load->view('_templates/dashboard/_header.php', $data);
-			$this->load->view('master/kelas/edit');
-			$this->load->view('_templates/dashboard/_footer.php');
-		}
-	}
+    public function index()
+    {
+        $user = $this->ion_auth->user()->row();
+        $data = [
+            'user' => $user,
+            'judul'    => 'Kelas',
+            'subjudul' => 'Daftar Kelas'
+        ];
 
-	public function save()
-	{
-		$rows = count($this->input->post('nama_kelas', true));
-		$mode = $this->input->post('mode', true);
-		for ($i = 1; $i <= $rows; $i++) {
-			$nama_kelas 	= 'nama_kelas[' . $i . ']';
-			$jurusan_id 	= 'jurusan_id[' . $i . ']';
-			$this->form_validation->set_rules($nama_kelas, 'Kelas', 'required');
-			$this->form_validation->set_rules($jurusan_id, 'Jurusan', 'required');
-			$this->form_validation->set_message('required', '{field} Wajib diisi');
+        $this->load->view('_templates/dashboard/_header.php', $data);
+        $this->load->view('kelas/data');
+        $this->load->view('_templates/dashboard/_footer.php');
+    }
 
-			if ($this->form_validation->run() === FALSE) {
-				$error[] = [
-					$nama_kelas 	=> form_error($nama_kelas),
-					$jurusan_id 	=> form_error($jurusan_id),
-				];
-				$status = FALSE;
-			} else {
-				if ($mode == 'add') {
-					$insert[] = [
-						'nama_kelas' 	=> $this->input->post($nama_kelas, true),
-						'jurusan_id' 	=> $this->input->post($jurusan_id, true)
-					];
-				} else if ($mode == 'edit') {
-					$update[] = array(
-						'id_kelas'		=> $this->input->post('id_kelas[' . $i . ']', true),
-						'nama_kelas' 	=> $this->input->post($nama_kelas, true),
-						'jurusan_id' 	=> $this->input->post($jurusan_id, true)
-					);
-				}
-				$status = TRUE;
-			}
-		}
-		if ($status) {
-			if ($mode == 'add') {
-				$this->master->create('kelas', $insert, true);
-				$data['insert']	= $insert;
-			} else if ($mode == 'edit') {
-				$this->master->update('kelas', $update, 'id_kelas', null, true);
-				$data['update'] = $update;
-			}
-		} else {
-			if (isset($error)) {
-				$data['errors'] = $error;
-			}
-		}
-		$data['status'] = $status;
-		$this->output_json($data);
-	}
+    public function detail($id)
+    {
+        $user = $this->ion_auth->user()->row();
+        $data = [
+            'user'      => $user,
+            'judul'        => 'Kelas',
+            'subjudul'  => 'Detail Kelas',
+            'kelas'      => $this->kelas->getKelasById($id),
+        ];
 
-	public function delete()
-	{
-		$chk = $this->input->post('checked', true);
-		if (!$chk) {
-			$this->output_json(['status' => false]);
-		} else {
-			if ($this->master->delete('kelas', $chk, 'id_kelas')) {
-				$this->output_json(['status' => true, 'total' => count($chk)]);
-			}
-		}
-	}
+        $this->load->view('_templates/dashboard/_header.php', $data);
+        $this->load->view('kelas/detail');
+        $this->load->view('_templates/dashboard/_footer.php');
+    }
 
-	public function kelas_by_jurusan($id)
-	{
-		$data = $this->master->getKelasByJurusan($id);
-		$this->output_json($data);
-	}
+    public function add()
+    {
+        $user = $this->ion_auth->user()->row();
+        $data = [
+            'user'      => $user,
+            'judul'        => 'Kelas',
+            'subjudul'  => 'Tambah Daftar Kelas'
+        ];
 
-	public function import($import_data = null)
-	{
-		$data = [
-			'user' => $this->ion_auth->user()->row(),
-			'judul'	=> 'Kelas',
-			'subjudul' => 'Import Kelas',
-			'jurusan' => $this->master->getAllJurusan()
-		];
-		if ($import_data != null) $data['import'] = $import_data;
+        $this->load->view('_templates/dashboard/_header.php', $data);
+        $this->load->view('kelas/add');
+        $this->load->view('_templates/dashboard/_footer.php');
+    }
 
-		$this->load->view('_templates/dashboard/_header', $data);
-		$this->load->view('master/kelas/import');
-		$this->load->view('_templates/dashboard/_footer');
-	}
+    public function edit($id)
+    {
+        $user = $this->ion_auth->user()->row();
+        $data = [
+            'user'      => $user,
+            'judul'    => 'Kelas',
+            'subjudul' => 'Edit Data Kelas',
+            'kelas'      => $this->kelas->getKelasById($id),
+        ];
 
-	public function preview()
-	{
-		$config['upload_path']		= './uploads/import/';
-		$config['allowed_types']	= 'xls|xlsx|csv';
-		$config['max_size']			= 2048;
-		$config['encrypt_name']		= true;
+        // print_r($data);
+        $this->load->view('_templates/dashboard/_header.php', $data);
+        $this->load->view('kelas/edit');
+        $this->load->view('_templates/dashboard/_footer.php');
+    }
 
-		$this->load->library('upload', $config);
+    public function data($id = null, $dosen = null)
+    {
+        $this->output_json($this->kelas->getDataKelas($id, $dosen), false);
+    }
 
-		if (!$this->upload->do_upload('upload_file')) {
-			$error = $this->upload->display_errors();
-			echo $error;
-			die;
-		} else {
-			$file = $this->upload->data('full_path');
-			$ext = $this->upload->data('file_ext');
+    public function validasi()
+    {
+        $this->form_validation->set_rules('nama', 'nama', 'required');
+    }
 
-			switch ($ext) {
-				case '.xlsx':
-					$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-					break;
-				case '.xls':
-					$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
-					break;
-				case '.csv':
-					$reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
-					break;
-				default:
-					echo "unknown file ext";
-					die;
-			}
+    public function file_config()
+    {
+        $allowed_type     = [
+            "image/jpeg", "image/jpg", "image/png", "image/gif",
+            "audio/mpeg", "audio/mpg", "audio/mpeg3", "audio/mp3", "audio/x-wav", "audio/wave", "audio/wav",
+            "video/mp4", "application/octet-stream"
+        ];
+        $config['upload_path']      = FCPATH . 'uploads/kelas_daftar/';
+        $config['allowed_types']    = 'jpeg|jpg|png|gif|mpeg|mpg|mpeg3|mp3|wav|wave|mp4';
+        $config['encrypt_name']     = TRUE;
 
-			$spreadsheet = $reader->load($file);
-			$sheetData = $spreadsheet->getActiveSheet()->toArray();
-			$data = [];
-			for ($i = 1; $i < count($sheetData); $i++) {
-				$data[] = [
-					'kelas' => $sheetData[$i][0],
-					'jurusan' => $sheetData[$i][1]
-				];
-			}
+        return $this->load->library('upload', $config);
+    }
 
-			unlink($file);
+    public function save()
+    {
+        $method = $this->input->post('method', true);
+        $this->validasi();
+        $this->file_config();
+        $id_kelas = $this->input->post('id_kelas', true);
 
-			$this->import($data);
-		}
-	}
-	public function do_import()
-	{
-		$input = json_decode($this->input->post('data', true));
-		$data = [];
-		foreach ($input as $d) {
-			$data[] = ['nama_kelas' => $d->kelas, 'jurusan_id' => $d->jurusan];
-		}
 
-		$save = $this->master->create('kelas', $data, true);
-		if ($save) {
-			redirect('kelas');
-		} else {
-			redirect('kelas/import');
-		}
-	}
+        if ($this->form_validation->run() === FALSE) {
+            $method === 'add' ? $this->add() : $this->edit($id_kelas);
+        } else {
+
+            $data = [
+                // 'level'      => $this->input->post('level', true),
+                'nama'      => $this->input->post('nama', true),
+            ];
+
+            $i = 0;
+            foreach ($_FILES as $key => $val) {
+                $img_src = FCPATH . 'uploads/kelas_daftar/';
+                $getkelas = $this->kelas->getkelasById($this->input->post('id_kelas', true));
+                $error = '';
+                if ($key === 'image') {
+                    if (!empty($_FILES['image']['name'])) {
+                        if (!$this->upload->do_upload('image')) {
+                            $error = $this->upload->display_errors();
+                            show_error($error, 500, 'File Soal Error');
+                            exit();
+                        } else {
+                            if ($method === 'edit') {
+                                if (!unlink($img_src . $getkelas->image)) {
+                                    show_error('Error saat delete gambar <br/>' . var_dump($getkelas), 500, 'Error Edit Gambar');
+                                    exit();
+                                }
+                            }
+                            $data['image'] = $this->upload->data('file_name');
+                        }
+                    }
+                }
+            }
+
+
+
+            // Inputan Opsi
+            $data['nama']    = $this->input->post('nama', true);
+
+            if ($method === 'add') {
+                //insert data
+                // print_r($data);
+                $this->master->create('tb_kelas', $data);
+            } else if ($method === 'edit') {
+                //update data
+                $id_kelas = $this->input->post('id_kelas', true);
+                $this->master->update('tb_kelas', $data, 'id_kelas', $id_kelas);
+            } else {
+                show_error('Method tidak diketahui', 404);
+            }
+            redirect('kelas');
+        }
+    }
+
+    public function delete()
+    {
+        $chk = $this->input->post('checked', true);
+
+        // Delete File
+        foreach ($chk as $id) {
+            $path = FCPATH . 'uploads/kelas_daftar/';
+            $kelas = $this->kelas->getKelasById($id);
+            // Hapus File Soal
+            if (!empty($kelas->image)) {
+                if (file_exists($path . $kelas->image)) {
+                    unlink($path . $kelas->image);
+                }
+            }
+        }
+
+        if (!$chk) {
+            $this->output_json(['status' => false]);
+        } else {
+            if ($this->master->delete('tb_kelas', $chk, 'id_kelas')) {
+                $this->output_json(['status' => true, 'total' => count($chk)]);
+            }
+        }
+    }
+
+    public function akses_mahasiswa()
+    {
+        if (!$this->ion_auth->in_group('mahasiswa')) {
+            show_error('Halaman ini khusus untuk mahasiswa mengikuti ujian, <a href="' . base_url('dashboard') . '">Kembali ke menu awal</a>', 403, 'Akses Terlarang');
+        }
+    }
+
+    public function list_json()
+    {
+        //$this->akses_mahasiswa();
+
+        $data = $this->kelas->getListUjian2();
+
+        echo json_encode($data);
+    }
 }

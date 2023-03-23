@@ -22,6 +22,7 @@
                     <tr>
                         <th>No.</th>
                         <th>NIM</th>
+                        <th>Kelas</th>
                         <th>Nama</th>
                         <th>Email</th>
                         <th width="100" class="text-center">Aksi</th>
@@ -38,4 +39,4 @@
                
             </div>
             <!-- END PAGE CONTENT-->
-            <script src="<?= base_url() ?>assets/dist/js/app/master/mahasiswa/data.js"></script>
+            <script src="<?= base_url() ?>assets/dist/js/app/master/mahasiswa/datas.js"></script>

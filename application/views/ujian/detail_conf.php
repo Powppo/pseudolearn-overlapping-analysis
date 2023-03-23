@@ -25,16 +25,32 @@
                         <i class="fa fa-print"></i> Print
                     </a>
                 </div> -->
-                <br>
-    <center><div class="center" style="margin-left: 400px;">
-        <div class="col-sm-4">
-        <div class="alert bg-green">
-            <h5>Jumlah Percobaan</i></h5>
-            <center><span class="d-block"> <span><h4><?= $total ?></h4></span></span></center>
-        </div>
-    </div>
-</div> </center>
+                <br></br>
+                <center>  <div class="row">
+                <center><div class="center" style="margin-left: 200px;">
+                <div class="col-lg-3 col-xs-6">
+                    <div class="alert bg-yellow">
+                        <h5>Jumlah Percobaan</i></h5>
+                        <center><span class="d-block"> <span><h4><?= $total ?></h4></span></span></center>
+                    </div>
             </div>
+            <div class="col-lg-3 col-xs-6">
+                    <div class="alert bg-green">
+                        <h5>Jawaban Benar</i></h5>
+                        <center><span class="d-block"> <span><h4><?= $total_benar ?></h4></span></span></center>
+                    </div>
+                    </div>
+                    <div class="col-lg-3 col-xs-6">
+                    <div class="alert bg-red">
+                        <h5>Jawaban Salah</i></h5>
+                        <center><span class="d-block"> <span><h4><?= $total_salah ?></h4></span></span></center>
+                    </div>
+                    </div>
+                </div>
+            </div>  </center>
+            
+            </div>
+
             <div class="table-responsive px-4 pb-3" style="border: 0">
             <table id="detail_conf" class="w-100 table table-striped table-bordered table-hover">
             <thead>

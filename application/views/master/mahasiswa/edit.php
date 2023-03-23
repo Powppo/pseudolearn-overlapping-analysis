@@ -17,6 +17,16 @@
                         <small class="help-block"></small>
                     </div>
                     <div class="form-group">
+                                <label for="id_kelas" class="control-label">Masukan Kelas</label>
+                                <select required="required" name="id_kelas" class="select2 form-group" style="width:100% !important">
+                                    <option value="" disabled selected>Pilih Kelas</option>
+                                    <?php
+                                    foreach ($tb_kelas as $kls) : ?>
+                                        <option <?= $mahasiswa->id_kelas == $kls->id_kelas ? "selected" : ""; ?> value="<?= $kls->id_kelas ?>"><?= $kls->nama ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                    <div class="form-group">
                         <label for="nama">Nama</label>
                         <input value="<?=$mahasiswa->nama?>" placeholder="Nama" type="text" name="nama" class="form-control">
                         <small class="help-block"></small>

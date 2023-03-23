@@ -35,6 +35,16 @@
                         </select>
                         <small class="help-block"></small>
                     </div>
+                    <div class="form-group">
+                            <label for="id_kelas" class="control-label">Masukan Kelas</label>
+                            <select required="required" name="id_kelas" class="select2 form-group" style="width:100% !important">
+                                <option value="" disabled selected>Pilih kelas</option>
+                                <?php
+                                foreach ($tb_kelas as $kls) : ?>
+                                    <option value="<?= $kls->id_kelas ?>"><?= $kls->nama ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     <div class="form-group pull-right">
                         <button type="reset" class="btn btn-flat btn-default"><i class="fa fa-rotate-left"></i> Reset</button>
                         <button type="submit" id="submit" class="btn btn-flat bg-purple"><i class="fa fa-save"></i> Simpan</button>

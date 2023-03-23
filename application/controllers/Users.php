@@ -70,6 +70,7 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('first_name', 'First Name', 'required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('id_kelas', 'Id Kelas', 'required');
 		
 		if($this->form_validation->run()===FALSE){
 			$data['status'] = false;
@@ -78,6 +79,7 @@ class Users extends CI_Controller {
 				'first_name' => form_error('first_name'),
 				'last_name' => form_error('last_name'),
 				'email' => form_error('email'),
+				// 'id_kelas' => form_error('id_kelas'),
 			];
 		}else{
 			$id = $this->input->post('id', true);
@@ -85,7 +87,8 @@ class Users extends CI_Controller {
 				'username' 		=> $this->input->post('username', true),
 				'first_name'	=> $this->input->post('first_name', true),
 				'last_name'		=> $this->input->post('last_name', true),
-				'email'			=> $this->input->post('email', true)
+				'email'			=> $this->input->post('email', true),
+				// 'id_kelas'		=> $this->input->post('id_kelas', true)
 			];
 			$update = $this->master->update('users', $input, 'id', $id);
 			$data['status'] = $update ? true : false;

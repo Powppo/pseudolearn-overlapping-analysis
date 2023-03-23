@@ -225,6 +225,7 @@ class Ion_auth
 	 * @param string $identity
 	 * @param string $password
 	 * @param string $email
+	 * @param string $kelas
 	 * @param array  $additional_data
 	 * @param array  $group_ids
 	 *
@@ -233,13 +234,13 @@ class Ion_auth
 	 *                        if the operation failed.
 	 * @author Mathew
 	 */
-	public function register($identity, $password, $email, $additional_data = [], $group_ids = [])
+	public function register($identity, $password, $email, $kelas, $additional_data = [], $group_ids = [])
 	{
 		$this->ion_auth_model->trigger_events('pre_account_creation');
 
 		$email_activation = $this->config->item('email_activation', 'ion_auth');
 
-		$id = $this->ion_auth_model->register($identity, $password, $email, $additional_data, $group_ids);
+		$id = $this->ion_auth_model->register($identity, $password, $email, $kelas, $additional_data, $group_ids);
 
 		if (!$email_activation)
 		{

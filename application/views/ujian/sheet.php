@@ -77,7 +77,7 @@
             <div class="box-body text-center" id="tampil_jawaban">
             </div>
         </div> -->
-    </div>
+        </div>
     <div class="col-sm-12">
         <?= form_open('', array('id' => 'ujian')); ?>
         <div class="box box-primary">
@@ -86,32 +86,9 @@
             <label id="minutes">00</label>
             <label id="colon">:</label>
             <label id="seconds">00</label>
-            <script type="text/javascript">
-                var minutesLabel = document.getElementById("minutes");
-                var secondsLabel = document.getElementById("seconds");
-                var totalSeconds = 0;
-                setInterval(setTime, 1000);
-
-                function setTime()
-                {
-                    ++totalSeconds;
-                    secondsLabel.innerHTML = pad(totalSeconds%60);
-                    minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
-                }
-
-                function pad(val)
-                {
-                    var valString = val + "";
-                    if(valString.length < 2)
-                    {
-                        return "0" + valString;
-                    }
-                    else
-                    {
-                        return valString;
-                    }
-                }
-            </script>
+         
+        <!-- <div class="box box-primary">
+            <div class="box-header with-border"> -->
                 <!-- <h3 class="box-title"><span class="badge bg-blue">Soal #<span id="soalke"></span> </span></h3> -->
                 <!-- <div class="box-tools pull-right">
                     <span class="badge bg-red">Sisa Waktu <span class="sisawaktu" data-time="<?= $soal->tgl_selesai ?>"></span></span>
@@ -150,17 +127,31 @@
                     <div class="form-check">
 
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="ya" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8>
+                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8>
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8>
+                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8>
                         </label>
                     </div>
                 </div>
             </div>
- 
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input type="hidden" class="form-check-input" id="corrects" name="corrects" value="benar" style="margin-left: 15px;"><h8 style="font-family: cursive;">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input type="hidden" class="form-check-input" id="incorrects" name="incorrects" value="salah" style="margin-left: 15px;"><h8 style="font-family: cursive;">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input type="hidden" class="form-check-input" id="waktu" name="waktu" style="margin-left: 15px;"><h8 style="font-family: cursive;">
+                </label>
+            </div>
                 <div class="modal-footer">
                     <button class="btn" data-dismiss="modal" aria-hidden="true"><h8 style="font-family: cursive;">Tutup</h8></button>
                     <button class="btn btn-info" id="btn_simpan" onclick="check_jawaban();"><h8 style="font-family: cursive;">Simpan</h8></button>
@@ -195,14 +186,63 @@ $(document).ready(function(){
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
             var confidence = $('#confidence:checked').val();
+            var waktu = $('#waktu').val();
             $.ajax({
                 type : "POST",
                 url: base_url+'ujian/save_confidence/' + id_soal + '/' + id_user,
                 dataType : "JSON",
-                data : {id_user:id_user ,id_soal:id_soal, confidence:confidence},
+                data : {id_user:id_user ,id_soal:id_soal, confidence:confidence, waktu:waktu},
                 success: function(data){
                     $('[name="id_user"]').val("");
                     $('[name="id_soal"]').val("");
+                    // $('[name="confidence"]').val("");
+                  
+                }
+            });
+            return false;
+        });
+     });
+
+     $(document).ready(function(){
+     //Simpan Barang
+     $('#btn_corrects').on('click',function(){ 
+            var id_user=$('#id_user').val();
+            var id_soal=$('#id_soal').val();
+            var condition = $('#corrects').val();
+            var username = $('#username').val();
+            $.ajax({
+                type : "POST",
+                url: base_url+'ujian/save_condition/' + id_soal + '/' + id_user,
+                dataType : "JSON",
+                data : {id_user:id_user ,id_soal:id_soal, condition:condition, username:username},
+                success: function(data){
+                    // $('[name="id_user"]').val("");
+                    $('[name="id_soal"]').val("");
+                    $('[name="username"]').val("");
+                    // $('[name="confidence"]').val("");
+                  
+                }
+            });
+            return false;
+        });
+     });
+
+     $(document).ready(function(){
+     //Simpan Barang
+     $('#btn_incorrects').on('click',function(){ 
+            var id_user=$('#id_user').val();
+            var id_soal=$('#id_soal').val();
+            var username = $('#username').val();
+            var condition = $('#incorrects').val();
+            $.ajax({
+                type : "POST",
+                url: base_url+'ujian/save_condition/' + id_soal + '/' + id_user,
+                dataType : "JSON",
+                data : {id_user:id_user ,id_soal:id_soal, condition:condition, username:username},
+                success: function(data){
+                    // $('[name="id_user"]').val("");
+                    $('[name="id_soal"]').val("");
+                    $('[name="username"]').val("");
                     // $('[name="confidence"]').val("");
                   
                 }
@@ -464,6 +504,20 @@ $(document).ready(function(){
                 }
             }
         });
+
+        var idsoal = $('#id_soal').val();
+        var iduser = $('#id_user').val();
+        $.ajax({
+            url: base_url+'ujian/save_detail_confidence/' + idsoal + '/' + iduser,
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    $(this).removeAttr('disabled');
+                    reload_ajax();
+                }
+            }
+        });
        
         var idsoal = $('#id_soal').val();
         var iduser = $('#id_user').val();
@@ -675,4 +729,30 @@ $(document).ready(function(){
     var total_widget = widget.length;
 </script>
 
+<script type="text/javascript">
+                var minutesLabel = document.getElementById("minutes");
+                var secondsLabel = document.getElementById("seconds");
+                var totalSeconds = 0;
+                setInterval(setTime, 1000);
+                document.getElementById("waktu").value = minutes + "minutes" + seconds + "seconds";
+                function setTime()
+                {
+                    ++totalSeconds;
+                    secondsLabel.innerHTML = pad(totalSeconds%60);
+                    minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+                }
+
+                function pad(val)
+                {
+                    var valString = val + "";
+                    if(valString.length < 2)
+                    {
+                        return "0" + valString;
+                    }
+                    else
+                    {
+                        return valString;
+                    }
+                }
+            </script>
 <script src="<?= base_url() ?>assets/dist/js/app/ujian/sheet.js"></script>
