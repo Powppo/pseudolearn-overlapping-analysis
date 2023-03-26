@@ -102,13 +102,13 @@
 					</a>
 				</li>
 			<?php endif; ?>
-			<?php if ($this->ion_auth->is_admin()) : ?>
+			<!-- <?php if ($this->ion_auth->is_admin()) : ?>
 				<li class="<?= $page === 'detailhistory' ? "active" : "" ?>">
 					<a href="<?= base_url('detailhistory') ?>" rel="noopener noreferrer">
 						<i class="fa fa-tasks"></i> <span>Laporan Aktivitas Mahasiswa</span>
 					</a>
 				</li>
-			<?php endif; ?>
+			<?php endif; ?> -->
 		</ul>
 
 	</section>

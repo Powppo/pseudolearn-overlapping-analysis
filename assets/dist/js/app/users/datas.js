@@ -19,19 +19,19 @@ $(document).ready(function() {
         buttons: [
             {
                 extend: "copy",
-                exportOptions: { columns: [1, 2, 3, 4, 5, 6, 7] }
+                exportOptions: { columns: [1, 2, 3, 4, 5, 6, 7, 8] }
             },
             {
                 extend: "print",
-                exportOptions: { columns: [1, 2, 3, 4, 5, 6, 7] }
+                exportOptions: { columns: [1, 2, 3, 4, 5, 6, 7, 8] }
             },
             {
                 extend: "excel",
-                exportOptions: { columns: [1, 2, 3, 4, 5, 6, 7] }
+                exportOptions: { columns: [1, 2, 3, 4, 5, 6, 7, 8] }
             },
             {
                 extend: "pdf",
-                exportOptions: { columns: [1, 2, 3, 4, 5, 6, 7] }
+                exportOptions: { columns: [1, 2, 3, 4, 5, 6, 7, 8] }
             }
         ],
         oLanguage: {
@@ -53,12 +53,13 @@ $(document).ready(function() {
             { data: "last_name" },
             { data: "username" },
             { data: "email" },
+            { data: "class_name" },
             { data: "level" },
             { data: "created_on" }
         ],
         columnDefs: [
             {
-                targets: 5,
+                targets: 6,
                 data: "level",
                 render: function(data, type, row, meta) {
                     return `<div class="text-center">
@@ -67,7 +68,7 @@ $(document).ready(function() {
                 }
             },
             {
-                targets: 7,
+                targets: 8,
                 orderable: false,
                 searchable: false,
                 title: "Status",
@@ -85,7 +86,7 @@ $(document).ready(function() {
                 }
             },
             {
-                targets: 8,
+                targets: 9,
                 data: "id",
                 render: function(data, type, row, meta) {
                     if (data === user_id) {

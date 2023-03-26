@@ -186,12 +186,13 @@ $(document).ready(function(){
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
             var confidence = $('#confidence:checked').val();
+            var status_jawaban = $('#status_jawaban').val();
             var waktu = $('#waktu').val();
             $.ajax({
                 type : "POST",
                 url: base_url+'ujian/save_confidence/' + id_soal + '/' + id_user,
                 dataType : "JSON",
-                data : {id_user:id_user ,id_soal:id_soal, confidence:confidence, waktu:waktu},
+                data : {id_user:id_user ,id_soal:id_soal, confidence:confidence, status_jawaban, waktu:waktu},
                 success: function(data){
                     $('[name="id_user"]').val("");
                     $('[name="id_soal"]').val("");
@@ -521,8 +522,9 @@ $(document).ready(function(){
        
         var idsoal = $('#id_soal').val();
         var iduser = $('#id_user').val();
+        var idlevel = $('#id_level').val();
         $.ajax({
-            url: base_url+'ujian/save_percobaan/' + idsoal + '/' + iduser,
+            url: base_url+'ujian/save_percobaan/' + idsoal + '/' + idlevel,
             type: 'get',
             dataType: 'json',
             success: function (data) {

@@ -56,12 +56,10 @@
             <thead>
                 <tr>
                 <th style="text-align: center">No.</th>
-                <!-- <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">NIM</th> -->
+                <th style="text-align: center">Level</th>
                 <th style="text-align: center">Sub Soal</th>
-                <th style="text-align: center">Soal</th>
                 <th style="text-align: center">Confidence Tag</th>
-                <!-- <th style="text-align: center">Confidence Tag</th> -->
+                <th style="text-align: center">Status Jawaban</th>
                 <!-- <th>Waktu</th>
                 <th>Tanggal</th> -->
             </tr> 
@@ -73,9 +71,24 @@
                     echo '
                 <tr>
                     <td style="text-align: center">'.$no++.'</td>  
+                    <td style="text-align: center">'.$u['levels'].'</td>
                     <td style="text-align: center">'.$u['sub_soal'].'</td>
-                    <td style="text-align: justify">'.$u['studi_kasus'].'</td>
                     <td style="text-align: center">'.$u['confidence'].'</td>
+                    <td style="text-align: center">';
+                    if ($u['id_confidence'] == $details_max){
+                        echo '
+                        <div class="text-center">
+                        <span class="badge bg-green">Benar</span>
+                    </div>
+                            ';
+                        }else{
+                            echo '
+                            <div class="text-center">
+                            <span class="badge bg-red">'.$details.'</span>
+                        </div>';
+                    }
+                    echo'
+                       </td>
                            </tr>';?>
                            <?php } ?>
                            </tbody>

@@ -19,19 +19,19 @@ $(document).ready(function () {
     buttons: [
       {
         extend: "copy",
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
+        exportOptions: { columns: [1, 2, 3, 4] },
       },
       {
         extend: "print",
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
+        exportOptions: { columns: [1, 2, 3, 4] },
       },
       {
         extend: "excel",
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
+        exportOptions: { columns: [1, 2, 3, 4] },
       },
       {
         extend: "pdf",
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
+        exportOptions: { columns: [1, 2, 3, 4] },
       },
     ],
     oLanguage: {
@@ -51,7 +51,7 @@ $(document).ready(function () {
         searchable: false,
       },
       { data: "nim" },
-       { data: "kelas" },
+      { data: "kelas" },
       { data: "nama" },
       { data: "email" },
     ],

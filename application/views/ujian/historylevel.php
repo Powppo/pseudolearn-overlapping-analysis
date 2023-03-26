@@ -7,19 +7,19 @@
         </div>
     </div>
     <div class="box-body">
-        <div class="row">
-        <div class="col-sm-12 mb-4">
-                <a href="<?=base_url()?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
-        </div>
+		<div class="row">
+			<div class="col-sm-4">
+            <a href="<?=base_url()?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+			</div>
             <!-- <div class="col-sm-4">
                 <button type="button" class="btn bg-purple btn-flat btn-sm reload"><i class="fa fa-refresh"></i> Reload</button>
             </div> -->
-            <div class="form-group col-sm-4 text-center" style="text-align: center; margin-left: 370px;">
+            <div class="form-group col-sm-4 text-center" style="text-align: center; margin-left: 20px;">
             <?php if ($this->ion_auth->is_admin()) : ?>
 							<select class="form-control status-dropdown select2" style="width:100% !important">
-								<option value="">Semua Kelas</option>
-                                <?php foreach ($kelas as $kls) : ?>
-								<option value="<?= $kls->id_kelas ?>"><?= $kls->nama ?></option>
+								<option value="">Semua Level</option>
+                                <?php foreach ($level as $lvl) : ?>
+								<option value="<?= $lvl->id_level ?>"><?= $lvl->nama ?></option>
 								<?php endforeach; ?>
 							</select>
 				<?php endif; ?>
@@ -32,53 +32,29 @@
             <thead>
                 <tr>
                 <th style="text-align: center">No.</th>
-                <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">NIM</th>
-                <th style="text-align: center">ID Kelas</th>
-                <th style="text-align: center">Kelas</th>
-                <th style="text-align: center">Total Poin</th>
-                <th style="text-align: center">Hasil Ujian</th>
+                <th style="text-align: center">ID Level</th>
+                <th style="text-align: center">Level</th>
+                <th style="text-align: center">Poin</th>
                 <th style="text-align: center">Aksi</th>              
                 </tr>
             </thead>
             <tbody>
             <?php 
                 $no = 1;
-                foreach($informasi as $u){ 
+                foreach($hasil as $hsl){ 
                     echo '
                 <tr>
-                    <td style="text-align: center">'.$no++.'</td>     
-                    <td style="text-align: center">'.$u['nama'].'</td>
-                    <td style="text-align: center">'.$u['nim'].'</td>
-                    <td style="text-align: center">'.$u['id_kelas'].'</td> 
-                    <td style="text-align: center">'.$u['nama_kelas'].'</td> 
-                    <td style="text-align: center">'.$u['total_poin'].'</td>
-                    <td style="text-align: center">';
-                    if ($u['total_poin'] >= "20"){
-                        echo '
+                    <td style="text-align: center">'.$no++.'</td> 
+                    <td style="text-align: center">'.$hsl['idlevel'].'</td>    
+                    <td style="text-align: center">'.$hsl['levels'].'</td>
+                    <td style="text-align: center">'.$hsl['poin'].'</td>
+                    <td>
                         <div class="text-center">
-                        <span class="badge bg-green">Sempurna!</span>
-                    </div>
-                            ';
-                           }else if ($u['total_poin'] <= "0"){
-                        echo '
-                        <div class="text-center">
-                        <span class="badge bg-red">Tingkatkan!</span>
-                    </div>';
-                           }else{
-                        echo '
-                        <div class="text-center">
-                        <span class="badge bg-yellow">Cukup!</span>
-                    </div>';
-                           }
-                        echo'
-                        <td>
-                        <div class="text-center">
-                        <a class="btn btn-xs btn-warning" style="color: #fff;" href="'.base_url().'hasilujian/detailLevel/'.$u['iduser'].'">
+                        <a class="btn btn-xs btn-warning" style="color: #fff;" href="'.base_url().'hasilujian/detailLog/'.$hsl['iduser'].'/'.$hsl['idlevel'].'">
                         <i class="fa fa-eye" style="color: #fff;"></i> Detail
                         </a> 
                         </div>
-                        </td>
+                    </td>
                            </tr>';
                            ?>
                         <?php } ?>
@@ -125,7 +101,7 @@
         ],
         "columnDefs": [
             {
-                "targets": [3],
+                "targets": [1],
                 "visible": false
             }
         ]
@@ -153,11 +129,11 @@
     // });
   
     $('.status-dropdown').on('change', function(e){
-      var id_kelas = $(this).val();
-      $('.status-dropdown').val(id_kelas)
-      console.log(id_kelas)
+      var id_level = $(this).val();
+      $('.status-dropdown').val(id_level)
+      console.log(id_level)
       //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
-      dataTable.column(3).search(id_kelas).draw();
+      dataTable.column(1).search(id_level).draw();
     })
 });
 </script>

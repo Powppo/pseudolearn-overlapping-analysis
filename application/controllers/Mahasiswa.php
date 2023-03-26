@@ -176,7 +176,7 @@ class Mahasiswa extends CI_Controller
 		$last_name = end($nama);
 		
 		$username = $data->nim;
-		// $kelas = $data->id_kelas;
+		$kls_mhs = $data->id_kelas;
 		$password = $data->nim;
 		$email = $data->email;
 		$additional_data = [
@@ -196,7 +196,7 @@ class Mahasiswa extends CI_Controller
 				'msg'	 => 'Email tidak tersedia (sudah digunakan).'
 			];
 		} else {
-			$this->ion_auth->register($username, $password, $email, $additional_data, $group);
+			$this->ion_auth->register($username, $password, $email, $kls_mhs, $additional_data, $group);
 			$data = [
 				'status'	=> true,
 				'msg'	 => 'Verifikasi berhasil. NIM digunakan sebagai password pada saat login.'

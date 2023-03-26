@@ -355,13 +355,15 @@ class Ujian extends CI_Controller
 	]);
 }
 
-	public function save_percobaan($id_soal)
+	public function save_percobaan($id_soal, $id_level)
 	{
 		// Decrypt Id
 		$id_user = $this->session->userdata('user_id');
+		$soal = $this->db->query('select * from tb_soal where id_soal = ?', $id_soal)->row_array();
 		$click = $this->db->query('select * from history_percobaan where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
 		$data['id_user'] = $id_user;
 		$data['id_soal'] = $id_soal;
+		$data['id_level'] = $soal['id_level'];
 		$data['jumlah'] = $click['jumlah'] + 1;
 			$this->db->insert('history_percobaan', $data);
 		
@@ -375,27 +377,22 @@ class Ujian extends CI_Controller
 		$data['id_soal'] = $id_soal;
 		$data['confidence'] = $this->input->post('confidence');
 		$data['waktu'] = $this->input->post('waktu');
-			$this->db->insert('confidence_tag', $data);
+		$this->db->insert('confidence_tag', $data);
 		$this->output_json(['status' => true]);
     }
 
 	function save_condition($id_soal){
 		$id_user = $this->session->userdata('user_id');
 		$click = $this->db->query('select * from users where id = ?', $id_user)->row_array();
+		$confidences = $this->db->query('SELECT DISTINCT(id) FROM confidence_tag', [$id_soal, $id_user])->row_array();
 		$this->db->insert('conditions', [
 			'id_soal' => $id_soal,
 			'id_user' => $id_user,
 			'username' => $click['username'],
 			'status_jawaban' => $this->input->post('condition'),
 		]);
-		// $data['id_user'] => $click['username'];
-		// $data['id_soal'] = $id_soal;
-		// $data['condition'] = $this->input->post('condition');
-		// 	$this->db->insert('conditions', $data);
 		$this->output_json(['status' => true]);
     }
-
-
 
 	public function index()
 	{

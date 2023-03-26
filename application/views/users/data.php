@@ -26,6 +26,7 @@
                     <th>Last Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Kelas</th>
                     <th>Level</th>
                     <th>Created On</th>
                     <th class="text-center">Status</th>
@@ -39,6 +40,7 @@
                     <th>Last Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Kelas</th>
                     <th>Level</th>
                     <th>Created On</th>
                     <th class="text-center">Status</th>

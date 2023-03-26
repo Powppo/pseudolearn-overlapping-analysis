@@ -47,28 +47,60 @@ class HasilUjian extends CI_Controller {
 			'judul'	=> 'Hasil Ujian',
 			'subjudul'=> 'Log Aktivitas Mahasiswa',
 		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+        }
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('ujian/hasil');
 		$this->load->view('_templates/dashboard/_footer.php');
 	}
 
-	
-	public function detailLog($id) {
+	public function detailLevel($id)
+	{
+		$results = $this->ujian->getHistoryLevel($id);
+		$data = [
+			'user' => $this->user,
+			'hasil' => $results,
+			'judul'	=> 'Hasil Ujian',
+			'subjudul'=> 'Log Aktivitas Mahasiswa',
+		];
 
-		$detail_data = $this->ujian->detailLogAktivitas($id);
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['level'] = $this->db->query('select * from tb_level')->result();
+        }
+
+		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('ujian/historylevel');
+		$this->load->view('_templates/dashboard/_footer.php');
+	}
+
+
+	
+	public function detailLog($id, $id_level) {
+
+		$detail_data = $this->ujian->detailLogAktivitas($id, $id_level);
 		$id_soal = $this->db->query('select id_soal from conditions')->row_array();
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_data,
 			'judul'	=> 'Hasil Ujian',
 			'subjudul'=> 'Detail Log Aktivitas Mahasiswa',
-			'total_benar' => $this->db->query("SELECT COUNT(IF(status_jawaban = 'benar', status_jawaban, NULL)) as total_benar from conditions where id_user = ? and id_soal = ?", [$id, $id_soal])->row_array()['total_benar'],
-			'total_salah' => $this->db->query("SELECT COUNT(IF(status_jawaban = 'salah', status_jawaban, NULL)) as total_salah from conditions where id_user = ? and id_soal = ?", [$id, $id_soal])->row_array()['total_salah'],
+			// 'total' => $this->db->query('select sum(jumlah) as total from history_percobaan where id_level = ? and id_user = ?', [$id_level, $id])->row_array()['total'],
+			// 'total_benar' => $this->db->query("SELECT COUNT(IF(status_jawaban = 'benar', status_jawaban, NULL)) as total_benar from conditions where id_user = ? and id_soal = ?", [$id, $id_soal])->row_array()['total_benar'],
+			// 'total_salah' => $this->db->query("SELECT COUNT(IF(status_jawaban = 'salah', status_jawaban, NULL)) as total_salah from conditions where id_user = ? and id_soal = ?", [$id, $id_soal])->row_array()['total_salah'],
 		];
 
 		if ($this->ion_auth->is_admin()) {
             //Jika admin maka tampilkan semua matkul
             $data['level'] = $this->db->query('select * from tb_level')->result();
+        }
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['soal'] = $this->db->query('select * from tb_soal')->result();
         }
 
 		$this->load->view('_templates/dashboard/_header.php', $data);
@@ -81,17 +113,12 @@ class HasilUjian extends CI_Controller {
 
 		$detail_conf = $this->ujian->detailLogConfidence($id, $id_soal);
 		$detail_cond = $this->ujian->detailLogConditions($id, $id_soal);
-		// $query =  
-		// $this->db->select('count(SalerName) as sothorn where tblSaler.SalerID = 1, count(SalerName) as Daly where tblSaler.SalerID = 2, count(SalerName) as Lyhong where tblSaler.SalerID = 3, count(SalerName) as Chantra where tblSaler.SalerID = 4');
-    	// $this->db->from('tblSaler');
-    	// $this->db->join('tblProduct', 'tblSaler.SalerID = tblProduct.SalerID');
-		// $this->db->get();
-        // $this->db->result_array();
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_conf,
-			'details' => $this->db->query('SELECT DISTINCT(cd.id) as details from conditions cd LEFT JOIN confidence_tag c ON cd.id_soal = c.id_soal GROUP BY cd.id')->row_array()['details'],
-			// 'details' => $detail_cond,
+			'details' => $this->db->query("SELECT s.judul, c.status_jawaban as details FROM conditions c INNER JOIN tb_soal s ON c.id_soal = s.id_soal WHERE c.id_user = ? and c.id_soal = ?", [$id, $id_soal])->row_array()['details'],
+			// 'details' => $this->db->query("SELECT s.judul, d.confidence, d.status_jawaban as details FROM `detail_confidence_tag` d INNER JOIN tb_soal s ON s.id_soal = d.id_soal where d.status_jawaban IS NOT NULL and d.id_user = ? and d.id_soal = ?", [$id, $id_soal])->row_array()['details'],
+			'details_max' =>$this->db->query("SELECT MAX(d.id) AS details_max FROM `confidence_tag` d INNER JOIN tb_soal s ON s.id_soal = d.id_soal where d.id_user = ? and d.id_soal = ?", [$id, $id_soal])->row_array()['details_max'],
 			'judul'	=> 'Hasil Ujian',
 			'subjudul'=> 'Detail Confidence Tag',
 			'total' => $this->db->query('select sum(jumlah) as total from history_percobaan where id_user = ? and id_soal = ?', [$id, $id_soal])->row_array()['total'],

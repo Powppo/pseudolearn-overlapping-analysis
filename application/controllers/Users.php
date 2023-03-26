@@ -58,6 +58,12 @@ class Users extends CI_Controller {
 			'groups'	=> $this->ion_auth->groups()->result(),
 			'level'		=> $level[0]
 		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+        }
+		
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('users/edit');
 		$this->load->view('_templates/dashboard/_footer.php');		
@@ -79,7 +85,7 @@ class Users extends CI_Controller {
 				'first_name' => form_error('first_name'),
 				'last_name' => form_error('last_name'),
 				'email' => form_error('email'),
-				// 'id_kelas' => form_error('id_kelas'),
+				'id_kelas' => form_error('id_kelas'),
 			];
 		}else{
 			$id = $this->input->post('id', true);
@@ -88,7 +94,7 @@ class Users extends CI_Controller {
 				'first_name'	=> $this->input->post('first_name', true),
 				'last_name'		=> $this->input->post('last_name', true),
 				'email'			=> $this->input->post('email', true),
-				// 'id_kelas'		=> $this->input->post('id_kelas', true)
+				'id_kelas'		=> $this->input->post('id_kelas', true)
 			];
 			$update = $this->master->update('users', $input, 'id', $id);
 			$data['status'] = $update ? true : false;

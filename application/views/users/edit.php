@@ -34,6 +34,16 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="email">Kelas</label>
+                    <select id="id_kelas" name="id_kelas" class="form-control select2" style="width: 100%!important">
+                        <option value="">Pilih Kelas</option>
+                        <?php foreach ($kelas as $kls) : ?>
+                            <option <?=$users->id_kelas == $kls->id_kelas ? "selected" : ""?> value="<?=$kls->id_kelas?>"><?=$kls->nama?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small class="help-block"></small>
+                </div>
+                <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" value="<?=$users->email?>">
                     <small class="help-block"></small>

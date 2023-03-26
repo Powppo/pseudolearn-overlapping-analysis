@@ -781,13 +781,14 @@ class Ion_auth_model extends CI_Model
 	 * @param    string $identity
 	 * @param    string $password
 	 * @param    string $email
+	 *  @param    string $kelas_mhs
 	 * @param    array  $additional_data
 	 * @param    array  $groups
 	 *
 	 * @return    bool
 	 * @author    Mathew
 	 */
-	public function register($identity, $password, $email, $additional_data = [], $groups = [])
+	public function register($identity, $password, $email, $kls_mhs, $additional_data = [], $groups = [])
 	{
 		$this->trigger_events('pre_register');
 
@@ -833,6 +834,7 @@ class Ion_auth_model extends CI_Model
 			'username' => $identity,
 			'password' => $password,
 			'email' => $email,
+			'id_kelas' => $kls_mhs,
 			'ip_address' => $ip_address,
 			'created_on' => time(),
 			'active' => ($manual_activation === FALSE ? 1 : 0)
