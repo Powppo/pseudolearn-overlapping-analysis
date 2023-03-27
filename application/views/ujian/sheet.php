@@ -83,9 +83,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
             <label>Waktu Pengerjaan</label>
-            <label id="minutes">00</label>
-            <label id="colon">:</label>
-            <label id="seconds">00</label>
+            <label id="my_timer">00:00:00</label>
          
         <!-- <div class="box box-primary">
             <div class="box-header with-border"> -->
@@ -135,6 +133,11 @@
                             <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8>
                         </label>
                     </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="hidden" class="form-check-input" id="waktu">
+                        </label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -180,13 +183,13 @@
 // }
 
 $(document).ready(function(){
-     //Simpan Barang
      $('#btn_simpan').on('click',function(){ 
          $('#ModalaAdd').modal('hide');
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
             var confidence = $('#confidence:checked').val();
             var status_jawaban = $('#status_jawaban').val();
+            var waktu = $('#waktu').val();
             var waktu = $('#waktu').val();
             $.ajax({
                 type : "POST",
@@ -205,7 +208,6 @@ $(document).ready(function(){
      });
 
      $(document).ready(function(){
-     //Simpan Barang
      $('#btn_corrects').on('click',function(){ 
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
@@ -229,7 +231,6 @@ $(document).ready(function(){
      });
 
      $(document).ready(function(){
-     //Simpan Barang
      $('#btn_incorrects').on('click',function(){ 
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
@@ -251,6 +252,8 @@ $(document).ready(function(){
             return false;
         });
      });
+
+     
       function check_jawaban() {
         var err = 0
         if($('#jenis_1').length > 0) {
@@ -732,29 +735,42 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-                var minutesLabel = document.getElementById("minutes");
-                var secondsLabel = document.getElementById("seconds");
-                var totalSeconds = 0;
-                setInterval(setTime, 1000);
-                document.getElementById("waktu").value = minutes + "minutes" + seconds + "seconds";
-                function setTime()
-                {
-                    ++totalSeconds;
-                    secondsLabel.innerHTML = pad(totalSeconds%60);
-                    minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
-                }
+    var seconds = 0
+    var timer = setInterval(upTimer, 1000);
+    
+    function upTimer() {
+        ++seconds;
 
-                function pad(val)
-                {
-                    var valString = val + "";
-                    if(valString.length < 2)
-                    {
-                        return "0" + valString;
-                    }
-                    else
-                    {
-                        return valString;
-                    }
-                }
+    var hour = Math.floor(seconds / 3600);
+    var minute = Math.floor((seconds - hour * 3600) / 60);
+    var updSecond = seconds - (hour * 3600 + minute * 60);
+
+    document.getElementById("my_timer").innerHTML = hour + ":" + minute + ":" + updSecond;
+    document.getElementById("waktu").value = hour + ":" + minute + ":" + updSecond;
+    }
+                // var minutesLabel = document.getElementById("minutes");
+                // var secondsLabel = document.getElementById("seconds");
+                // var totalSeconds = 0;
+                // setInterval(setTime, 1000);
+                // document.getElementById("waktu").value = minutes + "minutes" + seconds + "seconds";
+                // function setTime()
+                // {
+                //     ++totalSeconds;
+                //     secondsLabel.innerHTML = pad(totalSeconds%60);
+                //     minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+                // }
+
+                // function pad(val)
+                // {
+                //     var valString = val + "";
+                //     if(valString.length < 2)
+                //     {
+                //         return "0" + valString;
+                //     }
+                //     else
+                //     {
+                //         return valString;
+                //     }
+                // }
             </script>
 <script src="<?= base_url() ?>assets/dist/js/app/ujian/sheet.js"></script>

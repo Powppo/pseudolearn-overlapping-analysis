@@ -378,7 +378,6 @@ class Ujian extends CI_Controller
 		$data['confidence'] = $this->input->post('confidence');
 		$data['waktu'] = $this->input->post('waktu');
 		$this->db->insert('confidence_tag', $data);
-		$this->output_json(['status' => true]);
     }
 
 	function save_condition($id_soal){
