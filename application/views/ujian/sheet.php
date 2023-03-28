@@ -199,7 +199,7 @@ $(document).ready(function(){
                 success: function(data){
                     $('[name="id_user"]').val("");
                     $('[name="id_soal"]').val("");
-                    // $('[name="confidence"]').val("");
+                   location.reload(); //reload
                   
                 }
             });
@@ -735,18 +735,28 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-    var seconds = 0
+    var seconds = 0;
+    if(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>') != null)
+    {
+        seconds = window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+    }
     var timer = setInterval(upTimer, 1000);
     
     function upTimer() {
         ++seconds;
+        var hour = Math.floor(seconds / 3600);
+        var minute = Math.floor((seconds - hour * 3600) / 60);
+        var updSecond = seconds - (hour * 3600 + minute * 60);
 
-    var hour = Math.floor(seconds / 3600);
-    var minute = Math.floor((seconds - hour * 3600) / 60);
-    var updSecond = seconds - (hour * 3600 + minute * 60);
+        document.getElementById("my_timer").innerHTML = hour + ":" + minute + ":" + updSecond;
+        document.getElementById("waktu").value = hour + ":" + minute + ":" + updSecond;
+        saveTimeTaken(seconds);
+        
+    }
 
-    document.getElementById("my_timer").innerHTML = hour + ":" + minute + ":" + updSecond;
-    document.getElementById("waktu").value = hour + ":" + minute + ":" + updSecond;
+    function saveTimeTaken(seconds)
+    {
+       window.localStorage.setItem('taken_time_quiz_'+'<?= $id_tes; ?>', seconds);
     }
                 // var minutesLabel = document.getElementById("minutes");
                 // var secondsLabel = document.getElementById("seconds");
