@@ -14,6 +14,19 @@
             <!-- <div class="col-sm-4">
                 <button type="button" class="btn bg-purple btn-flat btn-sm reload"><i class="fa fa-refresh"></i> Reload</button>
             </div> -->
+            <br></br>
+                <center>  
+                    <div class="row">
+                <center>
+                    <div class="center" style="margin-left: 470px;">
+                <div class="col-lg-4 col-xs-8">
+                    <div class="alert bg-blue">
+                        <h5>Total Waktu</i></h5>
+                        <center><span class="d-block"> <span><h4><?= $total_waktu ?></h4></span></span></center>
+                    </div>
+                 </div>
+                </div>
+            </div>
             <div class="form-group col-sm-4 text-center" style="text-align: center; margin-left: 370px;">
             <?php if ($this->ion_auth->is_admin()) : ?>
 							<select class="form-control status-dropdown select2" style="width:100% !important">

@@ -206,7 +206,7 @@ class Ujian_model extends CI_Model
     }
 
     public function detailLogConfidence($id, $id_soal) {
-        $this->db->select('s.judul as sub_soal, cd.confidence, l.nama as levels, cd.id as id_confidence');
+        $this->db->select('s.judul as sub_soal, cd.confidence, l.nama as levels, cd.id as id_confidence, cd.waktu AS waktu');
         $this->db->from('confidence_tag cd');
         $this->db->join('tb_soal s', 'cd.id_soal = s.id_soal');
         $this->db->join('tb_level l', 's.id_level=l.id_level');

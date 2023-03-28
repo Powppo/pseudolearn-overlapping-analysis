@@ -27,30 +27,34 @@
                 </div> -->
                 <br></br>
                 <center>  <div class="row">
-                <center><div class="center" style="margin-left: 200px;">
-                <div class="col-lg-3 col-xs-6">
+                <center><div class="center" style="margin-left: 300px;">
+                <div class="col-lg-2 col-xs-4">
                     <div class="alert bg-yellow">
-                        <h5>Jumlah Percobaan</i></h5>
-                        <center><span class="d-block"> <span><h4><?= $total ?></h4></span></span></center>
+                        <h5>Percobaan</i></h5>
+                        <center><span class="d-block"><span><h5><b><?= $total ?> Kali</b></h5></span></span></center>
                     </div>
             </div>
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-2 col-xs-4">
                     <div class="alert bg-green">
                         <h5>Jawaban Benar</i></h5>
-                        <center><span class="d-block"> <span><h4><?= $total_benar ?></h4></span></span></center>
+                        <center><span class="d-block"><span><h5><b><?= $total_benar ?> Kali</b></h5></span></span></center>
                     </div>
                     </div>
-                    <div class="col-lg-3 col-xs-6">
+                    <div class="col-lg-2 col-xs-4">
                     <div class="alert bg-red">
                         <h5>Jawaban Salah</i></h5>
-                        <center><span class="d-block"> <span><h4><?= $total_salah ?></h4></span></span></center>
+                        <center><span class="d-block"><span><h5><b><?= $total_salah ?> Kali</b></h5></span></span></center>
+                    </div>
+                    </div>
+                    <div class="col-lg-2 col-xs-4">
+                    <div class="alert bg-blue">
+                        <h5>Total Waktu</i></h5>
+                        <center><span class="d-block"><span><h5><b><?= $total_waktu ?></b></h5></span></span></center>
                     </div>
                     </div>
                 </div>
             </div>  </center>
-            
             </div>
-
             <div class="table-responsive px-4 pb-3" style="border: 0">
             <table id="detail_conf" class="w-100 table table-striped table-bordered table-hover">
             <thead>
@@ -60,6 +64,7 @@
                 <th style="text-align: center">Sub Soal</th>
                 <th style="text-align: center">Confidence Tag</th>
                 <th style="text-align: center">Status Jawaban</th>
+                <th style="text-align: center">Waktu</th>
                 <!-- <th>Waktu</th>
                 <th>Tanggal</th> -->
             </tr> 
@@ -89,6 +94,7 @@
                     }
                     echo'
                        </td>
+                       <td style="text-align: center">'.$u['waktu'].'</td>
                            </tr>';?>
                            <?php } ?>
                            </tbody>
