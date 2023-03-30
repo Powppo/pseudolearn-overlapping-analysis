@@ -15,6 +15,9 @@
                 <button type="button" class="btn bg-purple btn-flat btn-sm reload"><i class="fa fa-refresh"></i> Reload</button>
             </div> -->
             <br></br>
+            <h5 style="margin-left:50px;"> Nama : <?=$nama_mahasiswa?></h5>
+            <h5 style="margin-left:50px;"> NIM : <?=$nim_mahasiswa?></h5>
+            <h5 style="margin-left:50px;"> Kelas : <?=$kelas_mahasiswa?></h5>
                 <center>  
                     <div class="row">
                 <center>
