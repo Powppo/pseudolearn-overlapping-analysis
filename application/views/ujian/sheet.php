@@ -78,6 +78,8 @@
             </div>
         </div> -->
         </div>
+
+        <!-- front end waktu pengerjaan -->
     <div class="col-sm-12">
         <?= form_open('', array('id' => 'ujian')); ?>
         <div class="box box-primary">
@@ -734,6 +736,8 @@ $(document).ready(function(){
     var total_widget = widget.length;
 </script>
 
+
+<!-- start waktu pengerjaan -->
 <script type="text/javascript">
     var seconds = 0;
     if(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>') != null)
@@ -783,4 +787,5 @@ $(document).ready(function(){
                 //     }
                 // }
             </script>
+<!-- end waktu pengerjaan -->
 <script src="<?= base_url() ?>assets/dist/js/app/ujian/sheet.js"></script>
