@@ -80,8 +80,6 @@ class HasilUjian extends CI_Controller {
 		$this->load->view('ujian/historylevel');
 		$this->load->view('_templates/dashboard/_footer.php');
 	}
-
-
 	
 	public function detailLog($id, $id_level) {
 

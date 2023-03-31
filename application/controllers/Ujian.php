@@ -378,17 +378,22 @@ class Ujian extends CI_Controller
 		$data['confidence'] = $this->input->post('confidence');
 		$data['waktu'] = $this->input->post('waktu');
 		$this->db->insert('confidence_tag', $data);
+		$this->session->set_userdata(array(
+			'confidence' => $this->input->post('confidence')
+		));
     }
 
 	function save_condition($id_soal){
 		$id_user = $this->session->userdata('user_id');
+		$confidences = $this->session->userdata('confidence_id');
 		$click = $this->db->query('select * from users where id = ?', $id_user)->row_array();
-		$confidences = $this->db->query('SELECT DISTINCT(id) FROM confidence_tag', [$id_soal, $id_user])->row_array();
+		// $confidences = $this->db->query('SELECT DISTINCT(id) FROM confidence_tag', [$id_soal, $id_user])->row_array();
 		$this->db->insert('conditions', [
 			'id_soal' => $id_soal,
 			'id_user' => $id_user,
 			'username' => $click['username'],
 			'status_jawaban' => $this->input->post('condition'),
+			'confidence'=>$this->session->confidence,
 		]);
 		$this->output_json(['status' => true]);
     }

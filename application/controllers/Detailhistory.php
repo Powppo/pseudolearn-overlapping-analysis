@@ -40,14 +40,62 @@ class DetailHistory extends CI_Controller {
 
 	public function index()
 	{
-        $detail_data = $this->ujian->logHistory();
+        $results = $this->ujian->confidenceHistory();
+		$data = [
+			'user' => $this->user,
+			'informasi' => $results,
+			'judul'	=> 'Hasil Ujian',
+			'subjudul'=> 'Log Aktivitas Mahasiswa',
+		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+        }
+		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('ujian/history_confidence');
+		$this->load->view('_templates/dashboard/_footer.php');
+	}
+
+	public function historyConfidence($id)
+	{
+		$results = $this->ujian->getConfidenceLevel($id);
+		$data = [
+			'user' => $this->user,
+			'hasil' => $results,
+			'judul'	=> 'Hasil Ujian',
+			'subjudul'=> 'Detail Confidence Tag',
+			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
+			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
+			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
+		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['level'] = $this->db->query('select * from tb_level')->result();
+        }
+
+		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('ujian/detailsconfidence');
+		$this->load->view('_templates/dashboard/_footer.php');
+	}
+
+	public function logConfidencePerLevel($id, $id_level) {
+
+		$detail_data = $this->ujian->detailConfidenceLevel($id, $id_level);
+		$id_soal = $this->db->query('select id_soal from conditions')->row_array();
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_data,
 			'judul'	=> 'Hasil Ujian',
-			'subjudul'=> 'Detail Log Aktivitas Mahasiswa',
-			'total_yakin' => $this->db->query("SELECT COUNT(IF(confidence = 'yakin', confidence, NULL)) as total_yakin from confidence_tag GROUP BY id_soal, id_user")->row_array()['total_yakin'],
-			'total_benar' => $this->db->query("SELECT COUNT(IF(status_jawaban = 'benar', status_jawaban, NULL)) as total_benar from conditions INNER JOIN tb_soal ON tb_soal.id_soal = conditions.id_soal GROUP BY tb_soal.id_soal")->row_array()['total_benar'],
+			'subjudul'=> 'Detail Confidence Tag',
+			'total_yakin_salah' => $this->db->query("SELECT COUNT(id) AS total_yakin_salah FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'yakin' AND status_jawaban = 'salah' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_yakin_salah'],
+			'total_yakin_benar' => $this->db->query("SELECT COUNT(id) AS total_yakin_benar FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'yakin' AND status_jawaban = 'benar' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_yakin_benar'],
+			'total_tidakyakin_salah' => $this->db->query("SELECT COUNT(id) AS total_tidakyakin_salah FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'tidak yakin' AND status_jawaban = 'salah' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_tidakyakin_salah'],
+			'total_tidakyakin_benar' => $this->db->query("SELECT COUNT(id) AS total_tidakyakin_benar FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'tidak yakin' AND status_jawaban = 'benar' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_tidakyakin_benar'],
+			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
+			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
+			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
 		];
 
 		if ($this->ion_auth->is_admin()) {
@@ -57,11 +105,71 @@ class DetailHistory extends CI_Controller {
 
 		if ($this->ion_auth->is_admin()) {
             //Jika admin maka tampilkan semua matkul
-            $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+            $data['soal'] = $this->db->query('select * from tb_soal')->result();
         }
 
 		$this->load->view('_templates/dashboard/_header.php', $data);
-		$this->load->view('ujian/detail_log');
+		$this->load->view('ujian/log_confidence_level');
+		$this->load->view('_templates/dashboard/_footer.php');
+
+	}
+
+	public function logConfidencePerSoal($id, $id_level) {
+		$detail_data = $this->ujian->detailConfidenceSoal($id, $id_level);
+		$data = [
+			'user' => $this->user,
+			'detail' => $detail_data,
+			'judul'	=> 'Hasil Ujian',
+			'subjudul'=> 'Detail Confidence Tag',
+			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
+			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
+			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
+		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['level'] = $this->db->query('select * from tb_level')->result();
+        }
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['soal'] = $this->db->query('select * from tb_soal')->result();
+        }
+
+		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('ujian/log_confidence_soal');
+		$this->load->view('_templates/dashboard/_footer.php');
+
+	}
+
+	public function logConfidenceSubSoal($id, $id_soal) {
+		$detail_data = $this->ujian->detailsConfidencePerSoal($id, $id_soal);
+		$data = [
+			'user' => $this->user,
+			'detail' => $detail_data,
+			'judul'	=> 'Hasil Ujian',
+			'subjudul'=> 'Detail Confidence Tag',
+			'total_yakin_salah' => $this->db->query("SELECT COUNT(id) AS total_yakin_salah FROM conditions WHERE confidence = 'yakin' AND status_jawaban = 'salah' AND id_user = ? AND id_soal = ?", [$id, $id_soal])->row_array()['total_yakin_salah'],
+			'total_yakin_benar' => $this->db->query("SELECT COUNT(id) AS total_yakin_benar FROM conditions WHERE confidence = 'yakin' AND status_jawaban = 'benar' AND id_user = ? AND id_soal = ?", [$id, $id_soal])->row_array()['total_yakin_benar'],
+			'total_tidakyakin_salah' => $this->db->query("SELECT COUNT(id) AS total_tidakyakin_salah FROM conditions WHERE confidence = 'tidak yakin' AND status_jawaban = 'salah' AND id_user = ? AND id_soal = ?", [$id, $id_soal])->row_array()['total_tidakyakin_salah'],
+			'total_tidakyakin_benar' => $this->db->query("SELECT COUNT(id) AS total_tidakyakin_benar FROM conditions WHERE confidence = 'tidak yakin' AND status_jawaban = 'benar' AND id_user = ? AND id_soal = ?", [$id, $id_soal])->row_array()['total_tidakyakin_benar'],
+			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
+			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
+			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
+		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['level'] = $this->db->query('select * from tb_level')->result();
+        }
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['soal'] = $this->db->query('select * from tb_soal')->result();
+        }
+
+		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('ujian/log_confidence_subsoal');
 		$this->load->view('_templates/dashboard/_footer.php');
 
 	}

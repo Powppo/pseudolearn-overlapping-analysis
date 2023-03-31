@@ -215,20 +215,24 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function loghistory() {
+    public function confidenceHistory() {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
-        $this->db->distinct('l.nama');
-        $this->db->select('u.username as nim, l.nama as levels, l.id_level as id_level, m.id_kelas, k.nama as nama_kelas, s.id_soal as idsoal, n.id_user as iduser, s.soal as studi_kasus, s.judul as sub_soal, n.nilai as poin, SUM(p.jumlah) AS jumlah');
-        // $this->db->select_max('c.id');
-        $this->db->from('history_percobaan p');
-        $this->db->join('nilai n', 'n.id_soal= p.id_soal');
+        $this->db->select("u.username as nim, u.id_kelas as id_kelas, k.nama as nama_kelas, sum(n.nilai) as total_poin, n.nilai as poin, s.soal as studi_kasus, s.judul as sub_soal, u.id as iduser");
+        $this->db->from('nilai n');
         $this->db->join('users u', 'u.id = n.id_user');
-        $this->db->join('mahasiswa m', 'm.nim = u.username');
-        $this->db->join('tb_kelas k', 'm.id_kelas = k.id_kelas');
-        $this->db->join('tb_level l', 'n.id_level=l.id_level');
+        $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
         $this->db->join('tb_soal s', 's.id_soal = n.id_soal');
-        $this->db->group_by('p.id_user');
-        $this->db->group_by('p.id_soal');
+        $this->db->group_by('u.id');
+        return $this->db->get()->result_array();
+    }
+
+    public function getConfidenceLevel($id) {
+        $this->db->select('l.id_level as idlevel, l.nama as levels, n.id_soal as idsoal, n.id_user as iduser');
+        $this->db->from('nilai n');
+        $this->db->join('tb_level l', 'n.id_level=l.id_level');
+        $this->db->where('n.id_user', $id);
+        $this->db->group_by('n.id_user');
+        $this->db->group_by('l.id_level');
         return $this->db->get()->result_array();
     }
 
@@ -238,6 +242,45 @@ class Ujian_model extends CI_Model
         $this->db->join('tb_soal s', 's.id_soal = cd.id_soal', 'left');
         $this->db->where('cd.id_user', $id);
         $this->db->where('cd.id_soal', $id_soal);
+        return $this->db->get()->result_array();
+    }
+
+    public function detailConfidenceLevel($id, $id_level) {
+        $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
+        $this->db->select('u.username as nim, l.id_level as idlevel, l.nama as levels, s.id_soal as idsoal, n.id_user as iduser, s.judul as sub_soal, n.nilai as poin');
+        // $this->db->select_max('c.id');
+        $this->db->from('users u');
+        $this->db->join('nilai n', 'u.id = n.id_user');
+        $this->db->join('tb_level l', 'n.id_level=l.id_level');
+        $this->db->join('tb_soal s', 's.id_soal = n.id_soal');
+        $this->db->where('n.id_user', $id);
+        $this->db->where('n.id_level', $id_level);
+        $this->db->group_by('n.id_user');
+        $this->db->group_by('n.id_level');
+        return $this->db->get()->result_array();
+    }
+
+    public function detailConfidenceSoal($id, $id_level) {
+        $this->db->select('s.judul as sub_soal, s.id_soal as idsoal, cd.confidence, cd.id_user as iduser, l.nama as levels, cd.id as id_confidence');
+        $this->db->from('confidence_tag cd');
+        $this->db->join('tb_soal s', 'cd.id_soal = s.id_soal');
+        $this->db->join('tb_level l', 's.id_level=l.id_level');
+        $this->db->where('cd.id_user', $id);
+        $this->db->where('l.id_level', $id_level);
+        $this->db->group_by('cd.id_user');
+        $this->db->group_by('s.id_soal');
+        return $this->db->get()->result_array();
+    }
+
+    public function detailsConfidencePerSoal($id, $id_soal) {
+        $this->db->select('s.judul as sub_soal, s.id_soal as idsoal, cd.confidence, cd.id_user as iduser, l.nama as levels, cd.id as id_confidence');
+        $this->db->from('confidence_tag cd');
+        $this->db->join('tb_soal s', 'cd.id_soal = s.id_soal');
+        $this->db->join('tb_level l', 's.id_level=l.id_level');
+        $this->db->where('cd.id_user', $id);
+        $this->db->where('s.id_soal', $id_soal);
+        $this->db->group_by('cd.id_user');
+        $this->db->group_by('s.id_soal');
         return $this->db->get()->result_array();
     }
 
