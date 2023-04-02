@@ -33,9 +33,11 @@ class Feedback extends CI_Controller
 
     public function index()
     {
+        $results = $this->feed->getAllFeedback();
         $user = $this->ion_auth->user()->row();
         $data = [
-            'user' => $user,
+            'user' => $this->user,
+			'informasi' => $results,
             'judul'    => 'Feedback',
             'subjudul' => 'Data Feedback'
         ];

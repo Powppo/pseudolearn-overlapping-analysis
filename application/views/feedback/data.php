@@ -15,26 +15,37 @@
                 <button onclick="bulk_delete()" class="btn btn-sm btn-flat btn-danger" type="button"><i class="fa fa-trash"></i> Delete</button>
             </div>
         </div>
-        <?= form_open('feedback/delete', array('id' => 'bulk')); ?>
-        <div class="table-responsive">
-            <table id="feedback" class="table table-striped table-bordered table-hover">
+        <div class="table-responsive px-4 pb-3" style="border: 0">
+		<table id="confidencehistory" class="w-100 table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Feedback Tipe Data</th>
-                        <th>Feedback Algoritma</th>
-                        <th width="100" class="text-center">Aksi</th>
-                        <th width="100" class="text-center">
-                            <input class="select_all" type="checkbox">
-                        </th>
+                        <th style="text-align: center">No.</th>
+                        <th style="text-align: center">Feedback Tipe Data</th>
+                        <th style="text-align: center">Feedback Algoritma</th>
+                        <th style="text-align: center" width="100" class="text-center">Aksi</th>
                     </tr>
-                </tfoot>
+                    </thead>
+            <tbody>
+            <?php 
+                $no = 1;
+                foreach($informasi as $u){ 
+                    echo '
+                <tr>
+                    <td style="text-align: center">'.$no++.'</td>     
+                    <td style="text-align: center">'.$u['feedback_tipedata'].'</td>
+                    <td style="text-align: center">'.$u['feedback_algoritma'].'</td>
+                    <td>
+                        <div class="text-center">
+                            <a class="btn btn-xs btn-warning" style="color: #fff;" href="'.base_url().'">
+                            <i class="fa fa-eye" style="color: #fff;"></i> Detail
+                            </a> 
+                        </div>
+                    </td>
+                           </tr>';
+                           ?>
+                        <?php } ?>
+                </tbody>
             </table>
         </div>
-        <?= form_close() ?>
-                    </div>
-                </div>
-               
-            </div>
-            <!-- END PAGE CONTENT-->
-            <script src="<?= base_url() ?>assets/dist/js/app/master/feedback/datas.js"></script>
+    </div>
+</div>
