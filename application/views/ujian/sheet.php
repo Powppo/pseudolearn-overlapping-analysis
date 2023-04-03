@@ -201,8 +201,9 @@ $(document).ready(function(){
                 success: function(data){
                     $('[name="id_user"]').val("");
                     $('[name="id_soal"]').val("");
-                   location.reload(); //reload
-                  
+                    window.localStorage.removeItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+                    location.reload(); //reload
+                   
                 }
             });
             return false;
@@ -529,7 +530,7 @@ $(document).ready(function(){
         var iduser = $('#id_user').val();
         var idlevel = $('#id_level').val();
         $.ajax({
-            url: base_url+'ujian/save_percobaan/' + idsoal + '/' + idlevel,
+            url: base_url+'ujian/save_percobaan/' + '<?= $id_tes; ?>' + '/' + '<?php echo $levelId?>',
             type: 'get',
             dataType: 'json',
             success: function (data) {
@@ -553,6 +554,7 @@ $(document).ready(function(){
 
     function submit_nilai(id, level) {
         $.getJSON(base_url+'ujian/simpan_hasil/' + id, function (data) {
+            window.localStorage.clear();
             window.location.href = '<?php echo site_url("ujian/list_ujian"); ?>/'+level
         });
     }
@@ -740,10 +742,24 @@ $(document).ready(function(){
 <!-- start waktu pengerjaan -->
 <script type="text/javascript">
     var seconds = 0;
-    if(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>') != null)
+    //console.log(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>'));
+    var timeTaken = '<?php echo $timeTaken?>';
+    if(timeTaken == '')
     {
-        seconds = window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+        if(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>') != null)
+        {
+            seconds = window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+        }else{
+            window.localStorage.removeItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+            seconds = 0;
+            window.localStorage.setItem('taken_time_quiz_'+'<?= $id_tes; ?>', seconds);
+        }
+    }else{
+        var plush = timeTaken;
+        seconds = plush;
     }
+    
+
     var timer = setInterval(upTimer, 1000);
     
     function upTimer() {
@@ -762,7 +778,7 @@ $(document).ready(function(){
     {
        window.localStorage.setItem('taken_time_quiz_'+'<?= $id_tes; ?>', seconds);
     }
-                // var minutesLabel = document.getElementById("minutes");
+                var minutesLabel = document.getElementById("minutes");
                 // var secondsLabel = document.getElementById("seconds");
                 // var totalSeconds = 0;
                 // setInterval(setTime, 1000);

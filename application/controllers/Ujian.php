@@ -406,8 +406,10 @@ class Ujian extends CI_Controller
 		$soal 		= $this->ujian->getSoal($id);
 
 		$mhs		= $this->mhs;
+		$levelId = 0;
 			$i = 0;
 			foreach ($soal as $s) {
+				$levelId = $s->id_level;
 				$soal_per = new stdClass();
 				$soal_per->id_soal 		= $s->id_soal;
 				$soal_per->id_level 	= $s->id_level;
@@ -729,7 +731,17 @@ class Ujian extends CI_Controller
 
 		// Enkripsi Id Tes
 		// $id_tes = $this->encryption->encrypt($detail_tes->id);
-
+		$timeTaken = null;
+		$userId = $this->session->userdata('user_id');
+		$getTimeTaken = $this->ujian->getTimeTakenByIdKey($id,$userId);
+		if($getTimeTaken)
+		{
+			$timeTaken = $getTimeTaken->waktu;
+			$str_time = $timeTaken;
+			$str_time = preg_replace("/^([\d]{1,2})\:([\d]{2})$/", "00:$1:$2", $str_time);
+			sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
+			$timeTaken = $hours * 3600 + $minutes * 60 + $seconds; //on scond calculate
+		}
 		$data = [
 			'user' 		=> $this->user,
 			'mhs'		=> $this->mhs,
@@ -738,6 +750,8 @@ class Ujian extends CI_Controller
 			// 'soal'		=> $detail_tes,
 			'no' 		=> $no,
 			'html' 		=> $html,
+			'timeTaken' => $timeTaken,
+			'levelId'	=> $levelId,
 			'id_tes'	=> $id
 		];
 		$this->load->view('_templates/topnav/_header.php', $data);

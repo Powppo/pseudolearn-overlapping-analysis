@@ -294,4 +294,14 @@ class Ujian_model extends CI_Model
 		$this->db->insert($table,$data);
         return $this->db->get()->result_array();
 	}
+
+    function getTimeTakenByIdKey($key,$user_id)
+    {
+        $this->db->select('waktu');
+        $this->db->from('confidence_tag');
+        $this->db->where('id_user', $user_id);
+        $this->db->where('id_soal', $key);
+        $this->db->order_by('waktu','DESC');
+        return $this->db->get()->row();
+    }
 }
