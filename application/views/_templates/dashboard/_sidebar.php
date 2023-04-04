@@ -105,7 +105,14 @@
 			<?php if ($this->ion_auth->is_admin()) : ?>
 				<li class="<?= $page === 'detailhistory' ? "active" : "" ?>">
 					<a href="<?= base_url('detailhistory') ?>" rel="noopener noreferrer">
-						<i class="fa fa-tasks"></i> <span>History Confidence Tag</span>
+						<i class="fa fa-history"></i> <span>History Confidence Tag</span>
+					</a>
+				</li>
+			<?php endif; ?>
+			<?php if ($this->ion_auth->is_admin()) : ?>
+				<li class="<?= $page === 'feedback' ? "active" : "" ?>">
+					<a href="<?= base_url('feedback') ?>" rel="noopener noreferrer">
+						<i class="fa fa-comments"></i> <span>Feedback</span>
 					</a>
 				</li>
 			<?php endif; ?>

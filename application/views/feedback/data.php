@@ -15,6 +15,7 @@
                 <button onclick="bulk_delete()" class="btn btn-sm btn-flat btn-danger" type="button"><i class="fa fa-trash"></i> Delete</button>
             </div>
         </div>
+        <?= form_open('feedback/delete', array('id' => 'bulk')); ?>
         <div class="table-responsive px-4 pb-3" style="border: 0">
 		<table id="confidencehistory" class="w-100 table table-striped table-bordered table-hover">
                 <thead>

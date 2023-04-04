@@ -44,6 +44,7 @@
 <!-- <script src="<?= base_url() ?>assets/dist/js/app/ujian/list.js"></script> -->
 <script>
     $(document).ready(function() {
+        window.localStorage.clear();
         ajaxcsrf();
         // console.log(window.location.href);
         console.log(window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
