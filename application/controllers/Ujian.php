@@ -323,39 +323,28 @@ class Ujian extends CI_Controller
 		$id_user = $this->session->userdata('user_id');
 		$user = $this->db->query('select * from users where id = ?', $id_user)->row_array();
 		$soal = $this->db->query('select * from tb_soal where id_soal = ?', $id_soal)->row_array();
-		$point = $this->db->query('select * from nilai where id_soal = ?', $id_soal)->row_array();
 		$count_data = $this->db->query('SELECT * FROM history_ujian WHERE idsoal = ? and iduser = ?', [$id_soal, $id_user])->num_rows();
-		$count_datas = $this->db->query('SELECT * FROM nilai WHERE id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
-		$total = $this->db->query('select sum(nilai) as total from nilai where id_user = ?', $id_user)->row_array()['total']; 
-		if ($count_data === 0 & $count_datas === 0) {
+		if ($count_data === 0) {
 			$this->db->insert('history_ujian', [
 				'idsoal' => $id_soal,
 				'iduser' => $id_user,
-				'poin' => $soal['bobot'],
-				'id_level' => $soal['id_level'],
-				'first_name' => $user['first_name'],
-				'last_name' => $user['last_name'],
-				'nim' => $user['username'],
-				'total_poin' => $total + 20,
-				'studi_kasus' => $soal['soal'],
-				'sub_soal' => $soal['judul'],
 			]);
 		}
 	}
 
-	public function save_detail_confidence($id_soal)
-	{
-		$id_user = $this->session->userdata('user_id');
-		$confidence = $this->db->query('select c.confidence, cd.condition from confidence_tag c inner join conditions cd on c.id_soal = cd.id_soal')->num_rows();
-		$this->db->insert('detail_confidence_tag', [
-		'id_soal' => $id_soal,
-		'id_user' => $id_user,
-		'confidence' => $confidence['confidence'],
-		'status_jawaban' => $confidence['condition'],
-	]);
-}
+// 	public function save_detail_confidence($id_soal)
+// 	{
+// 		$id_user = $this->session->userdata('user_id');
+// 		$confidence = $this->db->query('select c.confidence, cd.condition from confidence_tag c inner join conditions cd on c.id_soal = cd.id_soal')->num_rows();
+// 		$this->db->insert('detail_confidence_tag', [
+// 		'id_soal' => $id_soal,
+// 		'id_user' => $id_user,
+// 		'confidence' => $confidence['confidence'],
+// 		'status_jawaban' => $confidence['condition'],
+// 	]);
+// }
 
-	public function save_percobaan($id_soal, $id_level)
+	public function save_percobaan($id_soal)
 	{
 		// Decrypt Id
 		$id_user = $this->session->userdata('user_id');
@@ -378,6 +367,7 @@ class Ujian extends CI_Controller
 		$data['confidence'] = $this->input->post('confidence');
 		$data['waktu'] = $this->input->post('waktu');
 		$this->db->insert('confidence_tag', $data);
+		$this->session->sess_expiration = 0;// expires in 4 hours
 		$this->session->set_userdata(array(
 			'confidence' => $this->input->post('confidence')
 		));

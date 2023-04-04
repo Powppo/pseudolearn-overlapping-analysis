@@ -191,9 +191,9 @@ class HasilUjian extends CI_Controller {
 		$this->load->view('ujian/cetak_detail', $data);
 	}
 
-	function get_datalog_json() { //data data produk by JSON object
-		header('Content-Type: application/json');
-		$this->output_json($this->ujian->get_all_datalog());
-	  }
+	// function get_datalog_json() { //data data produk by JSON object
+	// 	header('Content-Type: application/json');
+	// 	$this->output_json($this->ujian->get_all_datalog());
+	//   }
 	
 }

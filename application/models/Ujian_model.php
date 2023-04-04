@@ -194,16 +194,16 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function get_all_datalog()
-    {
-        $this->datatables->select("CONCAT(h.first_name, ' ', h.last_name) AS nama", FALSE);
-        $this->datatables->select('h.nim, l.nama as levels, sum(n.nilai) as jml_poin, h.poin, h.idsoal, h.iduser, h.studi_kasus, h.sub_soal');
-        $this->datatables->from('history_ujian h');
-        $this->datatables->join('tb_level l', 'h.id_level=l.id_level');
-        $this->datatables->join('nilai n', 'h.idsoal = n.id_soal');
-        $this->datatables->group_by('h.iduser');
-        return $this->datatables->generate();
-    }
+    // public function get_all_datalog()
+    // {
+    //     $this->datatables->select("CONCAT(h.first_name, ' ', h.last_name) AS nama", FALSE);
+    //     $this->datatables->select('h.nim, l.nama as levels, sum(n.nilai) as jml_poin, h.poin, h.idsoal, h.iduser, h.studi_kasus, h.sub_soal');
+    //     $this->datatables->from('history_ujian h');
+    //     $this->datatables->join('tb_level l', 'h.id_level=l.id_level');
+    //     $this->datatables->join('nilai n', 'h.idsoal = n.id_soal');
+    //     $this->datatables->group_by('h.iduser');
+    //     return $this->datatables->generate();
+    // }
 
     public function detailLogConfidence($id, $id_soal) {
         $this->db->select('s.judul as sub_soal, cd.confidence, l.nama as levels, cd.id as id_confidence, cd.waktu AS waktu');

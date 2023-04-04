@@ -101,7 +101,7 @@
             </div>
             <div class="box-footer text-center">
                 <a class="action back btn btn-info" rel="0" onclick="return back();"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
-                <a class="check btn btn-success" href="#" data-toggle="modal" data-target="#ModalaAdd" rel="1">Check</a>
+                <a class="check btn btn-success" href="#" data-toggle="modal" data-target="#ModalaAdd" rel="1" onclick="check_percobaan();">Check</a>
                 <a class="check btn btn-danger" rel="1" onclick="return refresh();">Reload</a>
                 <a class="action next btn btn-info" rel="2" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
                 <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
@@ -214,12 +214,13 @@ $(document).ready(function(){
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
             var condition = $('#corrects').val();
+            var status_jawaban = $('#status_jawaban').val();
             var username = $('#username').val();
             $.ajax({
                 type : "POST",
                 url: base_url+'ujian/save_condition/' + id_soal + '/' + id_user,
                 dataType : "JSON",
-                data : {id_user:id_user ,id_soal:id_soal, condition:condition, username:username},
+                data : {id_user:id_user ,id_soal:id_soal, condition:condition, status_jawaban, username:username},
                 success: function(data){
                     // $('[name="id_user"]').val("");
                     $('[name="id_soal"]').val("");
@@ -237,12 +238,13 @@ $(document).ready(function(){
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
             var username = $('#username').val();
+            var status_jawaban = $('#status_jawaban').val();
             var condition = $('#incorrects').val();
             $.ajax({
                 type : "POST",
                 url: base_url+'ujian/save_condition/' + id_soal + '/' + id_user,
                 dataType : "JSON",
-                data : {id_user:id_user ,id_soal:id_soal, condition:condition, username:username},
+                data : {id_user:id_user ,id_soal:id_soal, condition:condition, status_jawaban, username:username},
                 success: function(data){
                     // $('[name="id_user"]').val("");
                     $('[name="id_soal"]').val("");
@@ -511,27 +513,31 @@ $(document).ready(function(){
             }
         });
 
-        var idsoal = $('#id_soal').val();
-        var iduser = $('#id_user').val();
+        // var idsoal = $('#id_soal').val();
+        // var iduser = $('#id_user').val();
+        // $.ajax({
+        //     url: base_url+'ujian/save_detail_confidence/' + idsoal + '/' + iduser,
+        //     type: 'get',
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         if (data.status) {
+        //             $(this).removeAttr('disabled');
+        //             reload_ajax();
+        //         }
+        //     }
+        // });
+      }
+
+      function check_percobaan() {
+        var id_soal = $('#id_soal').val();
+        var id_user = $('#id_user').val();
+        var id_level = $('#id_level').val();
+        var jumlah = $('#jumlah').val();
         $.ajax({
-            url: base_url+'ujian/save_detail_confidence/' + idsoal + '/' + iduser,
+            url: base_url+'ujian/save_percobaan/' + id_soal + '/' + id_user + '/' + id_level,
             type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                if (data.status) {
-                    $(this).removeAttr('disabled');
-                    reload_ajax();
-                }
-            }
-        });
-       
-        var idsoal = $('#id_soal').val();
-        var iduser = $('#id_user').val();
-        var idlevel = $('#id_level').val();
-        $.ajax({
-            url: base_url+'ujian/save_percobaan/' + idsoal + '/' + idlevel,
-            type: 'get',
-            dataType: 'json',
+            dataType : "JSON",
+            data : {id_soal:id_soal, id_user:id_user, id_level:id_level, jumlah:jumlah},
             success: function (data) {
                 if (data.status) {
                     $(this).removeAttr('disabled');
@@ -540,7 +546,6 @@ $(document).ready(function(){
             }
         });
       }
- 
 
     function refresh() {
         location.reload();
