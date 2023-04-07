@@ -25,6 +25,13 @@
                             <small class="help-block" style="color: #dc3545"><?=form_error('bts_nilai')?></small>
                         </div>
                         <div class="col-sm-12">
+                            <label for="bts_nilai" class="control-label">Feedback</label>
+                            <div class="form-group">
+                                <textarea cols="20" rows="6" class="form-control" name="feedback" placeholder="Masukan Feedback"></textarea>
+                                <small class="help-block" style="color: #dc3545"><?=form_error('feedback')?></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
                             <label for="Upload" class="control-label">Upload</label>
                             <div class="form-group">
                                 <input type="file" name="image" class="form-control">

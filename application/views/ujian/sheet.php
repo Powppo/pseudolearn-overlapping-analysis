@@ -537,10 +537,7 @@ $(document).ready(function(){
         $.ajax({
             url: base_url+'ujian/save_percobaan/' + id_soal + '/' + id_user + '/' + id_level,
             type: 'get',
-<<<<<<< HEAD
-            dataType : "JSON",
             data : {id_soal:id_soal, id_user:id_user, id_level:id_level, jumlah:jumlah},
-=======
             dataType: 'json',
             success: function (data) {
                 if (data.status) {
@@ -557,7 +554,6 @@ $(document).ready(function(){
             url: base_url+'ujian/save_percobaan/' + '<?= $id_tes; ?>' + '/' + '<?php echo $levelId?>',
             type: 'get',
             dataType: 'json',
->>>>>>> e5963e27d8ca2402f27fa615bc596bc4cf6faff6
             success: function (data) {
                 if (data.status) {
                     $(this).removeAttr('disabled');

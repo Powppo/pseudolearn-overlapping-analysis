@@ -482,8 +482,16 @@ class Ujian extends CI_Controller
 		$jenis_count = 8;
 		$html = '';
 		$no = 1;
+		$feedback = $this->ujian->getLevelFeedback($levelId);
+		if($feedback)
+		{
+			$feedback = $feedback->feedback;
+		}else{
+			$feedback = '';
+		}
 		// if (!empty($soal_urut_ok)) {
-			foreach ($soal_urut_ok as $s) {
+			foreach ($soal_urut_ok as $s) 
+			{
 				$path = 'uploads/bank_soal/';
 				$html .= '<input type="hidden" id="id_soal" name="id_soal_' . $no . '" value="' . $s->id_soal . '">';
 				$html .= '<input type="hidden" id="id_user" name="user-id" value="' . $mhs->id_mahasiswa . '">';
@@ -502,7 +510,7 @@ class Ujian extends CI_Controller
 					!empty($s->$var) ? $html .= '<li class="data-type__item draggable" id="opsi_jenis_'.$var_opsi[$i].'">'.$s->$var.'</li>' : '';
 				}
 				$html .= '</ul>
-			</div>';
+						</div>';
 				$html .= '<div class="description__algorithm algorithm">
 						<h4 class="algorithm__title">Algoritma</h4>
 						<ul class="algorithm__items">';
@@ -708,8 +716,12 @@ class Ujian extends CI_Controller
 						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
 					</div>
 					<div id="fail-alert" class="alert" style="display: none;">
-						<h4>Jawaban anda masih salah, silahkan menyusun ulang</h4>
-						<img src="'.base_url().'template/images/fail.jpeg" alt="fail" />
+						<p>Jawaban anda masih salah, silahkan menyusun ulang<br>
+						<b>Feedback</b>
+							<br>
+						'.$feedback.'
+						</p>
+						<img src="'.base_url().'template/images/fail.jpeg" style="width:120px;" alt="fail" />
 						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>
 					</div>
 				</main>';
@@ -732,6 +744,8 @@ class Ujian extends CI_Controller
 			sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
 			$timeTaken = $hours * 3600 + $minutes * 60 + $seconds; //on scond calculate
 		}
+
+		
 		$data = [
 			'user' 		=> $this->user,
 			'mhs'		=> $this->mhs,

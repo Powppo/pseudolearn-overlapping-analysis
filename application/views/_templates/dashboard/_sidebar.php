@@ -109,13 +109,13 @@
 					</a>
 				</li>
 			<?php endif; ?>
-			<?php if ($this->ion_auth->is_admin()) : ?>
+			<!-- <?php if ($this->ion_auth->is_admin()) : ?>
 				<li class="<?= $page === 'feedback' ? "active" : "" ?>">
 					<a href="<?= base_url('feedback') ?>" rel="noopener noreferrer">
 						<i class="fa fa-comments"></i> <span>Feedback</span>
 					</a>
 				</li>
-			<?php endif; ?>
+			<?php endif; ?> -->
 		</ul>
 
 	</section>

@@ -130,6 +130,7 @@ class Level extends CI_Controller
             $data = [
                 // 'level'      => $this->input->post('level', true),
                 'nama'      => $this->input->post('nama', true),
+                'feedback' => $this->input->post('feedback', true),
                 'bts_nilai' => $this->input->post('bts_nilai', true)
             ];
 
@@ -162,6 +163,7 @@ class Level extends CI_Controller
             // Inputan Opsi
             $data['bts_nilai']    = $this->input->post('bts_nilai', true);
             $data['nama']    = $this->input->post('nama', true);
+            $data['feedback']    = $this->input->post('feedback', true);
 
             if ($method === 'add') {
                 //insert data

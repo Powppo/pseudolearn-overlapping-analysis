@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Ujian_model extends CI_Model
 {
-
     public function getDataUjian($id)
     {
         $this->datatables->select('a.id_ujian, a.token, a.nama_ujian, b.nama_matkul, a.jumlah_soal, CONCAT(a.tgl_mulai, " <br/> (", a.waktu, " Menit)") as waktu, a.jenis');
@@ -302,6 +301,14 @@ class Ujian_model extends CI_Model
         $this->db->where('id_user', $user_id);
         $this->db->where('id_soal', $key);
         $this->db->order_by('waktu','DESC');
+        return $this->db->get()->row();
+    }
+
+    function getLevelFeedback($levelId)
+    {
+        $this->db->select('feedback');
+        $this->db->from('tb_level');
+        $this->db->where('id_level', $levelId);
         return $this->db->get()->row();
     }
 }
