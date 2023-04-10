@@ -717,7 +717,7 @@ class Ujian extends CI_Controller
 					</div>
 					<div id="fail-alert" class="alert" style="display: none;">
 						<p>Jawaban anda masih salah, silahkan menyusun ulang<br>
-						<b>Feedback</b>
+						<br>
 							<br>
 						'.$feedback.'
 						</p>
