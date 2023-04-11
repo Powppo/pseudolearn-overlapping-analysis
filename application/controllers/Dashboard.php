@@ -36,7 +36,7 @@ class Dashboard extends CI_Controller {
 			[
 				'box' 		=> 'orange',
 				'total' 	=> $this->dashboard->totals(),
-				'title'		=> 'Mengerjakan',
+				'title'		=> 'HasilUjian',
 				'icon'		=> 'check'
 			],
 		];
