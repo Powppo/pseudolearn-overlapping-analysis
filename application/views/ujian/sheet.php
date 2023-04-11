@@ -537,12 +537,8 @@ $(document).ready(function(){
         $.ajax({
             url: base_url+'ujian/save_percobaan/' + id_soal + '/' + id_user + '/' + id_level,
             type: 'get',
-<<<<<<< HEAD
             dataType : "JSON",
             data : {id_soal:id_soal, id_user:id_user, id_level:id_level, jumlah:jumlah},
-=======
-            data : {id_soal:id_soal, id_user:id_user, id_level:id_level, jumlah:jumlah},
-            dataType: 'json',
             success: function (data) {
                 if (data.status) {
                     $(this).removeAttr('disabled');
@@ -558,7 +554,6 @@ $(document).ready(function(){
             url: base_url+'ujian/save_percobaan/' + '<?= $id_tes; ?>' + '/' + '<?php echo $levelId?>',
             type: 'get',
             dataType: 'json',
->>>>>>> 0c09b66c7b6efb08a6fa61affca5270783f45d56
             success: function (data) {
                 if (data.status) {
                     $(this).removeAttr('disabled');
