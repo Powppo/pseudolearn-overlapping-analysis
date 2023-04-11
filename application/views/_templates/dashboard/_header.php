@@ -34,6 +34,8 @@
 
 	<link rel="stylesheet" href=" <?= base_url() ?>assets/dist/quiz/css/base.css" />
 	<link rel="stylesheet" href="<?= base_url() ?>assets/dist/quiz/css/categories.css" />
+
+	
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,10 +54,13 @@
 <script src="<?= base_url() ?>assets/bower_components/moment/min/moment.min.js"></script>
 <script src="<?= base_url() ?>assets/bower_components/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
+<!-- JS Google Chart -->
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script type="text/javascript">
 	let base_url = '<?= base_url() ?>';
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.min.js"></script>
 <body class="hold-transition skin-purple sidebar-mini">
 	<div class="wrapper">
 

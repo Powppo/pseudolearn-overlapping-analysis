@@ -52,13 +52,14 @@
                 var listsoal = '';
                 console.log(json);
                 $.each(json, function(key, value) {
-                    var status = 'incompleted'
-                    var flag = 'incompleted'
-                    var link = '<b class="card__title card__title">'+value.nama+'</b>'
-                    if (value.bts_nilai <= value.nilai || (!value.nilai && key == 0)) {
+                    if (value.nilai >= value.bts_nilai || (!value.nilai && key == 0)) {
                         status = 'completed'
                         flag = 'completed'
                         link = '<a href="<?= base_url() ?>ujian/list_ujian/' + value.id_level + '" class="card__title card__title"> ' + value.nama + '</a>'
+                    } else {
+                        var status = 'incompleted'
+                        var flag = 'incompleted'
+                        var link = '<b class="card__title card__title">'+value.nama+'</b>'
                     }
                     listsoal += '<div class="categories__card card">';
                     listsoal += link;

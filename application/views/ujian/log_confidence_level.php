@@ -18,7 +18,8 @@
             <h5 style="margin-left:50px;"> Nama : <?=$nama_mahasiswa?></h5>
             <h5 style="margin-left:50px;"> NIM : <?=$nim_mahasiswa?></h5>
             <h5 style="margin-left:50px;"> Kelas : <?=$kelas_mahasiswa?></h5>
-            <div class="form-group col-sm-4 text-center" style="text-align: center; margin-left: 370px;">
+            <br></br>
+            <!-- <div class="form-group col-sm-4 text-center" style="text-align: center; margin-left: 370px;">
             <?php if ($this->ion_auth->is_admin()) : ?>
 							<select class="form-control status-dropdown select2" style="width:100% !important">
 								<option value="">Semua Sub Soal</option>
@@ -27,7 +28,7 @@
 								<?php endforeach; ?>
 							</select>
 				<?php endif; ?>
-			</div>
+			</div> -->
         </div>
     </div>
             <div class="table-responsive px-4 pb-3" style="border: 0">

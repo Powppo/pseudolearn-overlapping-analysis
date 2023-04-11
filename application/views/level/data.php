@@ -44,6 +44,7 @@
 				<th>Nama</th>
                 <th>Gambar</th>
 				<th>Batas Nilai</th>
+				<th>Feedback</th>
 				<th class="text-center">Aksi</th>
             </tr>        
         </thead>

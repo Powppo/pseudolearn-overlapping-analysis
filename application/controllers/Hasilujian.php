@@ -115,7 +115,7 @@ class HasilUjian extends CI_Controller {
 	public function detailConfidence($id, $id_soal) {
 
 		$detail_conf = $this->ujian->detailLogConfidence($id, $id_soal);
-		$detail_cond = $this->ujian->detailLogConditions($id, $id_soal);
+		// $detail_cond = $this->ujian->detailLogConditions($id, $id_soal);
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_conf,

@@ -61,7 +61,8 @@ $(document).ready(function() {
           return '<img src="'+base_url+'uploads/level_soal/'+data+'" width="80" height="80">';
         }
       },
-      { data: "bts_nilai" }
+      { data: "bts_nilai" },
+      { data: "feedback" }
     ],
     columnDefs: [
       {
@@ -74,7 +75,7 @@ $(document).ready(function() {
         }
       },
       {
-        targets: 5,
+        targets: 6,
         data: "id_level",
         render: function(data, type, row, meta) {
           return `<div class="text-center">

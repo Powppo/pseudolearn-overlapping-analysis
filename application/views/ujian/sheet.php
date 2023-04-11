@@ -265,7 +265,7 @@ $(document).ready(function(){
             if ($('#jenis_1 #opsi_jenis_1').length < 1) {
                 err = 1
                 // alert('Urutan Pertama salah')
-                $('#jenis_1').css('background', 'red')
+                $('#jenis_1').css('background', '#efff00')
                 // alert("Tipe data yang dimasukkan pertama salah"); 
             }else{
                 $('#jenis_1').css('background', '#efff00')
@@ -276,7 +276,7 @@ $(document).ready(function(){
             if ($('#jenis_2 #opsi_jenis_2').length < 1) {
                 err = 1
                 // alert('Urutan Kedua salah')
-                $('#jenis_2').css('background', 'red')
+                $('#jenis_2').css('background', '#efff00')
                 // alert("Tipe data yang dimasukkan kedua salah"); 
             }else{
                 $('#jenis_2').css('background', '#efff00')
@@ -287,7 +287,7 @@ $(document).ready(function(){
             if ($('#jenis_3 #opsi_jenis_3').length < 1) {
                 err = 1
                 // alert('Urutan ketiga salah')
-                $('#jenis_3').css('background', 'red')
+                $('#jenis_3').css('background', '#efff00')
             }else{
                 $('#jenis_3').css('background', '#efff00')
             }
@@ -297,7 +297,7 @@ $(document).ready(function(){
             if ($('#jenis_4 #opsi_jenis_4').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jenis_4').css('background', 'red')
+                $('#jenis_4').css('background', '#efff00')
             }else{
                 $('#jenis_4').css('background', '#efff00')
             }
@@ -307,7 +307,7 @@ $(document).ready(function(){
             if ($('#jenis_5 #opsi_jenis_5').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jenis_5').css('background', 'red')
+                $('#jenis_5').css('background', '#efff00')
             }else{
                 $('#jenis_5').css('background', '#efff00')
             }
@@ -317,7 +317,7 @@ $(document).ready(function(){
             if ($('#jenis_6 #opsi_jenis_6').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jenis_6').css('background', 'red')
+                $('#jenis_6').css('background', '#efff00')
             }else{
                 $('#jenis_6').css('background', '#efff00')
             }
@@ -327,7 +327,7 @@ $(document).ready(function(){
             if ($('#jenis_7 #opsi_jenis_7').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jenis_7').css('background', 'red')
+                $('#jenis_7').css('background', '#efff00')
             }else{
                 $('#jenis_7').css('background', '#efff00')
             }
@@ -337,7 +337,7 @@ $(document).ready(function(){
             if ($('#jenis_8 #opsi_jenis_8').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jenis_8').css('background', 'red')
+                $('#jenis_8').css('background', '#efff00')
             }else{
                 $('#jenis_8').css('background', '#efff00')
             }
@@ -347,7 +347,7 @@ $(document).ready(function(){
             if ($('#jawaban_a #opsi_a').length < 1) {
                 err = 1
                 // alert('Urutan Pertama salah')
-                $('#jawaban_a').css('background', 'red')
+                $('#jawaban_a').css('background', '#efff00')
             }else{
                 $('#jawaban_a').css('background', '#efff00')
             }
@@ -357,7 +357,7 @@ $(document).ready(function(){
             if ($('#jawaban_b #opsi_b').length < 1) {
                 err = 1
                 // alert('Urutan Kedua salah')
-                $('#jawaban_b').css('background', 'red')
+                $('#jawaban_b').css('background', '#efff00')
             }else{
                 $('#jawaban_b').css('background', '#efff00')
             }
@@ -367,7 +367,7 @@ $(document).ready(function(){
             if ($('#jawaban_c #opsi_c').length < 1) {
                 err = 1
                 // alert('Urutan ketiga salah')
-                $('#jawaban_c').css('background', 'red')
+                $('#jawaban_c').css('background', '#efff00')
             }else{
                 $('#jawaban_c').css('background', '#efff00')
             }
@@ -377,7 +377,7 @@ $(document).ready(function(){
             if ($('#jawaban_d #opsi_d').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_d').css('background', 'red')
+                $('#jawaban_d').css('background', '#efff00')
             }else{
                 $('#jawaban_d').css('background', '#efff00')
             }
@@ -387,7 +387,7 @@ $(document).ready(function(){
             if ($('#jawaban_e #opsi_e').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_e').css('background', 'red')
+                $('#jawaban_e').css('background', '#efff00')
             }else{
                 $('#jawaban_e').css('background', '#efff00')
             }
@@ -397,7 +397,7 @@ $(document).ready(function(){
             if ($('#jawaban_f #opsi_f').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_f').css('background', 'red')
+                $('#jawaban_f').css('background', '#efff00')
             }else{
                 $('#jawaban_f').css('background', '#efff00')
             }
@@ -407,7 +407,7 @@ $(document).ready(function(){
             if ($('#jawaban_g #opsi_g').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_g').css('background', 'red')
+                $('#jawaban_g').css('background', '#efff00')
             }else{
                 $('#jawaban_g').css('background', '#efff00')
             }
@@ -417,7 +417,7 @@ $(document).ready(function(){
             if ($('#jawaban_h #opsi_h').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_h').css('background', 'red')
+                $('#jawaban_h').css('background', '#efff00')
             }else{
                 $('#jawaban_h').css('background', '#efff00')
             }
@@ -427,7 +427,7 @@ $(document).ready(function(){
             if ($('#jawaban_i #opsi_i').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_i').css('background', 'red')
+                $('#jawaban_i').css('background', '#efff00')
             }else{
                 $('#jawaban_i').css('background', '#efff00')
             }
@@ -437,7 +437,7 @@ $(document).ready(function(){
             if ($('#jawaban_j #opsi_j').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_j').css('background', 'red')
+                $('#jawaban_j').css('background', '#efff00')
             }else{
                 $('#jawaban_j').css('background', '#efff00')
             }
@@ -447,7 +447,7 @@ $(document).ready(function(){
             if ($('#jawaban_k #opsi_k').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_k').css('background', 'red')
+                $('#jawaban_k').css('background', '#efff00')
             }else{
                 $('#jawaban_k').css('background', '#efff00')
             }
@@ -457,7 +457,7 @@ $(document).ready(function(){
             if ($('#jawaban_l #opsi_l').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_l').css('background', 'red')
+                $('#jawaban_l').css('background', '#efff00')
             }else{
                 $('#jawaban_l').css('background', '#efff00')
             }
@@ -467,7 +467,7 @@ $(document).ready(function(){
             if ($('#jawaban_m #opsi_m').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_m').css('background', 'red')
+                $('#jawaban_m').css('background', '#efff00')
             }else{
                 $('#jawaban_m').css('background', '#efff00')
             }
@@ -477,7 +477,7 @@ $(document).ready(function(){
             if ($('#jawaban_n #opsi_n').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_n').css('background', 'red')
+                $('#jawaban_n').css('background', '#efff00')
             }else{
                 $('#jawaban_n').css('background', '#efff00')
             }
@@ -487,7 +487,7 @@ $(document).ready(function(){
             if ($('#jawaban_o #opsi_o').length < 1) {
                 err = 1
                 // alert('Urutan Keempat salah')
-                $('#jawaban_o').css('background', 'red')
+                $('#jawaban_o').css('background', '#efff00')
             }else{
                 $('#jawaban_o').css('background', '#efff00')
             }
@@ -537,8 +537,28 @@ $(document).ready(function(){
         $.ajax({
             url: base_url+'ujian/save_percobaan/' + id_soal + '/' + id_user + '/' + id_level,
             type: 'get',
+<<<<<<< HEAD
             dataType : "JSON",
             data : {id_soal:id_soal, id_user:id_user, id_level:id_level, jumlah:jumlah},
+=======
+            data : {id_soal:id_soal, id_user:id_user, id_level:id_level, jumlah:jumlah},
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    $(this).removeAttr('disabled');
+                    reload_ajax();
+                }
+            }
+        });
+       
+        var idsoal = $('#id_soal').val();
+        var iduser = $('#id_user').val();
+        var idlevel = $('#id_level').val();
+        $.ajax({
+            url: base_url+'ujian/save_percobaan/' + '<?= $id_tes; ?>' + '/' + '<?php echo $levelId?>',
+            type: 'get',
+            dataType: 'json',
+>>>>>>> 0c09b66c7b6efb08a6fa61affca5270783f45d56
             success: function (data) {
                 if (data.status) {
                     $(this).removeAttr('disabled');
