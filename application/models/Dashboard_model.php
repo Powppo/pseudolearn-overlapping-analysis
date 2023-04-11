@@ -31,6 +31,16 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    function totals()
+    {
+        $this->db->group_by('h.iduser'); 
+        $this->db->select("count(*) as total_mhs");
+        $this->db->from('history_ujian h');
+        return $this->db
+          ->get()
+          ->num_rows();
+    }
+
     function get_confidence_ys()
     {
         $this->db->group_by('s.id_level');

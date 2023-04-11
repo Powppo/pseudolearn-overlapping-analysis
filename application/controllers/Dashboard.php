@@ -33,6 +33,12 @@ class Dashboard extends CI_Controller {
 				'title'		=> 'Mahasiswa',
 				'icon'		=> 'user'
 			],
+			[
+				'box' 		=> 'orange',
+				'total' 	=> $this->dashboard->totals(),
+				'title'		=> 'Mengerjakan',
+				'icon'		=> 'check'
+			],
 		];
 		$info_box = json_decode(json_encode($box), FALSE);
 		return $info_box;
