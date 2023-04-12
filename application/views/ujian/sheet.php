@@ -578,7 +578,7 @@ $(document).ready(function(){
         var id_level = $('#id_level').val();
         var jumlah = $('#jumlah').val();
         $.ajax({
-            url: base_url+'ujian/save_percobaan/' + id_soal + '/' + id_user + '/' + id_level,
+            url: base_url+'ujian/save_percobaan/' + '<?= $id_tes; ?>' + '/' + '<?php echo $levelId?>',
             type: 'get',
             dataType : "JSON",
             data : {id_soal:id_soal, id_user:id_user, id_level:id_level, jumlah:jumlah},
@@ -590,20 +590,20 @@ $(document).ready(function(){
             }
         });
        
-        var idsoal = $('#id_soal').val();
-        var iduser = $('#id_user').val();
-        var idlevel = $('#id_level').val();
-        $.ajax({
-            url: base_url+'ujian/save_percobaan/' + '<?= $id_tes; ?>' + '/' + '<?php echo $levelId?>',
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                if (data.status) {
-                    $(this).removeAttr('disabled');
-                    reload_ajax();
-                }
-            }
-        });
+        // var idsoal = $('#id_soal').val();
+        // var iduser = $('#id_user').val();
+        // var idlevel = $('#id_level').val();
+        // $.ajax({
+        //     url: base_url+'ujian/save_percobaan/' + '<?= $id_tes; ?>' + '/' + '<?php echo $levelId?>',
+        //     type: 'get',
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         if (data.status) {
+        //             $(this).removeAttr('disabled');
+        //             reload_ajax();
+        //         }
+        //     }
+        // });
       }
 
     function refresh() {
