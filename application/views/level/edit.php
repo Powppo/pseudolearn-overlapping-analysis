@@ -24,11 +24,32 @@
                                     <input required="required" value="<?=$level->bts_nilai?>" type="number" name="bts_nilai" placeholder="Masukan Nilai Kategori"  class="form-control">
                                     <small class="help-block" style="color: #dc3545"><?=form_error('bts_nilai')?></small>
                                 </div>
-                                <div class="col-sm-12">
-                                    <label for="bts_nilai" class="control-label">Feedback</label>
+                                 <div class="col-sm-12">
+                                    <label for="bts_nilai" class="control-label">Feedback Data Type</label>
                                     <div class="form-group">
-                                        <textarea cols="20" rows="6" class="form-control" name="feedback" placeholder="Masukan Feedback"><?=$level->feedback?></textarea>
-                                        <small class="help-block" style="color: #dc3545"><?=form_error('feedback')?></small>
+                                        <textarea cols="20" rows="6" class="form-control" name="feedback_data_type" placeholder="Masukan Feedback"><?=$level->feedback_data_type?></textarea>
+                                        <small class="help-block" style="color: #dc3545"><?=form_error('feedback_data_type')?></small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="bts_nilai" class="control-label">Feedback Input</label>
+                                    <div class="form-group">
+                                        <textarea cols="20" rows="6" class="form-control" name="feedback_input" placeholder="Masukan Feedback"><?=$level->feedback_input?></textarea>
+                                        <small class="help-block" style="color: #dc3545"><?=form_error('feedback_input')?></small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="bts_nilai" class="control-label">Feedback Process</label>
+                                    <div class="form-group">
+                                        <textarea cols="20" rows="6" class="form-control" name="feedback_process" placeholder="Masukan Feedback"><?=$level->feedback_process?></textarea>
+                                        <small class="help-block" style="color: #dc3545"><?=form_error('feedback_process')?></small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="bts_nilai" class="control-label">Feedback Output</label>
+                                    <div class="form-group">
+                                        <textarea cols="20" rows="6" class="form-control" name="feedback_output" placeholder="Masukan Feedback"><?=$level->feedback_output?></textarea>
+                                        <small class="help-block" style="color: #dc3545"><?=form_error('feedback_output')?></small>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

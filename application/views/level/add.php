@@ -25,10 +25,31 @@
                             <small class="help-block" style="color: #dc3545"><?=form_error('bts_nilai')?></small>
                         </div>
                         <div class="col-sm-12">
-                            <label for="bts_nilai" class="control-label">Feedback</label>
+                            <label for="bts_nilai" class="control-label">Feedback Data Type</label>
                             <div class="form-group">
-                                <textarea cols="20" rows="6" class="form-control" name="feedback" placeholder="Masukan Feedback"></textarea>
-                                <small class="help-block" style="color: #dc3545"><?=form_error('feedback')?></small>
+                                <textarea cols="20" rows="6" class="form-control" name="feedback_data_type" placeholder="Masukan Feedback"></textarea>
+                                <small class="help-block" style="color: #dc3545"><?=form_error('feedback_data_type')?></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="bts_nilai" class="control-label">Feedback Input</label>
+                            <div class="form-group">
+                                <textarea cols="20" rows="6" class="form-control" name="feedback_input" placeholder="Masukan Feedback"></textarea>
+                                <small class="help-block" style="color: #dc3545"><?=form_error('feedback_input')?></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="bts_nilai" class="control-label">Feedback Process</label>
+                            <div class="form-group">
+                                <textarea cols="20" rows="6" class="form-control" name="feedback_process" placeholder="Masukan Feedback"></textarea>
+                                <small class="help-block" style="color: #dc3545"><?=form_error('feedback_process')?></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="bts_nilai" class="control-label">Feedback Output</label>
+                            <div class="form-group">
+                                <textarea cols="20" rows="6" class="form-control" name="feedback_output" placeholder="Masukan Feedback"></textarea>
+                                <small class="help-block" style="color: #dc3545"><?=form_error('feedback_output')?></small>
                             </div>
                         </div>
                         <div class="col-sm-12">

@@ -92,7 +92,39 @@ class Level extends CI_Controller
 
     public function data($id = null, $dosen = null)
     {
-        $this->output_json($this->level->getDataLevel($id, $dosen), false);
+        // $data = $this->level->getDataLevel($id, $dosen);
+        $data = $this->level->getDataLevel($id, $dosen);
+        $json = json_decode($data,true);
+        for ($i=0; $i < count($json['data']); $i++) { 
+           if($json['data'][$i]['feedback_data_type'] == NULL)
+           {
+                $json['data'][$i]['feedback_data_type'] = 'Belum diatur';
+           }
+
+           if($json['data'][$i]['feedback_input'] == NULL)
+           {
+                $json['data'][$i]['feedback_input'] = 'Belum diatur';
+           }
+
+           if($json['data'][$i]['feedback_process'] == NULL)
+           {
+                $json['data'][$i]['feedback_process'] = 'Belum diatur';
+           }
+
+           if($json['data'][$i]['feedback_output'] == NULL)
+           {
+                $json['data'][$i]['feedback_output'] = 'Belum diatur';
+           }
+           $json['data'][$i]['feedback'] = '<ul>
+            <li>Feedback Data Type : '.$json['data'][$i]['feedback_data_type'].'</li>
+            <li>Feedback Input : '.$json['data'][$i]['feedback_input'].'</li>
+            <li>Feedback Process : '.$json['data'][$i]['feedback_process'].'</li>
+            <li>Feedback Output : '.$json['data'][$i]['feedback_output'].'</li>
+           </ul>';
+        }
+        $back = json_encode($json);
+        //echo print_r($json['data'][0]);
+        $this->output_json($back, false);
     }
 
     public function validasi()
@@ -130,7 +162,10 @@ class Level extends CI_Controller
             $data = [
                 // 'level'      => $this->input->post('level', true),
                 'nama'      => $this->input->post('nama', true),
-                'feedback' => $this->input->post('feedback', true),
+                'feedback_data_type' => $this->input->post('feedback_data_type', true),
+                'feedback_input' => $this->input->post('feedback_input', true),
+                'feedback_process' => $this->input->post('feedback_process', true),
+                'feedback_output' => $this->input->post('feedback_output', true),
                 'bts_nilai' => $this->input->post('bts_nilai', true)
             ];
 
@@ -163,7 +198,10 @@ class Level extends CI_Controller
             // Inputan Opsi
             $data['bts_nilai']    = $this->input->post('bts_nilai', true);
             $data['nama']    = $this->input->post('nama', true);
-            $data['feedback']    = $this->input->post('feedback', true);
+            $data['feedback_data_type']    = $this->input->post('feedback_data_type', true);
+            $data['feedback_input']    = $this->input->post('feedback_input', true);
+            $data['feedback_process']    = $this->input->post('feedback_process', true);
+            $data['feedback_output']    = $this->input->post('feedback_output', true);
 
             if ($method === 'add') {
                 //insert data
