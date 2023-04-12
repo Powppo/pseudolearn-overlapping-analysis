@@ -1,4 +1,4 @@
-<div class="site-section" id="teachers-section">
+<!-- <div class="site-section" id="teachers-section">
       <div class="container">
 
         <div class="row mb-5 justify-content-center">
@@ -43,12 +43,12 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="site-section bg-image overlay" style="background-image: url(assets/frontend/images/hero_1.jpg);">
       <div class="container">
         <div class="row justify-content-center align-items-center">
-          <div class="col-md-8 text-center testimony">
+          <div class="col-md-8 text-center testimony" style="margin-top: 60px;">
             <img src="assets/frontend/images/imgs.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
             <h3 class="mb-4">Dr. Seuss</h3>
             <blockquote>

@@ -37,7 +37,7 @@
       </div>
     </div>
 
-
+<!-- 
     <div class="site-section bg-light" id="contact-section">
       <div class="container">
 
@@ -86,4 +86,4 @@
             </form>
           </div>
         </div>
-      </div>
+      </div> -->
