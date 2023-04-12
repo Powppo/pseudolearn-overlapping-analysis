@@ -763,21 +763,21 @@ $(document).ready(function(){
 <script type="text/javascript">
     var seconds = 0;
     //console.log(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>'));
-    var timeTaken = '<?php echo $timeTaken?>';
-    if(timeTaken == '')
-    {
-        if(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>') != null)
-        {
-            seconds = window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>');
-        }else{
-            window.localStorage.removeItem('taken_time_quiz_'+'<?= $id_tes; ?>');
-            seconds = 0;
-            window.localStorage.setItem('taken_time_quiz_'+'<?= $id_tes; ?>', seconds);
-        }
-    }else{
-        var plush = timeTaken;
-        seconds = plush;
-    }
+    // var timeTaken = '<?php echo $timeTaken?>';
+    // if(timeTaken == '')
+    // {
+    //     if(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>') != null)
+    //     {
+    //         seconds = window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+    //     }else{
+    //         window.localStorage.removeItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+    //         seconds = 0;
+    //         window.localStorage.setItem('taken_time_quiz_'+'<?= $id_tes; ?>', seconds);
+    //     }
+    // }else{
+    //     var plush = timeTaken;
+    //     seconds = plush;
+    // }
     
 
     var timer = setInterval(upTimer, 1000);

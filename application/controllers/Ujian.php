@@ -485,10 +485,16 @@ class Ujian extends CI_Controller
 		$feedback = $this->ujian->getLevelFeedback($levelId);
 		if($feedback)
 		{
-			$feedback = $feedback->feedback;
+			$feedback = [
+							'tipe_data'=>$feedback->tipe_data
+							,'input'=>$feedback->input
+							,'process'=>$feedback->process
+							,'output'=>$feedback->output
+						];
 		}else{
-			$feedback = '';
+			$feedback = [];
 		}
+		$feedbackStr = '';
 		// if (!empty($soal_urut_ok)) {
 			foreach ($soal_urut_ok as $s) 
 			{
@@ -719,7 +725,7 @@ class Ujian extends CI_Controller
 						<p>Jawaban anda masih salah, silahkan menyusun ulang<br>
 						<br>
 							<br>
-						'.$feedback.'
+						'.$feedbackStr.'
 						</p>
 						<img src="'.base_url().'template/images/fail.jpeg" style="width:120px;" alt="fail" />
 						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>

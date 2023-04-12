@@ -306,7 +306,7 @@ class Ujian_model extends CI_Model
 
     function getLevelFeedback($levelId)
     {
-        $this->db->select('feedback');
+        $this->db->select('feedback_data_type as tipe_data,feedback_input as input,feedback_process as process,feedback_output as output');
         $this->db->from('tb_level');
         $this->db->where('id_level', $levelId);
         return $this->db->get()->row();
