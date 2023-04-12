@@ -44,8 +44,8 @@ class DetailHistory extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'informasi' => $results,
-			'judul'	=> 'Hasil Ujian',
-			'subjudul'=> 'Log Aktivitas Mahasiswa',
+			'judul'	=> 'History',
+			'subjudul'=> 'History Confidence Tag',
 		];
 
 		if ($this->ion_auth->is_admin()) {
@@ -63,8 +63,8 @@ class DetailHistory extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'hasil' => $results,
-			'judul'	=> 'Hasil Ujian',
-			'subjudul'=> 'Detail Confidence Tag',
+			'judul'	=> 'History',
+			'subjudul'=> 'Detail Level',
 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
 			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
@@ -87,12 +87,12 @@ class DetailHistory extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_data,
-			'judul'	=> 'Hasil Ujian',
-			'subjudul'=> 'Detail Confidence Tag',
-			'total_yakin_salah' => $this->db->query("SELECT COUNT(id) AS total_yakin_salah FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'yakin' AND status_jawaban = 'salah' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_yakin_salah'],
-			'total_yakin_benar' => $this->db->query("SELECT COUNT(id) AS total_yakin_benar FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'yakin' AND status_jawaban = 'benar' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_yakin_benar'],
-			'total_tidakyakin_salah' => $this->db->query("SELECT COUNT(id) AS total_tidakyakin_salah FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'tidak yakin' AND status_jawaban = 'salah' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_tidakyakin_salah'],
-			'total_tidakyakin_benar' => $this->db->query("SELECT COUNT(id) AS total_tidakyakin_benar FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'tidak yakin' AND status_jawaban = 'benar' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_tidakyakin_benar'],
+			'judul'	=> 'History',
+			'subjudul'=> 'History Per Level',
+			'total_yakin_salah' => $this->db->query("SELECT COUNT(*) AS total_yakin_salah FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'yakin' AND status_jawaban = 'salah' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_yakin_salah'],
+			'total_yakin_benar' => $this->db->query("SELECT COUNT(*) AS total_yakin_benar FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'yakin' AND status_jawaban = 'benar' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_yakin_benar'],
+			'total_tidakyakin_salah' => $this->db->query("SELECT COUNT(*) AS total_tidakyakin_salah FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'tidak yakin' AND status_jawaban = 'salah' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_tidakyakin_salah'],
+			'total_tidakyakin_benar' => $this->db->query("SELECT COUNT(*) AS total_tidakyakin_benar FROM conditions c JOIN tb_soal s ON c.id_soal = s.id_soal WHERE confidence = 'tidak yakin' AND status_jawaban = 'benar' AND c.id_user = ? AND s.id_level = ?", [$id, $id_level])->row_array()['total_tidakyakin_benar'],
 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
 			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
@@ -119,8 +119,8 @@ class DetailHistory extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_data,
-			'judul'	=> 'Hasil Ujian',
-			'subjudul'=> 'Detail Confidence Tag',
+			'judul'	=> 'History',
+			'subjudul'=> 'Detail Soal',
 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
 			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
@@ -147,8 +147,8 @@ class DetailHistory extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_data,
-			'judul'	=> 'Hasil Ujian',
-			'subjudul'=> 'Detail Confidence Tag',
+			'judul'	=> 'History',
+			'subjudul'=> 'History Per Soal',
 			'total_yakin_salah' => $this->db->query("SELECT COUNT(id) AS total_yakin_salah FROM conditions WHERE confidence = 'yakin' AND status_jawaban = 'salah' AND id_user = ? AND id_soal = ?", [$id, $id_soal])->row_array()['total_yakin_salah'],
 			'total_yakin_benar' => $this->db->query("SELECT COUNT(id) AS total_yakin_benar FROM conditions WHERE confidence = 'yakin' AND status_jawaban = 'benar' AND id_user = ? AND id_soal = ?", [$id, $id_soal])->row_array()['total_yakin_benar'],
 			'total_tidakyakin_salah' => $this->db->query("SELECT COUNT(id) AS total_tidakyakin_salah FROM conditions WHERE confidence = 'tidak yakin' AND status_jawaban = 'salah' AND id_user = ? AND id_soal = ?", [$id, $id_soal])->row_array()['total_tidakyakin_salah'],

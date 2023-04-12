@@ -44,7 +44,7 @@ class HasilUjian extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'informasi' => $results,
-			'judul'	=> 'Hasil Ujian',
+			'judul'	=> 'Log',
 			'subjudul'=> 'Log Aktivitas Mahasiswa',
 		];
 
@@ -63,8 +63,8 @@ class HasilUjian extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'hasil' => $results,
-			'judul'	=> 'Hasil Ujian',
-			'subjudul'=> 'Log Aktivitas Mahasiswa',
+			'judul'	=> 'Log',
+			'subjudul'=> 'Detail Log Per Level',
 			'total_waktu' => $this->db->query("SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(waktu))) AS total_waktu FROM confidence_tag WHERE id_user = ?", $id)->row_array()['total_waktu'],
 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
@@ -88,8 +88,8 @@ class HasilUjian extends CI_Controller {
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_data,
-			'judul'	=> 'Hasil Ujian',
-			'subjudul'=> 'Detail Log Aktivitas Mahasiswa',
+			'judul'	=> 'Log',
+			'subjudul'=> 'Detail Log Per Soal',
 			'total_waktu' => $this->db->query('select SEC_TO_TIME(SUM(TIME_TO_SEC(waktu))) as total_waktu from confidence_tag c INNER JOIN tb_soal s ON c.id_soal = s.id_soal where c.id_user = ? and s.id_level = ?', [$id, $id_level])->row_array()['total_waktu'],
 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
@@ -122,7 +122,7 @@ class HasilUjian extends CI_Controller {
 			'details' => $this->db->query("SELECT s.judul, c.status_jawaban as details FROM conditions c INNER JOIN tb_soal s ON c.id_soal = s.id_soal WHERE c.id_user = ? and c.id_soal = ?", [$id, $id_soal])->row_array()['details'],
 			// 'details' => $this->db->query("SELECT s.judul, d.confidence, d.status_jawaban as details FROM `detail_confidence_tag` d INNER JOIN tb_soal s ON s.id_soal = d.id_soal where d.status_jawaban IS NOT NULL and d.id_user = ? and d.id_soal = ?", [$id, $id_soal])->row_array()['details'],
 			'details_max' =>$this->db->query("SELECT MAX(d.id) AS details_max FROM `confidence_tag` d INNER JOIN tb_soal s ON s.id_soal = d.id_soal where d.id_user = ? and d.id_soal = ?", [$id, $id_soal])->row_array()['details_max'],
-			'judul'	=> 'Hasil Ujian',
+			'judul'	=> 'Log',
 			'subjudul'=> 'Detail Confidence Tag',
 			'total' => $this->db->query('select sum(jumlah) as total from history_percobaan where id_user = ? and id_soal = ?', [$id, $id_soal])->row_array()['total'],
 			'total_benar' => $this->db->query("SELECT COUNT(IF(status_jawaban = 'benar', status_jawaban, NULL)) as total_benar from conditions where id_user = ? and id_soal = ?", [$id, $id_soal])->row_array()['total_benar'],
