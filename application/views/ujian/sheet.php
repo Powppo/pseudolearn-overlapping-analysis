@@ -260,10 +260,15 @@ $(document).ready(function(){
 
      
       function check_jawaban() {
-        var err = 0
+        var err = 0;
+        let tipe_data = 0;
+        let input = 0;
+        let proc = 0;
+        let output = 0;
         if($('#jenis_1').length > 0) {
-            if ($('#jenis_1 #opsi_jenis_1').length < 1) {
+            if ($('#jenis_1 #opsi_jenis_1').length < 1) { //tipe data
                 err = 1
+                tipe_data++;
                 // alert('Urutan Pertama salah')
                 $('#jenis_1').css('background', '#efff00')
                 // alert("Tipe data yang dimasukkan pertama salah"); 
@@ -273,8 +278,9 @@ $(document).ready(function(){
         }
 
         if($('#jenis_2').length > 0) {
-            if ($('#jenis_2 #opsi_jenis_2').length < 1) {
+            if ($('#jenis_2 #opsi_jenis_2').length < 1) { //tipe data
                 err = 1
+                tipe_data++;
                 // alert('Urutan Kedua salah')
                 $('#jenis_2').css('background', '#efff00')
                 // alert("Tipe data yang dimasukkan kedua salah"); 
@@ -284,8 +290,9 @@ $(document).ready(function(){
         }
 
         if($('#jenis_3').length > 0) {
-            if ($('#jenis_3 #opsi_jenis_3').length < 1) {
+            if ($('#jenis_3 #opsi_jenis_3').length < 1) { //tipe data
                 err = 1
+                tipe_data++;
                 // alert('Urutan ketiga salah')
                 $('#jenis_3').css('background', '#efff00')
             }else{
@@ -293,9 +300,10 @@ $(document).ready(function(){
             }
         }
 
-        if($('#jenis_4').length > 0) {
-            if ($('#jenis_4 #opsi_jenis_4').length < 1) {
+        if($('#jenis_4').length > 0) { 
+            if ($('#jenis_4 #opsi_jenis_4').length < 1) { //tipe data
                 err = 1
+                tipe_data++;
                 // alert('Urutan Keempat salah')
                 $('#jenis_4').css('background', '#efff00')
             }else{
@@ -304,8 +312,9 @@ $(document).ready(function(){
         }
 
         if($('#jenis_5').length > 0) {
-            if ($('#jenis_5 #opsi_jenis_5').length < 1) {
+            if ($('#jenis_5 #opsi_jenis_5').length < 1) { //tipe data
                 err = 1
+                tipe_data++;
                 // alert('Urutan Keempat salah')
                 $('#jenis_5').css('background', '#efff00')
             }else{
@@ -314,8 +323,9 @@ $(document).ready(function(){
         }
 
         if($('#jenis_6').length > 0) {
-            if ($('#jenis_6 #opsi_jenis_6').length < 1) {
+            if ($('#jenis_6 #opsi_jenis_6').length < 1) { //tipe data
                 err = 1
+                tipe_data++;
                 // alert('Urutan Keempat salah')
                 $('#jenis_6').css('background', '#efff00')
             }else{
@@ -324,8 +334,9 @@ $(document).ready(function(){
         }
 
         if($('#jenis_7').length > 0) {
-            if ($('#jenis_7 #opsi_jenis_7').length < 1) {
+            if ($('#jenis_7 #opsi_jenis_7').length < 1) { //tipe data
                 err = 1
+                tipe_data++;
                 // alert('Urutan Keempat salah')
                 $('#jenis_7').css('background', '#efff00')
             }else{
@@ -334,8 +345,9 @@ $(document).ready(function(){
         }
 
         if($('#jenis_8').length > 0) {
-            if ($('#jenis_8 #opsi_jenis_8').length < 1) {
+            if ($('#jenis_8 #opsi_jenis_8').length < 1) { //tipe data
                 err = 1
+                tipe_data++;
                 // alert('Urutan Keempat salah')
                 $('#jenis_8').css('background', '#efff00')
             }else{
@@ -344,8 +356,9 @@ $(document).ready(function(){
         }
 
         if($('#jawaban_a').length > 0) {
-            if ($('#jawaban_a #opsi_a').length < 1) {
+            if ($('#jawaban_a #opsi_a').length < 1) { //input data
                 err = 1
+                input++
                 // alert('Urutan Pertama salah')
                 $('#jawaban_a').css('background', '#efff00')
             }else{
@@ -354,8 +367,9 @@ $(document).ready(function(){
         }
 
         if($('#jawaban_b').length > 0) {
-            if ($('#jawaban_b #opsi_b').length < 1) {
+            if ($('#jawaban_b #opsi_b').length < 1) { //input data
                 err = 1
+                input++;
                 // alert('Urutan Kedua salah')
                 $('#jawaban_b').css('background', '#efff00')
             }else{
@@ -364,8 +378,9 @@ $(document).ready(function(){
         }
 
         if($('#jawaban_c').length > 0) {
-            if ($('#jawaban_c #opsi_c').length < 1) {
+            if ($('#jawaban_c #opsi_c').length < 1) { //process
                 err = 1
+                proc++;
                 // alert('Urutan ketiga salah')
                 $('#jawaban_c').css('background', '#efff00')
             }else{
@@ -374,8 +389,9 @@ $(document).ready(function(){
         }
 
         if($('#jawaban_d').length > 0) {
-            if ($('#jawaban_d #opsi_d').length < 1) {
+            if ($('#jawaban_d #opsi_d').length < 1) { 
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_d').css('background', '#efff00')
             }else{
@@ -386,6 +402,7 @@ $(document).ready(function(){
         if($('#jawaban_e').length > 0) {
             if ($('#jawaban_e #opsi_e').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_e').css('background', '#efff00')
             }else{
@@ -396,6 +413,7 @@ $(document).ready(function(){
         if($('#jawaban_f').length > 0) {
             if ($('#jawaban_f #opsi_f').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_f').css('background', '#efff00')
             }else{
@@ -406,6 +424,7 @@ $(document).ready(function(){
         if($('#jawaban_g').length > 0) {
             if ($('#jawaban_g #opsi_g').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_g').css('background', '#efff00')
             }else{
@@ -416,6 +435,7 @@ $(document).ready(function(){
         if($('#jawaban_h').length > 0) {
             if ($('#jawaban_h #opsi_h').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_h').css('background', '#efff00')
             }else{
@@ -426,6 +446,7 @@ $(document).ready(function(){
         if($('#jawaban_i').length > 0) {
             if ($('#jawaban_i #opsi_i').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_i').css('background', '#efff00')
             }else{
@@ -436,6 +457,7 @@ $(document).ready(function(){
         if($('#jawaban_j').length > 0) {
             if ($('#jawaban_j #opsi_j').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_j').css('background', '#efff00')
             }else{
@@ -446,6 +468,7 @@ $(document).ready(function(){
         if($('#jawaban_k').length > 0) {
             if ($('#jawaban_k #opsi_k').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_k').css('background', '#efff00')
             }else{
@@ -456,6 +479,7 @@ $(document).ready(function(){
         if($('#jawaban_l').length > 0) {
             if ($('#jawaban_l #opsi_l').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_l').css('background', '#efff00')
             }else{
@@ -466,6 +490,7 @@ $(document).ready(function(){
         if($('#jawaban_m').length > 0) {
             if ($('#jawaban_m #opsi_m').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_m').css('background', '#efff00')
             }else{
@@ -476,6 +501,7 @@ $(document).ready(function(){
         if($('#jawaban_n').length > 0) {
             if ($('#jawaban_n #opsi_n').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_n').css('background', '#efff00')
             }else{
@@ -486,6 +512,7 @@ $(document).ready(function(){
         if($('#jawaban_o').length > 0) {
             if ($('#jawaban_o #opsi_o').length < 1) {
                 err = 1
+                output++; //output
                 // alert('Urutan Keempat salah')
                 $('#jawaban_o').css('background', '#efff00')
             }else{
@@ -496,6 +523,22 @@ $(document).ready(function(){
         if(err == 1) {
             $('#fail-alert').css('display', 'flex');
             $('#fail-alert').css('opacity', '1');
+            if(tipe_data > 0)
+            {
+                $('#tipe_data_feedback').css('display', '');
+            }
+            if(input > 0)
+            {
+                $('#input_feedback').css('display', '');
+            }
+            if(proc > 0)
+            {
+                $('#process_feedback').css('display', '');
+            }
+            if(output > 0)
+            {
+                $('#output_feedback').css('display', '');
+            }
         } else {
             $('#success-alert').css('display', 'flex');
             $('#success-alert').css('opacity', '1');
@@ -762,22 +805,22 @@ $(document).ready(function(){
 <!-- start waktu pengerjaan -->
 <script type="text/javascript">
     var seconds = 0;
-    //console.log(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>'));
-    // var timeTaken = '<?php echo $timeTaken?>';
-    // if(timeTaken == '')
-    // {
-    //     if(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>') != null)
-    //     {
-    //         seconds = window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>');
-    //     }else{
-    //         window.localStorage.removeItem('taken_time_quiz_'+'<?= $id_tes; ?>');
-    //         seconds = 0;
-    //         window.localStorage.setItem('taken_time_quiz_'+'<?= $id_tes; ?>', seconds);
-    //     }
-    // }else{
-    //     var plush = timeTaken;
-    //     seconds = plush;
-    // }
+   // console.log(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>'));
+    var timeTaken = '<?php echo $timeTaken?>';
+    if(timeTaken == '')
+    {
+        if(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>') != null)
+        {
+            seconds = window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+        }else{
+            window.localStorage.removeItem('taken_time_quiz_'+'<?= $id_tes; ?>');
+            seconds = 0;
+            window.localStorage.setItem('taken_time_quiz_'+'<?= $id_tes; ?>', seconds);
+        }
+    }else{
+        var plush = timeTaken;
+        seconds = plush;
+    }
     
 
     var timer = setInterval(upTimer, 1000);
