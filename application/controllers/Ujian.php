@@ -721,12 +721,12 @@ class Ujian extends CI_Controller
 						</table>
 					</div>
 					<!-- ALERT -->
-					<div id="success-alert" class="alert" style="display: none;">
+					<div id="success-alert" class="alert" style="display: none; ">
 						<h4>Jawaban anda benar, silahkan lanjut ke studi kasus berikutnya</h4>
 						<img src="'.base_url().'template/images/success.png" alt="success" />
 						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
 					</div>
-					<div id="fail-alert" class="alert" style="display: none;">
+					<div id="fail-alert" class="alert" style="display: none;height:500px">
 						<p>Jawaban anda masih salah, silahkan menyusun ulang<br>
 						<br>
 							<br>
