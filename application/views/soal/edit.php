@@ -83,6 +83,8 @@
                                     $ABJ = strtoupper($abj); // Abjad Kapital
                                     $file = 'file_' . $abj;
                                     $opsi = 'opsi_' . $abj;
+                                    $clue   = 'clue_' . $abj;
+                                    $urutan = 'urut_' . $abj;
                                 ?>
 
                                     <div class="" id="formanswer_<?= $key + 1 ?>">
@@ -95,10 +97,37 @@
                                                     <?= tampil_media('uploads/bank_soal/' . $soal->$file); ?>
                                                 <?php endif; ?>
                                             </div> -->
-                                            <div class="form-group col-sm-12">
+                                            <div class="form-group col-sm-8">
                                                 <textarea name="jawaban_<?= $abj; ?>" id="jawaban_<?= $abj; ?>" class="form-control froala-editor"><?= $soal->$opsi ?></textarea>
                                                 <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_' . $abj) ?></small>
                                             </div>
+                                            <div class="form-group col-sm-4">
+                                                <label for="urutan" class="control-label">Pilih Urutan Jawaban :</label>
+                                                <select name="urut_<?= $abj; ?>" id="urut_<?= $abj; ?>" class="form-control select2" style="width:100%!important">
+                                                    <option value="" disabled selected>Pilih Jawaban Urutan Ke <?= $abj; ?></option>
+                                                    <option <?= $soal->$urutan === "a" ? "selected" : "" ?> value="a">A</option>
+                                                    <option <?= $soal->$urutan === "b" ? "selected" : "" ?> value="b">B</option>
+                                                    <option <?= $soal->$urutan === "c" ? "selected" : "" ?> value="c">C</option>
+                                                    <option <?= $soal->$urutan === "d" ? "selected" : "" ?> value="d">D</option>
+                                                    <option <?= $soal->$urutan === "e" ? "selected" : "" ?> value="e">E</option>
+                                                    <option <?= $soal->$urutan === "f" ? "selected" : "" ?> value="f">F</option>
+                                                    <option <?= $soal->$urutan === "g" ? "selected" : "" ?> value="g">G</option>
+                                                    <option <?= $soal->$urutan === "h" ? "selected" : "" ?> value="h">H</option>
+                                                    <option <?= $soal->$urutan === "i" ? "selected" : "" ?> value="i">I</option>
+                                                    <option <?= $soal->$urutan === "j" ? "selected" : "" ?> value="j">J</option>
+                                                    <option <?= $soal->$urutan === "k" ? "selected" : "" ?> value="k">K</option>
+                                                    <option <?= $soal->$urutan === "l" ? "selected" : "" ?> value="l">L</option>
+                                                    <option <?= $soal->$urutan === "m" ? "selected" : "" ?> value="m">M</option>
+                                                    <option <?= $soal->$urutan === "n" ? "selected" : "" ?> value="n">N</option>
+                                                    <option <?= $soal->$urutan === "o" ? "selected" : "" ?> value="o">O</option>
+                                                </select>
+                                                <small class="help-block" style="color: #dc3545"><?= form_error('urut_' . $abj) ?></small>
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                            <label for="jawaban" class="control-label">Checklist Clue :</label>
+                                                <label for="urutan"><input type="checkbox" name="chck_<?= $abj; ?>" value="urut_<?= $abj; ?>" <?php if ($soal->$clue <> '') echo "checked='checked'"; ?>></label>
+                                            </div>
+                                            <br>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -110,26 +139,20 @@
                             </div>
                             
 
-                            <div class="form-group col-sm-12">
+                            <!-- <div class="form-group col-sm-12">
                                 <label for="jawaban" class="control-label">Kunci Jawaban</label>
                             </div>
 
                             <div class="form-group col-sm-12">
                                 <div id="wrapperthree">
                                     <?php
-                                    $urut = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+                                    $urut = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
                                     foreach ($urut as $urt) :
                                         $clue   = 'clue_' . $urt;
                                         $urutan = 'urut_' . $urt;
                                     ?>
                                         <div id="formkeyanswer_<?= $urt ?>">
-                                            <div class="col-sm-3">
-                                                <label for="urutan" class="control-label">Pilih Clue No. <?= $urt; ?> :</label>
-                                                <div class="col">
-                                                    <label for="urutan"><?= $urt; ?>. <input type="checkbox" name="chck_<?= $urt; ?>" value="urut_<?= $urt; ?>" <?php if ($soal->$clue <> '') echo "checked='checked'"; ?>></label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-9">
+                                        <div class="form-group">
                                                 <label for="urutan" class="control-label">Pilih Urutan Jawaban No. <?= $urt; ?> :</label>
                                                 <select name="urut_<?= $urt; ?>" id="urut_<?= $urt; ?>" class="form-control select2" style="width:100%!important">
                                                     <option value="" disabled selected>Pilih Jawaban Urutan Ke <?= $urt; ?></option>
@@ -161,7 +184,7 @@
                                 </div>
                                 
                             </div>
-                            
+                             -->
                             <div class="form-group col-sm-12">
                                 <label for="bobot" class="control-label">Bobot Nilai</label>
                                 <input required="required" value="<?= $soal->bobot ?>" type="number" name="bobot" placeholder="Bobot Soal" id="bobot" class="form-control">

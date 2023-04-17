@@ -70,10 +70,39 @@
                             <div id="wrappertwo">
                                 <div class="" id="formanswer_1">
                                     <label for="file">Jawaban a</label>
-                                    <div class="form-group">
+                                    <div class="row">
+                                    <div class="form-group col-sm-8">
                                         <textarea name="jawaban_a" id="jawaban_a" class="form-control froala-editor"><?= set_value('jawaban_a') ?></textarea>
                                         <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_a') ?></small>
                                     </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="urutan" class="control-label">Pilih Urutan Jawaban  :</label>
+                                        <select name="urut_a" id="urut_a" class="form-control select2" style="width:100%!important">
+                                            <option value="" disabled selected>Pilih Jawaban Urutan Ke a</option>
+                                            <option value="a">A</option>
+                                            <option value="b">B</option>
+                                            <option value="c">C</option>
+                                            <option value="d">D</option>
+                                            <option value="e">E</option>
+                                            <option value="f">F</option>
+                                            <option value="g">G</option>
+                                            <option value="h">H</option>
+                                            <option value="i">I</option>
+                                            <option value="j">J</option>
+                                            <option value="k">K</option>
+                                            <option value="l">L</option>
+                                            <option value="m">M</option>
+                                            <option value="n">N</option>
+                                            <option value="o">O</option>
+                                        </select>
+                                        <small class="help-block" style="color: #dc3545"><?= form_error('urut_1') ?></small>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                    <label for="jawaban" class="control-label">Checklist Clue :</label>
+                                        <label for="urutan"><input type="checkbox" name="chck_a" value="urut_a"></label>
+                                    </div>
+                                    <br>
+                                </div>
                                 </div>
                             </div>
                             <div class="mb-2">
@@ -95,23 +124,22 @@
                             <small class="help-block" style="color: #dc3545"><?= form_error('jawaban') ?></small>
                         </div> -->
 
-                        <div class="form-group col-sm-12">
+                        <!-- <div class="form-group col-sm-12">
                             <label for="jawaban" class="control-label">Kunci Jawaban</label>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group col-sm-12">
+                        <!-- <div class="form-group col-sm-12">
                             <div id="wrapperthree">
-                                <div id="formkeyanswer_1">
-                                    <div class="col-sm-3">
-                                        <label for="urutan" class="control-label">Pilih Clue No. 1 :</label>
+                                <div id="formkeyanswer_1"> -->
+                                        <!-- <label for="urutan" class="control-label">Pilih Clue No. 1 :</label>
                                         <div class="col">
                                             <label for="urutan">1. <input type="checkbox" name="chck_1" value="urut_1"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <label for="urutan" class="control-label">Pilih Urutan Jawaban No. 1 :</label>
-                                        <select name="urut_1" id="urut_1" class="form-control select2" style="width:100%!important">
-                                            <option value="" disabled selected>Pilih Jawaban Urutan Ke 1</option>
+                                        </div> -->
+                                 
+                                        <!-- <div class="form-group">
+                                        <label for="urutan" class="control-label">Pilih Urutan Jawaban  :</label>
+                                        <select name="urut_a" id="urut_a" class="form-control select2" style="width:100%!important">
+                                            <option value="" disabled selected>Pilih Jawaban Urut</option>
                                             <option value="a">A</option>
                                             <option value="b">B</option>
                                             <option value="c">C</option>
@@ -137,7 +165,7 @@
                                 <button onclick="removeOption('keyanswer')" type="button" class="btn btn-danger">Hapus kunci jawaban</button>
                             </div>
                         </div>
-                        
+                         -->
                         
                         <div class="form-group col-sm-12">
                             <label for="bobot" class="control-label">Bobot Soal</label>
@@ -199,9 +227,39 @@
             
             const elmt = `<div class="" id="formanswer_${currentIndex + 2}">
                 <label for="file">Jawaban ${answer}</label>
-                <div class="form-group">
+                <div class="row">
+                <div class="form-group col-sm-8">
                     <textarea name="jawaban_${answer}" id="jawaban_${answer}" class="form-control froala-editor"><?= set_value('jawaban_${answer}') ?></textarea>
                     <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_${answer}') ?></small>
+                </div>
+                
+                <div class="form-group col-sm-4">
+                    <label for="urutan" class="control-label">Pilih Urutan Jawaban :</label>
+                    <select name="urut_${answer}" id="urut_${answer}" class="form-control select2" style="width:100%!important">
+                        <option value="" disabled selected>Pilih Jawaban Urutan Ke ${answer}</option>
+                        <option value="a">A</option>
+                        <option value="b">B</option>
+                        <option value="c">C</option>
+                        <option value="d">D</option>
+                        <option value="e">E</option>
+                        <option value="f">F</option>
+                        <option value="g">G</option>
+                        <option value="h">H</option>
+                        <option value="i">I</option>
+                        <option value="j">J</option>
+                        <option value="k">K</option>
+                        <option value="l">L</option>
+                        <option value="m">M</option>
+                        <option value="n">N</option>
+                        <option value="o">O</option>
+                    </select>
+                    <small class="help-block" style="color: #dc3545"><?= form_error('urut_${answer}') ?></small>
+                </div>
+                <div class="form-group col-sm-3">
+                <label for="jawaban" class="control-label">Checklist Clue :</label>
+                    <label for="urutan"><input type="checkbox" name="chck_${answer}" value="urut_${answer}"></label>
+                </div>
+                <br>
                 </div>
             </div>`;
         
@@ -212,21 +270,16 @@
                 toolbarButtons: ['fullscreen', '|', 'bold', 'italic', 'strikeThrough', 'underline', '|', 'align', 'insertTable', 'insertLink','formatOL', 'formatUL', '|', 'html']
             });
         } else if (type == 'keyanswer') {
-            const answerKey = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+            const answerKey = ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
             const currentIndex = $("[id*='formkeyanswer_']").length - 1;
             if(answerKey.length == (currentIndex)) return;
             const key = answerKey[currentIndex];
             const elmt = `<div id="formkeyanswer_${key}">
-                <div class="col-sm-3">
-                    <label for="urutan" class="control-label">Pilih Clue No. ${key} :</label>
-                    <div class="col">
-                        <label for="urutan">${key} <input type="checkbox" name="chck_${key}" value="urut_${key}"></label>
-                    </div>
-                </div>
-                <div class="col-sm-9">
-                    <label for="urutan" class="control-label">Pilih Urutan Jawaban No. ${key} :</label>
+               
+            <div class="form-group">
+                    <label for="urutan" class="control-label">Pilih Urutan Jawaban :</label>
                     <select name="urut_${key}" id="urut_${key}" class="form-control select2" style="width:100%!important">
-                        <option value="" disabled selected>Pilih Jawaban Urutan Ke ${key}</option>
+                        <option value="" disabled selected>Pilih Jawaban Urut</option>
                         <option value="a">A</option>
                         <option value="b">B</option>
                         <option value="c">C</option>
