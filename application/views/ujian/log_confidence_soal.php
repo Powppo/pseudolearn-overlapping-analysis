@@ -8,18 +8,11 @@
     </div>
     <div class="box-body">
         <div class="row">
-        <div class="col-sm-12 mb-4">
-                <a href="<?=base_url()?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+        <div class="col-lg-4 col-xs-4 mb-4">
+            <a href="<?=base_url()?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
         </div>
-            <!-- <div class="col-sm-4">
-                <button type="button" class="btn bg-purple btn-flat btn-sm reload"><i class="fa fa-refresh"></i> Reload</button>
-            </div> -->
-            <br></br>
-            <h5 style="margin-left:50px;"> Nama : <?=$nama_mahasiswa?></h5>
-            <h5 style="margin-left:50px;"> NIM : <?=$nim_mahasiswa?></h5>
-            <h5 style="margin-left:50px;"> Kelas : <?=$kelas_mahasiswa?></h5>
-            <div class="form-group col-sm-4 text-center" style="text-align: center; margin-left: 370px;">
-            <?php if ($this->ion_auth->is_admin()) : ?>
+        <div class="form-group col-lg-4 col-xs-6 text-center">
+        <?php if ($this->ion_auth->is_admin()) : ?>
 							<select class="form-control status-dropdown select2" style="width:100% !important">
 								<option value="">Semua Sub Soal</option>
                                 <?php foreach ($soal as $s) : ?>
@@ -30,6 +23,16 @@
 			</div>
         </div>
     </div>
+    <br></br>
+        <div class="box-body">
+            <div class="row">
+                <div class="form-group col-lg-12 col-xs-6 mb-4">
+                    <h5 style="margin-left:20px;"> Nama : <?=$nama_mahasiswa?></h5>
+                    <h5 style="margin-left:20px;"> NIM : <?=$nim_mahasiswa?></h5>
+                    <h5 style="margin-left:20px;"> Kelas : <?=$kelas_mahasiswa?></h5>
+                    </div>
+            </div>
+        </div>
             <div class="table-responsive px-4 pb-3" style="border: 0">
             <table id="details_hasil" class="w-100 table table-striped table-bordered table-hover">
             <thead>

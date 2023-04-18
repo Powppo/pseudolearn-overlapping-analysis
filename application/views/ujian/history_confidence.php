@@ -8,25 +8,22 @@
     </div>
     <div class="box-body">
         <div class="row">
-        <div class="col-sm-12 mb-4">
-                <a href="<?=base_url()?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+        <div class="col-lg-4 col-xs-4 mb-4">
+            <a href="<?=base_url()?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
         </div>
-            <!-- <div class="col-sm-4">
-                <button type="button" class="btn bg-purple btn-flat btn-sm reload"><i class="fa fa-refresh"></i> Reload</button>
-            </div> -->
-            <div class="form-group col-sm-4 text-center" style="text-align: center; margin-left: 370px;">
+        <div class="form-group col-lg-4 col-xs-6 text-center">
             <?php if ($this->ion_auth->is_admin()) : ?>
-							<select class="form-control status-dropdown select2" style="width:100% !important">
-								<option value="">Semua Kelas</option>
-                                <?php foreach ($kelas as $kls) : ?>
-								<option value="<?= $kls->id_kelas ?>"><?= $kls->nama ?></option>
-								<?php endforeach; ?>
-							</select>
-				<?php endif; ?>
+				<select class="form-control status-dropdown select2" style="width:100% !important">
+					<option value="">Semua Kelas</option>
+                        <?php foreach ($kelas as $kls) : ?>
+					        <option value="<?= $kls->id_kelas ?>"><?= $kls->nama ?></option>
+						<?php endforeach; ?>
+				</select>
+			<?php endif; ?>
 			</div>
         </div>
     </div>
-  
+
     <div class="table-responsive px-4 pb-3" style="border: 0">
 		<table id="confidencehistory" class="w-100 table table-striped table-bordered table-hover">
             <thead>

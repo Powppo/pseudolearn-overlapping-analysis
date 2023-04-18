@@ -8,10 +8,10 @@
     </div>
     <div class="box-body">
 		<div class="row">
-        	<div class="col-sm-4">
+        	<div class="col-lg-4 col-xs-3">
 				<button type="button" onclick="bulk_delete()" class="btn btn-flat btn-sm bg-red"><i class="fa fa-trash"></i> Delete</button>
 			</div>
-			<div class="form-group col-sm-4 text-center">
+			<div class="form-group col-lg-4 col-xs-5 text-center">
 				<?php if ( $this->ion_auth->is_admin() ) : ?>
 					<select id="matkul_filter" class="form-control select2" style="width:100% !important">
 						<option value="all">Semua Matkul</option>
@@ -24,7 +24,7 @@
 					<input id="matkul_id" value="<?=$matkul->nama_matkul;?>" type="text" readonly="readonly" class="form-control">
 				<?php endif; ?> -->
 			</div>
-			<div class="col-sm-4">
+			<div class="col-lg-4 col-xs-4">
 				<div class="pull-right">
 					<a href="<?=base_url('level/add')?>" class="btn bg-purple btn-flat btn-sm"><i class="fa fa-plus"></i> Buat Kategori</a>
 					<button type="button" onclick="reload_ajax()" class="btn btn-flat btn-sm bg-maroon"><i class="fa fa-refresh"></i> Reload</button>

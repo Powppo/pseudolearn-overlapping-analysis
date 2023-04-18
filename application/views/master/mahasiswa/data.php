@@ -16,7 +16,7 @@
             </div>
         </div>
         <?= form_open('mahasiswa/delete', array('id' => 'bulk')); ?>
-        <div class="table-responsive">
+        <div class="table-responsive mt-2 mb-3">
             <table id="mahasiswa" class="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>

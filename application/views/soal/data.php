@@ -8,10 +8,10 @@
 	</div>
 	<div class="box-body">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-lg-4 col-xs-3">
 				<button type="button" onclick="bulk_delete()" class="btn btn-flat btn-sm bg-red"><i class="fa fa-trash"></i> Delete</button>
 			</div>
-			<div class="form-group col-sm-4 text-center">
+			<div class="form-group col-lg-4 col-xs-5 text-center">
 				<?php if ($this->ion_auth->is_admin()) : ?>
 					<select id="level_filter" class="form-control select2" style="width:100% !important">
 						<option value="all">Semua Level</option>
@@ -21,7 +21,7 @@
 					</select>
 				<?php endif; ?>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-lg-4 col-xs-4">
 				<div class="pull-right">
 					<a href="<?= base_url('soal/add') ?>" class="btn bg-purple btn-flat btn-sm"><i class="fa fa-plus"></i> Buat Soal</a>
 					<button type="button" onclick="reload_ajax()" class="btn btn-flat btn-sm bg-maroon"><i class="fa fa-refresh"></i> Reload</button>

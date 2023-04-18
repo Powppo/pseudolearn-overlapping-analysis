@@ -36,7 +36,7 @@
     }
     </style>
 
-    <div class="col-lg-12 col-centered">
+    <div class="col-lg-12 col-xs-12">
         <center><b><h3 style="text-align: center; font-family: cursive;  background-color: #fff; padding-top:20px; padding-bottom:20px; margin-top: 50px;"> GRAFIK CONFIDENCE TAG </h3></b></center>
     </div>
     <br></br>
@@ -79,7 +79,7 @@
     $jumlah_tyb=null;
     foreach ($yakinsalah_satu as $ys1)
     {
-        $title = "Yakin + Salah";
+        $title = "Yakin+Salah";
         $sub_soal_ys .= "'($title)' ". ", ";
         $jum_ys=$ys1->total_yakin_salah;
         $jumlah_ys .= "$jum_ys". ", ";
@@ -87,7 +87,7 @@
 
     foreach ($yakinbenar_satu as $yb1)
     {
-        $title = "Yakin + Benar";
+        $title = "Yakin+Benar";
         $sub_soal_yb .= "'($title)' ". ", ";
         $jum_yb=$yb1->total_yakin_benar;
         $jumlah_yb .= "$jum_yb". ", ";
@@ -95,7 +95,7 @@
 
     foreach ($tidakyakinsalah_satu as $tys1)
     {
-        $title = "Tidak Yakin + Salah";
+        $title = "Tidak Yakin+Salah";
         $sub_soal_tys .= "'($title)' ". ", ";
         $jum_tys=$tys1->total_tidakyakin_salah;
         $jumlah_tys .= "$jum_tys". ", ";
@@ -103,7 +103,7 @@
 
     foreach ($tidakyakinbenar_satu as $tyb1)
     {
-        $title = "Tidak Yakin + Benar";
+        $title = "Tidak Yakin+Benar";
         $sub_soal_tyb .= "'($title)' ". ", ";
         $jum_tyb=$tyb1->total_tidakyakin_benar;
         $jumlah_tyb .= "$jum_tyb". ", ";
@@ -120,7 +120,7 @@
     $jumlah_tyb2=null;
     foreach ($yakinsalah_dua as $ys2)
     {
-        $title = "Yakin + Salah";
+        $title = "Yakin+Salah";
         $sub_soal_ys2 .= "'($title)' ". ", ";
         $jum_ys2=$ys2->total_yakin_salah;
         $jumlah_ys2 .= "$jum_ys2". ", ";
@@ -128,7 +128,7 @@
 
     foreach ($yakinbenar_dua as $yb2)
     {
-        $title = "Yakin + Benar";
+        $title = "Yakin+Benar";
         $sub_soal_yb2 .= "'($title)' ". ", ";
         $jum_yb2=$yb2->total_yakin_benar;
         $jumlah_yb2 .= "$jum_yb2". ", ";
@@ -136,7 +136,7 @@
 
     foreach ($tidakyakinsalah_dua as $tys2)
     {
-        $title = "Tidak Yakin + Salah";
+        $title = "Tidak Yakin+Salah";
         $sub_soal_tys2 .= "'($title)' ". ", ";
         $jum_tys2=$tys2->total_tidakyakin_salah;
         $jumlah_tys2 .= "$jum_tys2". ", ";
@@ -144,7 +144,7 @@
 
     foreach ($tidakyakinbenar_dua as $tyb2)
     {
-        $title = "Tidak Yakin + Benar";
+        $title = "Tidak Yakin+Benar";
         $sub_soal_tyb2 .= "'($title)' ". ", ";
         $jum_tyb2=$tyb2->total_tidakyakin_benar;
         $jumlah_tyb2 .= "$jum_tyb2". ", ";
@@ -161,7 +161,7 @@
     $jumlah_tyb3=null;
     foreach ($yakinsalah_tiga as $ys3)
     {
-        $title = "Yakin + Salah";
+        $title = "Yakin+Salah";
         $sub_soal_ys3 .= "'($title)' ". ", ";
         $jum_ys3=$ys3->total_yakin_salah;
         $jumlah_ys3 .= "$jum_ys3". ", ";
@@ -169,7 +169,7 @@
  
     foreach ($yakinbenar_tiga as $yb3)
     {
-        $title = "Yakin + Benar";
+        $title = "Yakin+Benar";
         $sub_soal_yb3 .= "'($title)' ". ", ";
         $jum_yb3=$yb3->total_yakin_benar;
         $jumlah_yb3 .= "$jum_yb3". ", ";
@@ -177,7 +177,7 @@
  
     foreach ($tidakyakinsalah_tiga as $tys3)
     {
-        $title = "Tidak Yakin + Salah";
+        $title = "Tidak Yakin+Salah";
         $sub_soal_tys3 .= "'($title)' ". ", ";
         $jum_tys3=$tys3->total_tidakyakin_salah;
         $jumlah_tys3 .= "$jum_tys3". ", ";
@@ -185,7 +185,7 @@
  
     foreach ($tidakyakinbenar_tiga as $tyb3)
     {
-        $title = "Tidak Yakin + Benar";
+        $title = "Tidak Yakin+Benar";
         $sub_soal_tyb3 .= "'($title)' ". ", ";
         $jum_tyb3=$tyb3->total_tidakyakin_benar;
         $jumlah_tyb3 .= "$jum_tyb3". ", ";
@@ -202,7 +202,7 @@
      $jumlah_tyb4=null;
      foreach ($yakinsalah_empat as $ys4)
      {
-         $title = "Yakin + Salah";
+         $title = "Yakin+Salah";
          $sub_soal_ys4 .= "'($title)' ". ", ";
          $jum_ys4=$ys4->total_yakin_salah;
          $jumlah_ys4 .= "$jum_ys4". ", ";
@@ -210,7 +210,7 @@
  
      foreach ($yakinbenar_empat as $yb4)
      {
-         $title = "Yakin + Benar";
+         $title = "Yakin+Benar";
          $sub_soal_yb4 .= "'($title)' ". ", ";
          $jum_yb4=$yb4->total_yakin_benar;
          $jumlah_yb4 .= "$jum_yb4". ", ";
@@ -218,7 +218,7 @@
  
      foreach ($tidakyakinsalah_empat as $tys4)
      {
-         $title = "Tidak Yakin + Salah";
+         $title = "Tidak Yakin+Salah";
          $sub_soal_tys4 .= "'($title)' ". ", ";
          $jum_tys4=$tys4->total_tidakyakin_salah;
          $jumlah_tys4 .= "$jum_tys4". ", ";
@@ -226,7 +226,7 @@
  
      foreach ($tidakyakinbenar_empat as $tyb4)
      {
-         $title = "Tidak Yakin + Benar";
+         $title = "Tidak Yakin+Benar";
          $sub_soal_tyb4 .= "'($title)' ". ", ";
          $jum_tyb4=$tyb4->total_tidakyakin_benar;
          $jumlah_tyb4 .= "$jum_tyb4". ", ";
@@ -243,7 +243,7 @@
       $jumlah_tyb5=null;
       foreach ($yakinsalah_lima as $ys5)
       {
-          $title = "Yakin + Salah";
+          $title = "Yakin+Salah";
           $sub_soal_ys5 .= "'($title)' ". ", ";
           $jum_ys5=$ys5->total_yakin_salah;
           $jumlah_ys5 .= "$jum_ys5". ", ";
@@ -251,7 +251,7 @@
    
       foreach ($yakinbenar_lima as $yb5)
       {
-          $title = "Yakin + Benar";
+          $title = "Yakin+Benar";
           $sub_soal_yb5 .= "'($title)' ". ", ";
           $jum_yb5=$yb5->total_yakin_benar;
           $jumlah_yb5 .= "$jum_yb5". ", ";
@@ -259,7 +259,7 @@
    
       foreach ($tidakyakinsalah_lima as $tys5)
       {
-          $title = "Tidak Yakin + Salah";
+          $title = "Tidak Yakin+Salah";
           $sub_soal_tys5 .= "'($title)' ". ", ";
           $jum_tys5=$tys5->total_tidakyakin_salah;
           $jumlah_tys5 .= "$jum_tys5". ", ";
@@ -267,7 +267,7 @@
    
       foreach ($tidakyakinbenar_lima as $tyb5)
       {
-          $title = "Tidak Yakin + Benar";
+          $title = "Tidak Yakin+Benar";
           $sub_soal_tyb5 .= "'($title)' ". ", ";
           $jum_tyb5=$tyb5->total_tidakyakin_benar;
           $jumlah_tyb5 .= "$jum_tyb5". ", ";
@@ -392,16 +392,16 @@
           data:
           [{
             value: [<?php echo $jumlah_ys;?>],
-            name: 'Yakin + Salah'
+            name: 'Yakin+Salah'
           }, {
             value: [<?php echo $jumlah_yb;?>],
-            name: 'Yakin + Benar'
+            name: 'Yakin+Benar'
           }, {
             value: [<?php echo $jumlah_tys;?>],
-            name: 'Tidak Yakin + Salah'
+            name: 'Tidak Yakin+Salah'
           }, {
             value: [<?php echo $jumlah_tyb;?>],
-            name: 'Tidak Yakin + Benar'
+            name: 'Tidak Yakin+Benar'
           }]
         }]
       });
