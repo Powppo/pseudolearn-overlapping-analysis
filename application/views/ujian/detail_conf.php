@@ -26,12 +26,12 @@
                     </a>
                 </div> -->
                 <br></br>
-                <h5 style="margin-left:50px;"> Nama : <?=$nama_mahasiswa?></h5>
-                <h5 style="margin-left:50px;"> NIM : <?=$nim_mahasiswa?></h5>
-                <h5 style="margin-left:50px;"> Kelas : <?=$kelas_mahasiswa?></h5>
+                <h5 style="margin-left:20px;"> Nama : <?=$nama_mahasiswa?></h5>
+                <h5 style="margin-left:20px;"> NIM : <?=$nim_mahasiswa?></h5>
+                <h5 style="margin-left:20px;"> Kelas : <?=$kelas_mahasiswa?></h5>
                 <br></br>
                 <center>  <div class="row">
-                <center><div class="center" style="margin-left: 50px;">
+                <center><div class="center" style="margin-left: 20px;">
                 <div class="col-lg-2 col-xs-4">
                     <div class="alert bg-yellow">
                         <h5>Percobaan</i></h5>

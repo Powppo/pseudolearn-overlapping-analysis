@@ -17,6 +17,7 @@ class Soal extends CI_Controller
         $this->load->model('Master_model', 'master');
         $this->load->model('Soal_model', 'soal');
         $this->load->model('Level_model', 'level');
+        $this->load->model('Tipe_model', 'tipe');
         $this->form_validation->set_error_delimiters('', '');
     }
 
@@ -73,6 +74,7 @@ class Soal extends CI_Controller
             //Jika admin maka tampilkan semua matkul
             // $data['dosen'] = $this->soal->getAllDosen();
             $data['tb_level'] = $this->level->getAlllevel();
+            $data['tipe_data'] = $this->tipe->getAllKelas();
         } else {
             //Jika bukan maka matkul dipilih otomatis sesuai matkul dosen
             // $data['dosen'] = $this->soal->getMatkulDosen($user->username);

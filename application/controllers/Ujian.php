@@ -513,7 +513,7 @@ class Ujian extends CI_Controller
 			
 					<p class="description__question">';
 				$html .= '<div class="text-center"><div class="w-25"></div></div>' . $s->soal . '<div class="funkyradio"></p>';
-				$html .= '<div class="description__data-type data-type">
+				$html .= '<div class="description__data-type data-type" style="margin-left: -3px; width:350px;">
 				<h4 class="data-type__title">Tipe Data</h4>
 				<ul class="data-type__items">';
 				for ($i=0; $i < $var_count; $i++) { 
@@ -522,7 +522,7 @@ class Ujian extends CI_Controller
 				}
 				$html .= '</ul>
 						</div>';
-				$html .= '<div class="description__algorithm algorithm">
+				$html .= '<div class="description__algorithm algorithm" style="margin-left: -3px; width:350px;">
 						<h4 class="algorithm__title">Algoritma</h4>
 						<ul class="algorithm__items">';
 				for ($j = 0; $j < $this->config->item('jml_opsi'); $j++) {
