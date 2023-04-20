@@ -266,7 +266,7 @@ $(document).ready(function(){
         let proc = 0;
         let output = 0;
         if($('#jenis_1').length > 0) {
-            if ($('#jenis_1 #opsi_jenis_1 #opsi_jenis_2').length < 1) { //tipe data
+            if ($('#jenis_1 #opsi_jenis_1').length < 1) { //tipe data
                 err = 1
                 tipe_data++;
                 // alert('Urutan Pertama salah')
