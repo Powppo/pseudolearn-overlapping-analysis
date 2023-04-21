@@ -283,6 +283,22 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function historyUjian() {
+        $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
+        $this->db->select("h.iduser, h.idsoal, u.username as nim, u.id_kelas as id_kelas, k.nama as nama_kelas, s.soal as studi_kasus, s.judul as sub_soal, l.nama as level");
+        $this->db->from('history_ujian h');
+        $this->db->join('users u', 'h.iduser = u.id');
+        $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
+        $this->db->join('tb_soal s', 's.id_soal = h.idsoal');
+        $this->db->join('tb_level l', 's.id_level = l.id_level');
+        return $this->db->get()->result_array();
+    }
+
+    public function hapusData($iduser, $idsoal)
+    {
+        $this->db->delete('history_ujian', ['iduser' => $iduser, 'idsoal' => $idsoal]);
+    }
+
     function input_data($data,$table){
 		$this->db->insert($table,$data);
         return $this->db->get()->result_array();

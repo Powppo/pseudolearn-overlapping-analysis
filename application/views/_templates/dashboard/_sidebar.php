@@ -109,6 +109,13 @@
 					</a>
 				</li>
 			<?php endif; ?>
+			<?php if ($this->ion_auth->is_admin()) : ?>
+				<li class="<?= $page === 'manajemenhistory' ? "active" : "" ?>">
+					<a href="<?= base_url('manajemenhistory') ?>" rel="noopener noreferrer">
+						<i class="fa fa-database"></i> <span>Manajemen History Ujian</span>
+					</a>
+				</li>
+			<?php endif; ?>
 			<!-- <?php if ($this->ion_auth->is_admin()) : ?>
 				<li class="<?= $page === 'feedback' ? "active" : "" ?>">
 					<a href="<?= base_url('feedback') ?>" rel="noopener noreferrer">

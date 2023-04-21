@@ -173,4 +173,29 @@ class DetailHistory extends CI_Controller {
 		$this->load->view('_templates/dashboard/_footer.php');
 
 	}
+
+	public function manageHistoryUjian(){
+	$results = $this->ujian->historyUjian();
+		$data = [
+			'user' => $this->user,
+			'informasi' => $results,
+			'judul'	=> 'Kelola Data History',
+			'subjudul'=> 'History Ujian Mahasiswa',
+		];
+
+		if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+        }
+		$this->load->view('_templates/dashboard/_header.php', $data);
+		$this->load->view('ujian/kelola_historyujian');
+		$this->load->view('_templates/dashboard/_footer.php');
+	}
+
+	public function hapus($iduser, $idsoal)
+    {
+        $this->ujian->hapusData($iduser, $idsoal);
+		$this->session->set_flashdata('flash', 'Dihapus');
+        redirect('detailhistory/manageHistoryUjian');
+    }
 }

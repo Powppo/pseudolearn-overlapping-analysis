@@ -477,7 +477,7 @@ class Ujian extends CI_Controller
 		$var_opsi = array(1, 2, 3, 4, 5, 6, 7, 8);
 		$jenis_opsi = array(1, 2, 3, 4, 5, 6, 7, 8);
 		shuffle($var_opsi);
-		shuffle($jenis_opsi);
+		// shuffle($jenis_opsi);
 		$var_count = 8;
 		$jenis_count = 8;
 		$html = '';
