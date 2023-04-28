@@ -55,7 +55,7 @@
                         <div class="col-sm-12">
                             <label for="Upload" class="control-label">Upload</label>
                             <div class="form-group">
-                                <input type="file" name="image" class="form-control">
+                                <input required="required" type="file" name="image" class="form-control">
                                 <small class="help-block" style="color: #dc3545"><?=form_error('image')?></small>
                             </div>
                         </div>

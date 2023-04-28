@@ -50,8 +50,9 @@ $autoload['packages'] = array();
 | 'database' library, which is somewhat of a special case.
 |
 | Prototype:
-|
-|	$autoload['libraries'] = array('database', 'email', 'session');
+|*/
+	$autoload['libraries'] = array('database', 'session');
+/*
 |
 | You can also supply an alternative library name to be assigned
 | in the controller:

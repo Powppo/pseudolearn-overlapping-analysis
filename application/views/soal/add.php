@@ -42,14 +42,14 @@
                                     <div class="col-xs-6">
                                         <label for="file">Variable 1</label>
                                         <div class="form-group">
-                                            <input name="variable_1" id="variable_1" class="form-control" value="<?= set_value('variable_1') ?>">
+                                            <input required="required" name="variable_1" id="variable_1" class="form-control" value="<?= set_value('variable_1') ?>">
                                             <small class="help-block" style="color: #dc3545"><?= form_error('variable_1') ?></small>
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
                                         <label for="file">Tipe Data 1</label>
                                         <div class="form-group">
-                                            <input name="tipe_data_1" id="tipe_data_1" class="form-control" value="<?= set_value('tipe_data_1') ?>">
+                                            <input required="required" name="tipe_data_1" id="tipe_data_1" class="form-control" value="<?= set_value('tipe_data_1') ?>">
                                             <small class="help-block" style="color: #dc3545"><?= form_error('tipe_data_1') ?></small>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
                                     <label for="file">Jawaban a</label>
                                     <div class="row">
                                     <div class="form-group col-sm-8">
-                                        <textarea name="jawaban_a" id="jawaban_a" class="form-control froala-editor"><?= set_value('jawaban_a') ?></textarea>
+                                        <textarea required="required" name="jawaban_a" id="jawaban_a" class="form-control froala-editor"><?= set_value('jawaban_a') ?></textarea>
                                         <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_a') ?></small>
                                     </div>
                                     <div class="form-group col-sm-4">

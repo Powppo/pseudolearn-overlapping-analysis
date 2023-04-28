@@ -8,6 +8,7 @@
     </div>
     <div class="box-body">
 		<div class="row">
+		<?php echo $this->session->flashdata('message');?>
         	<div class="col-lg-4 col-xs-3">
 				<button type="button" onclick="bulk_delete()" class="btn btn-flat btn-sm bg-red"><i class="fa fa-trash"></i> Delete</button>
 			</div>

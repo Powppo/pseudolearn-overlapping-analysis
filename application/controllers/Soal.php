@@ -264,6 +264,10 @@ class Soal extends CI_Controller
             } else {
                 show_error('Method tidak diketahui', 404);
             }
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert" style="position: relative; margin-left:10px; margin-right:10px; box-sizing: border-box;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Data berhasil disimpan!
+          </div>');
             redirect('soal');
         }
     }
