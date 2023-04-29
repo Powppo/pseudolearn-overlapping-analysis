@@ -9,23 +9,10 @@
     <div class="box-body">
 		<div class="row">
 		<?php echo $this->session->flashdata('message');?>
-        	<div class="col-lg-4 col-xs-3">
+        	<div class="col-lg-6 col-xs-6">
 				<button type="button" onclick="bulk_delete()" class="btn btn-flat btn-sm bg-red"><i class="fa fa-trash"></i> Delete</button>
 			</div>
-			<div class="form-group col-lg-4 col-xs-5 text-center">
-				<?php if ( $this->ion_auth->is_admin() ) : ?>
-					<select id="matkul_filter" class="form-control select2" style="width:100% !important">
-						<option value="all">Semua Matkul</option>
-						<?php foreach ($matkul as $m) :?>
-							<option value="<?=$m->id_matkul?>"><?=$m->nama_matkul?></option>
-						<?php endforeach; ?>
-					</select>
-				<?php endif; ?>
-				<!-- <?php if ( $this->ion_auth->in_group('dosen') ) : ?>				
-					<input id="matkul_id" value="<?=$matkul->nama_matkul;?>" type="text" readonly="readonly" class="form-control">
-				<?php endif; ?> -->
-			</div>
-			<div class="col-lg-4 col-xs-4">
+			<div class="col-lg-6 col-xs-6">
 				<div class="pull-right">
 					<a href="<?=base_url('level/add')?>" class="btn bg-purple btn-flat btn-sm"><i class="fa fa-plus"></i> Buat Kategori</a>
 					<button type="button" onclick="reload_ajax()" class="btn btn-flat btn-sm bg-maroon"><i class="fa fa-refresh"></i> Reload</button>

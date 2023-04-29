@@ -40,6 +40,11 @@ class Level extends CI_Controller
             'subjudul' => 'Kategori soal'
         ];
 
+        if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['level'] = $this->db->query('select * from tb_level')->result();
+        }
+
         $this->load->view('_templates/dashboard/_header.php', $data);
         $this->load->view('level/data');
         $this->load->view('_templates/dashboard/_footer.php');
