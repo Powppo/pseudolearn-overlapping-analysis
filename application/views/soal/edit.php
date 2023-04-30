@@ -52,14 +52,14 @@
                                         <div class="col-xs-6">
                                             <label for="file">Variable <?= $ABJ; ?></label>
                                             <div class="form-group">
-                                                <input required="required" name="variable_<?= $abj; ?>" id="variable_<?= $abj; ?>" class="form-control" value="<?= $soal->$variable ?>">
+                                                <input name="variable_<?= $abj; ?>" id="variable_<?= $abj; ?>" class="form-control" value="<?= $soal->$variable ?>">
                                                 <small class="help-block" style="color: #dc3545"><?= form_error('variable_' . $abj) ?></small>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="file">Tipe Data <?= $ABJ; ?></label>
                                             <div class="form-group">
-                                                <input required="required" name="tipe_data_<?= $abj; ?>" id="tipe_data_<?= $abj; ?>" class="form-control" value="<?= $soal->$jenis_data ?>">
+                                                <input name="tipe_data_<?= $abj; ?>" id="tipe_data_<?= $abj; ?>" class="form-control" value="<?= $soal->$jenis_data ?>">
                                                 <small class="help-block" style="color: #dc3545"><?= form_error('tipe_data_' . $abj) ?></small>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@
                                             </div>
                                             <div class="form-group col-sm-4">
                                                 <label for="urutan" class="control-label">Pilih Urutan Jawaban :</label>
-                                                <select required="required" name="urut_<?= $abj; ?>" id="urut_<?= $abj; ?>" class="form-control select2" style="width:100%!important">
+                                                <select name="urut_<?= $abj; ?>" id="urut_<?= $abj; ?>" class="form-control select2" style="width:100%!important">
                                                     <option value="" disabled selected>Pilih Jawaban Urutan Ke <?= $abj; ?></option>
                                                     <option <?= $soal->$urutan === "a" ? "selected" : "" ?> value="a">A</option>
                                                     <option <?= $soal->$urutan === "b" ? "selected" : "" ?> value="b">B</option>

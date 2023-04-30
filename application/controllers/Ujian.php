@@ -369,7 +369,8 @@ class Ujian extends CI_Controller
 		$this->db->insert('confidence_tag', $data);
 		$this->session->sess_expiration = 0;// expires in 4 hours
 		$this->session->set_userdata(array(
-			'confidence' => $this->input->post('confidence')
+			'confidence' => $this->input->post('confidence'),
+			'waktu' => $this->input->post('waktu')
 		));
     }
 
@@ -384,6 +385,7 @@ class Ujian extends CI_Controller
 			// 'username' => $click['username'],
 			'status_jawaban' => $this->input->post('condition'),
 			'confidence'=>$this->session->confidence,
+			'waktu'=>$this->session->waktu,
 		]);
 		$this->output_json(['status' => true]);
     }
