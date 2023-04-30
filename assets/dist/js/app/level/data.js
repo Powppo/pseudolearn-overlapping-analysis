@@ -19,19 +19,23 @@ $(document).ready(function() {
     buttons: [
       {
         extend: "copy",
-        exportOptions: { columns: [2, 3, 4, 5] }
+        download: 'open',
+        exportOptions: { columns: [2, 4, 5] }
       },
       {
         extend: "print",
-        exportOptions: { columns: [2, 3, 4, 5] }
+        download: 'open',
+        exportOptions: { columns: [2, 4, 5] }
       },
       {
         extend: "excel",
-        exportOptions: { columns: [2, 3, 4, 5] }
+        download: 'open',
+        exportOptions: { columns: [2, 4, 5] }
       },
       {
         extend: "pdf",
-        exportOptions: { columns: [2, 3, 4, 5] }
+        download: 'open',
+        exportOptions: { columns: [2, 4, 5] }
       }
     ],
     oLanguage: {
@@ -62,7 +66,11 @@ $(document).ready(function() {
         }
       },
       { data: "bts_nilai" },
-      { data: "feedback" }
+      { data: "feedback_data_type" },
+      { data: "feedback_input" },
+      { data: "feedback_process" },
+      { data: "feedback_output" },
+      { data: "feedback" },
     ],
     columnDefs: [
       {
@@ -89,7 +97,7 @@ $(document).ready(function() {
         }
       }
     ],
-    order: [[3, "desc"]],
+    order: [[3, "asc"]],
     rowId: function(a) {
       return a;
     },
