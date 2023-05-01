@@ -66,10 +66,6 @@ $(document).ready(function() {
         }
       },
       { data: "bts_nilai" },
-      { data: "feedback_data_type" },
-      { data: "feedback_input" },
-      { data: "feedback_process" },
-      { data: "feedback_output" },
       { data: "feedback" },
     ],
     columnDefs: [
