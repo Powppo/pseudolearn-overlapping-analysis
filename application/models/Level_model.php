@@ -6,10 +6,17 @@ class Level_model extends CI_Model
 
     public function getDataLevel($id, $dosen)
     {
-        $this->datatables->select('*');
+        $this->datatables->select('id_level, nama, image, bts_nilai, feedback_data_type, feedback_input, feedback_process, feedback_output, CONCAT(feedback_data_type, feedback_input, feedback_process, feedback_output) AS feedback');
         $this->datatables->from('tb_level');
         return $this->datatables->generate();
     }
+
+    // public function getAllDataLevel()
+    // {
+    //     $this->datatables->select('*');
+    //     $this->datatables->from('tb_level');
+    //     return $this->db->get()->result_array();
+    // }
 
     public function getLevelById($id)
     {
