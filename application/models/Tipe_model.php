@@ -16,10 +16,10 @@ class Tipe_model extends CI_Model
         return $this->db->get_where('tipe_data', ['id' => $id])->row();
     }
 
-    public function getAllTipe()
-    {
-        $this->db->select('*');
-        $this->db->from('tipe_data');
-        return $this->db->get()->result();
-    }
+    // public function getAllTipe()
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('tipe_data');
+    //     return $this->db->get()->result();
+    // }
 }
