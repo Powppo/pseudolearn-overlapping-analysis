@@ -359,6 +359,26 @@ class Ujian extends CI_Controller
 		$this->output_json(['status' => true]);
 	}
 
+	public function save_jenis_data($id_soal)
+	{
+		$jd1 = $this->db->query('select jenis_data_v1 from tb_soal')->row_array();
+		$jd2 = $this->db->query('select jenis_data_v2 from tb_soal')->row_array();
+		$jd3 = $this->db->query('select jenis_data_v3 from tb_soal')->row_array();
+		$jd4 = $this->db->query('select jenis_data_v4 from tb_soal')->row_array();
+		$jd5 = $this->db->query('select jenis_data_v5 from tb_soal')->row_array();
+		$jd6 = $this->db->query('select jenis_data_v6 from tb_soal')->row_array();
+		$jd7 = $this->db->query('select jenis_data_v7 from tb_soal')->row_array();
+		$jd8 = $this->db->query('select jenis_data_v8 from tb_soal')->row_array();
+		$data['jd1'] = $jd1;
+		$data['jd2'] = $jd2;
+		$data['jd3'] = $jd3;
+		$data['jd4'] = $jd4;
+		$data['jd5'] = $jd5;
+		$data['jd6'] = $jd6;
+		$data['jd7'] = $jd7;
+		$data['jd8'] = $jd8;
+	}
+
 	function save_confidence($id_soal){
 		$id_user = $this->session->userdata('user_id');
 		$click = $this->db->query('select * from confidence_tag where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
@@ -520,7 +540,7 @@ class Ujian extends CI_Controller
 				<ul class="data-type__items">';
 				for ($i=0; $i < $var_count; $i++) { 
 					$var = "jenis_data_v".$var_opsi[$i];
-					!empty($s->$var) ? $html .= '<li class="data-type__item draggable" id="opsi_jenis_'.$var_opsi[$i].'">'.$s->$var.'</li>' : '';
+					!empty($s->$var) ? $html .= '<li class="data-type__item draggable" id="opsi_jenis_'.$var_opsi[$i].'" value="' .$s->$var. '">'.$s->$var.'</li>' : '';
 				}
 				$html .= '</ul>
 						</div>';
@@ -774,6 +794,11 @@ class Ujian extends CI_Controller
 			'levelId'	=> $levelId,
 			'id_tes'	=> $id
 		];
+
+		$data['soal1'] = $this->db->query('select jenis_data_v1 from tb_soal')->result();
+		$data['soal2'] = $this->db->query('select jenis_data_v2 from tb_soal')->result();
+
+
 		$this->load->view('_templates/topnav/_header.php', $data);
 		$this->load->view('ujian/sheet');
 		$this->load->view('_templates/topnav/_footer.php');
