@@ -753,14 +753,12 @@ class Ujian extends CI_Controller
 						<img src="'.base_url().'template/images/success.png" alt="success" />
 						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
 					</div>
-					<div id="fail-alert" class="alert" style="display: none;height:500px">
-						<p>Jawaban anda masih salah, silahkan menyusun ulang<br>
-						<br>
-							<br>
-						<small id="tipe_data_feedback" style="display:none;">Tipe Data :'.$feedback['tipe_data'].'</small></br>
-						<small id="input_feedback" style="display:none;">Input : '.$feedback['input'].'</small></br>
-						<small id="process_feedback" style="display:none;">Process :'.$feedback['process'].'</small></br>
-						<small id="output_feedback" style="display:none;">Output : '.$feedback['output'].'</small></br>
+					<div id="fail-alert" class="alert" style="display: none;height:600px">
+						<p>Jawaban anda masih salah, silahkan menyusun ulang<br><br>
+						<small id="tipe_data_feedback" style="display:none;">Teliti kembali tipe data Anda :'.$feedback['tipe_data'].'</small></br><br>
+						<small id="input_feedback" style="display:none;">Teliti kembali inputan Anda : '.$feedback['input'].'</small></br><br>
+						<small id="process_feedback" style="display:none;">Teliti kembali proses Anda :'.$feedback['process'].'</small></br><br>
+						<small id="output_feedback" style="display:none;">Ups! Outputnya kurang tepat : '.$feedback['output'].'</small></br>
 						</p>
 						<img src="'.base_url().'template/images/fail.jpeg" style="width:120px;" alt="fail" />
 						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>
