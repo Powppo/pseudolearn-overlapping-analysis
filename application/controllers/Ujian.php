@@ -361,22 +361,22 @@ class Ujian extends CI_Controller
 
 	public function save_jenis_data($id_soal)
 	{
-		$jd1 = $this->db->query('select jenis_data_v1 from tb_soal')->row_array();
-		$jd2 = $this->db->query('select jenis_data_v2 from tb_soal')->row_array();
-		$jd3 = $this->db->query('select jenis_data_v3 from tb_soal')->row_array();
-		$jd4 = $this->db->query('select jenis_data_v4 from tb_soal')->row_array();
-		$jd5 = $this->db->query('select jenis_data_v5 from tb_soal')->row_array();
-		$jd6 = $this->db->query('select jenis_data_v6 from tb_soal')->row_array();
-		$jd7 = $this->db->query('select jenis_data_v7 from tb_soal')->row_array();
-		$jd8 = $this->db->query('select jenis_data_v8 from tb_soal')->row_array();
-		$data['jd1'] = $jd1;
-		$data['jd2'] = $jd2;
-		$data['jd3'] = $jd3;
-		$data['jd4'] = $jd4;
-		$data['jd5'] = $jd5;
-		$data['jd6'] = $jd6;
-		$data['jd7'] = $jd7;
-		$data['jd8'] = $jd8;
+		$id_user = $this->session->userdata('user_id');
+		$soal = $this->db->query('select jenis_data_v1, jenis_data_v2, jenis_data_v3, jenis_data_v4, jenis_data_v5, jenis_data_v6, jenis_data_v7, jenis_data_v8, soal from tb_soal where id_soal = ?', $id_soal)->row_array();
+		$data['id_soal'] = $id_soal;
+		$data['id_user'] = $id_user;
+		$data['soal'] = $soal['soal'];
+		$data['jd1'] = $soal['jenis_data_v1'];
+		$data['jd2'] = $soal['jenis_data_v2'];
+		$data['jd3'] = $soal['jenis_data_v3'];
+		$data['jd4'] = $soal['jenis_data_v4'];
+		$data['jd5'] = $soal['jenis_data_v5'];
+		$data['jd6'] = $soal['jenis_data_v6'];
+		$data['jd7'] = $soal['jenis_data_v7'];
+		$data['jd8'] = $soal['jenis_data_v8'];
+		$this->db->insert('jenis_data', $data);
+		
+		$this->output_json(['status' => true]);
 	}
 
 	function save_confidence($id_soal){
@@ -416,6 +416,9 @@ class Ujian extends CI_Controller
 		$id = $this->input->get('key', true);
 
 		$soal 		= $this->ujian->getSoal($id);
+		//$soal_urut_ok = $soal;
+		//echo "tes";
+		//print_r($soal_urut_ok);
 
 		$mhs		= $this->mhs;
 		$levelId = 0;
@@ -525,6 +528,8 @@ class Ujian extends CI_Controller
 		// if (!empty($soal_urut_ok)) {
 			foreach ($soal_urut_ok as $s) 
 			{
+				//print_r($soal_urut_ok);
+				//echo "tes1";
 				$path = 'uploads/bank_soal/';
 				$html .= '<input type="hidden" id="id_soal" name="id_soal_' . $no . '" value="' . $s->id_soal . '">';
 				$html .= '<input type="hidden" id="id_user" name="user-id" value="' . $mhs->id_mahasiswa . '">';
@@ -812,7 +817,8 @@ class Ujian extends CI_Controller
 		$soal = $this->ujian->getSoalNew($id);
 
 		$soal_urut_ok = $soal;
-
+		echo "tes";
+		print_r($soal_urut_ok);
 		$arr_opsi = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k","l","m","n","o");
 		$html = '';
 		$no = 1;
