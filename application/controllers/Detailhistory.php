@@ -33,10 +33,10 @@ class DetailHistory extends CI_Controller {
 		$this->output_json($this->ujian->getLogAktivitas(), false);
 	}
 
-	public function NilaiMhs($id)
-	{
-		$this->output_json($this->ujian->HslUjianById($id, true), false);
-	}
+	// public function NilaiMhs($id)
+	// {
+	// 	$this->output_json($this->ujian->HslUjianById($id, true), false);
+	// }
 
 	public function index()
 	{

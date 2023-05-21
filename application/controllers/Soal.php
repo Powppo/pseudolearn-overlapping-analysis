@@ -17,7 +17,6 @@ class Soal extends CI_Controller
         $this->load->model('Master_model', 'master');
         $this->load->model('Soal_model', 'soal');
         $this->load->model('Level_model', 'level');
-        $this->load->model('Tipe_model', 'tipe');
         $this->form_validation->set_error_delimiters('', '');
     }
 

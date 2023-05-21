@@ -44,164 +44,17 @@ class Ujian extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output($data);
 	}
 
-	public function json($id = null)
-	{
-		$this->akses_dosen();
+	// public function json($id = null)
+	// {
+	// 	$this->akses_dosen();
 
-		$this->output_json($this->ujian->getDataUjian($id), false);
-	}
-
-	public function master()
-	{
-		$this->akses_dosen();
-		$user = $this->ion_auth->user()->row();
-		$data = [
-			'user' => $user,
-			'judul'	=> 'Ujian',
-			'subjudul' => 'Data Ujian',
-			'dosen' => $this->ujian->getIdDosen($user->username),
-		];
-		$this->load->view('_templates/dashboard/_header.php', $data);
-		$this->load->view('ujian/data');
-		$this->load->view('_templates/dashboard/_footer.php');
-	}
-
-	public function add()
-	{
-		$this->akses_dosen();
-
-		$user = $this->ion_auth->user()->row();
-
-		$data = [
-			'user' 		=> $user,
-			'judul'		=> 'Ujian',
-			'subjudul'	=> 'Tambah Ujian',
-			'matkul'	=> $this->soal->getMatkulDosen($user->username),
-			'dosen'		=> $this->ujian->getIdDosen($user->username),
-			'level'		=> $this->db->query('select * from tb_level')->result_array(),
-		];
-
-		$this->load->view('_templates/dashboard/_header.php', $data);
-		$this->load->view('ujian/add');
-		$this->load->view('_templates/dashboard/_footer.php');
-	}
-
-	public function edit($id)
-	{
-		$this->akses_dosen();
-
-		$user = $this->ion_auth->user()->row();
-
-		$data = [
-			'user' 		=> $user,
-			'judul'		=> 'Ujian',
-			'subjudul'	=> 'Edit Ujian',
-			'matkul'	=> $this->soal->getMatkulDosen($user->username),
-			'dosen'		=> $this->ujian->getIdDosen($user->username),
-			'ujian'		=> $this->ujian->getUjianById($id),
-			'level'		=> $this->db->query('select * from tb_level')->result_array(),
-		];
-
-		$this->load->view('_templates/dashboard/_header.php', $data);
-		$this->load->view('ujian/edit');
-		$this->load->view('_templates/dashboard/_footer.php');
-	}
+	// 	$this->output_json($this->ujian->getDataUjian($id), false);
+	// }
 
 	public function convert_tgl($tgl)
 	{
 		$this->akses_dosen();
 		return date('Y-m-d H:i:s', strtotime($tgl));
-	}
-
-	public function validasi()
-	{
-		$this->akses_dosen();
-
-		$user 	= $this->ion_auth->user()->row();
-		$dosen 	= $this->ujian->getIdDosen($user->username);
-		$jml 	= $this->ujian->getJumlahSoal($dosen->id_dosen)->jml_soal;
-		$jml_a 	= $jml + 1; // Jika tidak mengerti, silahkan baca user_guide codeigniter tentang form_validation pada bagian less_than
-
-		$this->form_validation->set_rules('nama_ujian', 'Nama Ujian', 'required|alpha_numeric_spaces|max_length[50]');
-		$this->form_validation->set_rules('jumlah_soal', 'Jumlah Soal', "required|integer|less_than[{$jml_a}]|greater_than[0]", ['less_than' => "Soal tidak cukup, anda hanya punya {$jml} soal"]);
-		$this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'required');
-		$this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required');
-		$this->form_validation->set_rules('waktu', 'Waktu', 'required|integer|max_length[4]|greater_than[0]');
-		$this->form_validation->set_rules('jenis', 'Acak Soal', 'required|in_list[acak,urut]');
-	}
-
-	public function save()
-	{
-		$this->validasi();
-		$this->load->helper('string');
-
-		$method 		= $this->input->post('method', true);
-		$dosen_id 		= $this->input->post('dosen_id', true);
-		$matkul_id 		= $this->input->post('matkul_id', true);
-		$nama_ujian 	= $this->input->post('nama_ujian', true);
-		$jumlah_soal 	= $this->input->post('jumlah_soal', true);
-		$tgl_mulai 		= $this->convert_tgl($this->input->post('tgl_mulai', 	true));
-		$tgl_selesai	= $this->convert_tgl($this->input->post('tgl_selesai', true));
-		$waktu			= $this->input->post('waktu', true);
-		$jenis			= $this->input->post('jenis', true);
-		$level			= $this->input->post('level', true);
-		$token 			= strtoupper(random_string('alpha', 5));
-
-		if ($this->form_validation->run() === FALSE) {
-			$data['status'] = false;
-			$data['errors'] = [
-				'nama_ujian' 	=> form_error('nama_ujian'),
-				'jumlah_soal' 	=> form_error('jumlah_soal'),
-				'tgl_mulai' 	=> form_error('tgl_mulai'),
-				'tgl_selesai' 	=> form_error('tgl_selesai'),
-				'waktu' 		=> form_error('waktu'),
-				'jenis' 		=> form_error('jenis'),
-				'level' 		=> form_error('level'),
-			];
-		} else {
-			$input = [
-				'nama_ujian' 	=> $nama_ujian,
-				'jumlah_soal' 	=> $jumlah_soal,
-				'tgl_mulai' 	=> $tgl_mulai,
-				'terlambat' 	=> $tgl_selesai,
-				'waktu' 		=> $waktu,
-				'jenis' 		=> $jenis,
-				'level' 		=> $level,
-			];
-			if ($method === 'add') {
-				$input['dosen_id']	= $dosen_id;
-				$input['matkul_id'] = $matkul_id;
-				$input['token']		= $token;
-				$action = $this->master->create('m_ujian', $input);
-			} else if ($method === 'edit') {
-				$id_ujian = $this->input->post('id_ujian', true);
-				$action = $this->master->update('m_ujian', $input, 'id_ujian', $id_ujian);
-			}
-			$data['status'] = $action ? TRUE : FALSE;
-		}
-		$this->output_json($data);
-	}
-
-	public function delete()
-	{
-		$this->akses_dosen();
-		$chk = $this->input->post('checked', true);
-		if (!$chk) {
-			$this->output_json(['status' => false]);
-		} else {
-			if ($this->master->delete('m_ujian', $chk, 'id_ujian')) {
-				$this->output_json(['status' => true, 'total' => count($chk)]);
-			}
-		}
-	}
-
-	public function refresh_token($id)
-	{
-		$this->load->helper('string');
-		$data['token'] = strtoupper(random_string('alpha', 5));
-		$refresh = $this->master->update('m_ujian', $data, 'id_ujian', $id);
-		$data['status'] = $refresh ? TRUE : FALSE;
-		$this->output_json($data);
 	}
 
 	/**
@@ -267,34 +120,6 @@ class Ujian extends CI_Controller
 		$this->load->view('_templates/dashboard/_footer.php');
 	}
 
-	public function token($id)
-	{
-		$this->akses_mahasiswa();
-		$user = $this->ion_auth->user()->row();
-
-		$data = [
-			'user' 		=> $user,
-			'judul'		=> 'Ujian',
-			'subjudul'	=> 'Token Ujian',
-			'mhs' 		=> $this->ujian->getIdMahasiswa($user->username),
-			'ujian'		=> $this->ujian->getUjianById($id),
-			'encrypted_id' => urlencode($this->encryption->encrypt($id))
-		];
-		$this->load->view('_templates/topnav/_header.php', $data);
-		$this->load->view('ujian/token');
-		$this->load->view('_templates/topnav/_footer.php');
-	}
-
-	public function cektoken()
-	{
-		$id = $this->input->post('id_ujian', true);
-		$token = $this->input->post('token', true);
-		$cek = $this->ujian->getUjianById($id);
-
-		$data['status'] = $token === $cek->token ? TRUE : FALSE;
-		$this->output_json($data);
-	}
-
 	public function encrypt()
 	{
 		$id = $this->input->post('id', true);
@@ -332,18 +157,6 @@ class Ujian extends CI_Controller
 		}
 	}
 
-// 	public function save_detail_confidence($id_soal)
-// 	{
-// 		$id_user = $this->session->userdata('user_id');
-// 		$confidence = $this->db->query('select c.confidence, cd.condition from confidence_tag c inner join conditions cd on c.id_soal = cd.id_soal')->num_rows();
-// 		$this->db->insert('detail_confidence_tag', [
-// 		'id_soal' => $id_soal,
-// 		'id_user' => $id_user,
-// 		'confidence' => $confidence['confidence'],
-// 		'status_jawaban' => $confidence['condition'],
-// 	]);
-// }
-
 	public function save_percobaan($id_soal)
 	{
 		// Decrypt Id
@@ -355,26 +168,6 @@ class Ujian extends CI_Controller
 		$data['id_level'] = $soal['id_level'];
 		$data['jumlah'] = $click['jumlah'] + 1;
 			$this->db->insert('history_percobaan', $data);
-		
-		$this->output_json(['status' => true]);
-	}
-
-	public function save_jenis_data($id_soal)
-	{
-		$id_user = $this->session->userdata('user_id');
-		$soal = $this->db->query('select jenis_data_v1, jenis_data_v2, jenis_data_v3, jenis_data_v4, jenis_data_v5, jenis_data_v6, jenis_data_v7, jenis_data_v8, soal from tb_soal where id_soal = ?', $id_soal)->row_array();
-		$data['id_soal'] = $id_soal;
-		$data['id_user'] = $id_user;
-		$data['soal'] = $soal['soal'];
-		$data['jd1'] = $soal['jenis_data_v1'];
-		$data['jd2'] = $soal['jenis_data_v2'];
-		$data['jd3'] = $soal['jenis_data_v3'];
-		$data['jd4'] = $soal['jenis_data_v4'];
-		$data['jd5'] = $soal['jenis_data_v5'];
-		$data['jd6'] = $soal['jenis_data_v6'];
-		$data['jd7'] = $soal['jenis_data_v7'];
-		$data['jd8'] = $soal['jenis_data_v8'];
-		$this->db->insert('jenis_data', $data);
 		
 		$this->output_json(['status' => true]);
 	}
@@ -495,14 +288,12 @@ class Ujian extends CI_Controller
 				$i++;
 			}
 
-
-
 		$arr_opsi = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k","l","m","n","o");
 		$arr_clue = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k","l","m","n","o");
 		$var_opsi = array(1, 2, 3, 4, 5, 6, 7, 8);
 		$jenis_opsi = array(1, 2, 3, 4, 5, 6, 7, 8);
 		shuffle($var_opsi);
-		// shuffle($jenis_opsi);
+		shuffle($jenis_opsi);
 		$var_count = 8;
 		$jenis_count = 8;
 		$html = '';
@@ -551,7 +342,7 @@ class Ujian extends CI_Controller
 						</div>';
 				$html .= '<div class="description__algorithm algorithm" style="margin-left: -3px; width:350px;">
 						<h4 class="algorithm__title">Algoritma</h4>
-						<ul class="algorithm__items">';
+						<ul class="algorithm__items" style="margin-right:35px;">';
 				for ($j = 0; $j < $this->config->item('jml_opsi'); $j++) {
 					$array_clues = [];
 					for ($k = 0; $k < $this->config->item('jml_opsi'); $k++) {
@@ -566,7 +357,7 @@ class Ujian extends CI_Controller
 						if (!in_array($opsi, $array_clues)) {
 							$pilihan_opsi 	= !empty($s->$opsi) ? $s->$opsi : "";
 							
-							!empty($s->$opsi) ? $html .= '<li class="algorithm__item draggable dsdsd" id="opsi_' . strtolower($arr_opsi[$j]) . '">'. $pilihan_opsi .'</li>' : '';
+							!empty($s->$opsi) ? $html .= '<li class="algorithm__item draggable dsdsd" style="width:300px;" id="opsi_' . strtolower($arr_opsi[$j]) . '">'. $pilihan_opsi .'</li>' : '';
 						}		
 					}
 					$html .= '</ul>
@@ -799,65 +590,11 @@ class Ujian extends CI_Controller
 			'levelId'	=> $levelId,
 			'id_tes'	=> $id
 		];
-
-		$data['soal1'] = $this->db->query('select jenis_data_v1 from tb_soal')->result();
-		$data['soal2'] = $this->db->query('select jenis_data_v2 from tb_soal')->result();
-
-
 		$this->load->view('_templates/topnav/_header.php', $data);
 		$this->load->view('ujian/sheet');
 		$this->load->view('_templates/topnav/_footer.php');
 	}
-
-	public function indexOld()
-	{
-		$this->akses_mahasiswa();
-		$key = $this->input->get('key', true);
-		$id  = $this->encryption->decrypt(rawurldecode($key));
-		$soal = $this->ujian->getSoalNew($id);
-
-		$soal_urut_ok = $soal;
-		echo "tes";
-		print_r($soal_urut_ok);
-		$arr_opsi = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k","l","m","n","o");
-		$html = '';
-		$no = 1;
-		if (!empty($soal_urut_ok)) {
-			foreach ($soal_urut_ok as $s) {
-				$path = 'uploads/bank_soal/';
-				$html .= '<input type="hidden" name="id_soal_' . $no . '" value="' . $s->id_soal . '">';
-				$html .= '<input type="hidden" name="rg_' . $no . '" id="rg_' . $no . '" value="' . $no . '">';
-				$html .= '<div class="step" id="widget_' . $no . '">';
-
-				$html .= '<div class="text-center"><div class="w-25"></div></div>' . $s->soal . '<div class="funkyradio">';
-				for ($j = 0; $j < $this->config->item('jml_opsi'); $j++) {
-					$opsi 			= "opsi_" . $arr_opsi[$j];
-					// $file 			= "file_" . $arr_opsi[$j];
-					$pilihan_opsi 	= !empty($s->$opsi) ? $s->$opsi : "";
-					
-					$html .= '<div class="funkyradio-success" onclick="return simpan_sementara();">
-						<input type="radio" id="opsi_' . strtolower($arr_opsi[$j]) . '_' . $s->id_soal . '" name="opsi_' . $no . '" value="' . strtoupper($arr_opsi[$j]) . '"> <label for="opsi_' . strtolower($arr_opsi[$j]) . '_' . $s->id_soal . '"><div class="huruf_opsi">' . $arr_opsi[$j] . '</div> <p>' . $pilihan_opsi . '</p><div class="w-25"></div></label></div>';
-				}
-				$html .= '</div></div>';
-				$no++;
-			}
-		}
-
-		$data = [
-			'user' 		=> $this->user,
-			'mhs'		=> $this->mhs,
-			'judul'		=> 'Ujian',
-			'subjudul'	=> 'Lembar Ujian',
-			//'soal'		=> $detail_tes,
-			'no' 		=> $no,
-			'html' 		=> $html
-			//'id_tes'	=> $id_tes
-		];
-		$this->load->view('_templates/topnav/_header.php', $data);
-		$this->load->view('ujian/sheet');
-		$this->load->view('_templates/topnav/_footer.php');
-	}
-
+	
 	public function simpan_hasil($id)
 	{
 		// Decrypt Id

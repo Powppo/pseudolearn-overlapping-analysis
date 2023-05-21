@@ -3,28 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Ujian_model extends CI_Model
 {
-    public function getDataUjian($id)
-    {
-        $this->datatables->select('a.id_ujian, a.token, a.nama_ujian, b.nama_matkul, a.jumlah_soal, CONCAT(a.tgl_mulai, " <br/> (", a.waktu, " Menit)") as waktu, a.jenis');
-        $this->datatables->from('m_ujian a');
-        $this->datatables->join('matkul b', 'a.matkul_id = b.id_matkul');
-        if ($id !== null) {
-            $this->datatables->where('dosen_id', $id);
-        }
-        return $this->datatables->generate();
-    }
-
-    public function getListUjianOld($id, $kelas)
-    {
-        $this->datatables->select("a.id_ujian, e.nama_dosen, d.nama_kelas, a.nama_ujian, b.nama_matkul, a.jumlah_soal, CONCAT(a.tgl_mulai, ' <br/> (', a.waktu, ' Menit)') as waktu,  (SELECT COUNT(id) FROM h_ujian h WHERE h.mahasiswa_id = {$id} AND h.ujian_id = a.id_ujian) AS ada");
-        $this->datatables->from('m_ujian a');
-        $this->datatables->join('matkul b', 'a.matkul_id = b.id_matkul');
-        $this->datatables->join('kelas_dosen c', "a.dosen_id = c.dosen_id");
-        $this->datatables->join('kelas d', 'c.kelas_id = d.id_kelas');
-        $this->datatables->join('dosen e', 'e.id_dosen = c.dosen_id');
-        $this->datatables->where('d.id_kelas', $kelas);
-        return $this->datatables->generate();
-    }
 
     public function getListUjian($id_level)
     {
@@ -37,21 +15,6 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function getUjianById($id)
-    {
-        $this->db->select('*');
-        $this->db->from('m_ujian a');
-        $this->db->join('dosen b', 'a.dosen_id=b.id_dosen');
-        $this->db->join('matkul c', 'a.matkul_id=c.id_matkul');
-        $this->db->where('id_ujian', $id);
-        return $this->db->get()->row();
-    }
-
-    public function getIdDosen($nip)
-    {
-        $this->db->select('id_dosen, nama_dosen')->from('dosen')->where('nip', $nip);
-        return $this->db->get()->row();
-    }
 
     public function getJumlahSoal($dosen)
     {
@@ -67,17 +30,6 @@ class Ujian_model extends CI_Model
         $this->db->from('mahasiswa a');
         $this->db->where('nim', $nim);
         return $this->db->get()->row();
-    }
-
-    
-
-    public function HslUjian($id, $mhs)
-    {
-        $this->db->select('*, UNIX_TIMESTAMP(tgl_selesai) as waktu_habis');
-        $this->db->from('h_ujian');
-        $this->db->where('ujian_id', $id);
-        $this->db->where('mahasiswa_id', $mhs);
-        return $this->db->get();
     }
 
     public function getSoal($id)
@@ -128,34 +80,6 @@ class Ujian_model extends CI_Model
         return $this->datatables->generate();
     }
 
-    public function HslUjianById($id, $dt = false)
-    {
-        if ($dt === false) {
-            $db = "db";
-            $get = "get";
-        } else {
-            $db = "datatables";
-            $get = "generate";
-        }
-
-        $this->$db->select('d.id, a.nama, b.nama_kelas, c.nama_jurusan, d.jml_benar, d.nilai');
-        $this->$db->from('mahasiswa a');
-        $this->$db->join('kelas b', 'a.kelas_id=b.id_kelas');
-        $this->$db->join('jurusan c', 'b.jurusan_id=c.id_jurusan');
-        $this->$db->join('h_ujian d', 'a.id_mahasiswa=d.mahasiswa_id');
-        $this->$db->where(['d.ujian_id' => $id]);
-        return $this->$db->$get();
-    }
-
-    public function bandingNilai($id)
-    {
-        $this->db->select_min('nilai', 'min_nilai');
-        $this->db->select_max('nilai', 'max_nilai');
-        $this->db->select_avg('FORMAT(FLOOR(nilai),0)', 'avg_nilai');
-        $this->db->where('ujian_id', $id);
-        return $this->db->get('h_ujian')->row();
-    }
-
     public function getLogAktivitas() {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
         $this->db->select("u.username as nim, u.id_kelas as id_kelas, k.nama as nama_kelas, sum(n.nilai) as total_poin, n.nilai as poin, s.soal as studi_kasus, s.judul as sub_soal, u.id as iduser");
@@ -192,17 +116,6 @@ class Ujian_model extends CI_Model
         $this->db->group_by('n.id_soal');
         return $this->db->get()->result_array();
     }
-
-    // public function get_all_datalog()
-    // {
-    //     $this->datatables->select("CONCAT(h.first_name, ' ', h.last_name) AS nama", FALSE);
-    //     $this->datatables->select('h.nim, l.nama as levels, sum(n.nilai) as jml_poin, h.poin, h.idsoal, h.iduser, h.studi_kasus, h.sub_soal');
-    //     $this->datatables->from('history_ujian h');
-    //     $this->datatables->join('tb_level l', 'h.id_level=l.id_level');
-    //     $this->datatables->join('nilai n', 'h.idsoal = n.id_soal');
-    //     $this->datatables->group_by('h.iduser');
-    //     return $this->datatables->generate();
-    // }
 
     public function detailLogConfidence($id, $id_soal) {
         $this->db->select('s.judul as sub_soal, cd.confidence, l.nama as levels, cd.id as id_confidence, cd.waktu AS waktu');
