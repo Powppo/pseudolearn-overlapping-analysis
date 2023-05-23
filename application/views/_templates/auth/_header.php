@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="<?=base_url()?>assets/dist/css/mystyle.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/plugins/iCheck/square/blue.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/gif"> 
     <style>
     .blogbugabagi 
     {

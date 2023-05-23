@@ -39,8 +39,7 @@
 	<link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/summernote/summernote-bs4.css">
 	<script src="<?php echo base_url();?>assets/tinymce/tinymce.min.js"></script>
     <script>tinymce.init({ selector:'textarea' });</script>  
-	
-	
+	<link rel="icon" href="<?= base_url() ?>assets/images/favicon.ico" type="image/gif"> 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
