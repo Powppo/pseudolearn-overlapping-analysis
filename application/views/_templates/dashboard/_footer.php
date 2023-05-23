@@ -35,6 +35,7 @@
 			<script src="<?= base_url() ?>assets/bower_components/codemirror/lib/codemirror.min.js"></script>
 			<script src="<?= base_url() ?>assets/bower_components/codemirror/mode/xml.min.js"></script>
 			<script src="<?= base_url() ?>assets/bower_components/froala_editor/js/froala_editor.pkgd.min.js"></script>
+			<script src="<?= base_url() ?>assets/bower_components/summernote/summernote-bs4.js"></script>
 
 			<!-- App JS -->
 			<script src="<?= base_url() ?>assets/dist/js/app/dashboard.js"></script>

@@ -167,7 +167,7 @@ class Soal extends CI_Controller
                 'judul'     => $this->input->post('judul', true),
             ];
 
-            $abjad = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
+            $abjad = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
             // Inputan Opsi
             foreach ($abjad as $abj) {
@@ -182,7 +182,7 @@ class Soal extends CI_Controller
                 $data['jenis_data_v' . $urt]    = $this->input->post('tipe_data_' . $urt, true);
             }
 
-            $urut = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
+            $urut = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
             // Inputan Urutan dan checkbox hints
             foreach ($urut as $urt) {
@@ -277,7 +277,7 @@ class Soal extends CI_Controller
 
         // Delete File
         foreach ($chk as $id) {
-            $abjad = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
+            $abjad = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
             $path = FCPATH . 'uploads/bank_soal/';
             $soal = $this->soal->getSoalById($id);
             // Hapus File Soal

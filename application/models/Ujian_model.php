@@ -157,6 +157,15 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function detailLogConditions2($id, $id_soal) {
+        $this->db->select_max('cd.id');
+        $this->db->select('cd.status_jawaban, cd.confidence');
+        $this->db->from('conditions cd');
+        $this->db->where('cd.id_user', $id);
+        $this->db->where('cd.id_soal', $id_soal);
+        return $this->db->get()->result_array();
+    }
+
     public function detailConfidenceLevel($id, $id_level) {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
         $this->db->select('u.username as nim, l.id_level as idlevel, l.nama as levels, s.id_soal as idsoal, n.id_user as iduser, s.judul as sub_soal, n.nilai as poin');

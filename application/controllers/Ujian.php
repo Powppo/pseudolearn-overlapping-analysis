@@ -238,6 +238,17 @@ class Ujian extends CI_Controller
 				$soal_per->opsi_m 		= $s->opsi_m;
 				$soal_per->opsi_n 		= $s->opsi_n;
 				$soal_per->opsi_o 		= $s->opsi_o;
+				$soal_per->opsi_p 		= $s->opsi_p;
+				$soal_per->opsi_q 		= $s->opsi_q;
+				$soal_per->opsi_r 		= $s->opsi_r;
+				$soal_per->opsi_s 		= $s->opsi_s;
+				$soal_per->opsi_t 		= $s->opsi_t;
+				$soal_per->opsi_u 		= $s->opsi_u;
+				$soal_per->opsi_v 		= $s->opsi_v;
+				$soal_per->opsi_w 		= $s->opsi_w;
+				$soal_per->opsi_x 		= $s->opsi_x;
+				$soal_per->opsi_y 		= $s->opsi_y;
+				$soal_per->opsi_z 		= $s->opsi_z;
 				$soal_per->urut_a 			= $s->urut_a;
 				$soal_per->urut_b 			= $s->urut_b;
 				$soal_per->urut_c 			= $s->urut_c;
@@ -253,6 +264,17 @@ class Ujian extends CI_Controller
 				$soal_per->urut_m 			= $s->urut_m;
 				$soal_per->urut_n 			= $s->urut_n;
 				$soal_per->urut_o 			= $s->urut_o;
+				$soal_per->urut_p 			= $s->urut_p;
+				$soal_per->urut_q 			= $s->urut_q;
+				$soal_per->urut_r 			= $s->urut_r;
+				$soal_per->urut_s 			= $s->urut_s;
+				$soal_per->urut_t 			= $s->urut_t;
+				$soal_per->urut_u 			= $s->urut_u;
+				$soal_per->urut_v 			= $s->urut_v;
+				$soal_per->urut_w 			= $s->urut_w;
+				$soal_per->urut_x 			= $s->urut_x;
+				$soal_per->urut_y 			= $s->urut_y;
+				$soal_per->urut_z 			= $s->urut_z;
 				$soal_per->clue_a 			= $s->clue_a;
 				$soal_per->clue_b 			= $s->clue_b;
 				$soal_per->clue_c 			= $s->clue_c;
@@ -268,6 +290,17 @@ class Ujian extends CI_Controller
 				$soal_per->clue_m 			= $s->clue_m;
 				$soal_per->clue_n 			= $s->clue_n;
 				$soal_per->clue_o 			= $s->clue_o;
+				$soal_per->clue_p 			= $s->clue_p;
+				$soal_per->clue_q 			= $s->clue_q;
+				$soal_per->clue_r 			= $s->clue_r;
+				$soal_per->clue_s 			= $s->clue_s;
+				$soal_per->clue_t 			= $s->clue_t;
+				$soal_per->clue_u 			= $s->clue_u;
+				$soal_per->clue_v 			= $s->clue_v;
+				$soal_per->clue_w 			= $s->clue_w;
+				$soal_per->clue_x 			= $s->clue_x;
+				$soal_per->clue_y 			= $s->clue_y;
+				$soal_per->clue_z 			= $s->clue_z;
 				$soal_per->variable_1 			= $s->variable_1;
 				$soal_per->variable_2 			= $s->variable_2;
 				$soal_per->variable_3 			= $s->variable_3;
@@ -288,8 +321,8 @@ class Ujian extends CI_Controller
 				$i++;
 			}
 
-		$arr_opsi = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k","l","m","n","o");
-		$arr_clue = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k","l","m","n","o");
+		$arr_opsi = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k","l","m","n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+		$arr_clue = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k","l","m","n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
 		$var_opsi = array(1, 2, 3, 4, 5, 6, 7, 8);
 		$jenis_opsi = array(1, 2, 3, 4, 5, 6, 7, 8);
 		shuffle($var_opsi);
@@ -391,7 +424,7 @@ class Ujian extends CI_Controller
 						<table class="answer__content">
 							<tbody>
 								<tr>
-									<th rowspan="16"><span>DeskripsiAlgoritma</span></th>
+									<th rowspan="40"><span>DeskripsiAlgoritma</span></th>
 									
 								</tr>';
 								if ($s->clue_a) {
@@ -534,7 +567,105 @@ class Ujian extends CI_Controller
 								} else {
 									!empty($s->urut_o) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_o.'"></td></tr>' : '';
 								}
-
+								if ($s->clue_p) {
+									$clue = $s->clue_p;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_p) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_p.'"></td></tr>' : '';
+								}
+								if ($s->clue_q) {
+									$clue = $s->clue_q;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_q) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_q.'"></td></tr>' : '';
+								}
+								if ($s->clue_r) {
+									$clue = $s->clue_r;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_r) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_r.'"></td></tr>' : '';
+								}
+								if ($s->clue_s) {
+									$clue = $s->clue_s;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_s) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_s.'"></td></tr>' : '';
+								}
+								if ($s->clue_t) {
+									$clue = $s->clue_t;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_t) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_t.'"></td></tr>' : '';
+								}
+								if ($s->clue_u) {
+									$clue = $s->clue_u;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_u) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_u.'"></td></tr>' : '';
+								}
+								if ($s->clue_v) {
+									$clue = $s->clue_v;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_v) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_v.'"></td></tr>' : '';
+								}
+								if ($s->clue_w) {
+									$clue = $s->clue_w;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_w) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_w.'"></td></tr>' : '';
+								}
+								if ($s->clue_x) {
+									$clue = $s->clue_x;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_x) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_x.'"></td></tr>' : '';
+								}
+								if ($s->clue_y) {
+									$clue = $s->clue_y;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_y) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_y.'"></td></tr>' : '';
+								}
+								if ($s->clue_z) {
+									$clue = $s->clue_z;
+									$clue = $s->$clue;
+									$clue = "opsi_".$clue;
+									$clue = $s->$clue;
+									$html .= '<tr style="height: 50px;"><td><span>'.$clue.'</span></td></tr>';
+								} else {
+									!empty($s->urut_z) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_'.$s->urut_z.'"></td></tr>' : '';
+								}
 							$html .= '</tbody>
 						</table>
 					</div>
@@ -678,4 +809,13 @@ class Ujian extends CI_Controller
 		$this->master->update('h_ujian', $d_update, 'id', $id_tes);
 		$this->output_json(['status' => TRUE, 'data' => $d_update, 'id' => $id_tes]);
 	}
+
+	public function listCondition_json($id, $id_soal)
+    {
+        //$this->akses_mahasiswa();
+
+        $data = $this->ujian->detailLogConditions2($id, $id_soal);
+
+        echo json_encode($data);
+    }
 }

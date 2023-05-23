@@ -19,7 +19,7 @@
                                 <small class="help-block" style="color: #dc3545"><?= form_error('file_soal') ?></small>
                             </div>
                             <div class="form-group">
-                                <textarea name="soal" id="soal" class="form-control froala-editor"><?= set_value('soal') ?></textarea>
+                                <textarea name="soal" id="soal"><?= set_value('soal') ?></textarea>
                                 <small class="help-block" style="color: #dc3545"><?= form_error('soal') ?></small>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     <label for="file">Jawaban a</label>
                                     <div class="row">
                                     <div class="form-group col-sm-8">
-                                        <textarea name="jawaban_a" id="jawaban_a" class="form-control froala-editor"><?= set_value('jawaban_a') ?></textarea>
+                                        <textarea name="jawaban_a" id="jawaban_a"><?= set_value('jawaban_a') ?></textarea>
                                         <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_a') ?></small>
                                     </div>
                                     <div class="form-group col-sm-4">
@@ -219,7 +219,7 @@
             </div>`;
             $("#wrapperone").append(elemt);
         }else if (type == 'answer') {
-            const answerTemplate = ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
+            const answerTemplate = ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
             const currentIndex = $("[id*='formanswer_']").length - 1;
 
             if (answerTemplate.length == (currentIndex)) return;
@@ -229,7 +229,7 @@
                 <label for="file">Jawaban ${answer}</label>
                 <div class="row">
                 <div class="form-group col-sm-8">
-                    <textarea name="jawaban_${answer}" id="jawaban_${answer}" class="form-control froala-editor"><?= set_value('jawaban_${answer}') ?></textarea>
+                    <textarea name="jawaban_${answer}" id="jawaban_${answer}"><?= set_value('jawaban_${answer}') ?></textarea>
                     <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_${answer}') ?></small>
                 </div>
                 
@@ -252,6 +252,17 @@
                         <option value="m">M</option>
                         <option value="n">N</option>
                         <option value="o">O</option>
+                        <option value="p">P</option>
+                        <option value="q">Q</option>
+                        <option value="r">R</option>
+                        <option value="s">S</option>
+                        <option value="t">T</option>
+                        <option value="u">U</option>
+                        <option value="v">V</option>
+                        <option value="w">W</option>
+                        <option value="x">X</option>
+                        <option value="y">Y</option>
+                        <option value="z">Z</option>
                     </select>
                     <small class="help-block" style="color: #dc3545"><?= form_error('urut_${answer}') ?></small>
                 </div>
@@ -270,7 +281,7 @@
                 toolbarButtons: ['fullscreen', '|', 'bold', 'italic', 'strikeThrough', 'underline', '|', 'align', 'insertTable', 'insertLink','formatOL', 'formatUL', '|', 'html']
             });
         } else if (type == 'keyanswer') {
-            const answerKey = ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
+            const answerKey = ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
             const currentIndex = $("[id*='formkeyanswer_']").length - 1;
             if(answerKey.length == (currentIndex)) return;
             const key = answerKey[currentIndex];
@@ -295,6 +306,17 @@
                         <option value="m">M</option>
                         <option value="n">N</option>
                         <option value="o">O</option>
+                        <option value="p">P</option>
+                        <option value="q">Q</option>
+                        <option value="r">R</option>
+                        <option value="s">S</option>
+                        <option value="t">T</option>
+                        <option value="u">U</option>
+                        <option value="v">V</option>
+                        <option value="w">W</option>
+                        <option value="x">X</option>
+                        <option value="y">Y</option>
+                        <option value="z">Z</option>
                     </select>
                     <small class="help-block" style="color: #dc3545"><?= form_error('urut_${key}') ?></small>
                 </div>

@@ -25,14 +25,14 @@
                                         <?php endif; ?>
                                     </div> -->
                                     <div class="form-group col-sm-12">
-                                        <textarea name="soal" id="soal" class="form-control froala-editor"><?= $soal->soal ?></textarea>
+                                        <textarea name="soal" id="soal" ><?= $soal->soal ?></textarea>
                                         <small class="help-block" style="color: #dc3545"><?= form_error('soal') ?></small>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-sm-12">
                                 <label for="bobot" class="control-label">Judul Soal</label>
-                                <textarea name="judul" id="judul" class="form-control froala-editor"><?= $soal->judul ?></textarea>
+                                <textarea name="judul" id="judul" ><?= $soal->judul ?></textarea>
                                 <!-- <input required="required" type="text" name="judul" placeholder="Judul Soal" id="judul" class="form-control"> -->
                                 <small class="help-block" style="color: #dc3545"><?= form_error('judul') ?></small>
                             </div>
@@ -78,7 +78,7 @@
                             <div class="col-sm-12">
                                 <div id="wrappertwo">
                                 <?php
-                                $abjad = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
+                                $abjad = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
                                 foreach ($abjad as $key => $abj) :
                                     $ABJ = strtoupper($abj); // Abjad Kapital
                                     $file = 'file_' . $abj;
@@ -98,7 +98,7 @@
                                                 <?php endif; ?>
                                             </div> -->
                                             <div class="form-group col-sm-8">
-                                                <textarea name="jawaban_<?= $abj; ?>" id="jawaban_<?= $abj; ?>" class="form-control froala-editor"><?= $soal->$opsi ?></textarea>
+                                                <textarea name="jawaban_<?= $abj; ?>" id="jawaban_<?= $abj; ?>" ><?= $soal->$opsi ?></textarea>
                                                 <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_' . $abj) ?></small>
                                             </div>
                                             <div class="form-group col-sm-4">
@@ -120,6 +120,17 @@
                                                     <option <?= $soal->$urutan === "m" ? "selected" : "" ?> value="m">M</option>
                                                     <option <?= $soal->$urutan === "n" ? "selected" : "" ?> value="n">N</option>
                                                     <option <?= $soal->$urutan === "o" ? "selected" : "" ?> value="o">O</option>
+                                                    <option <?= $soal->$urutan === "p" ? "selected" : "" ?> value="p">P</option>
+                                                    <option <?= $soal->$urutan === "q" ? "selected" : "" ?> value="q">Q</option>
+                                                    <option <?= $soal->$urutan === "r" ? "selected" : "" ?> value="r">R</option>
+                                                    <option <?= $soal->$urutan === "s" ? "selected" : "" ?> value="s">S</option>
+                                                    <option <?= $soal->$urutan === "t" ? "selected" : "" ?> value="t">T</option>
+                                                    <option <?= $soal->$urutan === "u" ? "selected" : "" ?> value="u">U</option>
+                                                    <option <?= $soal->$urutan === "v" ? "selected" : "" ?> value="v">V</option>
+                                                    <option <?= $soal->$urutan === "w" ? "selected" : "" ?> value="w">W</option>
+                                                    <option <?= $soal->$urutan === "x" ? "selected" : "" ?> value="x">X</option>
+                                                    <option <?= $soal->$urutan === "y" ? "selected" : "" ?> value="y">Y</option>
+                                                    <option <?= $soal->$urutan === "z" ? "selected" : "" ?> value="z">Z</option>
                                                 </select>
                                                 <small class="help-block" style="color: #dc3545"><?= form_error('urut_' . $abj) ?></small>
                                             </div>
@@ -146,7 +157,7 @@
                             <div class="form-group col-sm-12">
                                 <div id="wrapperthree">
                                     <?php
-                                    $urut = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
+                                    $urut = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
                                     foreach ($urut as $urt) :
                                         $clue   = 'clue_' . $urt;
                                         $urutan = 'urut_' . $urt;
@@ -171,6 +182,17 @@
                                             <option <?= $soal->$urutan === "m" ? "selected" : "" ?> value="m">M</option>
                                             <option <?= $soal->$urutan === "n" ? "selected" : "" ?> value="n">N</option>
                                             <option <?= $soal->$urutan === "o" ? "selected" : "" ?> value="o">O</option>
+                                            <option <?= $soal->$urutan === "p" ? "selected" : "" ?> value="p">P</option>
+                                            <option <?= $soal->$urutan === "q" ? "selected" : "" ?> value="q">Q</option>
+                                            <option <?= $soal->$urutan === "r" ? "selected" : "" ?> value="r">R</option>
+                                            <option <?= $soal->$urutan === "s" ? "selected" : "" ?> value="s">S</option>
+                                            <option <?= $soal->$urutan === "t" ? "selected" : "" ?> value="t">T</option>
+                                            <option <?= $soal->$urutan === "u" ? "selected" : "" ?> value="u">U</option>
+                                            <option <?= $soal->$urutan === "v" ? "selected" : "" ?> value="v">V</option>
+                                            <option <?= $soal->$urutan === "w" ? "selected" : "" ?> value="w">W</option>
+                                            <option <?= $soal->$urutan === "x" ? "selected" : "" ?> value="x">X</option>
+                                            <option <?= $soal->$urutan === "y" ? "selected" : "" ?> value="y">Y</option>
+                                            <option <?= $soal->$urutan === "z" ? "selected" : "" ?> value="z">Z</option>
                                                     
                                                 </select>
                                                 <small class="help-block" style="color: #dc3545"><?= form_error('urut_' . $urt) ?></small>
@@ -239,7 +261,7 @@
             </div>`;
             $("#wrapperone").append(elemt);
         }else if (type == 'answer') {
-            const answerTemplate = ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o'];
+            const answerTemplate = ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
             const currentIndex = $("[id*='formanswer_']").length - 1;
 
             if (answerTemplate.length == (currentIndex)) return;
@@ -248,7 +270,7 @@
             const elmt = `<div class="" id="formanswer_${answer}">
                 <label for="file">Jawaban ${answer}</label>
                 <div class="form-group">
-                    <textarea name="jawaban_${answer}" id="jawaban_${answer}" class="form-control froala-editor"><?= set_value('jawaban_${answer}') ?></textarea>
+                    <textarea name="jawaban_${answer}" id="jawaban_${answer}" ><?= set_value('jawaban_${answer}') ?></textarea>
                     <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_${answer}') ?></small>
                 </div>
             </div>`;
@@ -260,7 +282,7 @@
                 toolbarButtons: ['fullscreen', '|', 'bold', 'italic', 'strikeThrough', 'underline', '|', 'align', 'insertTable', 'insertLink','formatOL', 'formatUL', '|', 'html']
             });
         } else if (type == 'keyanswer') {
-            const answerKey = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+            const answerKey = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
             const currentIndex = $("[id*='formkeyanswer_']").length - 1;
             if(answerKey.length == (currentIndex)) return;
             const key = answerKey[currentIndex];
@@ -290,6 +312,17 @@
                         <option value="m">M</option>
                         <option value="n">N</option>
                         <option value="o">O</option>
+                        <option value="p">P</option>
+                        <option value="q">Q</option>
+                        <option value="r">R</option>
+                        <option value="s">S</option>
+                        <option value="t">T</option>
+                        <option value="u">U</option>
+                        <option value="v">V</option>
+                        <option value="w">W</option>
+                        <option value="x">X</option>
+                        <option value="y">Y</option>
+                        <option value="z">Z</option>
                     </select>
                     <small class="help-block" style="color: #dc3545"><?= form_error('urut_${key}') ?></small>
                 </div>

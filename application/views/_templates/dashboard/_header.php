@@ -35,6 +35,10 @@
 	<link rel="stylesheet" href=" <?= base_url() ?>assets/dist/quiz/css/base.css" />
 	<link rel="stylesheet" href="<?= base_url() ?>assets/dist/quiz/css/categories.css" />
 
+	<!-- Summernote -->
+	<link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/summernote/summernote-bs4.css">
+	<script src="<?php echo base_url();?>assets/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>  
 	
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
