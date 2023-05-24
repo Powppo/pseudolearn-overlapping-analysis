@@ -402,11 +402,11 @@ class Ujian extends CI_Controller
 						<table class="answer__content">
 							<tbody>
 								<tr>
-									<th><span>Judul</span></th>
+									<th><span style="background-color: #91CAE2">Judul</span></th>
 									<td>'.$s->judul.'</td>
 								</tr>
 								<tr>
-									<th><span>Deklarasi</span></th>
+									<th><span style="background-color: #91CAE2">Deklarasi</span></th>
 									<td>
 										<table>
 											<tbody>';
@@ -424,7 +424,7 @@ class Ujian extends CI_Controller
 						<table class="answer__content">
 							<tbody>
 								<tr>
-									<th rowspan="40"><span>DeskripsiAlgoritma</span></th>
+									<th rowspan="40"><span style="background-color: #91CAE2">DeskripsiAlgoritma</span></th>
 									
 								</tr>';
 								if ($s->clue_a) {
@@ -676,12 +676,14 @@ class Ujian extends CI_Controller
 						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
 					</div>
 					<div id="fail-alert" class="alert" style="display: none;height:600px">
-						<p>Jawaban anda masih salah, silahkan menyusun ulang<br><br>
-						<small id="tipe_data_feedback" style="display:none;">Teliti kembali tipe data Anda :'.$feedback['tipe_data'].'</small></br><br>
-						<small id="input_feedback" style="display:none;">Teliti kembali inputan Anda : '.$feedback['input'].'</small></br><br>
-						<small id="process_feedback" style="display:none;">Teliti kembali proses Anda :'.$feedback['process'].'</small></br><br>
-						<small id="output_feedback" style="display:none;">Ups! Outputnya kurang tepat : '.$feedback['output'].'</small></br>
-						</p>
+						<p>Jawaban anda masih salah, silahkan menyusun ulang </p><br>
+						<br>
+							<br>
+						<small id="tipe_data_feedback" style="display:none;">Tipe Data :'.$feedback['tipe_data'].'</small></br>
+						<small id="input_feedback" style="display:none;">Input : '.$feedback['input'].'</small></br>
+						<small id="process_feedback" style="display:none;">Process :'.$feedback['process'].'</small></br>
+						<small id="output_feedback" style="display:none;">Output : '.$feedback['output'].'</small></br>
+						
 						<img src="'.base_url().'template/images/fail.jpeg" style="width:120px;" alt="fail" />
 						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>
 					</div>

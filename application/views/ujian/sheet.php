@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="<?=base_url()?>template/css/alert.css" />
 <style>
       .draggable {
-          background: #f08976;
+          background: #91CAE2 ;
           border-radius: 10px;
-          border: 1px solid #eb7b6a;
+          border: 1px solid #074863;
           width: 200px;
           padding: 5px;
           margin: 3px;
