@@ -127,6 +127,15 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function detailLogConfidence2($id, $id_soal) {
+        $this->db->select_max('cd.id');
+        $this->db->select('cd.confidence');
+        $this->db->from('confidence_tag cd');
+        $this->db->where('cd.id_user', $id);
+        $this->db->where('cd.id_soal', $id_soal);
+        return $this->db->get()->result_array();
+    }
+
     public function confidenceHistory() {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
         $this->db->select("u.username as nim, u.id_kelas as id_kelas, k.nama as nama_kelas, sum(n.nilai) as total_poin, n.nilai as poin, s.soal as studi_kasus, s.judul as sub_soal, u.id as iduser");

@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/frontend/css/aos.css">
 
     <link rel="stylesheet" href="<?= base_url() ?>assets/frontend/css/style.css">
-    
+    <link rel="icon" href="<?= base_url() ?>assets/images/favicon.ico" type="image/gif">
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   

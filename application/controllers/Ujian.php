@@ -818,4 +818,12 @@ class Ujian extends CI_Controller
 
         echo json_encode($data);
     }
+	public function listConfidence_json($id, $id_soal)
+    {
+        //$this->akses_mahasiswa();
+
+        $data = $this->ujian->detailLogConfidence2($id, $id_soal);
+
+        echo json_encode($data);
+    }
 }

@@ -104,7 +104,7 @@
                                             <div class="form-group col-sm-4">
                                                 <label for="urutan" class="control-label">Pilih Urutan Jawaban :</label>
                                                 <select name="urut_<?= $abj; ?>" id="urut_<?= $abj; ?>" class="form-control select2" style="width:100%!important">
-                                                    <option value="" disabled selected>Pilih Jawaban Urutan Ke <?= $abj; ?></option>
+                                                    <option value="">Pilih Jawaban Urutan Ke <?= $abj; ?></option>
                                                     <option <?= $soal->$urutan === "a" ? "selected" : "" ?> value="a">A</option>
                                                     <option <?= $soal->$urutan === "b" ? "selected" : "" ?> value="b">B</option>
                                                     <option <?= $soal->$urutan === "c" ? "selected" : "" ?> value="c">C</option>
@@ -296,7 +296,7 @@
                 <div class="col-sm-9">
                     <label for="urutan" class="control-label">Pilih Urutan Jawaban No. ${key} :</label>
                     <select name="urut_${key}" id="urut_${key}" class="form-control select2" style="width:100%!important">
-                        <option value="" disabled selected>Pilih Jawaban Urutan Ke ${key}</option>
+                        <option value="">Pilih Jawaban Urutan Ke ${key}</option>
                         <option value="a">A</option>
                         <option value="b">B</option>
                         <option value="c">C</option>
