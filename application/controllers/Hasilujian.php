@@ -127,7 +127,7 @@ class HasilUjian extends CI_Controller {
 			'total' => $this->db->query('select sum(jumlah) as total from history_percobaan where id_user = ? and id_soal = ?', [$id, $id_soal])->row_array()['total'],
 			'total_benar' => $this->db->query("SELECT COUNT(IF(status_jawaban = 'benar', status_jawaban, NULL)) as total_benar from conditions where id_user = ? and id_soal = ?", [$id, $id_soal])->row_array()['total_benar'],
 			'total_salah' => $this->db->query("SELECT COUNT(IF(status_jawaban = 'salah', status_jawaban, NULL)) as total_salah from conditions where id_user = ? and id_soal = ?", [$id, $id_soal])->row_array()['total_salah'],
-			'total_waktu' => $this->db->query("SELECT waktu AS total_waktu FROM confidence_tag WHERE id_user = ? AND id_soal = ? ORDER BY id DESC LIMIT 1", [$id, $id_soal])->row_array()['total_waktu'],
+			'total_waktu' => $this->db->query("SELECT waktu AS total_waktu FROM conditions WHERE id_user = ? AND id_soal = ? ORDER BY id DESC LIMIT 1", [$id, $id_soal])->row_array()['total_waktu'],
 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
 			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
