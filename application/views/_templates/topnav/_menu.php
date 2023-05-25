@@ -1,5 +1,5 @@
-<nav class="navbar navbar-static-top">
-	<div class="container">
+<nav class="navbar navbar-static-top" style="background-color: #75241d">
+	<div class="container" style="background-color:#75241d">
 		<div class="navbar-header">
 			<!-- <a href="<?=base_url()?>" class="navbar-brand"><i class="fa fa-laptop"></i> <b>JPLAS</a> -->
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">

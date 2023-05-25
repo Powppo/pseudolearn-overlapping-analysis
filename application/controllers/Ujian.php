@@ -364,8 +364,8 @@ class Ujian extends CI_Controller
 			
 					<p class="description__question">';
 				$html .= '<div class="text-center"><div class="w-25"></div></div>' . $s->soal . '<div class="funkyradio"></p>';
-				$html .= '<div class="description__data-type data-type" style="margin-left: -3px; width:350px;">
-				<h4 class="data-type__title">Tipe Data</h4>
+				$html .= '<div class="description__data-type data-type" style="margin-left: -3px; width:350px; background-color: #ffe3c5;border-color:#75251e">
+				<h4 class="data-type__title" style="background-color: #ab372d;"><b>Tipe Data</b></h4>
 				<ul class="data-type__items">';
 				for ($i=0; $i < $var_count; $i++) { 
 					$var = "jenis_data_v".$var_opsi[$i];
@@ -373,8 +373,8 @@ class Ujian extends CI_Controller
 				}
 				$html .= '</ul>
 						</div>';
-				$html .= '<div class="description__algorithm algorithm" style="margin-left: -3px; width:350px;">
-						<h4 class="algorithm__title">Algoritma</h4>
+				$html .= '<div class="description__algorithm algorithm" style="margin-left: -3px; width:350px; background-color: #ffe3c5;border-color:#75251e">
+						<h4 class="algorithm__title" style="background-color: #ab372d"><b>Algoritma</b></h4>
 						<ul class="algorithm__items" style="margin-right:35px;">';
 				for ($j = 0; $j < $this->config->item('jml_opsi'); $j++) {
 					$array_clues = [];
@@ -402,11 +402,11 @@ class Ujian extends CI_Controller
 						<table class="answer__content">
 							<tbody>
 								<tr>
-									<th><span style="background-color: #91CAE2">Judul</span></th>
+									<th><span style="background-color: #FF6D60">Judul</span></th>
 									<td>'.$s->judul.'</td>
 								</tr>
 								<tr>
-									<th><span style="background-color: #91CAE2">Deklarasi</span></th>
+									<th><span style="background-color: #FF6D60">Deklarasi</span></th>
 									<td>
 										<table>
 											<tbody>';
@@ -424,7 +424,7 @@ class Ujian extends CI_Controller
 						<table class="answer__content">
 							<tbody>
 								<tr>
-									<th rowspan="40"><span style="background-color: #91CAE2">DeskripsiAlgoritma</span></th>
+									<th rowspan="40"><span style="background-color: #FF6D60">DeskripsiAlgoritma</span></th>
 									
 								</tr>';
 								if ($s->clue_a) {
@@ -676,23 +676,23 @@ class Ujian extends CI_Controller
 						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
 					</div>
 					<div id="fail-alert" class="alert" style="display: none;height:600px">
-						<p>Jawaban anda masih salah, silahkan menyusun ulang </p><br>
+						<p>Jawaban anda masih salah, silahkan menyusun ulang</p><br>
 						<br>
 							<br>
-						<small id="tipe_data_feedback" style="display:none;">Tipe Data :'.$feedback['tipe_data'].'</small></br>
-						<small id="input_feedback" style="display:none;">Input : '.$feedback['input'].'</small></br>
-						<small id="process_feedback" style="display:none;">Process :'.$feedback['process'].'</small></br>
-						<small id="output_feedback" style="display:none;">Output : '.$feedback['output'].'</small></br>
-						
+						<small id="tipe_data_feedback" style="display:none;">Teliti kembali tipe data Anda :'.$feedback['tipe_data'].'</small></br>
+						<small id="input_feedback" style="display:none;">Teliti kembali inputan Anda : '.$feedback['input'].'</small></br>
+						<small id="process_feedback" style="display:none;">Teliti kembali proses Anda :'.$feedback['process'].'</small></br>
+						<small id="output_feedback" style="display:none;">Ups! Outputnya salah : '.$feedback['output'].'</small></br>
+						</p>
 						<img src="'.base_url().'template/images/fail.jpeg" style="width:120px;" alt="fail" />
 						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>
 					</div>
-				</main>';
-			}
-				$html .= '</div>';
-				$no++;
-			// }
-		//}
+					</main>';
+				}
+					$html .= '</div>';
+					$no++;
+				// }
+			//}
 
 		// Enkripsi Id Tes
 		// $id_tes = $this->encryption->encrypt($detail_tes->id);
