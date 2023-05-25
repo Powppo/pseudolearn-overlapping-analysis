@@ -79,6 +79,13 @@
 					</a>
 				</li>
 			<?php endif; ?>
+			<?php if ($this->ion_auth->in_group('eksperimen')) : ?>
+				<li class="<?= $page === 'ujian' ? "active" : "" ?>">
+					<a href="<?= base_url('ujianeksperimen/list_level') ?>" rel="noopener noreferrer">
+						<i class="fa fa-chrome"></i> <span>Latihan Soal</span>
+					</a>
+				</li>
+			<?php endif; ?>
 			<?php if (!$this->ion_auth->in_group('mahasiswa')) : ?>
 				<!-- <li class="header">REPORTS</li>
 				<li class="<?= $page === 'hasilujian' ? "active" : "" ?>">

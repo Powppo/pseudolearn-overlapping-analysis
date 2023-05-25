@@ -207,6 +207,13 @@ class Kelas extends CI_Controller
         }
     }
 
+    public function akses_eksperimen()
+	{
+		if (!$this->ion_auth->in_group('eksperimen')) {
+			show_error('Halaman ini khusus untuk mahasiswa mengikuti ujian tanpa confidence tag, <a href="' . base_url('dashboard') . '">Kembali ke menu awal</a>', 403, 'Akses Terlarang');
+		}
+	}
+
     public function list_json()
     {
         //$this->akses_mahasiswa();

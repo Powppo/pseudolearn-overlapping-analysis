@@ -11,7 +11,7 @@ class Level extends CI_Controller
         parent::__construct();
         if (!$this->ion_auth->logged_in()) {
             redirect('auth');
-        } else if (!$this->ion_auth->is_admin() && !$this->ion_auth->in_group('dosen') && !$this->ion_auth->in_group('mahasiswa')) {
+        } else if (!$this->ion_auth->is_admin() && !$this->ion_auth->in_group('dosen') && !$this->ion_auth->in_group('mahasiswa') && !$this->ion_auth->in_group('eksperimen')) {
             show_error('Hanya Administrator dan dosen yang diberi hak untuk mengakses halaman ini, <a href="' . base_url('dashboard') . '">Kembali ke menu awal</a>', 403, 'Akses Terlarang');
         }
         $this->load->library(['datatables', 'form_validation']); // Load Library Ignited-Datatables
@@ -259,9 +259,25 @@ class Level extends CI_Controller
         }
     }
 
+    public function akses_eksperimen()
+	{
+		if (!$this->ion_auth->in_group('eksperimen')) {
+			show_error('Halaman ini khusus untuk mahasiswa mengikuti ujian tanpa confidence tag, <a href="' . base_url('dashboard') . '">Kembali ke menu awal</a>', 403, 'Akses Terlarang');
+		}
+	}
+
     public function list_json()
     {
-        //$this->akses_mahasiswa();
+        $this->akses_mahasiswa();
+
+        $data = $this->level->getListUjian2();
+
+        echo json_encode($data);
+    }
+
+    public function list_jsonEksperimen()
+    {
+        $this->akses_eksperimen();
 
         $data = $this->level->getListUjian2();
 
