@@ -155,6 +155,7 @@ class UjianEksperimen extends CI_Controller
 				'iduser' => $id_user,
 			]);
 		}
+		$this->session->sess_expiration = 0;// expires in 4 hours
 	}
 
 	public function save_percobaan($id_soal)
@@ -168,7 +169,7 @@ class UjianEksperimen extends CI_Controller
 		$data['id_level'] = $soal['id_level'];
 		$data['jumlah'] = $click['jumlah'] + 1;
 			$this->db->insert('history_percobaan', $data);
-		
+			$this->session->sess_expiration = 0;// expires in 4 hours
 		$this->output_json(['status' => true]);
 	}
 
@@ -214,6 +215,7 @@ class UjianEksperimen extends CI_Controller
 			// 'confidence'=>$this->session->confidence,
 			// 'waktu'=>$this->session->waktu,
 		]);
+		$this->session->sess_expiration = 0;// expires in 4 hours
 		$this->output_json(['status' => true]);
     }
 
@@ -753,6 +755,7 @@ class UjianEksperimen extends CI_Controller
 		if ($cek == 0) {
 			$this->db->insert('nilai', $data);
 		}
+		$this->session->sess_expiration = 0;// expires in 4 hours
 		$this->output_json(['status' => true]);
 	}
 
