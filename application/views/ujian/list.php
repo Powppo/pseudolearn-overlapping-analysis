@@ -52,7 +52,7 @@
                 var listsoal = '';
                 console.log(json);
                 $.each(json, function(key, value) {
-                    if (value.nilai >= value.bts_nilai || (!value.nilai && key == 0)) {
+                    if (value.status == 'unlocked') {
                         status = 'completed'
                         flag = 'completed'
                         link = '<a href="<?= base_url() ?>ujian/list_ujian/' + value.id_level + '" class="card__title card__title"> ' + value.nama + '</a>'
