@@ -52,30 +52,14 @@
                 var listsoal = '';
                 console.log(json);
                 $.each(json, function(key, value) {
-                    // console.log(value);
-                    // if (value.hasil > 0) {
-                    //     status = 'completed'
-                    //     flag = 'completed'
-                    //     link = '<a href="<?= base_url() ?>ujianEksperimen/list_ujian/' + value.id_level + '" class="card__title card__title"> ' + value.nama + '</a>'
-                    // } else {
-                    //     var status = 'incompleted'
-                    //     var flag = 'incompleted'
-                    //     var link = '<b class="card__title card__title">'+value.nama+'</b>'
-                    // }
-                    if (value.hasil > 0) {
-                        status = 'in progress'
-                        flag = 'completed'
-                        link = '<a href="<?= base_url() ?>ujianEksperimen/list_ujian/' + value.id_level + '" class="card__title card__title"> ' + value.nama + '</a>'
-                    } 
-                    if(value.hasil <= 0){
-                        var status = 'incompleted'
-                        var flag = 'incompleted'
-                        var link = '<b class="card__title card__title">'+value.nama+'</b>'
-                    }
-                    if (value.hasil >= value.soal) {
+                    if (value.status == 'unlocked') {
                         status = 'completed'
                         flag = 'completed'
                         link = '<a href="<?= base_url() ?>ujianEksperimen/list_ujian/' + value.id_level + '" class="card__title card__title"> ' + value.nama + '</a>'
+                    } else {
+                        var status = 'incompleted'
+                        var flag = 'incompleted'
+                        var link = '<b class="card__title card__title">'+value.nama+'</b>'
                     }
                     listsoal += '<div class="categories__card card">';
                     listsoal += link;

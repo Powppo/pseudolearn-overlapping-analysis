@@ -61,14 +61,33 @@ class Level_model extends CI_Model
             $data[$key]['nilai'] = $value->nilai;
         }
         //checkvalidate
+        $data[0]['status'] = 'unlocked';
         foreach ($data as $dataKey => $dataValue) 
         {
             $checkSoal = $this->db->query('select count(*) as total from tb_soal where id_level='.$dataValue['id_level'].'')
             ->result_array();
             $hasilPengerjaan = $this->db->query('select count(*) as total from nilai where id_level='.$dataValue['id_level'].' and id_user='.$id_user.'')
             ->result_array();
-            $data[$dataKey]['soal'] = $checkSoal[0]['total'];
-            $data[$dataKey]['hasil'] = $hasilPengerjaan[0]['total'];
+            // $data[$dataKey]['soal'] = $checkSoal[0]['total'];
+            // $data[$dataKey]['hasil'] = $hasilPengerjaan[0]['total'];
+            if($checkSoal[0]['total'] > 0)
+            {
+                if($checkSoal[0]['total'] == $hasilPengerjaan[0]['total'])
+                {
+                    $next = $dataKey+1;
+                    if(isset($data[$next]))
+                    {
+                        $data[$next]['status'] = 'unlocked';
+                    }
+                }else
+                {
+                    $next = $dataKey+1;
+                    if(isset($data[$next]))
+                    {
+                        $data[$next]['status'] = 'locked';
+                    }
+                }
+            }
         }
         return $data;
     }
