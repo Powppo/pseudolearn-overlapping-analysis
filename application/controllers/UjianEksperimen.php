@@ -211,7 +211,7 @@ class UjianEksperimen extends CI_Controller
 			'id_user' => $id_user,
 			// 'username' => $click['username'],
 			'status_jawaban' => $this->input->post('condition'),
-            'waktu' => $this->input->post('waktu'),
+            'waktu'=>$this->session->waktu,
 			// 'confidence'=>$this->session->confidence,
 			// 'waktu'=>$this->session->waktu,
 		]);
@@ -380,8 +380,8 @@ class UjianEksperimen extends CI_Controller
 			
 					<p class="description__question">';
 				$html .= '<div class="text-center"><div class="w-25"></div></div>' . $s->soal . '<div class="funkyradio"></p>';
-				$html .= '<div class="description__data-type data-type" style="margin-left: -3px; width:350px;">
-				<h4 class="data-type__title">Tipe Data</h4>
+				$html .= '<div class="description__data-type data-type" style="margin-left: -3px; width:350px; background-color: #ffe3c5;border-color:#75251e">
+				<h4 class="data-type__title" style="background-color: #ab372d;"><b>Tipe Data</b></h4>
 				<ul class="data-type__items">';
 				for ($i=0; $i < $var_count; $i++) { 
 					$var = "jenis_data_v".$var_opsi[$i];
@@ -389,8 +389,8 @@ class UjianEksperimen extends CI_Controller
 				}
 				$html .= '</ul>
 						</div>';
-				$html .= '<div class="description__algorithm algorithm" style="margin-left: -3px; width:350px;">
-						<h4 class="algorithm__title">Algoritma</h4>
+				$html .= '<div class="description__algorithm algorithm" style="margin-left: -3px; width:350px; background-color: #ffe3c5;border-color:#75251e">
+						<h4 class="algorithm__title" style="background-color: #ab372d"><b>Algoritma</b></h4>
 						<ul class="algorithm__items" style="margin-right:35px;">';
 				for ($j = 0; $j < $this->config->item('jml_opsi'); $j++) {
 					$array_clues = [];
@@ -744,6 +744,7 @@ class UjianEksperimen extends CI_Controller
 	
 	public function simpan_hasil($id)
 	{
+		$this->session->sess_expiration = 0;// expires in 4 hours
 		// Decrypt Id
 		$id_user = $this->session->userdata('user_id');
 		$soal = $this->db->query('select * from tb_soal where id_soal = ?', $id)->row_array();
@@ -755,7 +756,6 @@ class UjianEksperimen extends CI_Controller
 		if ($cek == 0) {
 			$this->db->insert('nilai', $data);
 		}
-		$this->session->sess_expiration = 0;// expires in 4 hours
 		$this->output_json(['status' => true]);
 	}
 

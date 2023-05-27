@@ -730,6 +730,7 @@ class Ujian extends CI_Controller
 	
 	public function simpan_hasil($id)
 	{
+		$this->session->sess_expiration = 0;// expires in 4 hours
 		// Decrypt Id
 		$id_user = $this->session->userdata('user_id');
 		$soal = $this->db->query('select * from tb_soal where id_soal = ?', $id)->row_array();
@@ -741,7 +742,6 @@ class Ujian extends CI_Controller
 		if ($cek == 0) {
 			$this->db->insert('nilai', $data);
 		}
-		$this->session->sess_expiration = 0;// expires in 4 hours
 		$this->output_json(['status' => true]);
 	}
 
