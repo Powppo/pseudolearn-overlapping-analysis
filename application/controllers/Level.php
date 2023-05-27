@@ -280,7 +280,7 @@ class Level extends CI_Controller
         $this->akses_eksperimen();
 
         $data = $this->level->getListUjian2();
-
+         
         echo json_encode($data);
     }
 }
