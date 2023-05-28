@@ -673,21 +673,22 @@ class Ujian extends CI_Controller
 					</div>
 					<!-- ALERT -->
 					<div id="success-alert" class="alert" style="display: none; ">
-						<h4>Jawaban anda benar, silahkan lanjut ke studi kasus berikutnya</h4>
+						<h4>Jawaban Anda benar, silahkan lanjut ke studi kasus berikutnya!</h4>
 						<img src="'.base_url().'template/images/success.png" alt="success" />
-						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-xs btn-info">close</button>
+						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_level.');" class="btn btn-m btn-info"><b>Close</b></button>
 					</div>
-					<div id="fail-alert" class="alert" style="display: none;height:600px">
-						<p>Jawaban anda masih salah, silahkan menyusun ulang</p><br>
-						<br>
-							<br>
-						<small id="tipe_data_feedback" style="display:none;">Teliti kembali tipe data Anda :'.$feedback['tipe_data'].'</small></br>
-						<small id="input_feedback" style="display:none;">Teliti kembali inputan Anda : '.$feedback['input'].'</small></br>
-						<small id="process_feedback" style="display:none;">Teliti kembali proses Anda :'.$feedback['process'].'</small></br>
-						<small id="output_feedback" style="display:none;">Ups! Outputnya salah : '.$feedback['output'].'</small></br>
+					<div id="fail-alert" class="alert" style="display: none;height:550px; width: 700px">
+					<span>
+						<h2 style="color: red;"><b>Jawaban Anda masih salah, silahkan menyusun ulang!</b></h2></br>
+						<small id="tipe_data_feedback" style="display:none;"><b>Teliti kembali tipe data Anda :<b>'.$feedback['tipe_data'].'</small>
+						<small id="input_feedback" style="display:none;">Teliti kembali inputan Anda : '.$feedback['input'].'</small>
+						<small id="process_feedback" style="display:none;">Teliti kembali proses Anda :'.$feedback['process'].'</small>
+						<small id="output_feedback" style="display:none;">Ups! Outputnya salah : '.$feedback['output'].'</small>
 						</p>
-						<img src="'.base_url().'template/images/fail.jpeg" style="width:120px;" alt="fail" />
-						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-xs btn-info">close</button>
+						</span>
+						<img src="'.base_url().'template/images/fail.jpeg" style="width:120px;" alt="fail" /></br><br>
+						
+						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-m btn-info"><b>Close<b></button>
 					</div>
 					</main>';
 				}
