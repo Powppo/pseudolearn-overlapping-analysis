@@ -115,10 +115,11 @@ class HasilUjian extends CI_Controller {
 	public function detailConfidence($id, $id_soal) {
 
 		$detail_conf = $this->ujian->detailLogConfidence($id, $id_soal);
-		// $detail_cond = $this->ujian->detailLogConditions($id, $id_soal);
+		$detail_cond = $this->ujian->detailLogConf($id, $id_soal);
 		$data = [
 			'user' => $this->user,
 			'detail' => $detail_conf,
+			'detail_conf' => $detail_cond,
 			'details' => $this->db->query("SELECT s.judul, c.status_jawaban as details FROM conditions c INNER JOIN tb_soal s ON c.id_soal = s.id_soal WHERE c.id_user = ? and c.id_soal = ?", [$id, $id_soal])->row_array()['details'],
 			// 'details' => $this->db->query("SELECT s.judul, d.confidence, d.status_jawaban as details FROM `detail_confidence_tag` d INNER JOIN tb_soal s ON s.id_soal = d.id_soal where d.status_jawaban IS NOT NULL and d.id_user = ? and d.id_soal = ?", [$id, $id_soal])->row_array()['details'],
 			'details_max' =>$this->db->query("SELECT MAX(d.id) AS details_max FROM `confidence_tag` d INNER JOIN tb_soal s ON s.id_soal = d.id_soal where d.id_user = ? and d.id_soal = ?", [$id, $id_soal])->row_array()['details_max'],

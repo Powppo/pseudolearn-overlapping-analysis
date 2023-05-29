@@ -76,7 +76,7 @@
             <tbody>  
             <?php 
                 $no = 1;
-                foreach($detail as $u){ 
+                foreach($detail_conf as $u){ 
                     echo '
                 <tr>
                     <td style="text-align: center">'.$no++.'</td>  
@@ -84,7 +84,7 @@
                     <td style="text-align: center">'.$u['sub_soal'].'</td>
                     <td style="text-align: center">'.$u['confidence'].'</td>
                     <td style="text-align: center">';
-                    if ($u['id_confidence'] == $details_max){
+                    if ($u['status'] == 'benar'){
                         echo '
                         <div class="text-center">
                         <span class="badge bg-green">Benar</span>

@@ -127,14 +127,24 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function detailLogConfidence2($id, $id_soal) {
-        $this->db->select_max('cd.id');
-        $this->db->select('cd.confidence');
-        $this->db->from('confidence_tag cd');
+    public function detailLogConf($id, $id_soal) {
+        $this->db->select('s.judul as sub_soal, cd.confidence, l.nama as levels, cd.id as id_confidence, cd.waktu AS waktu,, cd.status_jawaban AS status');
+        $this->db->from('conditions cd');
+        $this->db->join('tb_soal s', 'cd.id_soal = s.id_soal');
+        $this->db->join('tb_level l', 's.id_level=l.id_level');
         $this->db->where('cd.id_user', $id);
         $this->db->where('cd.id_soal', $id_soal);
         return $this->db->get()->result_array();
     }
+
+    // public function detailLogConfidence2($id, $id_soal) {
+    //     $this->db->select_max('cd.id');
+    //     $this->db->select('cd.confidence');
+    //     $this->db->from('confidence_tag cd');
+    //     $this->db->where('cd.id_user', $id);
+    //     $this->db->where('cd.id_soal', $id_soal);
+    //     return $this->db->get()->result_array();
+    // }
 
     public function confidenceHistory() {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
@@ -166,14 +176,14 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function detailLogConditions2($id, $id_soal) {
-        $this->db->select_max('cd.id');
-        $this->db->select('cd.status_jawaban, cd.confidence');
-        $this->db->from('conditions cd');
-        $this->db->where('cd.id_user', $id);
-        $this->db->where('cd.id_soal', $id_soal);
-        return $this->db->get()->result_array();
-    }
+    // public function detailLogConditions2($id, $id_soal) {
+    //     $this->db->select_max('cd.id');
+    //     $this->db->select('cd.status_jawaban, cd.confidence');
+    //     $this->db->from('conditions cd');
+    //     $this->db->where('cd.id_user', $id);
+    //     $this->db->where('cd.id_soal', $id_soal);
+    //     return $this->db->get()->result_array();
+    // }
 
     public function detailConfidenceLevel($id, $id_level) {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);

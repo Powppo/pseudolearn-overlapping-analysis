@@ -59,13 +59,13 @@
                 $.each(json, function(key, value) {
                     listujian += '<div class="col-sm-6 pt-3">';
                     if (value.id) {
-                        listujian += '<img src="<?= base_url() ?>assets/dist/img/lock_img.png" style="position: absolute; margin: 20px; height:50px; width:50px;">';
+                        listujian += '<img src="<?= base_url() ?>assets/dist/img/unlock_img2.png" style="position: absolute; margin: 20px; height:50px; width:50px;">';
                     } else {
                         listujian += '<img src="<?= base_url() ?>assets/dist/img/unlock_img.png" style="position: absolute; margin: 20px; height:50px; width:50px;">';
                     }
                     listujian += '<div class="alert bg-success" style="text-align: center; border-radius: 13px; background: radial-gradient(circle at top left, #9bb8ed, #a4eaff)">';
                     if (value.id) {
-                        listujian += '<h4><span style="text-decoration: none; color: black">' + value.judul + '</span></i></h4>';
+                        listujian += '<h4><a href="<?= base_url() ?>ujian/?key=' + value.id_soal + '" style="text-decoration: none; color: black">' + value.judul + '</a></i></h4>';
                     } else {
                         listujian += '<h4><a href="<?= base_url() ?>ujian/?key=' + value.id_soal + '" style="text-decoration: none; color: black">' + value.judul + '</a></i></h4>';
                     }

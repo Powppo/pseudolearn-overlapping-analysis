@@ -829,20 +829,18 @@ class UjianEksperimen extends CI_Controller
 		$this->output_json(['status' => TRUE, 'data' => $d_update, 'id' => $id_tes]);
 	}
 
-	public function listCondition_json($id, $id_soal)
-    {
-        //$this->akses_eksperimen();
+	// public function listCondition_json($id, $id_soal)
+    // {
 
-        $data = $this->ujian->detailLogConditions2($id, $id_soal);
+    //     $data = $this->ujian->detailLogConditions2($id, $id_soal);
 
-        echo json_encode($data);
-    }
-	public function listConfidence_json($id, $id_soal)
-    {
-        //$this->akses_eksperimen();
+    //     echo json_encode($data);
+    // }
+	// public function listConfidence_json($id, $id_soal)
+    // {
 
-        $data = $this->ujian->detailLogConfidence2($id, $id_soal);
+    //     $data = $this->ujian->detailLogConfidence2($id, $id_soal);
 
-        echo json_encode($data);
-    }
+    //     echo json_encode($data);
+    // }
 }
