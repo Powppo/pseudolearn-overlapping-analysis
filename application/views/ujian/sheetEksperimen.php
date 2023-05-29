@@ -125,16 +125,17 @@
                 <div class="modal-body">
                     <div class="form-group">
                     <div class="form-check">
-
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8>
+                            <button style="margin-left:20px;" class="btn btn-info" id="btn_simpan" name="btn_simpan" value="yakin" onclick="check_jawaban();"><h8 style="font-family: cursive;">Yakin</h8></button>
+                            <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8> -->
                         </label>
-                    </div>
-                    <div class="form-check">
+                        </div>
+                        <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8>
+                            <button style="margin-left:20px;" class="btn btn-danger" id="btn_simpan2" name="btn_simpan2" value="tidak yakin" onclick="check_jawaban_notsure();"><h8 style="font-family: cursive;">Tidak Yakin</h8></button>
+                            <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8> -->
                         </label>
-                    </div>
+                        </div>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="hidden" class="form-check-input" id="waktu">
@@ -195,10 +196,11 @@ $(document).ready(function(){
          $('#ModalaAdd').modal('hide');
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
-            var confidence = $('#confidence:checked').val();
+            // var confidence = $('#confidence:checked').val();
+            var confidence = $(this).val();
             var status_jawaban = $('#status_jawaban').val();
             var waktu = $('#waktu').val();
-            var waktu = $('#waktu').val();
+            // var waktu = $('#waktu').val();
             $.ajax({
                 type : "POST",
                 url: base_url+'ujian/save_confidence/' + id_soal + '/' + id_user,
@@ -221,7 +223,8 @@ $(document).ready(function(){
          $('#ModalaAdd').modal('hide');
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
-            var confidence = $('#confidence:checked').val();
+           // var confidence = $('#confidence:checked').val();
+            var confidence = $(this).val();
             var status_jawaban = $('#status_jawaban').val();
             var waktu = $('#waktu').val();
             var waktu = $('#waktu').val();
