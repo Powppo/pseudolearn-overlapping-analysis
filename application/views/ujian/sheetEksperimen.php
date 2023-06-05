@@ -125,17 +125,16 @@
                 <div class="modal-body">
                     <div class="form-group">
                     <div class="form-check">
+
                         <label class="form-check-label">
-                            <button style="margin-left:20px;" class="btn btn-info" id="btn_simpan" name="btn_simpan" value="yakin" onclick="check_jawaban();"><h8 style="font-family: cursive;">Yakin</h8></button>
-                            <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8> -->
+                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8>
                         </label>
-                        </div>
-                        <div class="form-check">
+                    </div>
+                    <div class="form-check">
                         <label class="form-check-label">
-                            <button style="margin-left:20px;" class="btn btn-danger" id="btn_simpan2" name="btn_simpan2" value="tidak yakin" onclick="check_jawaban_notsure();"><h8 style="font-family: cursive;">Tidak Yakin</h8></button>
-                            <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8> -->
+                            <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8>
                         </label>
-                        </div>
+                    </div>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="hidden" class="form-check-input" id="waktu">
@@ -196,11 +195,10 @@ $(document).ready(function(){
          $('#ModalaAdd').modal('hide');
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
-            // var confidence = $('#confidence:checked').val();
-            var confidence = $(this).val();
+            var confidence = $('#confidence:checked').val();
             var status_jawaban = $('#status_jawaban').val();
             var waktu = $('#waktu').val();
-            // var waktu = $('#waktu').val();
+            var waktu = $('#waktu').val();
             $.ajax({
                 type : "POST",
                 url: base_url+'ujian/save_confidence/' + id_soal + '/' + id_user,
@@ -223,8 +221,7 @@ $(document).ready(function(){
          $('#ModalaAdd').modal('hide');
             var id_user=$('#id_user').val();
             var id_soal=$('#id_soal').val();
-           // var confidence = $('#confidence:checked').val();
-            var confidence = $(this).val();
+            var confidence = $('#confidence:checked').val();
             var status_jawaban = $('#status_jawaban').val();
             var waktu = $('#waktu').val();
             var waktu = $('#waktu').val();
@@ -319,7 +316,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -329,7 +326,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -339,7 +336,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -349,7 +346,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -359,7 +356,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -369,7 +366,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -379,7 +376,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -389,7 +386,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -399,7 +396,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -409,7 +406,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -419,7 +416,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -429,7 +426,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -439,7 +436,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -449,7 +446,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -459,7 +456,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -469,7 +466,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -479,7 +476,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -489,7 +486,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -499,7 +496,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -509,7 +506,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -519,7 +516,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -529,7 +526,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -539,7 +536,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -549,7 +546,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -559,7 +556,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -569,7 +566,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -579,7 +576,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -589,7 +586,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', 'red')
+                    $('#jenis_1').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_1').css('background', '#efff00')
@@ -599,7 +596,7 @@ $(document).ready(function(){
                 err = 1
                 tipe_data++;
                 // alert('Urutan ketiga salah')
-                $('#jenis_1').css('background', 'red')
+                $('#jenis_1').css('background', '#efff00')
                 }else{
                     $('#jenis_1').css('background', '#efff00')
                 }
@@ -612,7 +609,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -622,7 +619,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -632,7 +629,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -642,7 +639,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -652,7 +649,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -662,7 +659,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -672,7 +669,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -682,7 +679,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -692,7 +689,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -702,7 +699,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -712,7 +709,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -722,7 +719,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -732,7 +729,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -742,7 +739,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -752,7 +749,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -762,7 +759,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -772,7 +769,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -782,7 +779,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -792,7 +789,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -802,7 +799,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -812,7 +809,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -822,7 +819,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -832,7 +829,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -842,7 +839,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -852,7 +849,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -862,17 +859,17 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                 }
             }else if(jd2==jd7) {
                 if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1)) { //tipe data
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -882,7 +879,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', 'red')
+                    $('#jenis_2').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_2').css('background', '#efff00')
@@ -892,7 +889,7 @@ $(document).ready(function(){
                 err = 1
                 tipe_data++;
                 // alert('Urutan ketiga salah')
-                $('#jenis_2').css('background', 'red')
+                $('#jenis_2').css('background', '#efff00')
                 }else{
                     $('#jenis_2').css('background', '#efff00')
                 }
@@ -905,7 +902,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -915,7 +912,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -925,7 +922,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -935,7 +932,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -945,7 +942,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -955,7 +952,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -965,7 +962,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -975,7 +972,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -985,7 +982,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -995,7 +992,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1005,7 +1002,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1015,7 +1012,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1025,7 +1022,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1035,7 +1032,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1045,7 +1042,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1055,7 +1052,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1065,7 +1062,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1075,7 +1072,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1085,7 +1082,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1095,7 +1092,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1105,7 +1102,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1115,7 +1112,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1125,7 +1122,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1135,7 +1132,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1145,7 +1142,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1155,7 +1152,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1165,7 +1162,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1175,7 +1172,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', 'red')
+                    $('#jenis_3').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_3').css('background', '#efff00')
@@ -1185,7 +1182,7 @@ $(document).ready(function(){
                 err = 1
                 tipe_data++;
                 // alert('Urutan ketiga salah')
-                $('#jenis_3').css('background', 'red')
+                $('#jenis_3').css('background', '#efff00')
                 }else{
                     $('#jenis_3').css('background', '#efff00')
                 }
@@ -1198,7 +1195,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1208,7 +1205,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1218,7 +1215,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1228,7 +1225,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1238,7 +1235,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1248,7 +1245,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1258,7 +1255,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1268,7 +1265,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1278,7 +1275,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1288,7 +1285,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1298,7 +1295,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1308,7 +1305,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1318,7 +1315,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1328,7 +1325,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1338,7 +1335,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1348,7 +1345,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1358,7 +1355,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1368,7 +1365,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1378,7 +1375,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1388,7 +1385,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1398,7 +1395,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1408,7 +1405,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1418,7 +1415,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1428,7 +1425,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1438,7 +1435,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1448,7 +1445,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1458,7 +1455,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1468,7 +1465,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', 'red')
+                    $('#jenis_4').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_4').css('background', '#efff00')
@@ -1478,7 +1475,7 @@ $(document).ready(function(){
                 err = 1
                 tipe_data++;
                 // alert('Urutan ketiga salah')
-                $('#jenis_4').css('background', 'red')
+                $('#jenis_4').css('background', '#efff00')
                 }else{
                     $('#jenis_4').css('background', '#efff00')
                 }
@@ -1491,7 +1488,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1501,7 +1498,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1511,7 +1508,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1521,7 +1518,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1531,7 +1528,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1541,7 +1538,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1551,7 +1548,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1561,7 +1558,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1571,7 +1568,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1581,7 +1578,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1591,7 +1588,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1601,7 +1598,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1611,7 +1608,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1621,7 +1618,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1631,7 +1628,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1641,7 +1638,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1651,7 +1648,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1661,7 +1658,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1671,7 +1668,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1681,7 +1678,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1691,7 +1688,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1701,7 +1698,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1711,7 +1708,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1721,7 +1718,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1731,7 +1728,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1741,7 +1738,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1751,7 +1748,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1761,7 +1758,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', 'red')
+                    $('#jenis_5').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_5').css('background', '#efff00')
@@ -1771,7 +1768,7 @@ $(document).ready(function(){
                 err = 1
                 tipe_data++;
                 // alert('Urutan ketiga salah')
-                $('#jenis_5').css('background', 'red')
+                $('#jenis_5').css('background', '#efff00')
                 }else{
                     $('#jenis_5').css('background', '#efff00')
                 }
@@ -1784,7 +1781,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1794,7 +1791,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1804,7 +1801,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1814,7 +1811,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1824,7 +1821,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1834,7 +1831,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1844,7 +1841,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1854,7 +1851,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1864,7 +1861,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1874,7 +1871,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1884,7 +1881,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1894,7 +1891,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1904,7 +1901,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1914,7 +1911,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1924,7 +1921,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1934,7 +1931,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1944,7 +1941,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1954,7 +1951,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1964,7 +1961,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1974,7 +1971,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1984,7 +1981,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -1994,7 +1991,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -2004,7 +2001,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -2014,7 +2011,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -2024,7 +2021,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -2034,7 +2031,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -2044,7 +2041,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -2054,7 +2051,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', 'red')
+                    $('#jenis_6').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_6').css('background', '#efff00')
@@ -2064,7 +2061,7 @@ $(document).ready(function(){
                 err = 1
                 tipe_data++;
                 // alert('Urutan ketiga salah')
-                $('#jenis_6').css('background', 'red')
+                $('#jenis_6').css('background', '#efff00')
                 }else{
                     $('#jenis_6').css('background', '#efff00')
                 }
@@ -2077,7 +2074,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2087,7 +2084,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2097,7 +2094,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2107,7 +2104,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2117,7 +2114,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2127,7 +2124,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2137,7 +2134,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2147,7 +2144,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2157,7 +2154,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2167,7 +2164,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2177,7 +2174,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2187,7 +2184,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2197,7 +2194,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2207,7 +2204,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2217,7 +2214,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2227,7 +2224,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2237,7 +2234,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2247,7 +2244,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2257,7 +2254,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2267,7 +2264,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2277,7 +2274,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2287,7 +2284,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2297,7 +2294,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2307,7 +2304,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2317,7 +2314,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2327,7 +2324,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2337,7 +2334,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2347,7 +2344,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', 'red')
+                    $('#jenis_7').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_7').css('background', '#efff00')
@@ -2357,7 +2354,7 @@ $(document).ready(function(){
                 err = 1
                 tipe_data++;
                 // alert('Urutan ketiga salah')
-                $('#jenis_7').css('background', 'red')
+                $('#jenis_7').css('background', '#efff00')
                 }else{
                     $('#jenis_7').css('background', '#efff00')
                 }
@@ -2370,7 +2367,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2380,7 +2377,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2390,7 +2387,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2400,7 +2397,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2410,7 +2407,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2420,7 +2417,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2430,7 +2427,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2440,7 +2437,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2450,7 +2447,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2460,7 +2457,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2470,7 +2467,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2480,7 +2477,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2490,7 +2487,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2500,7 +2497,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2510,7 +2507,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2520,7 +2517,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2530,7 +2527,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2540,7 +2537,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2550,7 +2547,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2560,7 +2557,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2570,7 +2567,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan pertama salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2580,7 +2577,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2590,7 +2587,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2600,7 +2597,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2610,7 +2607,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2620,7 +2617,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2630,7 +2627,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2640,7 +2637,7 @@ $(document).ready(function(){
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', 'red')
+                    $('#jenis_8').css('background', '#efff00')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 }else{
                     $('#jenis_8').css('background', '#efff00')
@@ -2650,7 +2647,7 @@ $(document).ready(function(){
                 err = 1
                 tipe_data++;
                 // alert('Urutan ketiga salah')
-                $('#jenis_8').css('background', 'red')
+                $('#jenis_8').css('background', '#efff00')
                 }else{
                     $('#jenis_8').css('background', '#efff00')
                 }
@@ -2662,7 +2659,7 @@ $(document).ready(function(){
                 err = 1
                 input++
                 // alert('Urutan Pertama salah')
-                $('#jawaban_a').css('background', 'red')
+                $('#jawaban_a').css('background', '#efff00')
             }else{
                 $('#jawaban_a').css('background', '#efff00')
             }
@@ -2673,7 +2670,7 @@ $(document).ready(function(){
                 err = 1
                 input++;
                 // alert('Urutan Kedua salah')
-                $('#jawaban_b').css('background', 'red')
+                $('#jawaban_b').css('background', '#efff00')
             }else{
                 $('#jawaban_b').css('background', '#efff00')
             }
@@ -2684,7 +2681,7 @@ $(document).ready(function(){
                 err = 1
                 proc++;
                 // alert('Urutan ketiga salah')
-                $('#jawaban_c').css('background', 'red')
+                $('#jawaban_c').css('background', '#efff00')
             }else{
                 $('#jawaban_c').css('background', '#efff00')
             }
@@ -2695,7 +2692,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_d').css('background', 'red')
+                $('#jawaban_d').css('background', '#efff00')
             }else{
                 $('#jawaban_d').css('background', '#efff00')
             }
@@ -2706,7 +2703,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_e').css('background', 'red')
+                $('#jawaban_e').css('background', '#efff00')
             }else{
                 $('#jawaban_e').css('background', '#efff00')
             }
@@ -2717,7 +2714,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_f').css('background', 'red')
+                $('#jawaban_f').css('background', '#efff00')
             }else{
                 $('#jawaban_f').css('background', '#efff00')
             }
@@ -2728,7 +2725,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_g').css('background', 'red')
+                $('#jawaban_g').css('background', '#efff00')
             }else{
                 $('#jawaban_g').css('background', '#efff00')
             }
@@ -2739,7 +2736,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_h').css('background', 'red')
+                $('#jawaban_h').css('background', '#efff00')
             }else{
                 $('#jawaban_h').css('background', '#efff00')
             }
@@ -2750,7 +2747,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_i').css('background', 'red')
+                $('#jawaban_i').css('background', '#efff00')
             }else{
                 $('#jawaban_i').css('background', '#efff00')
             }
@@ -2761,7 +2758,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_j').css('background', 'red')
+                $('#jawaban_j').css('background', '#efff00')
             }else{
                 $('#jawaban_j').css('background', '#efff00')
             }
@@ -2772,7 +2769,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_k').css('background', 'red')
+                $('#jawaban_k').css('background', '#efff00')
             }else{
                 $('#jawaban_k').css('background', '#efff00')
             }
@@ -2783,7 +2780,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_l').css('background', 'red')
+                $('#jawaban_l').css('background', '#efff00')
             }else{
                 $('#jawaban_l').css('background', '#efff00')
             }
@@ -2794,7 +2791,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_m').css('background', 'red')
+                $('#jawaban_m').css('background', '#efff00')
             }else{
                 $('#jawaban_m').css('background', '#efff00')
             }
@@ -2805,7 +2802,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_n').css('background', 'red')
+                $('#jawaban_n').css('background', '#efff00')
             }else{
                 $('#jawaban_n').css('background', '#efff00')
             }
@@ -2816,7 +2813,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_o').css('background', 'red')
+                $('#jawaban_o').css('background', '#efff00')
             }else{
                 $('#jawaban_o').css('background', '#efff00')
             }
@@ -2827,7 +2824,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_p').css('background', 'red')
+                $('#jawaban_p').css('background', '#efff00')
             }else{
                 $('#jawaban_p').css('background', '#efff00')
             }
@@ -2838,7 +2835,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_q').css('background', 'red')
+                $('#jawaban_q').css('background', '#efff00')
             }else{
                 $('#jawaban_q').css('background', '#efff00')
             }
@@ -2849,7 +2846,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_r').css('background', 'red')
+                $('#jawaban_r').css('background', '#efff00')
             }else{
                 $('#jawaban_r').css('background', '#efff00')
             }
@@ -2860,7 +2857,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_s').css('background', 'red')
+                $('#jawaban_s').css('background', '#efff00')
             }else{
                 $('#jawaban_s').css('background', '#efff00')
             }
@@ -2871,7 +2868,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_t').css('background', 'red')
+                $('#jawaban_t').css('background', '#efff00')
             }else{
                 $('#jawaban_t').css('background', '#efff00')
             }
@@ -2882,7 +2879,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_u').css('background', 'red')
+                $('#jawaban_u').css('background', '#efff00')
             }else{
                 $('#jawaban_u').css('background', '#efff00')
             }
@@ -2893,7 +2890,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_v').css('background', 'red')
+                $('#jawaban_v').css('background', '#efff00')
             }else{
                 $('#jawaban_v').css('background', '#efff00')
             }
@@ -2904,7 +2901,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_w').css('background', 'red')
+                $('#jawaban_w').css('background', '#efff00')
             }else{
                 $('#jawaban_w').css('background', '#efff00')
             }
@@ -2915,7 +2912,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_x').css('background', 'red')
+                $('#jawaban_x').css('background', '#efff00')
             }else{
                 $('#jawaban_x').css('background', '#efff00')
             }
@@ -2926,7 +2923,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_y').css('background', 'red')
+                $('#jawaban_y').css('background', '#efff00')
             }else{
                 $('#jawaban_y').css('background', '#efff00')
             }
@@ -2937,7 +2934,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_z').css('background', 'red')
+                $('#jawaban_z').css('background', '#efff00')
             }else{
                 $('#jawaban_z').css('background', '#efff00')
             }
@@ -2948,7 +2945,7 @@ $(document).ready(function(){
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_v').css('background', 'red')
+                $('#jawaban_v').css('background', '#efff00')
             }else{
                 $('#jawaban_v').css('background', '#efff00')
             }
