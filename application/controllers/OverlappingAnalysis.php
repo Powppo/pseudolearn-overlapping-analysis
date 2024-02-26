@@ -1,0 +1,87 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class OverlappingAnalysis extends CI_Controller
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth');
+        }
+
+        $this->load->library(['datatables']); // Load Library Ignited-Datatables
+        $this->load->model('Master_model', 'master');
+        $this->load->model('Ujian_model', 'ujian');
+
+        $this->user = $this->ion_auth->user()->row();
+    }
+
+    public function output_json($data, $encode = true)
+    {
+        if ($encode) $data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($data);
+    }
+
+    public function index()
+    {
+        $results = $this->ujian->getOverlappingAnalysis();
+        $data = [
+            'user' => $this->user,
+            'informasi' => $results,
+            'judul'    => 'Hasil Overlapping Analysis',
+            'subjudul' => 'Analisis Hasil Ujian Mahasiswa',
+        ];
+
+        if ($this->ion_auth->is_admin()) {
+            //Jika admin maka tampilkan semua matkul
+            $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+        }
+        $this->load->view('_templates/dashboard/_header.php', $data);
+        $this->load->view('ujian/overlapping_analysis');
+        $this->load->view('_templates/dashboard/_footer.php');
+    }
+
+
+    // public function save_history_overlapping($id_soal)
+    // {
+    //     $id_user = $this->session->userdata('user_id');
+    //     $user = $this->db->query('select * from users where id = ?', $id_user)->row_array();
+    //     $soal = $this->db->query('select * from tb_soal where id_soal = ?', $id_soal)->row_array();
+    //     $count_data = $this->db->query('SELECT * FROM overlapping_analysis WHERE id_soal = ? and id_mahasiswa = ?', [$id_soal, $id_user])->num_rows();
+    //     // $jawaban = json_decode($this->input->post('semuaJawaban'), true); // Assuming jawaban sent from client as JSON
+    //     // print_r($jawaban);
+    //     if ($count_data === 0) {
+    //         $this->db->insert('overlapping_analysis', [
+    //             'id_soal' => $id_soal,
+    //             'id_mahasiswa' => $id_user,
+    //             // 'jawaban' => json_encode($jawaban)
+    //         ]);
+    //     }
+
+    //     $this->session->sess_expiration = 0; // expires in 4 hours
+    // }
+    public function save_history_overlapping($id_soal)
+    {
+        $id_user = $this->session->userdata('user_id');
+        $click = $this->db->query('select * from overlapping_analysis where id_soal = ? and id_mahasiswa = ?', [$id_soal, $id_user])->num_rows();
+        $data['id_mahasiswa'] = $id_user;
+        $data['id_soal'] = $id_soal;
+        $data['jawaban'] = $this->input->post('jawaban');
+        $data['waktu'] = $this->input->post('waktu');
+        $this->db->insert('overlapping_analysis', $data);
+        $this->session->sess_expiration = 0; // expires in 4 hours
+        $this->session->set_userdata(array(
+            'jawaban' => $this->input->post('jawaban'),
+            // 'waktu' => $this->input->post('waktu')
+        ));
+    }
+
+    public function hapus($iduser, $idsoal)
+    {
+        $this->ujian->hapusData($iduser, $idsoal);
+        $this->session->set_flashdata('flash', 'Dihapus');
+        redirect('manajemenhistory');
+    }
+}

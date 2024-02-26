@@ -45,12 +45,12 @@
 				<?php endif; ?> -->
 			<?php if ($this->ion_auth->is_admin() || $this->ion_auth->in_group('dosen')) : ?>
 				<li class="<?= $page === 'mahasiswa' ? "active" : "" ?>">
-							<a href="<?= base_url('mahasiswa') ?>">
-							<i class="fa fa-address-card"></i> <span>Data Mahasiswa</span>
-							</a>
-						</li>
-			<?php endif; ?>	
-			
+					<a href="<?= base_url('mahasiswa') ?>">
+						<i class="fa fa-address-card"></i> <span>Data Mahasiswa</span>
+					</a>
+				</li>
+			<?php endif; ?>
+
 			<?php if ($this->ion_auth->is_admin() || $this->ion_auth->in_group('dosen')) : ?>
 				<li class="<?= $page === 'soal' ? "active" : "" ?>">
 					<a href="<?= base_url('soal') ?>" rel="noopener noreferrer">
@@ -101,8 +101,8 @@
 						<i class="fa fa-users"></i> <span>Manajemen Pengguna</span>
 					</a>
 				</li>
-				<?php endif; ?>
-				<?php if ($this->ion_auth->is_admin()) : ?>
+			<?php endif; ?>
+			<?php if ($this->ion_auth->is_admin()) : ?>
 				<li class="<?= $page === 'hasilujian' ? "active" : "" ?>">
 					<a href="<?= base_url('hasilujian') ?>" rel="noopener noreferrer">
 						<i class="fa fa-tasks"></i> <span>Log Aktivitas Mahasiswa</span>
@@ -120,6 +120,13 @@
 				<li class="<?= $page === 'manajemenhistory' ? "active" : "" ?>">
 					<a href="<?= base_url('manajemenhistory') ?>" rel="noopener noreferrer">
 						<i class="fa fa-database"></i> <span>Manajemen History Ujian</span>
+					</a>
+				</li>
+			<?php endif; ?>
+			<?php if ($this->ion_auth->is_admin()) : ?>
+				<li class="<?= $page === 'overlappinganalysis' ? "active" : "" ?>">
+					<a href="<?= base_url('overlappinganalysis') ?>" rel="noopener noreferrer">
+						<i class="fa fa-map"></i> <span>Hasil Overlapping Analysis</span>
 					</a>
 				</li>
 			<?php endif; ?>

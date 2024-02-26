@@ -10,7 +10,7 @@ class Ujian_model extends CI_Model
         $this->db->select("a.id_soal, a.judul, l.nama, u.id");
         $this->db->from('tb_soal a');
         $this->db->join('tb_level l', 'a.id_level = l.id_level');
-        $this->db->join('history_ujian u', 'u.idsoal = a.id_soal and u.iduser = '.$id_user, 'left');
+        $this->db->join('history_ujian u', 'u.idsoal = a.id_soal and u.iduser = ' . $id_user, 'left');
         $this->db->where('a.id_level', $id_level);
         return $this->db->get()->result();
     }
@@ -33,7 +33,7 @@ class Ujian_model extends CI_Model
     }
 
     public function getSoal($id)
-    {   
+    {
         $soal_first = $this->db->query('select * from tb_soal where id_soal = ?', $id)->row();
         return $this->db->query('select * from tb_soal where id_soal = ? union all
         select  * from tb_soal where id_soal != ? and id_level = ?', [$id, $id, $soal_first->id_soal])->result();
@@ -80,7 +80,8 @@ class Ujian_model extends CI_Model
         return $this->datatables->generate();
     }
 
-    public function getLogAktivitas() {
+    public function getLogAktivitas()
+    {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
         $this->db->select("u.username as nim, u.id_kelas as id_kelas, k.nama as nama_kelas, sum(n.nilai) as total_poin, n.nilai as poin, s.soal as studi_kasus, s.judul as sub_soal, u.id as iduser");
         $this->db->from('nilai n');
@@ -91,7 +92,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function getHistoryLevel($id) {
+    public function getHistoryLevel($id)
+    {
         $this->db->select('l.id_level as idlevel, l.nama as levels, n.id_soal as idsoal, n.id_user as iduser, sum(n.nilai) as poin');
         $this->db->from('nilai n');
         $this->db->join('tb_level l', 'n.id_level=l.id_level');
@@ -101,7 +103,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function detailLogAktivitas($id, $id_level) {
+    public function detailLogAktivitas($id, $id_level)
+    {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
         $this->db->select('u.username as nim, l.nama as levels, s.id_soal as idsoal, n.id_user as iduser, s.soal as studi_kasus, s.judul as sub_soal, n.nilai as poin, SUM(p.jumlah) AS jumlah');
         // $this->db->select_max('c.id');
@@ -117,7 +120,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function detailLogConfidence($id, $id_soal) {
+    public function detailLogConfidence($id, $id_soal)
+    {
         $this->db->select('s.judul as sub_soal, cd.confidence, l.nama as levels, cd.id as id_confidence, cd.waktu AS waktu');
         $this->db->from('confidence_tag cd');
         $this->db->join('tb_soal s', 'cd.id_soal = s.id_soal');
@@ -127,7 +131,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function detailLogConf($id, $id_soal) {
+    public function detailLogConf($id, $id_soal)
+    {
         $this->db->select('s.judul as sub_soal, cd.confidence, l.nama as levels, cd.id as id_confidence, cd.waktu AS waktu,, cd.status_jawaban AS status');
         $this->db->from('conditions cd');
         $this->db->join('tb_soal s', 'cd.id_soal = s.id_soal');
@@ -146,7 +151,8 @@ class Ujian_model extends CI_Model
     //     return $this->db->get()->result_array();
     // }
 
-    public function confidenceHistory() {
+    public function confidenceHistory()
+    {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
         $this->db->select("u.username as nim, u.id_kelas as id_kelas, k.nama as nama_kelas, sum(n.nilai) as total_poin, n.nilai as poin, s.soal as studi_kasus, s.judul as sub_soal, u.id as iduser");
         $this->db->from('nilai n');
@@ -157,7 +163,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function getConfidenceLevel($id) {
+    public function getConfidenceLevel($id)
+    {
         $this->db->select('l.id_level as idlevel, l.nama as levels, n.id_soal as idsoal, n.id_user as iduser');
         $this->db->from('nilai n');
         $this->db->join('tb_level l', 'n.id_level=l.id_level');
@@ -167,7 +174,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function detailLogConditions($id, $id_soal) {
+    public function detailLogConditions($id, $id_soal)
+    {
         $this->db->select('cd.status_jawaban as details');
         $this->db->from('conditions cd');
         $this->db->join('tb_soal s', 's.id_soal = cd.id_soal', 'left');
@@ -185,7 +193,8 @@ class Ujian_model extends CI_Model
     //     return $this->db->get()->result_array();
     // }
 
-    public function detailConfidenceLevel($id, $id_level) {
+    public function detailConfidenceLevel($id, $id_level)
+    {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
         $this->db->select('u.username as nim, l.id_level as idlevel, l.nama as levels, s.id_soal as idsoal, n.id_user as iduser, s.judul as sub_soal, n.nilai as poin');
         // $this->db->select_max('c.id');
@@ -200,7 +209,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function detailConfidenceSoal($id, $id_level) {
+    public function detailConfidenceSoal($id, $id_level)
+    {
         $this->db->select('s.judul as sub_soal, s.id_soal as idsoal, cd.confidence, cd.id_user as iduser, l.nama as levels, cd.id as id_confidence');
         $this->db->from('confidence_tag cd');
         $this->db->join('tb_soal s', 'cd.id_soal = s.id_soal');
@@ -212,7 +222,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function detailsConfidencePerSoal($id, $id_soal) {
+    public function detailsConfidencePerSoal($id, $id_soal)
+    {
         $this->db->select('s.judul as sub_soal, s.id_soal as idsoal, cd.confidence, cd.id_user as iduser, l.nama as levels, cd.id as id_confidence');
         $this->db->from('confidence_tag cd');
         $this->db->join('tb_soal s', 'cd.id_soal = s.id_soal');
@@ -224,7 +235,8 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function historyUjian() {
+    public function historyUjian()
+    {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama", FALSE);
         $this->db->select("h.iduser, h.idsoal, u.username as nim, u.id_kelas as id_kelas, k.nama as nama_kelas, s.soal as studi_kasus, s.judul as sub_soal, l.nama as level");
         $this->db->from('history_ujian h');
@@ -235,29 +247,43 @@ class Ujian_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    // Hasil overlapping analysis
+    public function getOverlappingAnalysis()
+    {
+        $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
+        $this->db->select("oa.id_soal as soal, k.nama as nama_kelas, s.soal as studi_kasus");
+        $this->db->from('overlapping_analysis oa');
+        $this->db->join('users u', 'oa.id_user = u.id');
+        $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
+        $this->db->join('tb_soal s', 'oa.id_soal = s.id_soal');
+        return $this->db->get()->result_array();
+    }
+
     public function hapusData($iduser, $idsoal)
     {
         $this->db->delete('history_ujian', ['iduser' => $iduser, 'idsoal' => $idsoal]);
     }
 
-    function input_data($data,$table){
-		$this->db->insert($table,$data);
+    function input_data($data, $table)
+    {
+        $this->db->insert($table, $data);
         return $this->db->get()->result_array();
-	}
+    }
 
-    function saverecords($data){
+    function saverecords($data)
+    {
         $table = "confidence_tag";
-		$this->db->insert($table,$data);
+        $this->db->insert($table, $data);
         return $this->db->get()->result_array();
-	}
+    }
 
-    function getTimeTakenByIdKey($key,$user_id)
+    function getTimeTakenByIdKey($key, $user_id)
     {
         $this->db->select('waktu');
         $this->db->from('confidence_tag');
         $this->db->where('id_user', $user_id);
         $this->db->where('id_soal', $key);
-        $this->db->order_by('waktu','DESC');
+        $this->db->order_by('waktu', 'DESC');
         return $this->db->get()->row();
     }
 
