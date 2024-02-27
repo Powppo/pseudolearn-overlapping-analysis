@@ -65,17 +65,18 @@ class OverlappingAnalysis extends CI_Controller
     public function save_history_overlapping($id_soal)
     {
         $id_user = $this->session->userdata('user_id');
-        $click = $this->db->query('select * from overlapping_analysis where id_soal = ? and id_mahasiswa = ?', [$id_soal, $id_user])->num_rows();
-        $data['id_mahasiswa'] = $id_user;
-        $data['id_soal'] = $id_soal;
-        $data['jawaban'] = $this->input->post('jawaban');
-        $data['waktu'] = $this->input->post('waktu');
-        $this->db->insert('overlapping_analysis', $data);
+        // $confidences = $this->session->userdata('confidence_id');
+        // $click = $this->db->query('select * from users where id = ?', $id_user)->row_array();
+        // $confidences = $this->db->query('SELECT DISTINCT(id) FROM confidence_tag', [$id_soal, $id_user])->row_array();
+        $this->db->insert('overlapping_analysis', [
+            'id_soal' => $id_soal,
+            'id_user' => $id_user,
+            // 'username' => $click['username'],
+            'status_jawaban' => $this->input->post('condition'),
+            'waktu' => $this->session->waktu,
+        ]);
         $this->session->sess_expiration = 0; // expires in 4 hours
-        $this->session->set_userdata(array(
-            'jawaban' => $this->input->post('jawaban'),
-            // 'waktu' => $this->input->post('waktu')
-        ));
+        $this->output_json(['status' => true]);
     }
 
     public function hapus($iduser, $idsoal)
