@@ -251,7 +251,7 @@ class Ujian_model extends CI_Model
     public function getOverlappingAnalysis()
     {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
-        $this->db->select("oa.id_soal as soal, k.nama as nama_kelas, s.soal as studi_kasus");
+        $this->db->select("oa.id_soal as soal, k.nama as nama_kelas, s.soal as studi_kasus, oa.jawaban as jawaban, oa.waktu as waktu, oa.status_jawaban as status_jawaban");
         $this->db->from('overlapping_analysis oa');
         $this->db->join('users u', 'oa.id_user = u.id');
         $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');

@@ -62,22 +62,53 @@ class OverlappingAnalysis extends CI_Controller
 
     //     $this->session->sess_expiration = 0; // expires in 4 hours
     // }
+    // public function save_history_overlapping($id_soal)
+    // {
+    //     $id_user = $this->session->userdata('user_id');
+    //     // $confidences = $this->session->userdata('confidence_id');
+    //     // $click = $this->db->query('select * from users where id = ?', $id_user)->row_array();
+    //     // $confidences = $this->db->query('SELECT DISTINCT(id) FROM confidence_tag', [$id_soal, $id_user])->row_array();
+    //     $jawaban = $this->input->post('jawaban');
+    //     $this->db->insert('overlapping_analysis', [
+    //         'id_soal' => $id_soal,
+    //         'id_user' => $id_user,
+    //         'jawaban' => json_decode($jawaban, true),
+    //         'status_jawaban' => $this->input->post('condition'),
+    //         'waktu' => $this->session->waktu,
+    //     ]);
+    //     $this->session->sess_expiration = 0; // expires in 4 hours
+    //     $this->output_json(['status' => true]);
+    // }
+
     public function save_history_overlapping($id_soal)
     {
         $id_user = $this->session->userdata('user_id');
-        // $confidences = $this->session->userdata('confidence_id');
-        // $click = $this->db->query('select * from users where id = ?', $id_user)->row_array();
-        // $confidences = $this->db->query('SELECT DISTINCT(id) FROM confidence_tag', [$id_soal, $id_user])->row_array();
+        $jawaban = $this->input->post('jawaban');
+
+        $click = $this->db->query('select * from overlapping_analysis where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
+
+        // Pastikan data jawaban adalah string JSON yang valid sebelum mendekode
+        $decoded_jawaban = json_decode($jawaban, true);
+        if ($decoded_jawaban === null && json_last_error() !== JSON_ERROR_NONE) {
+            // Handle kesalahan jika data jawaban tidak valid
+            log_message('error', 'Data jawaban tidak valid: ' . $jawaban);
+            // Lakukan tindakan lain yang sesuai dengan aplikasi Anda
+            return;
+        }
+
+        // Pastikan kolom jawaban dapat menampung data JSON
         $this->db->insert('overlapping_analysis', [
             'id_soal' => $id_soal,
             'id_user' => $id_user,
-            // 'username' => $click['username'],
+            'jawaban' => $jawaban, // Simpan data JSON mentah ke dalam kolom jawaban
             'status_jawaban' => $this->input->post('condition'),
             'waktu' => $this->session->waktu,
         ]);
+
         $this->session->sess_expiration = 0; // expires in 4 hours
         $this->output_json(['status' => true]);
     }
+
 
     public function hapus($iduser, $idsoal)
     {

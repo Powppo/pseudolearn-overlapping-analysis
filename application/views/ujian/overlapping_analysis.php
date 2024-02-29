@@ -33,6 +33,7 @@
                     <th style="text-align: center">Kelas</th>
                     <th style="text-align: center">Soal</th>
                     <th style="text-align: center">Jawaban</th>
+                    <th style="text-align: center">Status Jawaban</th>
                     <th style="text-align: center">Waktu</th>
                 </tr>
             </thead>
@@ -46,8 +47,9 @@
                     <td style="text-align: center">' . $u['nama_mahasiswa'] . '</td>
                     <td style="text-align: center">' . $u['nama_kelas'] . '</td> 
                     <td style="text-align: center">' . $u['studi_kasus'] . '</td> 
-                    <td style="text-align: center">"asasas"</td> 
-                    <td style="text-align: center">"asasas"</td> 
+                    <td style="text-align: center">' . $u['jawaban'] . '</td> 
+                    <td style="text-align: center">' . $u['status_jawaban'] . '</td> 
+                    <td style="text-align: center">' . $u['waktu'] . '</td> 
                     
                            </tr>';
                 ?>
