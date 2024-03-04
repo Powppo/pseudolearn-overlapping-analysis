@@ -3143,6 +3143,20 @@
             $('#success-alert').css('display', 'flex');
             $('#success-alert').css('opacity', '1');
         }
+
+        // Variabel untuk menyimpan status jawaban tipe data dan algoritma
+        var status_jawaban_tipedata = 0; // Default 0
+        var status_jawaban_algoritma = 0; // Default 0
+
+        // Logika untuk menentukan status jawaban berdasarkan feedback
+        if (tipe_data > 0 && input == 0 && proc == 0 && output == 0) {
+            status_jawaban_tipedata = 1; // Jawaban salah untuk tipe data
+        }
+
+        if ((input > 0 || proc > 0 || output > 0) && tipe_data == 0) {
+            status_jawaban_algoritma = 1; // Jawaban salah untuk algoritma
+        }
+
         var idsoal = $('#id_soal').val();
         var iduser = $('#id_user').val();
         $.ajax({
@@ -3156,50 +3170,6 @@
                 }
             }
         });
-
-        // $(document).ready(function() {
-        //     $('#btn_corrects').on('click', function() {
-        //         var id_user = $('#id_user').val();
-        //         var id_soal = $('#id_soal').val();
-        //         var condition = $('#corrects').val();
-        //         var status_jawaban = $('#status_jawaban').val();
-        //         var waktu = $('#waktu').val();
-        //         // var waktu = $('#waktu').val();
-
-        //         // Iterasi melalui semua elemen input jawaban
-        //         $('[id^="jawaban_"]').each(function() {
-        //             var jawabanId = $(this).attr('id'); // ID elemen jawaban
-        //             var jawabanValue = $('#' + jawabanId + ' #opsi_' + jawabanId).val(); // Nilai jawaban
-        //             semuaJawaban[jawabanId] = jawabanValue; // Tambahkan jawaban ke objek
-        //         });
-
-        //         $.ajax({
-        //             type: "POST",
-        //             url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
-        //             dataType: "JSON",
-        //             data: {
-        //                 id_user: id_user,
-        //                 id_soal: id_soal,
-        //                 condition: condition,
-        //                 status_jawaban,
-        //                 jawaban: semuaJawaban,
-        //                 waktu: waktu
-        //             },
-        //             success: function(data) {
-        //                 $('[name="id_user"]').val("");
-        //                 $('[name="id_soal"]').val("");
-        //                 window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
-        //                 location.reload(); //reload
-
-        //             },
-        //             error: function(xhr, status, error) {
-        //                 console.error(xhr.responseText); // Tampilkan pesan kesalahan di konsol
-        //             }
-        //         });
-        //         return false;
-        //     });
-        // });
-
         $(document).ready(function() {
             $('#btn_incorrects').on('click', function() {
                 var id_user = $('#id_user').val();
@@ -3208,45 +3178,27 @@
                 var status_jawaban = $('#status_jawaban').val();
                 var waktu = $('#waktu').val();
 
-                // $('[id^="opsi_"]').each(function() {
-                //     var opsiId = $(this).attr('id').replace('opsi_', ''); // Mendapatkan id opsi (contoh: a, b, c, dst.)
-                //     var jawaban = $(this).val(); // Mengambil nilai jawaban dari opsi
+                // Objek untuk menyimpan jawaban tipe data
+                var tipeDataJawaban = {};
 
-                //     semuaJawaban[opsiId] = jawaban; // Menyimpan jawaban dalam objek semuaJawaban
-                // });
-
-                // // Mendapatkan jawaban untuk setiap opsi yang dibuat oleh mahasiswa
-                // $('[id^="jawaban_"]').each(function() {
-                //     var jawabanId = $(this).attr('id').replace('jawaban_', ''); // Mendapatkan id jawaban (contoh: a, b, c, dst.)
-                //     var jawaban = ''; // Inisialisasi jawaban kosong
-
-                //     // Mendapatkan semua elemen anak yang memiliki kelas .dragged-item di dalam elemen jawaban
-                //     $(this).find('.drop-zone').each(function() {
-                //         jawaban += $(this).text().trim() + ' '; // Mengambil teks jawaban dan menambahkannya ke variabel jawaban
-                //     });
-
-                //     // Menghapus spasi ekstra di akhir jawaban
-                //     jawaban = jawaban.trim();
-
-                //     semuaJawaban[jawabanId] = jawaban; // Menyimpan jawaban dalam objek semuaJawaban
-                // });
-
-                // Loop melalui setiap ID jawaban (a, b, c, dst.)
-                // $('[id^="jawaban_"]').each(function() {
-                //     var jawabanId = $(this).attr('id'); // Mendapatkan ID jawaban (contoh: jawaban_a)
-                //     var jawabanValue = $('#' + jawabanId + ' .drop-zone').text().trim(); // Mendapatkan nilai jawaban dari drop zone
-
-                //     semuaJawaban[jawabanId] = jawabanValue; // Menyimpan jawaban dalam objek
-                // });
+                // Objek untuk menyimpan jawaban algoritma
+                var algoritmaJawaban = {};
 
                 // Iterasi melalui setiap .drop-zone
                 $('.drop-zone').each(function() {
                     var dropZoneId = $(this).attr('id'); // Mendapatkan ID .drop-zone
                     var jawaban = $(this).text().trim(); // Mengambil nilai jawaban dari .drop-zone
 
-                    semuaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban ke objek semuaJawaban
+                    // Memisahkan jawaban berdasarkan pola ID
+                    if (dropZoneId.startsWith('jenis_')) {
+                        tipeDataJawaban[dropZoneId] = jawaban; // Menyimpan jawaban tipe data
+                        // statusJawabanTipeData[dropZoneId] = getStatusJawaban(jawaban);
+                    } else if (dropZoneId.startsWith('jawaban_')) {
+                        algoritmaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban algoritma
+                        // statusJawabanAlgoritma[dropZoneId] = getStatusJawaban(jawaban);
+                    }
                 });
-
+                // Mengirimkan data ke server melalui AJAX
                 $.ajax({
                     type: "POST",
                     url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
@@ -3256,7 +3208,10 @@
                         id_soal: id_soal,
                         condition: condition,
                         status_jawaban: status_jawaban,
-                        jawaban: JSON.stringify(semuaJawaban),
+                        tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
+                        jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
+                        status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
+                        status_jawaban_algoritma: status_jawaban_algoritma,
                         waktu: waktu
                     },
                     success: function(data) {
@@ -3272,6 +3227,50 @@
                 return false;
             });
         });
+
+
+
+        // $(document).ready(function() {
+        //     $('#btn_incorrects').on('click', function() {
+        //         var id_user = $('#id_user').val();
+        //         var id_soal = $('#id_soal').val();
+        //         var condition = $('#incorrects').val();
+        //         var status_jawaban = $('#status_jawaban').val();
+        //         var waktu = $('#waktu').val();
+
+        //         // Iterasi melalui setiap .drop-zone
+        //         $('.drop-zone').each(function() {
+        //             var dropZoneId = $(this).attr('id'); // Mendapatkan ID .drop-zone
+        //             var jawaban = $(this).text().trim(); // Mengambil nilai jawaban dari .drop-zone
+
+        //             semuaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban ke objek semuaJawaban
+        //         });
+
+        //         $.ajax({
+        //             type: "POST",
+        //             url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
+        //             dataType: "JSON",
+        //             data: {
+        //                 id_user: id_user,
+        //                 id_soal: id_soal,
+        //                 condition: condition,
+        //                 status_jawaban: status_jawaban,
+        //                 jawaban: JSON.stringify(semuaJawaban),
+        //                 waktu: waktu
+        //             },
+        //             success: function(data) {
+        //                 $('[name="id_user"]').val("");
+        //                 $('[name="id_soal"]').val("");
+        //                 window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
+        //                 location.reload(); //reload
+        //             },
+        //             error: function(xhr, status, error) {
+        //                 console.error(xhr.responseText); // Tampilkan pesan kesalahan di konsol
+        //             }
+        //         });
+        //         return false;
+        //     });
+        // });
         $(document).ready(function() {
             $('#btn_corrects').on('click', function() {
                 var id_user = $('#id_user').val();
@@ -3328,6 +3327,10 @@
         //         }
         //     }
         // });
+    }
+
+    function getStatusJawaban(jawaban) {
+        return (jawaban.trim() === '') ? 'benar' : 'salah';
     }
 
 

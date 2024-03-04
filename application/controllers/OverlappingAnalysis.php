@@ -84,6 +84,9 @@ class OverlappingAnalysis extends CI_Controller
     {
         $id_user = $this->session->userdata('user_id');
         $jawaban = $this->input->post('jawaban');
+        $tipe_data_jawaban = $this->input->post('tipe_data_jawaban');
+        $status_jawaban_tipedata = $this->input->post('status_jawaban_tipedata');
+        $status_jawaban_algoritma = $this->input->post('status_jawaban_algoritma');
 
         $click = $this->db->query('select * from overlapping_analysis where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
 
@@ -101,7 +104,10 @@ class OverlappingAnalysis extends CI_Controller
             'id_soal' => $id_soal,
             'id_user' => $id_user,
             'jawaban' => $jawaban, // Simpan data JSON mentah ke dalam kolom jawaban
+            'tipe_data_jawaban' => $tipe_data_jawaban, // Simpan data JSON mentah ke dalam kolom jawaban
             'status_jawaban' => $this->input->post('condition'),
+            'status_jawaban_tipedata' => $status_jawaban_tipedata,
+            'status_jawaban_algoritma' => $status_jawaban_algoritma,
             'waktu' => $this->session->waktu,
         ]);
 
