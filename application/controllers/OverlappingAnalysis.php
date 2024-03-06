@@ -90,21 +90,18 @@ class OverlappingAnalysis extends CI_Controller
 
         $click = $this->db->query('select * from overlapping_analysis where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
 
-        // Pastikan data jawaban adalah string JSON yang valid sebelum mendekode
         $decoded_jawaban = json_decode($jawaban, true);
         if ($decoded_jawaban === null && json_last_error() !== JSON_ERROR_NONE) {
             // Handle kesalahan jika data jawaban tidak valid
             log_message('error', 'Data jawaban tidak valid: ' . $jawaban);
-            // Lakukan tindakan lain yang sesuai dengan aplikasi Anda
             return;
         }
 
-        // Pastikan kolom jawaban dapat menampung data JSON
         $this->db->insert('overlapping_analysis', [
             'id_soal' => $id_soal,
             'id_user' => $id_user,
-            'jawaban' => $jawaban, // Simpan data JSON mentah ke dalam kolom jawaban
-            'tipe_data_jawaban' => $tipe_data_jawaban, // Simpan data JSON mentah ke dalam kolom jawaban
+            'jawaban' => $jawaban,
+            'tipe_data_jawaban' => $tipe_data_jawaban,
             'status_jawaban' => $this->input->post('condition'),
             'status_jawaban_tipedata' => $status_jawaban_tipedata,
             'status_jawaban_algoritma' => $status_jawaban_algoritma,
