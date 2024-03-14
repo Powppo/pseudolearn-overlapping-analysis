@@ -3175,6 +3175,7 @@
                 }
             }
         });
+
         $(document).ready(function() {
             $('#btn_incorrects').on('click', function() {
                 var id_user = $('#id_user').val();
@@ -3214,7 +3215,7 @@
                         tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
                         jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
                         status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
-                        status_jawaban_algoritma: status_jawaban_algoritma,
+                        status_jawaban_algoritma: status_jawaban_algoritma, // Menyimpan jawaban algoritma
                         waktu: waktu
                     },
                     success: function(data) {
@@ -3224,12 +3225,67 @@
                         location.reload(); //reload
                     },
                     error: function(xhr, status, error) {
-                        console.error(xhr.responseText); // Tampilkan pesan kesalahan di konsol
+                        console.error(xhr.responseText);
                     }
                 });
                 return false;
             });
         });
+        // $(document).ready(function() {
+        //     $('#btn_incorrects').on('click', function() {
+        //         var id_user = $('#id_user').val();
+        //         var id_soal = $('#id_soal').val();
+        //         var condition = $('#incorrects').val();
+        //         var status_jawaban = $('#status_jawaban').val();
+        //         var waktu = $('#waktu').val();
+
+        //         // Objek untuk menyimpan jawaban tipe data
+        //         var tipeDataJawaban = {};
+
+        //         // Objek untuk menyimpan jawaban algoritma
+        //         var algoritmaJawaban = {};
+
+        //         // Iterasi melalui setiap .drop-zone
+        //         $('.drop-zone').each(function() {
+        //             var dropZoneId = $(this).attr('id'); // Mendapatkan ID .drop-zone
+        //             var jawaban = $(this).text().trim(); // Mengambil nilai jawaban dari .drop-zone
+
+        //             // Memisahkan jawaban berdasarkan pola ID
+        //             if (dropZoneId.startsWith('jenis_')) {
+        //                 tipeDataJawaban[dropZoneId] = jawaban; // Menyimpan jawaban tipe data
+        //             } else if (dropZoneId.startsWith('jawaban_')) {
+        //                 algoritmaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban algoritma
+        //             }
+        //         });
+        //         // Mengirimkan data ke server melalui AJAX
+        //         $.ajax({
+        //             type: "POST",
+        //             url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
+        //             dataType: "JSON",
+        //             data: {
+        //                 id_user: id_user,
+        //                 id_soal: id_soal,
+        //                 condition: condition,
+        //                 status_jawaban: status_jawaban,
+        //                 tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
+        //                 jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
+        //                 status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
+        //                 status_jawaban_algoritma: status_jawaban_algoritma, // Menyimpan jawaban algoritma
+        //                 waktu: waktu
+        //             },
+        //             success: function(data) {
+        //                 $('[name="id_user"]').val("");
+        //                 $('[name="id_soal"]').val("");
+        //                 window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
+        //                 location.reload(); //reload
+        //             },
+        //             error: function(xhr, status, error) {
+        //                 console.error(xhr.responseText);
+        //             }
+        //         });
+        //         return false;
+        //     });
+        // });
 
         $(document).ready(function() {
             $('#btn_corrects').on('click', function() {
@@ -3270,7 +3326,7 @@
                         tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
                         jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
                         status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
-                        status_jawaban_algoritma: status_jawaban_algoritma,
+                        status_jawaban_algoritma: status_jawaban_algoritma, // Status jawaban algoritma
                         waktu: waktu
                     },
                     success: function(data) {
@@ -3280,7 +3336,7 @@
                         location.reload(); //reload
                     },
                     error: function(xhr, status, error) {
-                        console.error(xhr.responseText); // Tampilkan pesan kesalahan di konsol
+                        console.error(xhr.responseText);
                     }
                 });
                 return false;
@@ -3476,21 +3532,254 @@
         }
     }
 
+    // $(document).ready(function() {
+    //     // Fungsi untuk menyimpan jawaban ke server
+    //     function saveAnswerToServer(tipeDataJawaban, algoritmaJawaban) {
+    //         var id_user = $('#id_user').val();
+    //         var id_soal = $('#id_soal').val();
+    //         var condition = $('#incorrects').val();
+    //         var status_jawaban = $('#status_jawaban').val();
+    //         var waktu = $('#waktu').val();
+
+    //         // Mengirimkan data ke server melalui AJAX
+    //         $.ajax({
+    //             type: "POST",
+    //             url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
+    //             dataType: "JSON",
+    //             data: {
+    //                 id_user: id_user,
+    //                 id_soal: id_soal,
+    //                 condition: condition,
+    //                 status_jawaban: status_jawaban,
+    //                 tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
+    //                 jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
+    //                 waktu: waktu
+    //             },
+    //             success: function(data) {
+    //                 $('[name="id_user"]').val("");
+    //                 $('[name="id_soal"]').val("");
+    //                 window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
+    //                 location.reload(); //reload
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error(xhr.responseText);
+    //             }
+    //         });
+    //     }
+
+    //     // Setiap kali elemen draggable di-drop ke drop-zone
+    //     $('.drop-zone').on('drop', function(event) {
+    //         event.preventDefault();
+    //         var jawaban = event.originalEvent.dataTransfer.getData('text/plain').trim();
+    //         var jenis = event.currentTarget.id.startsWith('jenis_') ? 'tipe_data' : 'algoritma';
+
+    //         // Menyimpan jawaban ke objek yang sesuai berdasarkan jenis
+    //         if (jenis === 'tipe_data') {
+    //             tipeDataJawaban[event.currentTarget.id] = jawaban; // Menyimpan jawaban tipe data
+    //         } else if (jenis === 'algoritma') {
+    //             algoritmaJawaban[event.currentTarget.id] = jawaban; // Menyimpan jawaban algoritma
+    //         }
+
+    //         // Simpan jawaban ke server
+    //         saveAnswerToServer(tipeDataJawaban, algoritmaJawaban);
+    //     });
+
+    //     // Fungsi untuk mencegah perilaku default saat drag
+    //     $('.drop-zone').on('dragover', function(event) {
+    //         event.preventDefault();
+    //     });
+
+    //     // Fungsi untuk mengatur event saat drag start
+    //     $('.draggable').on('dragstart', function(event) {
+    //         event.originalEvent.dataTransfer.setData('text/plain', $(this).text().trim()); // Menyimpan nilai jawaban yang di-drag
+    //     });
+    // });
+
+
+    // $(document).ready(function() {
+    //     function saveAnswerToDatabase(jawaban, jenis, dropZone) {
+    //         var id_user = $('#id_user').val();
+    //         var id_soal = $('#id_soal').val();
+    //         var waktu = $('#waktu').val();
+    //         var status_jawaban = $('#status_jawaban').val();
+    //         var condition = $('#incorrects').val();
+
+    //         var data = {
+    //             id_user: id_user,
+    //             id_soal: id_soal,
+    //             condition: condition,
+    //             status_jawaban: status_jawaban,
+    //             waktu: waktu
+    //         };
+
+    //         if (jenis === 'tipe_data') {
+    //             data['tipe_data_jawaban'] = JSON.stringify(jawaban);
+    //         } else if (jenis === 'algoritma') {
+    //             data['jawaban'] = JSON.stringify(jawaban);
+    //         }
+
+    //         $.ajax({
+    //             type: "POST",
+    //             url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
+    //             dataType: "JSON",
+    //             data: data,
+    //             success: function(data) {
+    //                 // Dapatkan elemen yang di-dragged
+    //                 let draggedElement = document.querySelector('.dragged');
+
+    //                 // Buat clone dari elemen yang di-dragged
+    //                 let clonedElement = draggedElement.cloneNode(true);
+
+    //                 // Hapus kelas 'dragged' dari cloned element agar tidak ada styling tambahan
+    //                 clonedElement.classList.remove('dragged');
+
+    //                 // Append cloned element ke dalam drop zone
+    //                 dropZone.appendChild(clonedElement);
+    //                 $('[name="id_user"]').val("");
+    //                 $('[name="id_soal"]').val("");
+    //                 window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
+    //                 location.reload(); //reload
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error(xhr.responseText);
+    //             }
+    //         });
+    //         return false;
+    //     }
+
+    //     // Setiap kali elemen draggable di-drop ke drop-zone
+    //     $('.drop-zone').on('drop', function(event) {
+    //         event.preventDefault();
+    //         var jawaban = event.originalEvent.dataTransfer.getData('text/plain').trim();
+    //         var jenis = event.currentTarget.id.startsWith('jenis_') ? 'tipe_data' : 'algoritma';
+    //         var jawabanData = {};
+    //         jawabanData[event.currentTarget.id] = jawaban;
+    //         saveAnswerToDatabase(jawabanData, jenis);
+    //     });
+
+    //     // Fungsi untuk mencegah perilaku default saat drag
+    //     $('.drop-zone').on('dragover', function(event) {
+    //         event.preventDefault();
+    //     });
+
+    //     // Fungsi untuk mengatur event saat drag start
+    //     $('.draggable').on('dragstart', function(event) {
+    //         event.originalEvent.dataTransfer.setData('text/plain', $(this).text().trim()); // Menyimpan nilai jawaban yang di-drag
+    //     });
+    // });
+
     /**
      * On successful drop event, move the element
      */
+    // function dropZoneDropHandler(e) {
+
+    //     // We have checked in the "dragover" handler (dropZoneOverHandler) if it is allowed
+    //     // to drop here, so it should be ok to move the element without further checks
+    //     let draggedElement = document.querySelector('.dragged');
+    //     e.currentTarget.appendChild(draggedElement);
+
+    //     // // We  drop default action (eg. move selected text)
+    //     // // default actions detailed here:
+    //     // // https://www.w3.org/TR/html51/editing.html#drag-and-drop-processing-model
+    //     // e.preventDefault();
+    //     // Prevent the default action of dropping, which is reloading the page
+    //     e.preventDefault();
+
+    // }
+    $(document).ready(function() {
+        // Objek untuk menyimpan jawaban tipe data
+        var tipeDataJawaban = {};
+
+        // Objek untuk menyimpan jawaban algoritma
+        var algoritmaJawaban = {};
+
+        // Fungsi untuk menyimpan jawaban ke server
+        function saveAnswerToServer(tipeDataJawaban, algoritmaJawaban) {
+            var id_user = $('#id_user').val();
+            var id_soal = $('#id_soal').val();
+            var condition = $('#incorrects').val();
+            var status_jawaban = $('#status_jawaban').val();
+            var waktu = $('#waktu').val();
+
+            // Mengirimkan data ke server melalui AJAX
+            $.ajax({
+                type: "POST",
+                url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
+                dataType: "JSON",
+                data: {
+                    id_user: id_user,
+                    id_soal: id_soal,
+                    condition: condition,
+                    status_jawaban: status_jawaban,
+                    tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
+                    jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
+                    waktu: waktu
+                },
+                success: function(data) {
+                    $('[name="id_user"]').val("");
+                    $('[name="id_soal"]').val("");
+                    window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
+                    // location.reload(); //reload
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        // Setiap kali elemen draggable di-drop ke drop-zone
+        $('.drop-zone').on('drop', function(event) {
+            event.preventDefault();
+            var jawaban = event.originalEvent.dataTransfer.getData('text/plain').trim();
+            var jenis = event.currentTarget.id.startsWith('jenis_') ? 'tipe_data' : 'algoritma';
+
+            // Menyimpan jawaban ke objek yang sesuai berdasarkan jenis
+            if (jenis === 'tipe_data') {
+                tipeDataJawaban[event.currentTarget.id] = jawaban; // Menyimpan jawaban tipe data
+            } else if (jenis === 'algoritma') {
+                algoritmaJawaban[event.currentTarget.id] = jawaban; // Menyimpan jawaban algoritma
+            }
+
+            // Simpan jawaban ke server
+            saveAnswerToServer(tipeDataJawaban, algoritmaJawaban);
+        });
+
+        // Fungsi untuk mencegah perilaku default saat drag
+        $('.drop-zone').on('dragover', function(event) {
+            event.preventDefault();
+        });
+
+        // Fungsi untuk mengatur event saat drag start
+        $('.draggable').on('dragstart', function(event) {
+            event.originalEvent.dataTransfer.setData('text/plain', $(this).text().trim()); // Menyimpan nilai jawaban yang di-drag
+        });
+
+
+    });
+    // Fungsi dropZoneDropHandler
     function dropZoneDropHandler(e) {
         // We have checked in the "dragover" handler (dropZoneOverHandler) if it is allowed
         // to drop here, so it should be ok to move the element without further checks
         let draggedElement = document.querySelector('.dragged');
         e.currentTarget.appendChild(draggedElement);
 
-        // We  drop default action (eg. move selected text)
-        // default actions detailed here:
-        // https://www.w3.org/TR/html51/editing.html#drag-and-drop-processing-model
-        e.preventDefault();
+        // Tangkap jawaban yang di-drop
+        var jawaban = e.dataTransfer.getData('text/plain').trim();
 
+        // Tentukan jenis jawaban berdasarkan area drop-zone
+        var jenis = e.currentTarget.id.startsWith('jenis_') ? 'tipe_data' : 'algoritma';
+
+        // Simpan jawaban ke dalam objek yang sesuai
+        var jawabanData = {};
+        jawabanData[e.currentTarget.id] = jawaban;
+
+        // Kirim data jawaban ke server untuk disimpan ke database
+        saveAnswerToServer(jenis === 'tipe_data' ? jawabanData : {}, jenis === 'algoritma' ? jawabanData : {});
+
+        // Prevent the default action of dropping, which is reloading the page
+        e.preventDefault();
     }
+
 
 
     /**
