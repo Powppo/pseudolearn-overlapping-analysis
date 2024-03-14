@@ -87,7 +87,7 @@ class OverlappingAnalysis extends CI_Controller
         $tipe_data_jawaban = $this->input->post('tipe_data_jawaban');
         $status_jawaban_tipedata = $this->input->post('status_jawaban_tipedata');
         $status_jawaban_algoritma = $this->input->post('status_jawaban_algoritma');
-        $waktu = $this->input->post('waktu');
+        $is_submit = $this->input->post('is_submit');
         $click = $this->db->query('select * from overlapping_analysis where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
 
         $decoded_jawaban = json_decode($jawaban, true);
@@ -105,6 +105,7 @@ class OverlappingAnalysis extends CI_Controller
             'status_jawaban' => $this->input->post('condition'),
             'status_jawaban_tipedata' => $status_jawaban_tipedata,
             'status_jawaban_algoritma' => $status_jawaban_algoritma,
+            'is_submit' => $is_submit,
             'waktu' => $this->input->post('waktu')
         ]);
 

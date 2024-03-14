@@ -3157,10 +3157,10 @@
             status_jawaban_algoritma = 1; // Jawaban salah untuk algoritma
         }
 
-        if ((input > 0 || proc > 0 || output > 0 || tipe_data > 0)) {
-            status_jawaban_algoritma = 1; // Jawaban salah untuk algoritma
-            status_jawaban_tipedata = 1; // Jawaban salah untuk tipe data
-        }
+        // if ((input > 0 || proc > 0 || output > 0 || tipe_data > 0)) {
+        //     status_jawaban_algoritma = 1; // Jawaban salah untuk algoritma
+        //     status_jawaban_tipedata = 1; // Jawaban salah untuk tipe data
+        // }
 
         var idsoal = $('#id_soal').val();
         var iduser = $('#id_user').val();
@@ -3183,6 +3183,7 @@
                 var condition = $('#incorrects').val();
                 var status_jawaban = $('#status_jawaban').val();
                 var waktu = $('#waktu').val();
+                var is_submit = 1;
 
                 // Objek untuk menyimpan jawaban tipe data
                 var tipeDataJawaban = {};
@@ -3216,7 +3217,8 @@
                         jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
                         status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
                         status_jawaban_algoritma: status_jawaban_algoritma, // Menyimpan jawaban algoritma
-                        waktu: waktu
+                        waktu: waktu,
+                        is_submit: is_submit
                     },
                     success: function(data) {
                         $('[name="id_user"]').val("");
@@ -3700,6 +3702,7 @@
             var condition = $('#incorrects').val();
             var status_jawaban = $('#status_jawaban').val();
             var waktu = $('#waktu').val();
+            var is_submit = 0;
 
             // Mengirimkan data ke server melalui AJAX
             $.ajax({
@@ -3713,7 +3716,8 @@
                     status_jawaban: status_jawaban,
                     tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
                     jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
-                    waktu: waktu
+                    waktu: waktu,
+                    is_submit: is_submit,
                 },
                 success: function(data) {
                     $('[name="id_user"]').val("");
