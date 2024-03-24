@@ -40,6 +40,7 @@ class OverlappingAnalysis extends CI_Controller
         }
         $this->load->view('_templates/dashboard/_header.php', $data);
         $this->load->view('ujian/overlapping_analysis');
+        // $this->load->view('ujian/soal');
         $this->load->view('_templates/dashboard/_footer.php');
     }
 
@@ -88,6 +89,9 @@ class OverlappingAnalysis extends CI_Controller
         $status_jawaban_tipedata = $this->input->post('status_jawaban_tipedata');
         $status_jawaban_algoritma = $this->input->post('status_jawaban_algoritma');
         $is_submit = $this->input->post('is_submit');
+        $detail_jawaban_algoritma = $this->input->post('detail_jawaban_algoritma');
+        $detail_jawaban_tipedata = $this->input->post('detail_jawaban_tipedata');
+        $is_submit = $this->input->post('is_submit');
         $click = $this->db->query('select * from log_data where id_soal = ? and id_user = ?', [$id_soal, $id_user])->num_rows();
 
         $decoded_jawaban = json_decode($jawaban, true);
@@ -105,6 +109,8 @@ class OverlappingAnalysis extends CI_Controller
             'status_jawaban' => $this->input->post('condition'),
             'status_jawaban_tipedata' => $status_jawaban_tipedata,
             'status_jawaban_algoritma' => $status_jawaban_algoritma,
+            'detail_jawaban_tipedata' => $detail_jawaban_tipedata,
+            'detail_jawaban_algoritma' => $detail_jawaban_algoritma,
             'is_submit' => $is_submit,
             'waktu' => $this->input->post('waktu')
         ]);

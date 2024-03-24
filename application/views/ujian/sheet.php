@@ -412,9 +412,10 @@
         });
     });
 
+    var err = 0;
 
     function check_jawaban() {
-        var err = 0;
+
         var semuaJawaban = {};
         let tipe_data = 0;
         let input = 0;
@@ -2716,7 +2717,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
+                    $('#jenis_8').css('background', '#ee0e0e')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
                     $('#jenis_8').css('background', '#efff00')
@@ -2726,7 +2727,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
+                    $('#jenis_8').css('background', '#ee0e0e')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
                     $('#jenis_8').css('background', '#efff00')
@@ -2736,7 +2737,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
+                    $('#jenis_8').css('background', '#ee0e0e')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
                     $('#jenis_8').css('background', '#efff00')
@@ -2746,7 +2747,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
+                    $('#jenis_8').css('background', '#ee0e0e')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
                     $('#jenis_8').css('background', '#efff00')
@@ -2756,7 +2757,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
+                    $('#jenis_8').css('background', '#ee0e0e')
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
                     $('#jenis_8').css('background', '#efff00')
@@ -2766,7 +2767,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan ketiga salah')
-                    $('#jenis_8').css('background', '#efff00')
+                    $('#jenis_8').css('background', '#ee0e0e')
                 } else {
                     $('#jenis_8').css('background', '#efff00')
                 }
@@ -2780,7 +2781,7 @@
                 err = 1
                 input++
                 // alert('Urutan Pertama salah')
-                $('#jawaban_a').css('background', '#efff00')
+                $('#jawaban_a').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_a').css('background', '#efff00');
             }
@@ -2793,7 +2794,7 @@
                 err = 1
                 input++;
                 // alert('Urutan Kedua salah')
-                $('#jawaban_b').css('background', '#efff00')
+                $('#jawaban_b').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_b').css('background', '#efff00');
             }
@@ -2806,7 +2807,7 @@
                 err = 1
                 proc++;
                 // alert('Urutan ketiga salah')
-                $('#jawaban_c').css('background', '#efff00')
+                $('#jawaban_c').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_c').css('background', '#efff00');
             }
@@ -2819,7 +2820,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_d').css('background', '#efff00')
+                $('#jawaban_d').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_d').css('background', '#efff00');
             }
@@ -2832,7 +2833,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_e').css('background', '#efff00')
+                $('#jawaban_e').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_e').css('background', '#efff00');
             }
@@ -2845,7 +2846,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_f').css('background', '#efff00')
+                $('#jawaban_f').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_f').css('background', '#efff00');
             }
@@ -2858,7 +2859,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_g').css('background', '#efff00')
+                $('#jawaban_g').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_g').css('background', '#efff00');
             }
@@ -2871,7 +2872,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_h').css('background', '#efff00')
+                $('#jawaban_h').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_h').css('background', '#efff00');
             }
@@ -2884,7 +2885,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_i').css('background', '#efff00')
+                $('#jawaban_i').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_i').css('background', '#efff00');
             }
@@ -2897,7 +2898,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_j').css('background', '#efff00')
+                $('#jawaban_j').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_j').css('background', '#efff00');
             }
@@ -2910,7 +2911,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_k').css('background', '#efff00')
+                $('#jawaban_k').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_k').css('background', '#efff00');
             }
@@ -2923,7 +2924,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_l').css('background', '#efff00')
+                $('#jawaban_l').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_l').css('background', '#efff00');
             }
@@ -2936,7 +2937,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_m').css('background', '#efff00')
+                $('#jawaban_m').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_m').css('background', '#efff00');
             }
@@ -2949,7 +2950,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_n').css('background', '#efff00')
+                $('#jawaban_n').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_n').css('background', '#efff00');
             }
@@ -2962,7 +2963,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_o').css('background', '#efff00')
+                $('#jawaban_o').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_o').css('background', '#efff00');
             }
@@ -2975,7 +2976,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_p').css('background', '#efff00')
+                $('#jawaban_p').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_p').css('background', '#efff00');
             }
@@ -2988,7 +2989,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_q').css('background', '#efff00')
+                $('#jawaban_q').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_q').css('background', '#efff00');
             }
@@ -3001,7 +3002,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_r').css('background', '#efff00')
+                $('#jawaban_r').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_r').css('background', '#efff00');
             }
@@ -3014,7 +3015,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_s').css('background', '#efff00')
+                $('#jawaban_s').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_s').css('background', '#efff00');
             }
@@ -3027,7 +3028,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_t').css('background', '#efff00')
+                $('#jawaban_t').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_t').css('background', '#efff00');
             }
@@ -3040,7 +3041,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_u').css('background', '#efff00')
+                $('#jawaban_u').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_u').css('background', '#efff00');
             }
@@ -3053,7 +3054,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_v').css('background', '#efff00')
+                $('#jawaban_v').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_v').css('background', '#efff00');
             }
@@ -3066,7 +3067,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_w').css('background', '#efff00')
+                $('#jawaban_w').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_w').css('background', '#efff00');
             }
@@ -3079,7 +3080,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_x').css('background', '#efff00')
+                $('#jawaban_x').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_x').css('background', '#efff00');
             }
@@ -3092,7 +3093,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_y').css('background', '#efff00')
+                $('#jawaban_y').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_y').css('background', '#efff00');
             }
@@ -3105,7 +3106,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_z').css('background', '#efff00')
+                $('#jawaban_z').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_z').css('background', '#efff00');
             }
@@ -3118,7 +3119,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_v').css('background', '#efff00')
+                $('#jawaban_v').css('background', '#ee0e0e')
             } else {
                 $('#jawaban_v').css('background', '#efff00')
             }
@@ -3688,6 +3689,7 @@
     //     e.preventDefault();
 
     // }
+
     $(document).ready(function() {
         // Objek untuk menyimpan jawaban tipe data
         var tipeDataJawaban = {};
@@ -3695,8 +3697,12 @@
         // Objek untuk menyimpan jawaban algoritma
         var algoritmaJawaban = {};
 
+
+        var detailJawabanAlgoritma = {};
+        var detailJawabanTipedata = {};
+
         // Fungsi untuk menyimpan jawaban ke server
-        function saveAnswerToServer(tipeDataJawaban, algoritmaJawaban) {
+        function saveAnswerToServer(tipeDataJawaban, algoritmaJawaban, detailJawabanTipedata, detailJawabanAlgoritma) {
             var id_user = $('#id_user').val();
             var id_soal = $('#id_soal').val();
             var condition = $('#incorrects').val();
@@ -3716,6 +3722,8 @@
                     status_jawaban: status_jawaban,
                     tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
                     jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
+                    detail_jawaban_tipedata: JSON.stringify(detailJawabanTipedata), // Jawaban tipe data
+                    detail_jawaban_algoritma: JSON.stringify(detailJawabanAlgoritma), // Jawaban algoritma
                     waktu: waktu,
                     is_submit: is_submit,
                 },
@@ -3731,21 +3739,44 @@
             });
         }
 
+        function cekJawaban(jawaban) {
+            if (jawaban === 'benar') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         // Setiap kali elemen draggable di-drop ke drop-zone
         $('.drop-zone').on('drop', function(event) {
             event.preventDefault();
             var jawaban = event.originalEvent.dataTransfer.getData('text/plain').trim();
             var jenis = event.currentTarget.id.startsWith('jenis_') ? 'tipe_data' : 'algoritma';
 
+            // check_jawaban();
+
+            var isBenar = cekJawaban(jawaban);
+
+            err = isBenar ? 0 : 1;
+
             // Menyimpan jawaban ke objek yang sesuai berdasarkan jenis
             if (jenis === 'tipe_data') {
+                detailJawabanTipedata[event.currentTarget.id] = isBenar ? 1 : 0; // 1 untuk benar, 0 untuk salah
                 tipeDataJawaban[event.currentTarget.id] = jawaban; // Menyimpan jawaban tipe data
             } else if (jenis === 'algoritma') {
+                detailJawabanAlgoritma[event.currentTarget.id] = isBenar ? 1 : 0; // 1 untuk benar, 0 untuk salah
                 algoritmaJawaban[event.currentTarget.id] = jawaban; // Menyimpan jawaban algoritma
             }
 
             // Simpan jawaban ke server
-            saveAnswerToServer(tipeDataJawaban, algoritmaJawaban);
+            saveAnswerToServer(tipeDataJawaban, algoritmaJawaban, detailJawabanTipedata, detailJawabanAlgoritma);
+
+            // Tandai elemen dengan warna berdasarkan nilai err
+            if (err === 1) {
+                $(event.currentTarget).css('background', '#ee0e0e'); // Warna merah untuk jawaban salah
+            } else {
+                $(event.currentTarget).css('background', '#efff00'); // Warna kuning untuk jawaban benar
+            }
         });
 
         // Fungsi untuk mencegah perilaku default saat drag
@@ -3760,6 +3791,7 @@
 
 
     });
+
     // Fungsi dropZoneDropHandler
     function dropZoneDropHandler(e) {
         // We have checked in the "dragover" handler (dropZoneOverHandler) if it is allowed
