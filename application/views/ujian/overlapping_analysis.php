@@ -30,7 +30,7 @@
     <style>
         .container {
             width: 900px;
-            height: 650px;
+            /* height: 650px; */
             margin: 50px auto;
         }
 
@@ -38,6 +38,7 @@
             width: 100%;
             background-color: #f0f0f0;
             border-radius: 20px;
+            margin-bottom: 20px;
             /* untuk membuat sudut agak tumpul */
             padding: 20px;
             /* jarak antara kotak besar dengan kotak kecil */
@@ -78,95 +79,8 @@
                 <div class="small-box"></div>
             </div>
         </div> -->
-        <div class="container">
+        <!-- <div class="container">
             <div class="big-box">
-                <!-- <?php
-                        $no = 1;
-                        foreach ($informasi as $data) {
-                            // Ambil nilai tipe_data_jawaban dari database
-                            $jawaban_algoritma = $data['jawaban'];
-
-                            // Menghapus karakter kurung kurawal dan spasi dari string
-                            $jawaban_algoritma = str_replace(['{', '}', ' '], '', $jawaban_algoritma);
-
-                            // Memecah string menjadi array berdasarkan koma
-                            $jawaban_array = explode(',', $jawaban_algoritma);
-
-                            // Array sementara untuk menyimpan nilai yang telah ditampilkan sebelumnya
-                            $displayed_values = [];
-
-                            // Cetak nilai jawaban tipe data dalam kotak-kotak kecil
-                            foreach ($jawaban_array as $value) {
-                                // Cetak hanya jika nilai tidak kosong dan belum ditampilkan sebelumnya
-                                if (!empty($value) && !in_array($value, $displayed_values)) {
-                                    echo '<div class="small-box">' . $value . '</div>';
-                                    // Tambahkan nilai ke dalam array sementara
-                                    $displayed_values[] = $value;
-                                }
-                            }
-                        }
-                        ?> -->
-
-                <!-- <?php
-                        $displayed_values = []; // Array asosiatif untuk menyimpan nilai yang telah ditampilkan sebelumnya
-                        foreach ($informasi as $data) {
-                            // Ambil nilai tipe_data_jawaban dari database
-                            $jawaban_algoritma = $data['tipe_data_jawaban'];
-
-                            // Menghapus karakter kurung kurawal dan spasi dari string
-                            $jawaban_algoritma = str_replace(['{', '}', ' '], '', $jawaban_algoritma);
-
-                            // Memecah string menjadi array berdasarkan koma
-                            $jawaban_array = explode(',', $jawaban_algoritma);
-
-                            // Cetak nilai jawaban tipe data dalam kotak-kotak kecil
-                            foreach ($jawaban_array as $value) {
-                                // Cetak hanya jika nilai tidak kosong dan belum ditampilkan sebelumnya
-                                if (!empty($value) && !isset($displayed_values[$value])) {
-                                    echo '<div class="small-box">' . $value . '</div>';
-                                    // Tambahkan nilai ke dalam array sementara
-                                    $displayed_values[$value] = true;
-                                }
-                            }
-                        }
-                        ?> -->
-
-                <!-- <?php
-                        $displayed_values = []; // Array asosiatif untuk menyimpan nilai yang telah ditampilkan sebelumnya
-                        $duplication_count = []; // Array asosiatif untuk menyimpan jumlah duplikasi nilai
-                        foreach ($informasi as $data) {
-                            // Ambil nilai tipe_data_jawaban dari database
-                            $jawaban_algoritma = $data['tipe_data_jawaban'];
-
-                            // Menghapus karakter kurung kurawal dan spasi dari string
-                            $jawaban_algoritma = str_replace(['{', '}', ' '], '', $jawaban_algoritma);
-
-                            // Memecah string menjadi array berdasarkan koma
-                            $jawaban_array = explode(',', $jawaban_algoritma);
-
-                            // Hitung jumlah duplikasi nilai dan simpan di dalam array
-                            foreach ($jawaban_array as $value) {
-                                // Cetak hanya jika nilai tidak kosong dan belum ditampilkan sebelumnya
-                                if (!empty($value)) {
-                                    if (!isset($displayed_values[$value])) {
-                                        $displayed_values[$value] = true;
-                                        $duplication_count[$value] = 1;
-                                    } else {
-                                        $duplication_count[$value]++;
-                                    }
-                                }
-                            }
-                        }
-
-                        // Cetak nilai jawaban tipe data dalam kotak-kotak kecil beserta jumlah duplikasinya
-                        foreach ($displayed_values as $value => $is_displayed) {
-                            echo '<div class="small-box">' . $value;
-                            if (isset($duplication_count[$value])) {
-                                echo '<br>Jumlah: ' . $duplication_count[$value];
-                            }
-                            echo '</div>';
-                        }
-                        ?> -->
 
                 <?php
                 $displayed_values = []; // Array untuk menyimpan nilai yang telah ditampilkan sebelumnya
@@ -222,7 +136,84 @@
 
 
             </div>
+        </div> -->
+        <div class="container">
+            <?php
+            // Array untuk menyimpan nilai yang telah ditampilkan sebelumnya
+            $displayed_values = [];
+
+            // Array untuk menyimpan jumlah id_user yang memberikan jawaban yang sama
+            $user_counts = [];
+
+            // Array untuk menyimpan jawaban berdasarkan label
+            $grouped_values = [];
+
+            foreach ($informasi as $data) {
+                // Ambil nilai jawaban dari database
+                $jawaban_tipe_data = $data['jawaban'];
+
+                // Ambil id_user dari database
+                $id_user = $data['id_user'];
+
+                // Ambil nilai is_submit dari database
+                $is_submit = $data['is_submit'];
+
+                // Jika is_submit bernilai 0, lewati iterasi ini
+                if ($is_submit != 1) {
+                    continue;
+                }
+
+                // Parse nilai jawaban sebagai JSON
+                $jawaban_json = json_decode($jawaban_tipe_data, true);
+
+                // Loop melalui nilai jawaban
+                foreach ($jawaban_json as $key => $value) {
+                    // Cetak hanya jika nilai tidak kosong
+                    if (!empty($value)) {
+                        // Buat kunci unik berdasarkan label jawaban dan nilai jawaban
+                        $unique_key = $key . '_' . $value;
+
+                        // Tambahkan jawaban ke dalam array berdasarkan label jawaban
+                        if (!isset($grouped_values[$key])) {
+                            $grouped_values[$key] = [];
+                        }
+                        // Tambahkan nilai jawaban ke array jika belum ada
+                        if (!in_array($value, $grouped_values[$key])) {
+                            $grouped_values[$key][] = $value;
+                        }
+
+                        // Tambahkan jawaban ke dalam array yang ditampilkan
+                        if (!isset($displayed_values[$unique_key][$id_user])) {
+                            $displayed_values[$unique_key][$id_user] = true;
+                            if (!isset($user_counts[$unique_key])) {
+                                $user_counts[$unique_key] = 1;
+                            } else {
+                                $user_counts[$unique_key]++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Cetak nilai jawaban dalam kotak-kotak kecil berdasarkan label jawaban
+            foreach ($grouped_values as $jawaban_label => $values) {
+                echo '<div class="big-box">';
+                echo '<h3>' . $jawaban_label . '</h3>';
+                foreach ($values as $value) {
+                    // Buat kunci unik untuk nilai jawaban
+                    $unique_key = $jawaban_label . '_' . $value;
+                    echo '<div class="small-box">' . $jawaban_label . ': ' . $value;
+                    if (isset($user_counts[$unique_key])) {
+                        echo '<br>Jumlah User: ' . $user_counts[$unique_key];
+                    }
+                    echo '</div>';
+                }
+                echo '</div>';
+            }
+
+            ?>
         </div>
+
         <div class="container">
             <div class="big-box">
                 <!-- <?php
