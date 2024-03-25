@@ -3771,12 +3771,6 @@
             // Simpan jawaban ke server
             saveAnswerToServer(tipeDataJawaban, algoritmaJawaban, detailJawabanTipedata, detailJawabanAlgoritma);
 
-            // Tandai elemen dengan warna berdasarkan nilai err
-            if (err === 1) {
-                $(event.currentTarget).css('background', '#ee0e0e'); // Warna merah untuk jawaban salah
-            } else {
-                $(event.currentTarget).css('background', '#efff00'); // Warna kuning untuk jawaban benar
-            }
         });
 
         // Fungsi untuk mencegah perilaku default saat drag
