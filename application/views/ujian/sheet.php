@@ -3669,16 +3669,16 @@
         }
 
         // Variabel untuk menyimpan status jawaban tipe data dan algoritma
-        var status_jawaban_tipedata = 0; // Default 0
-        var status_jawaban_algoritma = 0; // Default 0
+        var status_jawaban_tipedata = 1; // Default 1
+        var status_jawaban_algoritma = 1; // Default 1
 
         // Logika untuk menentukan status jawaban berdasarkan feedback
         if (tipe_data > 0 && input == 0 && proc == 0 && output == 0) {
-            status_jawaban_tipedata = 1; // Jawaban salah untuk tipe data
+            status_jawaban_tipedata = 0; // Jawaban salah untuk tipe data
         }
 
         if ((input > 0 || proc > 0 || output > 0) && tipe_data == 0) {
-            status_jawaban_algoritma = 1; // Jawaban salah untuk algoritma
+            status_jawaban_algoritma = 0; // Jawaban salah untuk algoritma
         }
 
         // if ((input > 0 || proc > 0 || output > 0 || tipe_data > 0)) {
@@ -3709,36 +3709,34 @@
                 var waktu = $('#waktu').val();
                 var is_submit = 1;
 
-                // Objek untuk menyimpan jawaban tipe data
                 var tipeDataJawaban = {};
                 var algoritmaJawaban = {};
-                // var detailJawabanAlgoritma = {};
-                // var detailJawabanTipedata = {};
 
                 // Iterasi melalui setiap .drop-zone
                 $('.drop-zone').each(function() {
                     var dropZoneId = $(this).attr('id'); // Mendapatkan ID .drop-zone
+                    var idJawaban = dropZoneId.replace('jawaban_', '');
                     var jawaban = $(this).text().trim(); // Mengambil nilai jawaban dari .drop-zone
 
                     // Memisahkan jawaban berdasarkan pola ID
                     if (dropZoneId.startsWith('jenis_')) {
+
+                        var nilai = detailJawabanTipedata[dropZoneId] === 1 ? 1 : 0;
+
+                        detailJawabanTipedata[dropZoneId] = {
+                            'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
+                            'nilai': nilai // Nilai 1 jika benar, 0 jika salah
+                        };
                         tipeDataJawaban[dropZoneId] = jawaban; // Menyimpan jawaban tipe data
                     } else if (dropZoneId.startsWith('jawaban_')) {
-                        // Ambil jawaban dari elemen yang di-drop
 
-                        if (detailJawabanAlgoritma[dropZoneId] == 0) {
-                            detailJawabanAlgoritma[dropZoneId] = {
-                                'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
-                                'nilai': 0 // Nilai 1 jika benar, 0 jika salah
-                            };
-                        } else if (detailJawabanAlgoritma[dropZoneId] == 1) {
-                            detailJawabanAlgoritma[dropZoneId] = {
-                                'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
-                                'nilai': 1 // Nilai 1 jika benar, 0 jika salah
-                            };
-                        }
+                        var nilai = detailJawabanAlgoritma[dropZoneId] === 1 ? 1 : 0;
 
-                        algoritmaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban tipe data
+                        detailJawabanAlgoritma[idJawaban] = {
+                            'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
+                            'nilai': nilai // Nilai 1 jika benar, 0 jika salah
+                        };
+                        algoritmaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban algoritma
 
                     }
 
@@ -3775,61 +3773,6 @@
                 return false;
             });
         });
-        // $(document).ready(function() {
-        //     $('#btn_incorrects').on('click', function() {
-        //         var id_user = $('#id_user').val();
-        //         var id_soal = $('#id_soal').val();
-        //         var condition = $('#incorrects').val();
-        //         var status_jawaban = $('#status_jawaban').val();
-        //         var waktu = $('#waktu').val();
-
-        //         // Objek untuk menyimpan jawaban tipe data
-        //         var tipeDataJawaban = {};
-
-        //         // Objek untuk menyimpan jawaban algoritma
-        //         var algoritmaJawaban = {};
-
-        //         // Iterasi melalui setiap .drop-zone
-        //         $('.drop-zone').each(function() {
-        //             var dropZoneId = $(this).attr('id'); // Mendapatkan ID .drop-zone
-        //             var jawaban = $(this).text().trim(); // Mengambil nilai jawaban dari .drop-zone
-
-        //             // Memisahkan jawaban berdasarkan pola ID
-        //             if (dropZoneId.startsWith('jenis_')) {
-        //                 tipeDataJawaban[dropZoneId] = jawaban; // Menyimpan jawaban tipe data
-        //             } else if (dropZoneId.startsWith('jawaban_')) {
-        //                 algoritmaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban algoritma
-        //             }
-        //         });
-        //         // Mengirimkan data ke server melalui AJAX
-        //         $.ajax({
-        //             type: "POST",
-        //             url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
-        //             dataType: "JSON",
-        //             data: {
-        //                 id_user: id_user,
-        //                 id_soal: id_soal,
-        //                 condition: condition,
-        //                 status_jawaban: status_jawaban,
-        //                 tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
-        //                 jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
-        //                 status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
-        //                 status_jawaban_algoritma: status_jawaban_algoritma, // Menyimpan jawaban algoritma
-        //                 waktu: waktu
-        //             },
-        //             success: function(data) {
-        //                 $('[name="id_user"]').val("");
-        //                 $('[name="id_soal"]').val("");
-        //                 window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
-        //                 location.reload(); //reload
-        //             },
-        //             error: function(xhr, status, error) {
-        //                 console.error(xhr.responseText);
-        //             }
-        //         });
-        //         return false;
-        //     });
-        // });
 
         $(document).ready(function() {
             $('#btn_corrects').on('click', function() {
@@ -3838,24 +3781,39 @@
                 var condition = $('#corrects').val();
                 var status_jawaban = $('#status_jawaban').val();
                 var waktu = $('#waktu').val();
+                var is_submit = 1;
 
-                // Objek untuk menyimpan jawaban tipe data
                 var tipeDataJawaban = {};
-
-                // Objek untuk menyimpan jawaban algoritma
                 var algoritmaJawaban = {};
 
                 // Iterasi melalui setiap .drop-zone
                 $('.drop-zone').each(function() {
                     var dropZoneId = $(this).attr('id'); // Mendapatkan ID .drop-zone
+                    var idJawaban = dropZoneId.replace('jawaban_', '');
                     var jawaban = $(this).text().trim(); // Mengambil nilai jawaban dari .drop-zone
 
                     // Memisahkan jawaban berdasarkan pola ID
                     if (dropZoneId.startsWith('jenis_')) {
+
+                        var nilai = detailJawabanTipedata[dropZoneId] === 1 ? 1 : 0;
+
+                        detailJawabanTipedata[dropZoneId] = {
+                            'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
+                            'nilai': nilai // Nilai 1 jika benar, 0 jika salah
+                        };
                         tipeDataJawaban[dropZoneId] = jawaban; // Menyimpan jawaban tipe data
                     } else if (dropZoneId.startsWith('jawaban_')) {
+
+                        var nilai = detailJawabanAlgoritma[dropZoneId] === 1 ? 1 : 0;
+
+                        detailJawabanAlgoritma[idJawaban] = {
+                            'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
+                            'nilai': nilai // Nilai 1 jika benar, 0 jika salah
+                        };
                         algoritmaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban algoritma
+
                     }
+
                 });
                 // Mengirimkan data ke server melalui AJAX
                 $.ajax({
@@ -3870,8 +3828,11 @@
                         tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
                         jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
                         status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
-                        status_jawaban_algoritma: status_jawaban_algoritma, // Status jawaban algoritma
-                        waktu: waktu
+                        status_jawaban_algoritma: status_jawaban_algoritma, // Menyimpan jawaban algoritma
+                        detail_jawaban_tipedata: JSON.stringify(detailJawabanTipedata), // Jawaban tipe data
+                        detail_jawaban_algoritma: JSON.stringify(detailJawabanAlgoritma), // Jawaban algoritma
+                        waktu: waktu,
+                        is_submit: is_submit
                     },
                     success: function(data) {
                         $('[name="id_user"]').val("");

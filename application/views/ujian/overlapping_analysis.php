@@ -15,12 +15,12 @@
             <div class="col-lg-4 col-xs-4 mb-4">
                 <a href="<?= base_url() ?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div>
-            <div class="form-group col-lg-4 col-xs-6 text-center">
+            <div class="form-group col-lg-4 col-xs-5 text-center">
                 <?php if ($this->ion_auth->is_admin()) : ?>
-                    <select class="form-control status-dropdown select2" style="width:100% !important">
-                        <option value="">Semua Kelas</option>
-                        <?php foreach ($kelas as $kls) : ?>
-                            <option value="<?= $kls->id_kelas ?>"><?= $kls->nama ?></option>
+                    <select id="level_filter" class="form-control select2" style="width:100% !important">
+                        <option value="all">Semua Level</option>
+                        <?php foreach ($level as $m) : ?>
+                            <option value="<?= $m->id_level ?>"><?= $m->nama ?></option>
                         <?php endforeach; ?>
                     </select>
                 <?php endif; ?>
@@ -30,35 +30,65 @@
     <style>
         .container {
             width: 900px;
-            /* height: 650px; */
             margin: 50px auto;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.75);
+        }
+
+        p {
+            text-align: center;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.75);
         }
 
         .big-box {
             width: 100%;
-            background-color: #f0f0f0;
+            background-color: rgba(239, 236, 236, 0.45);
             border-radius: 20px;
             margin-bottom: 20px;
-            /* untuk membuat sudut agak tumpul */
             padding: 20px;
-            /* jarak antara kotak besar dengan kotak kecil */
             box-sizing: border-box;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            /* justify-content: space-between; */
+        }
+
+        .item-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .circle {
+            width: 45px;
+            height: 45px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
         .small-box {
             flex-grow: 1;
-            /* Biarkan small-box tumbuh sesuai kebutuhan */
             min-width: 100px;
-            /* Atur lebar minimum small-box */
             margin: 5px;
             padding: 10px;
             background-color: #ccc;
             border-radius: 15px;
-            border: 2px solid;
-            /* untuk membuat sudut agak tumpul */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white;
+            font-size: 16px;
+            text-align: center;
         }
     </style>
 
@@ -66,78 +96,14 @@
     <html lang="en">
 
     <head>
-        <meta charset="UTF-8">
+        <!-- <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kotak dengan Kotak Kecil</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css"> -->
     </head>
 
     <body>
-        <!-- <div class="container">
-            <div class="big-box">
-                <div class="small-box"></div>
-                <div class="small-box"></div>
-                <div class="small-box"></div>
-            </div>
-        </div> -->
-        <!-- <div class="container">
-            <div class="big-box">
-
-                <?php
-                $displayed_values = []; // Array untuk menyimpan nilai yang telah ditampilkan sebelumnya
-                $user_counts = []; // Array untuk menyimpan jumlah id_user yang memberikan jawaban yang sama
-
-                foreach ($informasi as $data) {
-                    // Ambil nilai jawaban dari database
-                    $jawaban_tipe_data = $data['jawaban'];
-                    // Ambil id_user dari database
-                    $id_user = $data['id_user'];
-                    // Ambil nilai is_submit dari database
-                    $is_submit = $data['is_submit'];
-
-                    // Jika is_submit bernilai 0, lewati iterasi ini
-                    if ($is_submit != 1) {
-                        continue;
-                    }
-
-                    // Parse nilai jawaban sebagai JSON
-                    $jawaban_json = json_decode($jawaban_tipe_data, true);
-
-                    // Loop melalui nilai jawaban
-                    foreach ($jawaban_json as $key => $value) {
-                        // Cetak hanya jika nilai tidak kosong dan belum ditampilkan sebelumnya
-                        if (!empty($value)) {
-                            // Buat kunci unik berdasarkan label jawaban dan nilai jawaban
-                            $unique_key = $key . '_' . $value;
-                            if (!isset($displayed_values[$unique_key][$id_user])) {
-                                $displayed_values[$unique_key][$id_user] = true;
-                                if (!isset($user_counts[$unique_key])) {
-                                    $user_counts[$unique_key] = 1;
-                                } else {
-                                    $user_counts[$unique_key]++;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Cetak nilai jawaban dalam kotak-kotak kecil beserta jumlah id_user yang memberikan jawaban yang sama
-                foreach ($displayed_values as $unique_key => $users) {
-                    // Ambil kunci atau label jawaban dan nilai jawaban dari kunci unik
-                    list($jawaban_label, $value) = explode('_', $unique_key, 2);
-                    echo '<div class="small-box">' . $jawaban_label . ': ' . $value;
-                    if (isset($user_counts[$unique_key])) {
-                        echo '<br>Jumlah User: ' . $user_counts[$unique_key];
-                    }
-                    echo '</div>';
-                }
-
-
-                ?>
-
-
-            </div>
-        </div> -->
+        <p>aksdjskajd</p>
         <div class="container">
             <?php
             // Array untuk menyimpan nilai yang telah ditampilkan sebelumnya
@@ -151,27 +117,23 @@
 
             foreach ($informasi as $data) {
                 // Ambil nilai jawaban dari database
-                $jawaban_tipe_data = $data['jawaban'];
+                $jawaban_tipe_data = $data['tipe_data_jawaban'];
 
                 // Ambil id_user dari database
                 $id_user = $data['id_user'];
 
                 // Ambil nilai is_submit dari database
                 $is_submit = $data['is_submit'];
-                $id = $data['id'];
-
-                $detail_jawaban_algoritma = $data['detail_jawaban_algoritma'];
+                $detail_jawaban_tipedata = $data['detail_jawaban_tipedata'];
 
                 // Jika is_submit bernilai 0, lewati iterasi ini
                 if ($is_submit != 1) {
                     continue;
                 }
 
-                // Parse nilai jawaban sebagai JSON
-                $jawaban_json = json_decode($detail_jawaban_algoritma, true);
+                $jawaban_json = json_decode($detail_jawaban_tipedata, true);
 
                 if (is_array($jawaban_json) && !empty($jawaban_json)) {
-                    // Loop melalui nilai jawaban
                     foreach ($jawaban_json as $key => $value) {
                         if (is_array($value) && isset($value['jawaban']) && isset($value['nilai'])) {
                             $jawaban = $value['jawaban'];
@@ -205,54 +167,30 @@
                     }
                 }
             }
-
+            echo '<h1> Tipe Data </h1>';
             foreach ($grouped_values as $jawaban_label => $values) {
+
                 echo '<div class="big-box">';
-                echo '<h3>' . $jawaban_label . '</h3>';
                 foreach ($values as $value) {
                     if (is_array($value) && isset($value['jawaban']) && isset($value['nilai'])) {
-                        // Buat kunci unik untuk nilai jawaban
                         $jawaban = $value['jawaban'];
                         $nilai = $value['nilai'];
                         $unique_key = $jawaban_label . '_' . $jawaban;
+                        $background_color = ($nilai == 1) ? '#69C751' : '#CD4747';
 
-                        $border_color = ($nilai == 1) ? 'green' : 'red';
-
-                        // Cetak kotak kecil untuk setiap nilai jawaban
-                        echo '<div class="small-box" style="border-color: ' . $border_color . '">' . $jawaban_label . ': ' . $jawaban;
-                        echo '<br>Nilai: ' . $nilai;
-
-                        // Periksa jumlah user jika ada
+                        echo '<div class="item-container"> ';
+                        echo '<div class="circle">';
                         if (isset($user_counts[$unique_key])) {
-                            echo '<br>Jumlah User: ' . $user_counts[$unique_key];
+                            echo $user_counts[$unique_key];
                         }
+                        echo '</div>';
+                        echo '<div class="small-box" style="background-color: ' . $background_color . '"> ' . $jawaban;
+                        echo '</div>';
                         echo '</div>';
                     }
                 }
                 echo '</div>';
             }
-
-
-
-
-            // foreach ($grouped_values as $jawaban_label => $values) {
-            //     echo '<div class="big-box">';
-            //     echo '<h3>' . $jawaban_label . '</h3>';
-            //     foreach ($values as $value) {
-            //         // Buat kunci unik untuk nilai jawaban
-            //         $unique_key = $jawaban_label . '_' . $value;
-            //         $border_color = 'red'; // Default: warna merah
-
-            //         // Cetak kotak kecil untuk setiap nilai jawaban
-            //         echo '<div class="small-box" style="border-color: ' . $border_color . '">' . $jawaban_label . ': ' . $value;
-            //         // Periksa jumlah user jika ada
-            //         if (isset($user_counts[$unique_key])) {
-            //             echo '<br>Jumlah User: ' . $user_counts[$unique_key];
-            //         }
-            //         echo '</div>';
-            //     }
-            //     echo '</div>';
-            // }
 
             ?>
         </div>
@@ -268,72 +206,88 @@
             // Array untuk menyimpan jawaban berdasarkan label
             $grouped_values = [];
 
+            usort($informasi, function ($a, $b) {
+                return strcmp($a['id'], $b['id']);
+            });
+
             foreach ($informasi as $data) {
                 // Ambil nilai jawaban dari database
-                $jawaban_tipe_data = $data['tipe_data_jawaban'];
+                $jawaban_tipe_data = $data['jawaban'];
+                $jawaban_label = $data['id'];
 
-                // Ambil id_user dari database
                 $id_user = $data['id_user'];
 
-                // Ambil nilai is_submit dari database
                 $is_submit = $data['is_submit'];
 
-                // Jika is_submit bernilai 0, lewati iterasi ini
+                $detail_jawaban_algoritma = $data['detail_jawaban_algoritma'];
+
                 if ($is_submit != 1) {
                     continue;
                 }
 
-                // Parse nilai jawaban sebagai JSON
-                $jawaban_json = json_decode($jawaban_tipe_data, true);
+                $jawaban_json = json_decode($detail_jawaban_algoritma, true);
 
-                // Loop melalui nilai jawaban
-                foreach ($jawaban_json as $key => $value) {
-                    // Cetak hanya jika nilai tidak kosong
-                    if (!empty($value)) {
-                        // Buat kunci unik berdasarkan label jawaban dan nilai jawaban
-                        $unique_key = $key . '_' . $value;
+                if (is_array($jawaban_json) && !empty($jawaban_json)) {
+                    foreach ($jawaban_json as $key => $value) {
+                        if (is_array($value) && isset($value['jawaban']) && isset($value['nilai'])) {
+                            $jawaban = $value['jawaban'];
+                            $nilai = $value['nilai'];
+                            // Cetak hanya jika nilai tidak kosong
+                            if (!empty($jawaban)) {
 
-                        // Tambahkan jawaban ke dalam array berdasarkan label jawaban
-                        if (!isset($grouped_values[$key])) {
-                            $grouped_values[$key] = [];
-                        }
-                        // Tambahkan nilai jawaban ke array jika belum ada
-                        if (!in_array($value, $grouped_values[$key])) {
-                            $grouped_values[$key][] = $value;
-                        }
+                                $unique_key = $key . '_' . $jawaban;
 
-                        // Tambahkan jawaban ke dalam array yang ditampilkan
-                        if (!isset($displayed_values[$unique_key][$id_user])) {
-                            $displayed_values[$unique_key][$id_user] = true;
-                            if (!isset($user_counts[$unique_key])) {
-                                $user_counts[$unique_key] = 1;
-                            } else {
-                                $user_counts[$unique_key]++;
+                                // Tambahkan jawaban ke dalam array berdasarkan label jawaban
+                                if (!isset($grouped_values[$key])) {
+                                    $grouped_values[$key] = [];
+                                }
+                                // Tambahkan nilai jawaban ke array jika belum ada
+                                if (!in_array($value, $grouped_values[$key])) {
+                                    $grouped_values[$key][] = $value;
+                                }
+
+                                // Tambahkan jawaban ke dalam array yang ditampilkan
+                                if (!isset($displayed_values[$unique_key][$id_user])) {
+                                    $displayed_values[$unique_key][$id_user] = true;
+                                    if (!isset($user_counts[$unique_key])) {
+                                        $user_counts[$unique_key] = 1;
+                                    } else {
+                                        $user_counts[$unique_key]++;
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
 
-            // Cetak nilai jawaban dalam kotak-kotak kecil berdasarkan label jawaban
+            echo '<h1> Algoritma </h1>';
+
             foreach ($grouped_values as $jawaban_label => $values) {
                 echo '<div class="big-box">';
-                echo '<h3>' . $jawaban_label . '</h3>';
                 foreach ($values as $value) {
-                    // Buat kunci unik untuk nilai jawaban
-                    $unique_key = $jawaban_label . '_' . $value;
-                    echo '<div class="small-box">' . $jawaban_label . ': ' . $value;
-                    if (isset($user_counts[$unique_key])) {
-                        echo '<br>Jumlah User: ' . $user_counts[$unique_key];
+                    if (is_array($value) && isset($value['jawaban']) && isset($value['nilai'])) {
+                        $jawaban = $value['jawaban'];
+                        $nilai = $value['nilai'];
+                        $unique_key = $jawaban_label . '_' . $jawaban;
+                        $background_color = ($nilai == 1) ? '#69C751' : '#CD4747';
+
+                        echo '<div class="item-container"> ';
+                        echo '<div class="circle">';
+                        if (isset($user_counts[$unique_key])) {
+                            echo $user_counts[$unique_key];
+                        }
+                        echo '</div>';
+                        echo '<div class="small-box" style="background-color: ' . $background_color . '"> ' . $jawaban;
+                        echo '</div>';
+                        echo '</div>';
                     }
-                    echo '</div>';
                 }
                 echo '</div>';
             }
 
             ?>
         </div>
-
 
     </body>
 
