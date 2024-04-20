@@ -297,9 +297,6 @@ class Ujian_model extends CI_Model
         $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
         $this->db->join('tb_soal s', 'oa.id_soal = s.id_soal');
         $this->db->where('oa.id_soal', $id_soal);
-        // $this->db->group_by('oa.id_user');
-
-        // Jalankan query dan ambil hasilnya
         $results = $this->db->get()->result_array();
 
         // Memproses hasil untuk menyiapkan unique_key
@@ -331,112 +328,34 @@ class Ujian_model extends CI_Model
                     }
                 }
             }
+            $jawaban_algoritma = json_decode($result['detail_jawaban_algoritma'], true);
+
+            if (is_array($jawaban_algoritma)) {
+                foreach ($jawaban_algoritma as $jenis => $data) {
+                    if (is_array($data) && isset($data['jawaban'])) {
+                        $jawaban = $data['jawaban'];
+                        $nilai = $data['nilai'] ?? null;
+
+                        $uniqueKey = $jenis . '_' . $jawaban;
+                        // $uniqueKey = str_replace(' ', '+', $uniqueKey);
+
+                        if (in_array($uniqueKey, $unique_keys)) {
+                            $dataByUser[$userId][$jenis][] = [
+                                'nim' => $nim,
+                                'nama_mahasiswa' => $namaMahasiswa,
+                                'nama_kelas' => $namaKelas,
+                                'jenis_jawaban' => $jenis,
+                                'jawaban' => $jawaban,
+                                'nilai' => $nilai,
+                            ];
+                        }
+                    }
+                }
+            }
         }
 
         return $dataByUser;
     }
-
-
-    // public function detailMhsOverlappingAnalysis()
-    // {
-    //     $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
-    //     $this->db->select("oa.id as id, oa.id_soal as soal, oa.id_user as id_user, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas");
-    //     $this->db->from('log_data oa');
-    //     $this->db->join('users u', 'oa.id_user = u.id');
-    //     $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
-    //     $this->db->join('tb_soal s', 'oa.id_soal = s.id_soal');
-    //     $this->db->group_by('oa.id_user');
-
-    //     // Jalankan query dan ambil hasilnya
-    //     $results = $this->db->get()->result_array();
-
-    //     // Memproses hasil untuk menyiapkan unique_key
-    //     $unique_keys = [];
-    //     foreach ($results as $result) {
-    //         $jawaban_tipedata = json_decode($result['detail_jawaban_tipedata'], true);
-
-    //         // Lakukan iterasi untuk setiap jenis jawaban dalam $jawaban_tipedata
-    //         foreach ($jawaban_tipedata as $jenis => $data) {
-    //             if (isset($data['jawaban'])) {
-    //                 $jawaban = $data['jawaban'];
-    //                 $unique_keys[] = $jenis . '_' . $jawaban;
-    //             }
-    //         }
-    //     }
-    //     foreach ($results as $result) {
-    //         $jawaban_tipedata = json_decode($result['detail_jawaban_algoritma'], true);
-
-    //         // Lakukan iterasi untuk setiap jenis jawaban dalam $jawaban_tipedata
-    //         foreach ($jawaban_tipedata as $jawaban => $data) {
-    //             if (isset($data['jawaban'])) {
-    //                 $jawaban = $data['jawaban'];
-    //                 $unique_keys[] = $jawaban . '_' . $jawaban;
-    //             }
-    //         }
-    //     }
-
-    //     return $unique_keys;
-    // }
-
-    // public function detailMhsOverlappingAnalysis()
-    // {
-    //     $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
-    //     $this->db->select("oa.id as id, oa.id_soal as soal, oa.id_user as id_user, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas");
-    //     $this->db->from('log_data oa');
-    //     $this->db->join('users u', 'oa.id_user = u.id');
-    //     $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
-    //     $this->db->join('tb_soal s', 'oa.id_soal = s.id_soal');
-    //     $this->db->group_by('oa.id_user');
-
-    //     // Jalankan query dan ambil hasilnya
-    //     $results = $this->db->get()->result_array();
-
-    //     // Struktur data hasil berdasarkan jenis jawaban
-    //     $dataByUser = [];
-
-    //     foreach ($results as $result) {
-    //         $userId = $result['id_user'];
-    //         $namaMahasiswa = $result['nama_mahasiswa'];
-    //         $namaKelas = $result['nama_kelas'];
-
-    //         // Proses detail_jawaban_tipedata
-    //         $jawaban_tipedata = json_decode($result['detail_jawaban_tipedata'], true);
-    //         if (is_array($jawaban_tipedata)) {
-    //             foreach ($jawaban_tipedata as $jenis => $data) {
-    //                 if (isset($data['jawaban'])) {
-    //                     $jawaban = $data['jawaban'];
-    //                     $dataByUser[$userId][$jenis][] = [
-    //                         'nama_mahasiswa' => $namaMahasiswa,
-    //                         'nama_kelas' => $namaKelas,
-    //                         'jenis_jawaban' => $jenis,
-    //                         'jawaban' => $jawaban,
-    //                         'nilai' => $data['nilai'] ?? null,
-    //                     ];
-    //                 }
-    //             }
-    //         }
-
-    //         // Proses detail_jawaban_algoritma
-    //         $jawaban_algoritma = json_decode($result['detail_jawaban_algoritma'], true);
-    //         if (is_array($jawaban_algoritma)) {
-    //             foreach ($jawaban_algoritma as $jenis => $data) {
-    //                 if (isset($data['jawaban'])) {
-    //                     $jawaban = $data['jawaban'];
-    //                     $dataByUser[$userId][$jenis][] = [
-    //                         'nama_mahasiswa' => $namaMahasiswa,
-    //                         'nama_kelas' => $namaKelas,
-    //                         'jenis_jawaban' => $jenis,
-    //                         'jawaban' => $jawaban,
-    //                         'nilai' => $data['nilai'] ?? null,
-    //                     ];
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     return $dataByUser;
-    // }
-
 
     public function hapusData($iduser, $idsoal)
     {

@@ -205,10 +205,12 @@
                         $jawaban = $value['jawaban'];
                         $nilai = $value['nilai'];
                         $unique_key = $jawaban_label . '_' . $jawaban;
+                        $encoded_unique_key = base64_encode($unique_key);
+
                         $background_color = ($nilai == 1) ? '#69C751' : '#CD4747';
 
                         echo '<div class="item-container"> ';
-                        echo '<a class="circle" href="' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $unique_key . '">';
+                        echo '<a class="circle" href="' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $encoded_unique_key . '">';
                         echo '<div>';
                         if (isset($user_counts[$unique_key])) {
                             echo $user_counts[$unique_key];
@@ -302,17 +304,18 @@
                         $jawaban = $value['jawaban'];
                         $nilai = $value['nilai'];
                         $unique_key = $jawaban_label . '_' . $jawaban;
+                        $encoded_unique_key = base64_encode($unique_key);
                         $background_color = ($nilai == 1) ? '#69C751' : '#CD4747';
 
                         echo '<div class="item-container"> ';
-                        echo '<a class="circle" href="' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $unique_key . '">';
+                        echo '<a class="circle" href="' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $encoded_unique_key . '">';
                         echo '<div>';
                         if (isset($user_counts[$unique_key])) {
                             echo $user_counts[$unique_key];
                         }
                         echo '</div>';
                         echo '</a>';
-                        echo '<div class="small-box" style="background-color: ' . $background_color . '"> ' . $jawaban;
+                        echo '<div class="small-box" style="background-color: ' . $background_color . '"> ' . $unique_key;
                         echo '</div>';
                         echo '</div>';
                     }

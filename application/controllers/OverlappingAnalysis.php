@@ -53,7 +53,6 @@ class OverlappingAnalysis extends CI_Controller
             'informasi' => $results,
             'judul'        => 'Soal',
             'subjudul'  => 'Edit Soal',
-            // 'soal'      => $this->soal->detailOverlappingAnalysis($id_soal),
         ];
 
         $this->load->view('_templates/dashboard/_header.php', $data);
@@ -61,23 +60,28 @@ class OverlappingAnalysis extends CI_Controller
         $this->load->view('_templates/dashboard/_footer.php');
     }
 
-    public function detail_jawaban($id_soal, $unique_keys_string)
+    public function detail_jawaban($id_soal, $encodedUniqueKey)
     {
-        // Konversi string `unique_keys_string` menjadi array
-        $unique_keys = explode(',', $unique_keys_string);
+        // $unique_keys_array = explode(' ', $unique_keys_string);
+        // $unique_keys = array($unique_keys_string);
 
-        // Memanggil model dengan parameter id_soal dan unique_keys (array)
-        $results = $this->ujian->detailMhsOverlappingAnalysis($id_soal, $unique_keys);
 
-        // Menyiapkan data untuk dikirim ke view
+        $decodedUniqueKey = base64_decode(urldecode($encodedUniqueKey));
+
+        $results = $this->ujian->detailMhsOverlappingAnalysis($id_soal, array($decodedUniqueKey));
+
+        $encoded_url = urlencode('d_READ array[5] = {');
+        echo $encoded_url;
+
+        var_dump($decodedUniqueKey);
+        var_dump($results);
+
         $data = [
             'user'      => $this->user,
             'informasi' => $results,
             'judul'     => 'Soal',
             'subjudul'  => 'Edit Soal',
         ];
-
-        // Memuat view dengan data yang telah disiapkan
         $this->load->view('_templates/dashboard/_header.php', $data);
         $this->load->view('ujian/detail_mhs_overlapping_analysis');
         $this->load->view('_templates/dashboard/_footer.php');

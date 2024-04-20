@@ -59,19 +59,9 @@
                             echo '<td style="text-align: center">' . $status . '</td>';
                             echo '</tr>';
 
-                            // Tambahkan id_soal ke dalam array shownIds
                             $shownIds[] = $nim;
                         }
                         ?>
-                        <!-- <tr>
-                            <td style="text-align: center"><?= $no++ ?></td>
-                            <td style="text-align: center"><?= $jawaban['id_user'] ?></td>
-                            <td style="text-align: center"><?= $jawaban['nama_mahasiswa'] ?></td>
-                            <td style="text-align: center"><?= $jawaban['nama_kelas'] ?></td>
-                            <td style="text-align: center"><?= $jawaban['jenis_jawaban'] ?></td>
-                            <td style="text-align: center"><?= $jawaban['jawaban'] ?></td>
-                            <td style="text-align: center"><?= $jawaban['nilai'] ?></td>
-                        </tr> -->
                     <?php endforeach; ?>
                 <?php endforeach; ?>
             <?php endforeach; ?>
