@@ -1,7 +1,3 @@
-<!-- <link rel="stylesheet" href="<?= base_url() ?>template/css/base.css" /> -->
-<link rel="stylesheet" href="<?= base_url() ?>template/css/quiz.css" />
-<!-- <link rel="stylesheet" href="<?= base_url() ?>template/css/alert.css" /> -->
-
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title"><?= $subjudul ?></h3>
@@ -15,7 +11,7 @@
             <div class="col-lg-4 col-xs-4 mb-4">
                 <a href="<?= base_url() ?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div>
-            <div class="form-group col-lg-4 col-xs-5 text-center">
+            <div class="form-group col-lg-4 col-xs-6 text-center">
                 <?php if ($this->ion_auth->is_admin()) : ?>
                     <select id="level_filter" class="form-control select2" style="width:100% !important">
                         <option value="all">Semua Level</option>
@@ -27,284 +23,14 @@
             </div>
         </div>
     </div>
-    <style>
-        .container {
-            width: 900px;
-            margin: 50px auto;
-            align-items: center;
-        }
-
-        h1 {
-            text-align: center;
-            text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.75);
-        }
-
-        p {
-            text-align: center;
-            text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.75);
-        }
-
-        .big-box {
-            width: 100%;
-            background-color: rgba(239, 236, 236, 0.45);
-            border-radius: 20px;
-            margin-bottom: 20px;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-            /* justify-content: space-between; */
-        }
-
-        .item-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .circle {
-            width: 45px;
-            height: 45px;
-            background-color: white;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .small-box {
-            flex-grow: 1;
-            min-width: 100px;
-            margin: 5px;
-            padding: 10px;
-            background-color: #ccc;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: white;
-            font-size: 16px;
-            text-align: center;
-        }
-    </style>
-
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <!-- <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kotak dengan Kotak Kecil</title>
-        <link rel="stylesheet" href="styles.css"> -->
-    </head>
-
-    <body>
-        <p>aksdjskajd</p>
-        <div class="container">
-            <?php
-            // Array untuk menyimpan nilai yang telah ditampilkan sebelumnya
-            $displayed_values = [];
-
-            // Array untuk menyimpan jumlah id_user yang memberikan jawaban yang sama
-            $user_counts = [];
-
-            // Array untuk menyimpan jawaban berdasarkan label
-            $grouped_values = [];
-
-            foreach ($informasi as $data) {
-                // Ambil nilai jawaban dari database
-                $jawaban_tipe_data = $data['tipe_data_jawaban'];
-
-                // Ambil id_user dari database
-                $id_user = $data['id_user'];
-
-                // Ambil nilai is_submit dari database
-                $is_submit = $data['is_submit'];
-                $detail_jawaban_tipedata = $data['detail_jawaban_tipedata'];
-
-                // Jika is_submit bernilai 0, lewati iterasi ini
-                if ($is_submit != 1) {
-                    continue;
-                }
-
-                $jawaban_json = json_decode($detail_jawaban_tipedata, true);
-
-                if (is_array($jawaban_json) && !empty($jawaban_json)) {
-                    foreach ($jawaban_json as $key => $value) {
-                        if (is_array($value) && isset($value['jawaban']) && isset($value['nilai'])) {
-                            $jawaban = $value['jawaban'];
-                            $nilai = $value['nilai'];
-                            // Cetak hanya jika nilai tidak kosong
-                            if (!empty($jawaban)) {
-                                // Buat kunci unik berdasarkan label jawaban dan nilai jawaban
-
-                                $unique_key = $key . '_' . $jawaban;
-
-                                // Tambahkan jawaban ke dalam array berdasarkan label jawaban
-                                if (!isset($grouped_values[$key])) {
-                                    $grouped_values[$key] = [];
-                                }
-                                // Tambahkan nilai jawaban ke array jika belum ada
-                                if (!in_array($value, $grouped_values[$key])) {
-                                    $grouped_values[$key][] = $value;
-                                }
-
-                                // Tambahkan jawaban ke dalam array yang ditampilkan
-                                if (!isset($displayed_values[$unique_key][$id_user])) {
-                                    $displayed_values[$unique_key][$id_user] = true;
-                                    if (!isset($user_counts[$unique_key])) {
-                                        $user_counts[$unique_key] = 1;
-                                    } else {
-                                        $user_counts[$unique_key]++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            echo '<h1> Tipe Data </h1>';
-            foreach ($grouped_values as $jawaban_label => $values) {
-
-                echo '<div class="big-box">';
-                foreach ($values as $value) {
-                    if (is_array($value) && isset($value['jawaban']) && isset($value['nilai'])) {
-                        $jawaban = $value['jawaban'];
-                        $nilai = $value['nilai'];
-                        $unique_key = $jawaban_label . '_' . $jawaban;
-                        $background_color = ($nilai == 1) ? '#69C751' : '#CD4747';
-
-                        echo '<div class="item-container"> ';
-                        echo '<div class="circle">';
-                        if (isset($user_counts[$unique_key])) {
-                            echo $user_counts[$unique_key];
-                        }
-                        echo '</div>';
-                        echo '<div class="small-box" style="background-color: ' . $background_color . '"> ' . $jawaban;
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                }
-                echo '</div>';
-            }
-
-            ?>
-        </div>
-
-        <div class="container">
-            <?php
-            // Array untuk menyimpan nilai yang telah ditampilkan sebelumnya
-            $displayed_values = [];
-
-            // Array untuk menyimpan jumlah id_user yang memberikan jawaban yang sama
-            $user_counts = [];
-
-            // Array untuk menyimpan jawaban berdasarkan label
-            $grouped_values = [];
-
-            usort($informasi, function ($a, $b) {
-                return strcmp($a['id'], $b['id']);
-            });
-
-            foreach ($informasi as $data) {
-                // Ambil nilai jawaban dari database
-                $jawaban_tipe_data = $data['jawaban'];
-                $jawaban_label = $data['id'];
-
-                $id_user = $data['id_user'];
-
-                $is_submit = $data['is_submit'];
-
-                $detail_jawaban_algoritma = $data['detail_jawaban_algoritma'];
-
-                if ($is_submit != 1) {
-                    continue;
-                }
-
-                $jawaban_json = json_decode($detail_jawaban_algoritma, true);
-
-                if (is_array($jawaban_json) && !empty($jawaban_json)) {
-                    foreach ($jawaban_json as $key => $value) {
-                        if (is_array($value) && isset($value['jawaban']) && isset($value['nilai'])) {
-                            $jawaban = $value['jawaban'];
-                            $nilai = $value['nilai'];
-                            // Cetak hanya jika nilai tidak kosong
-                            if (!empty($jawaban)) {
-
-                                $unique_key = $key . '_' . $jawaban;
-
-                                // Tambahkan jawaban ke dalam array berdasarkan label jawaban
-                                if (!isset($grouped_values[$key])) {
-                                    $grouped_values[$key] = [];
-                                }
-                                // Tambahkan nilai jawaban ke array jika belum ada
-                                if (!in_array($value, $grouped_values[$key])) {
-                                    $grouped_values[$key][] = $value;
-                                }
-
-                                // Tambahkan jawaban ke dalam array yang ditampilkan
-                                if (!isset($displayed_values[$unique_key][$id_user])) {
-                                    $displayed_values[$unique_key][$id_user] = true;
-                                    if (!isset($user_counts[$unique_key])) {
-                                        $user_counts[$unique_key] = 1;
-                                    } else {
-                                        $user_counts[$unique_key]++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            echo '<h1> Algoritma </h1>';
-
-            foreach ($grouped_values as $jawaban_label => $values) {
-                echo '<div class="big-box">';
-                foreach ($values as $value) {
-                    if (is_array($value) && isset($value['jawaban']) && isset($value['nilai'])) {
-                        $jawaban = $value['jawaban'];
-                        $nilai = $value['nilai'];
-                        $unique_key = $jawaban_label . '_' . $jawaban;
-                        $background_color = ($nilai == 1) ? '#69C751' : '#CD4747';
-
-                        echo '<div class="item-container"> ';
-                        echo '<div class="circle">';
-                        if (isset($user_counts[$unique_key])) {
-                            echo $user_counts[$unique_key];
-                        }
-                        echo '</div>';
-                        echo '<div class="small-box" style="background-color: ' . $background_color . '"> ' . $jawaban;
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                }
-                echo '</div>';
-            }
-
-            ?>
-        </div>
-
-    </body>
-
-    </html>
-
-
-    <!-- <div class="table-responsive px-4 pb-3" style="border: 0">
-        <table id="overlappinganalysis" class="w-100 table table-striped table-bordered table-hover">
+    <div class="table-responsive px-4 pb-3" style="border: 0">
+        <table id="example" class="w-100 table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th width="25" style="text-align: center">No.</th>
-                    <th style="text-align: center">Nama Mahasiswa</th>
-                    <th style="text-align: center">Kelas</th>
-                    <th style="text-align: center">Soal</th>
-                    <th style="text-align: center">Jawaban</th>
-                    <th style="text-align: center">Status Jawaban</th>
-                    <th style="text-align: center">Waktu</th>
+                    <th style="text-align: center">No.</th>
+                    <th style="text-align: center">Studi Kasus</th>
+                    <th style="text-align: center">Level</th>
+                    <th style="text-align: center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -313,68 +39,44 @@
                 foreach ($informasi as $u) {
                     echo '
                 <tr>
-                    <td style="text-align: center">' . $no++ . '</td>     
-                    <td style="text-align: center">' . $u['nama_mahasiswa'] . '</td>
-                    <td style="text-align: center">' . $u['nama_kelas'] . '</td> 
-                    <td style="text-align: center">' . $u['studi_kasus'] . '</td> 
-                    <td style="text-align: center">' . $u['tipe_data_jawaban'] . '</td> 
-                    <td style="text-align: center">' . $u['status_jawaban'] . '</td> 
-                    <td style="text-align: center">' . $u['waktu'] . '</td> 
-                    
-                           </tr>';
+                    <td style="text-align: center">' . $no++ . '</td>
+                    <td style="text-align: center">' . $u['studi_kasus'] . '</td>
+                    <td style="text-align: center">' . $u['level'] . '</td>
+                    <td>
+                    <div class="text-center">
+                            <a class="btn btn-xs btn-warning" style="color: #fff; background-color: #69C751; border-color: #69C751;" href="' . base_url() . 'overlappinganalysis/detail/' . $u['soal'] . '">
+                            <i class="fa fa-eye" style="color: #fff;"></i> Analisis
+                            </a> 
+                        </div>
+                    </td>
+                </tr>';
                 ?>
                 <?php } ?>
             </tbody>
         </table>
-    </div> -->
+    </div>
 </div>
 </div>
-<!-- 
-<script src="<?= base_url() ?>assets/dist/js/app/ujian/hasil.js"></script> -->
+</div>
 
-<script>
-    $(document).ready(function() {
-        dataTable = $('#overlappinganalysis').DataTable({
-            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            buttons: [{
-                    extend: 'print',
-                    download: 'open',
-                    title: 'History Confidence',
-                    filename: 'history_conf_mhs_print'
-                },
-                {
-                    extend: 'copy',
-                    download: 'open',
-                    title: 'History Confidence',
-                    filename: 'history_conf_mhs_copy'
-                },
-                {
-                    extend: 'excel',
-                    download: 'open',
-                    title: 'History Confidence',
-                    filename: 'history_conf_mhs_excel'
-                },
-                {
-                    extend: 'pdfHtml5',
-                    download: 'open',
-                    title: 'History Confidence',
-                    filename: 'history_conf_mhs_pdf'
+<script src="<?= base_url() ?>assets/dist/js/app/soal/data.js"></script>
+
+<?php if ($this->ion_auth->is_admin()) : ?>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#level_filter').on('change', function() {
+                let id = $(this).val();
+                let src = '<?= base_url() ?>soal/data';
+                let url;
+
+                if (id !== 'all') {
+                    let src2 = src + '/' + id;
+                    url = $(this).prop('checked') === true ? src : src2;
+                } else {
+                    url = src;
                 }
-            ],
-            "columnDefs": [{
-                "targets": [3],
-                "visible": true
-            }]
+                table.ajax.url(url).load();
+            });
         });
-
-        $('.status-dropdown').on('change', function(e) {
-            var id_kelas = $(this).val();
-            $('.status-dropdown').val(id_kelas)
-            console.log(id_kelas)
-            //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
-            dataTable.column(3).search(id_kelas).draw();
-        })
-    });
-</script>
+    </script>
+<?php endif; ?>
