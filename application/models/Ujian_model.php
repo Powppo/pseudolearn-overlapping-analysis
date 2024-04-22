@@ -251,7 +251,7 @@ class Ujian_model extends CI_Model
     {
 
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
-        $this->db->select("oa.id as id, oa.id_soal as soal, oa.id_user as id_user, oa.is_submit as is_submit, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas, s.soal as studi_kasus, oa.jawaban as jawaban,oa.tipe_data_jawaban as tipe_data_jawaban, oa.waktu as waktu, oa.status_jawaban as status_jawaban, l.nama as level");
+        $this->db->select("oa.id as id, u.id_kelas as id_kelas, oa.id_soal as soal, oa.id_user as id_user, oa.is_submit as is_submit, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas, s.soal as studi_kasus, oa.jawaban as jawaban,oa.tipe_data_jawaban as tipe_data_jawaban, oa.waktu as waktu, oa.status_jawaban as status_jawaban, l.nama as level");
         $this->db->from('log_data oa');
         $this->db->join('users u', 'oa.id_user = u.id');
         $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
@@ -291,7 +291,7 @@ class Ujian_model extends CI_Model
     public function detailMhsOverlappingAnalysis($id_soal, $unique_keys)
     {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
-        $this->db->select("oa.id as id, oa.id_soal as soal, oa.id_user as id_user, u.username as nim, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas");
+        $this->db->select("oa.id as id, u.id_kelas as id_kelas, oa.id_soal as soal, oa.id_user as id_user, u.username as nim, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas");
         $this->db->from('log_data oa');
         $this->db->join('users u', 'oa.id_user = u.id');
         $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
@@ -307,6 +307,7 @@ class Ujian_model extends CI_Model
             $namaMahasiswa = $result['nama_mahasiswa'];
             $namaKelas = $result['nama_kelas'];
             $nim = $result['nim'];
+            $idKelas = $result['id_kelas'];
 
             // Proses detail_jawaban_tipedata
             $jawaban_tipedata = json_decode($result['detail_jawaban_tipedata'], true);
@@ -321,6 +322,7 @@ class Ujian_model extends CI_Model
                             'nim' => $nim,
                             'nama_mahasiswa' => $namaMahasiswa,
                             'nama_kelas' => $namaKelas,
+                            'id_kelas' => $idKelas,
                             'jenis_jawaban' => $jenis,
                             'jawaban' => $jawaban,
                             'nilai' => $data['nilai'] ?? null,
@@ -344,6 +346,7 @@ class Ujian_model extends CI_Model
                                 'nim' => $nim,
                                 'nama_mahasiswa' => $namaMahasiswa,
                                 'nama_kelas' => $namaKelas,
+                                'id_kelas' => $idKelas,
                                 'jenis_jawaban' => $jenis,
                                 'jawaban' => $jawaban,
                                 'nilai' => $nilai,

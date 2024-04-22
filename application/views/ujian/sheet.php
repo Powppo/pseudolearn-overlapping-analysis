@@ -4200,40 +4200,6 @@
 
 <!-- start waktu pengerjaan -->
 <script type="text/javascript">
-    var seconds = 0;
-    // console.log(window.localStorage.getItem('taken_time_quiz_'+'<?= $id_tes; ?>'));
-    var timeTaken = '<?php echo $timeTaken ?>';
-    if (timeTaken == '') {
-        if (window.localStorage.getItem('taken_time_quiz_' + '<?= $id_tes; ?>') != null) {
-            seconds = window.localStorage.getItem('taken_time_quiz_' + '<?= $id_tes; ?>');
-        } else {
-            window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
-            seconds = 0;
-            window.localStorage.setItem('taken_time_quiz_' + '<?= $id_tes; ?>', seconds);
-        }
-    } else {
-        var plush = timeTaken;
-        seconds = plush;
-    }
-
-
-    var timer = setInterval(upTimer, 1000);
-
-    function upTimer() {
-        ++seconds;
-        var hour = Math.floor(seconds / 3600);
-        var minute = Math.floor((seconds - hour * 3600) / 60);
-        var updSecond = seconds - (hour * 3600 + minute * 60);
-
-        document.getElementById("my_timer").innerHTML = hour + ":" + minute + ":" + updSecond;
-        document.getElementById("waktu").value = hour + ":" + minute + ":" + updSecond;
-        saveTimeTaken(seconds);
-
-    }
-
-    function saveTimeTaken(seconds) {
-        window.localStorage.setItem('taken_time_quiz_' + '<?= $id_tes; ?>', seconds);
-    }
     var minutesLabel = document.getElementById("minutes");
     // var secondsLabel = document.getElementById("seconds");
     // var totalSeconds = 0;
@@ -6968,5 +6934,72 @@
         //     }
         // });
     }
+    var seconds = 0;
+    var timerInterval;
+    var firstAnswerDropped = false;
+
+    function startTimer() {
+        console.log('Start Timer called. firstAnswerDropped:', firstAnswerDropped);
+        // Mulai interval hanya jika belum dimulai sebelumnya
+        if (!timerInterval) {
+            if (!firstAnswerDropped) {
+                seconds = 1; // Mulai dari 1 agar waktu pertama kali dimulai dari 00:00:01
+                firstAnswerDropped = true;
+                console.log('First answer dropped. seconds set to 1.');
+                updateTimer(); // Panggil updateTimer untuk menampilkan waktu awal
+            }
+            timerInterval = setInterval(upTimer, 1000); // Mulai interval baru
+            console.log('Timer Interval started.');
+        }
+    }
+
+    function upTimer() {
+        var hour = Math.floor(seconds / 3600);
+        var minute = Math.floor((seconds % 3600) / 60);
+        var second = seconds % 60;
+
+        // Format waktu
+        var formattedTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
+
+        // Tampilkan waktu pada elemen HTML
+        document.getElementById("my_timer").innerHTML = formattedTime;
+        document.getElementById("waktu").value = formattedTime;
+
+        // Tambah 1 detik ke waktu
+        seconds++;
+    }
+
+    function updateTimer() {
+        // Pembaruan waktu pertama kali saat jawaban pertama di-drop
+        var hour = Math.floor(seconds / 3600);
+        var minute = Math.floor((seconds % 3600) / 60);
+        var second = seconds % 60;
+
+        // Format waktu
+        var formattedTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
+
+        // Tampilkan waktu pada elemen HTML
+        document.getElementById("my_timer").innerHTML = formattedTime;
+        document.getElementById("waktu").value = formattedTime;
+    }
+
+    // Menargetkan semua elemen dengan kelas "drop-zone"
+    const dropZones = document.querySelectorAll('.drop-zone');
+    // Mendeteksi perubahan dalam setiap elemen drop-zone
+    dropZones.forEach((dropZone) => {
+        new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList') {
+                    startTimer(); // Mulai timer ketika terjadi perubahan di drop zone
+                }
+            });
+        }).observe(dropZone, {
+            childList: true,
+            subtree: true
+        });
+    });
+
+    // Mulai timer secara langsung saat halaman dimuat (opsional)
+    // startTimer();
 </script>
 <script src="<?= base_url() ?>assets/dist/js/app/ujian/sheet.js"></script>

@@ -23,77 +23,107 @@
             </div>
         </div>
     </div>
-    <table id="example" class="w-100 table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th style="text-align: center">No.</th>
-                <th style="text-align: center">NIM</th>
-                <th style="text-align: center">Nama Mahasiswa</th>
-                <th style="text-align: center">Kelas</th>
-                <th style="text-align: center">Jenis Jawaban</th>
-                <th style="text-align: center">Jawaban</th>
-                <th style="text-align: center">Status Jawaban</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $shownIds = []; ?>
-            <?php $no = 1; ?>
-            <?php foreach ($informasi as $userId => $jenisJawaban) : ?>
-                <?php foreach ($jenisJawaban as $jenis => $jawabanList) : ?>
-                    <?php foreach ($jawabanList as $jawaban) : ?>
-                        <?php
+    <br></br>
 
-                        $nim = $jawaban['nim'];
-                        $nilai = $jawaban['nilai'];
+    <div class="table-responsive px-4 pb-3" style="border: 0">
+        <table id="overlappinganalysis" class="w-100 table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th width="25" style="text-align: center">No.</th>
+                    <th style="text-align: center">NIM</th>
+                    <th style="text-align: center">Nama Mahasiswa</th>
+                    <th style="text-align: center">ID Kelas</th>
+                    <th style="text-align: center">Kelas</th>
+                    <th style="text-align: center">Jenis Jawaban</th>
+                    <th style="text-align: center">Jawaban</th>
+                    <th style="text-align: center">Status Jawaban</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $shownIds = []; ?>
+                <?php $no = 1; ?>
+                <?php foreach ($informasi as $userId => $jenisJawaban) : ?>
+                    <?php foreach ($jenisJawaban as $jenis => $jawabanList) : ?>
+                        <?php foreach ($jawabanList as $jawaban) : ?>
+                            <?php
 
-                        $status = ($nilai == 1) ? 'Benar' : 'Salah';
+                            $nim = $jawaban['nim'];
+                            $nilai = $jawaban['nilai'];
 
-                        if (!in_array($nim, $shownIds)) {
-                            echo '<tr>';
-                            echo '<td style="text-align: center">' . $no++ . '</td>';
-                            echo '<td style="text-align: center">' . $jawaban['nim'] . '</td>';
-                            echo '<td style="text-align: center">' . $jawaban['nama_mahasiswa'] . '</td>';
-                            echo '<td style="text-align: center">' . $jawaban['nama_kelas'] . '</td>';
-                            echo '<td style="text-align: center">' . $jawaban['jenis_jawaban'] . '</td>';
-                            echo '<td style="text-align: center">' . $jawaban['jawaban'] . '</td>';
-                            echo '<td style="text-align: center">' . $status . '</td>';
-                            echo '</tr>';
+                            $status = ($nilai == 1) ? 'Benar' : 'Salah';
 
-                            $shownIds[] = $nim;
-                        }
-                        ?>
+                            if (!in_array($nim, $shownIds)) {
+                                echo '<tr>';
+                                echo '<td style="text-align: center">' . $no++ . '</td>';
+                                echo '<td style="text-align: center">' . $jawaban['nim'] . '</td>';
+                                echo '<td style="text-align: center">' . $jawaban['nama_mahasiswa'] . '</td>';
+                                echo '<td style="text-align: center">' . $jawaban['id_kelas'] . '</td>';
+                                echo '<td style="text-align: center">' . $jawaban['nama_kelas'] . '</td>';
+                                echo '<td style="text-align: center">' . $jawaban['jenis_jawaban'] . '</td>';
+                                echo '<td style="text-align: center">' . $jawaban['jawaban'] . '</td>';
+                                echo '<td style="text-align: center">' . $status . '</td>';
+                                echo '</tr>';
+
+                                $shownIds[] = $nim;
+                            }
+                            ?>
+                        <?php endforeach; ?>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-
-
-
-
-
-</div>
-</div>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<script src="<?= base_url() ?>assets/dist/js/app/soal/data.js"></script>
 
-<?php if ($this->ion_auth->is_admin()) : ?>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#level_filter').on('change', function() {
-                let id = $(this).val();
-                let src = '<?= base_url() ?>soal/data';
-                let url;
+<!-- </div>
+</div> -->
+<!-- 
+<script src="<?= base_url() ?>assets/dist/js/app/ujian/hasil.js"></script> -->
 
-                if (id !== 'all') {
-                    let src2 = src + '/' + id;
-                    url = $(this).prop('checked') === true ? src : src2;
-                } else {
-                    url = src;
+<script>
+    $(document).ready(function() {
+        dataTable = $('#overlappinganalysis').DataTable({
+            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [{
+                    extend: 'print',
+                    download: 'open',
+                    title: 'History Confidence',
+                    filename: 'history_conf_mhs_print'
+                },
+                {
+                    extend: 'copy',
+                    download: 'open',
+                    title: 'History Confidence',
+                    filename: 'history_conf_mhs_copy'
+                },
+                {
+                    extend: 'excel',
+                    download: 'open',
+                    title: 'History Confidence',
+                    filename: 'history_conf_mhs_excel'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    download: 'open',
+                    title: 'History Confidence',
+                    filename: 'history_conf_mhs_pdf'
                 }
-                table.ajax.url(url).load();
-            });
+            ],
+            "columnDefs": [{
+                "targets": [3],
+                "visible": false
+            }]
         });
-    </script>
-<?php endif; ?>
+
+        $('.status-dropdown').on('change', function(e) {
+            var id_kelas = $(this).val();
+            $('.status-dropdown').val(id_kelas)
+            console.log(id_kelas)
+            //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+            dataTable.column(3).search(id_kelas).draw();
+        })
+    });
+</script>
