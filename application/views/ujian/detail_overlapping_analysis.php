@@ -315,7 +315,7 @@
                         }
                         echo '</div>';
                         echo '</a>';
-                        echo '<div class="small-box" style="background-color: ' . $background_color . '"> ' . $unique_key;
+                        echo '<div class="small-box" style="background-color: ' . $background_color . '"> ' . $jawaban;
                         echo '</div>';
                         echo '</div>';
                     }
