@@ -339,9 +339,7 @@
             dropdown.addEventListener('change', function() {
                 const selectedKelasId = this.value; // Nilai id_kelas yang dipilih
 
-                // Kirim request ke server untuk memperbarui tampilan berdasarkan id_kelas yang dipilih
-                // Implementasikan logika AJAX di sini untuk memuat ulang data berdasarkan id_kelas yang dipilih
-                // Contoh menggunakan jQuery AJAX
+
                 $.ajax({
                     type: 'GET',
                     url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user, // Ganti dengan URL endpoint Anda
@@ -349,8 +347,6 @@
                         id_kelas: selectedKelasId
                     }, // Kirim id_kelas yang dipilih ke server
                     success: function(response) {
-                        // Di sini Anda dapat memperbarui tampilan dengan data yang dimuat ulang
-                        // Misalnya, memperbarui tabel atau konten lainnya
                         console.log(response); // Tampilkan respons dari server
                     },
                     error: function(error) {
