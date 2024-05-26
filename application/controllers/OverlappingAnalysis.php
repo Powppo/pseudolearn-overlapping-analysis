@@ -45,17 +45,45 @@ class OverlappingAnalysis extends CI_Controller
         $this->load->view('_templates/dashboard/_footer.php');
     }
 
+    // public function detail($id_soal)
+    // {
+    //     $results = $this->ujian->detailOverlappingAnalysis($id_soal);
+    //     $data = [
+    //         'user'      => $this->user,
+    //         'informasi' => $results,
+    //         'judul'    => 'Hasil Overlapping Analysis',
+    //         'subjudul' => 'Analisis Hasil Ujian Mahasiswa',
+    //     ];
+    //     if ($this->ion_auth->is_admin()) {
+    //         //Jika admin maka tampilkan semua matkul
+    //         $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+    //     }
+
+    //     $this->load->view('_templates/dashboard/_header.php', $data);
+    //     $this->load->view('ujian/detail_overlapping_analysis');
+    //     $this->load->view('_templates/dashboard/_footer.php');
+    // }
+
     public function detail($id_soal)
     {
-        $results = $this->ujian->detailOverlappingAnalysis($id_soal);
+        $id_kelas = $this->input->post('id_kelas');
+
+        if ($id_kelas) {
+            $results = $this->ujian->get_filtered_data($id_soal, $id_kelas);
+        } else {
+            $results = $this->ujian->detailOverlappingAnalysis($id_soal);
+        }
+
         $data = [
-            'user'      => $this->user,
+            'user' => $this->user,
             'informasi' => $results,
-            'judul'    => 'Hasil Overlapping Analysis',
+            'judul' => 'Hasil Overlapping Analysis',
             'subjudul' => 'Analisis Hasil Ujian Mahasiswa',
+            'selected_kelas' => $id_kelas, // Tambahkan ini untuk mengatur nilai terpilih pada dropdown
+            'id_soal' => $id_soal // Tambahkan ini untuk memastikan $id_soal tersedia di view
         ];
+
         if ($this->ion_auth->is_admin()) {
-            //Jika admin maka tampilkan semua matkul
             $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
         }
 
@@ -64,21 +92,18 @@ class OverlappingAnalysis extends CI_Controller
         $this->load->view('_templates/dashboard/_footer.php');
     }
 
-    public function detail_jawaban($id_soal, $encodedUniqueKey)
-    {
-        // $unique_keys_array = explode(' ', $unique_keys_string);
-        // $unique_keys = array($unique_keys_string);
 
+
+    public function detail_jawaban($id_soal, $encodedUniqueKey, $id_kelas = 'all')
+    {
 
         $decodedUniqueKey = base64_decode(urldecode($encodedUniqueKey));
 
-        $results = $this->ujian->detailMhsOverlappingAnalysis($id_soal, array($decodedUniqueKey));
-
-        // $encoded_url = urlencode('d_READ array[5] = {');
-        // echo $encoded_url;
-
-        // var_dump($decodedUniqueKey);
-        // var_dump($results);
+        if ($id_kelas == 'all') {
+            $results = $this->ujian->getAllMhsOverlappingAnalysis($id_soal, array($decodedUniqueKey));
+        } else {
+            $results = $this->ujian->detailMhsOverlappingAnalysis($id_soal, array($decodedUniqueKey), $id_kelas);
+        }
 
         $data = [
             'user'      => $this->user,

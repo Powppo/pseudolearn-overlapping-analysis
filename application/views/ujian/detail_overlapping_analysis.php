@@ -1,6 +1,11 @@
 <!-- <link rel="stylesheet" href="<?= base_url() ?>template/css/base.css" /> -->
 <link rel="stylesheet" href="<?= base_url() ?>template/css/quiz.css" />
 <!-- <link rel="stylesheet" href="<?= base_url() ?>template/css/alert.css" /> -->
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 <div class="box">
     <div class="box-header with-border">
@@ -13,18 +18,24 @@
     <div class="box-body">
         <div class="row">
             <div class="col-lg-4 col-xs-4 mb-4">
-                <a href="<?= base_url() ?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+                <a href="<?= $_SERVER['HTTP_REFERER'] ?>" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div>
-            <div class="form-group col-lg-4 col-xs-5 text-center">
-                <!-- <?php if ($this->ion_auth->is_admin()) : ?>
-                    <select class="form-control status-dropdown select2" style="width:100% !important">
-                        <option value="">Semua Kelas</option>
-                        <?php foreach ($kelas as $kls) : ?>
-                            <option value="<?= $kls->id_kelas ?>"><?= $kls->nama ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                <?php endif; ?> -->
-            </div>
+            <form method="POST" action="<?= base_url('overlappinganalysis/detail/' . $id_soal) ?>">
+                <div class="form-group col-lg-4 col-xs-6 text-center">
+                    <?php if ($this->ion_auth->is_admin()) : ?>
+                        <select name="id_kelas" class="form-control status-dropdown select2" style="width:100% !important" onchange="this.form.submit()">
+                            <option value="">Semua Kelas</option>
+                            <?php foreach ($kelas as $kls) : ?>
+                                <option value="<?= $kls->id_kelas ?>" <?= (isset($selected_kelas) && $selected_kelas == $kls->id_kelas) ? 'selected' : '' ?>>
+                                    <?= $kls->nama ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php endif; ?>
+                </div>
+            </form>
+
+
         </div>
     </div>
     <style>
@@ -103,10 +114,8 @@
     <html lang="en">
 
     <head>
-        <!-- <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kotak dengan Kotak Kecil</title>
-        <link rel="stylesheet" href="styles.css"> -->
+
+
     </head>
 
     <body>
@@ -132,7 +141,7 @@
             ?>
         </div>
 
-        <div class="container">
+        <div id="jawaban-container" class="container">
             <?php
             // Array untuk menyimpan nilai yang telah ditampilkan sebelumnya
             $displayed_values = [];
@@ -154,6 +163,7 @@
                 $is_submit = $data['is_submit'];
                 $detail_jawaban_tipedata = $data['detail_jawaban_tipedata'];
                 $id_soal = $data['soal'];
+                $id_kelas = $data['id_kelas'];
 
                 // Jika is_submit bernilai 0, lewati iterasi ini
                 if ($is_submit != 1) {
@@ -210,7 +220,10 @@
                         $background_color = ($nilai == 1) ? '#69C751' : '#CD4747';
 
                         echo '<div class="item-container"> ';
-                        echo '<a class="circle" href="' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $encoded_unique_key . '">';
+                        $id_kelas = isset($id_kelas) ? $id_kelas : 'all';
+
+                        // echo '<a class="circle" href="' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $encoded_unique_key . '/' . $id_kelas . '">';
+                        echo '<a class="circle" href="javascript:void(0);" onclick="openInNewWindow(\'' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $encoded_unique_key . '/' . ($id_kelas ?: 'all') . '\');">';
                         echo '<div>';
                         if (isset($user_counts[$unique_key])) {
                             echo $user_counts[$unique_key];
@@ -325,34 +338,84 @@
 
             ?>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            function openInNewWindow(url) {
+                // Mendapatkan lebar dan tinggi layar
+                var screenWidth = window.screen.width;
+                var screenHeight = window.screen.height;
+
+                // Menentukan lebar dan tinggi pop-up 
+                var popupWidth = 1200;
+                var popupHeight = 800;
+
+                // Menghitung posisi pop-up agar muncul di tengah layar
+                var leftPosition = (screenWidth - popupWidth) / 2;
+                var topPosition = (screenHeight - popupHeight) / 2;
+
+                // Membuka pop-up dengan ukuran dan posisi yang ditentukan
+                window.open(url, 'popUpWindow', 'width=' + popupWidth + ', height=' + popupHeight + ', left=' + leftPosition + ', top=' + topPosition + ', resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes');
+            }
+        </script>
 
     </body>
 
     </html>
-
     <script>
-        // Fungsi untuk menangani perubahan pada dropdown kelas
         document.addEventListener('DOMContentLoaded', function() {
+            $('.select2').select2();
+
             const dropdown = document.querySelector('.status-dropdown');
+            const jawabanContainer = document.getElementById('jawaban-container');
 
-            // Tambahkan event listener untuk perubahan nilai dropdown
             dropdown.addEventListener('change', function() {
-                const selectedKelasId = this.value; // Nilai id_kelas yang dipilih
+                let selectedKelasId = this.value;
+                if (selectedKelasId === 'Semua Kelas') {
+                    selectedKelasId = ''; // Atur ke string kosong jika 'all' dipilih
+                }
+                fetch('<?= base_url() ?>overlappinganalysis/filter_jawaban', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id_kelas: selectedKelasId,
+                            id_soal: <?= $id_soal ?> // Pastikan id_soal sudah terdefinisi di JavaScript Anda
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data); // Tambahkan ini untuk debugging
 
+                        // Kosongkan kontainer sebelum mengisi dengan data baru
+                        jawabanContainer.innerHTML = '';
 
-                $.ajax({
-                    type: 'GET',
-                    url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user, // Ganti dengan URL endpoint Anda
-                    data: {
-                        id_kelas: selectedKelasId
-                    }, // Kirim id_kelas yang dipilih ke server
-                    success: function(response) {
-                        console.log(response); // Tampilkan respons dari server
-                    },
-                    error: function(error) {
-                        console.error('Error:', error);
-                    }
-                });
+                        let html = '<h1> Tipe Data </h1>';
+                        Object.keys(data.grouped_values).forEach(jawaban_label => {
+                            html += '<div class="big-box">';
+                            data.grouped_values[jawaban_label].forEach(value => {
+                                if (value && value.jawaban && value.nilai) {
+                                    const jawaban = value.jawaban;
+                                    const nilai = value.nilai;
+                                    const unique_key = jawaban_label + '_' + jawaban;
+                                    const encoded_unique_key = btoa(unique_key);
+                                    const background_color = (nilai == 1) ? '#69C751' : '#CD4747';
+
+                                    const id_kelas = selectedKelasId || 'all'; // Gunakan 'all' jika null
+                                    html += '<div class="item-container"> ';
+                                    html += '<a class="circle" href="<?= base_url() ?>overlappinganalysis/detail_jawaban/' + data.id_soal + '/' + encoded_unique_key + '/' + id_kelas + '">';
+                                    html += '<div>' + (data.user_counts[unique_key] || 0) + '</div>';
+                                    html += '</a>';
+                                    html += '<div class="small-box" style="background-color: ' + background_color + '"> ' + jawaban;
+                                    html += '</div>';
+                                    html += '</div>';
+                                }
+                            });
+                            html += '</div>';
+                        });
+                        jawabanContainer.innerHTML = html;
+                    })
+                    .catch(error => console.error('Error:', error));
             });
         });
     </script>
