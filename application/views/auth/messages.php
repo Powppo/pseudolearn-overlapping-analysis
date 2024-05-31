@@ -44,8 +44,8 @@
         </div>
       </div>
     </div> -->
-
-    <div class="site-section bg-image overlay" style="background-image: url(assets/frontend/images/hero_1.jpg);">
+<!-- <div id="messages-section">
+<div class="site-section bg-image overlay" style="background-image: url(assets/frontend/images/hero_1.jpg);">
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-md-8 text-center testimony" style="margin-top: 60px;">
@@ -115,3 +115,5 @@
         </div>
       </div>
     </div>
+</div> -->
+    

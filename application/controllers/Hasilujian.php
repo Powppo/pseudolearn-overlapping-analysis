@@ -65,7 +65,7 @@ class HasilUjian extends CI_Controller {
 			'hasil' => $results,
 			'judul'	=> 'Log',
 			'subjudul'=> 'Detail Log Per Level',
-			'total_waktu' => $this->db->query("SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(waktu))) AS total_waktu FROM conditions c WHERE c.status_jawaban='benar' AND id_user = ?", $id)->row_array()['total_waktu'],
+			'total_waktu' => $this->db->query("SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(waktu))) AS total_waktu FROM conditions c WHERE id_user = ?", $id)->row_array()['total_waktu'],
 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
 			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
@@ -81,7 +81,39 @@ class HasilUjian extends CI_Controller {
 		$this->load->view('_templates/dashboard/_footer.php');
 	}
 	
-	public function detailLog($id, $id_level) {
+// 	public function detailLog($id, $id_level) {
+
+// 		$detail_data = $this->ujian->detailLogAktivitas($id, $id_level);
+// 		$id_soal = $this->db->query('select id_soal from conditions')->row_array();
+// 		$data = [
+// 			'user' => $this->user,
+// 			'detail' => $detail_data,
+// 			'judul'	=> 'Log',
+// 			'subjudul'=> 'Detail Log Per Soal',
+// 			'total_waktu' => $this->db->query('select SEC_TO_TIME(SUM(TIME_TO_SEC(waktu))) as total_waktu from conditions c INNER JOIN tb_soal s ON c.id_soal = s.id_soal where c.status_jawaban="benar" and c.id_user = ? and s.id_level = ?', [$id, $id_level])->row_array()['total_waktu'],
+// 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
+// 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
+// 			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
+// 		];
+
+// 		if ($this->ion_auth->is_admin()) {
+//             //Jika admin maka tampilkan semua matkul
+//             $data['level'] = $this->db->query('select * from tb_level')->result();
+//         }
+
+// 		if ($this->ion_auth->is_admin()) {
+//             //Jika admin maka tampilkan semua matkul
+//             $data['soal'] = $this->db->query('select * from tb_soal')->result();
+//         }
+
+// 		$this->load->view('_templates/dashboard/_header.php', $data);
+// 		$this->load->view('ujian/details_hasil');
+// 		$this->load->view('_templates/dashboard/_footer.php');
+
+// 	}
+
+public function detailLog($id, $id_level)
+	{
 
 		$detail_data = $this->ujian->detailLogAktivitas($id, $id_level);
 		$id_soal = $this->db->query('select id_soal from conditions')->row_array();
@@ -89,27 +121,26 @@ class HasilUjian extends CI_Controller {
 			'user' => $this->user,
 			'detail' => $detail_data,
 			'judul'	=> 'Log',
-			'subjudul'=> 'Detail Log Per Soal',
-			'total_waktu' => $this->db->query('select SEC_TO_TIME(SUM(TIME_TO_SEC(waktu))) as total_waktu from conditions c INNER JOIN tb_soal s ON c.id_soal = s.id_soal where c.status_jawaban="benar" and c.id_user = ? and s.id_level = ?', [$id, $id_level])->row_array()['total_waktu'],
+			'subjudul' => 'Detail Log Per Soal',
+			'total_waktu' => $this->db->query('select SEC_TO_TIME(SUM(TIME_TO_SEC(waktu))) as total_waktu from conditions c INNER JOIN tb_soal s ON c.id_soal = s.id_soal where c.id_user = ? and s.id_level = ?', [$id, $id_level])->row_array()['total_waktu'],
 			'nama_mahasiswa' => $this->db->query("SELECT CONCAT(first_name, ' ', last_name) AS nama_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nama_mahasiswa'],
 			'nim_mahasiswa' => $this->db->query("SELECT username AS nim_mahasiswa FROM users WHERE id = ?", $id)->row_array()['nim_mahasiswa'],
 			'kelas_mahasiswa' => $this->db->query("SELECT u.id, k.nama AS kelas_mahasiswa FROM users u INNER JOIN tb_kelas k ON u.id_kelas = k.id_kelas WHERE id = ?", $id)->row_array()['kelas_mahasiswa'],
 		];
 
 		if ($this->ion_auth->is_admin()) {
-            //Jika admin maka tampilkan semua matkul
-            $data['level'] = $this->db->query('select * from tb_level')->result();
-        }
+			//Jika admin maka tampilkan semua matkul
+			$data['level'] = $this->db->query('select * from tb_level')->result();
+		}
 
 		if ($this->ion_auth->is_admin()) {
-            //Jika admin maka tampilkan semua matkul
-            $data['soal'] = $this->db->query('select * from tb_soal')->result();
-        }
+			//Jika admin maka tampilkan semua matkul
+			$data['soal'] = $this->db->query('select * from tb_soal')->result();
+		}
 
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('ujian/details_hasil');
 		$this->load->view('_templates/dashboard/_footer.php');
-
 	}
 
 	public function detailConfidence($id, $id_soal) {

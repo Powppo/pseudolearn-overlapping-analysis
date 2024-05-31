@@ -8,9 +8,15 @@
     </div>
     <div class="box-body">
         <div class="row">
+            <!-- <div class="col-lg-4 col-xs-4 mb-4">
+                <a href="<?= base_url() ?>'overlappinganalysis/detail/ (ini id soal)" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+            </div> -->
             <div class="col-lg-4 col-xs-4 mb-4">
-                <a href="<?= base_url() ?>hasilujian" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+                <a href="#" class="btn btn-flat btn-sm btn-default">
+                    <i class="fa fa-arrow-left"></i> Kembali
+                </a>
             </div>
+
             <div class="form-group col-lg-4 col-xs-6 text-center">
                 <?php if ($this->ion_auth->is_admin()) : ?>
                     <select class="form-control status-dropdown select2" style="width:100% !important">
@@ -125,5 +131,17 @@
             //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
             dataTable.column(3).search(id_kelas).draw();
         })
+    });
+</script>
+
+<script>
+    // Mensimulasikan klik pada toggle button saat halaman dimuat di dalam pop-up
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.opener) {
+            var toggleButton = document.querySelector('.sidebar-toggle');
+            if (toggleButton) {
+                toggleButton.click();
+            }
+        }
     });
 </script>

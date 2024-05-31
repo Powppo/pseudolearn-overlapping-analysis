@@ -57,21 +57,35 @@
                 $('#ujian').html('');
                 var listujian = '';
                 $.each(json, function(key, value) {
-                    listujian += '<div class="col-sm-6 pt-3">';
-                    if (value.id) {
-                        listujian += '<img src="<?= base_url() ?>assets/dist/img/unlock_img2.png" style="position: absolute; margin: 20px; height:50px; width:50px;">';
-                    } else {
-                        listujian += '<img src="<?= base_url() ?>assets/dist/img/unlock_img.png" style="position: absolute; margin: 20px; height:50px; width:50px;">';
+                    if (key % 3 == 0) { // Memulai baris baru setiap tiga item
+                        listujian += '<div class="row">';
                     }
-                    listujian += '<div class="alert bg-success" style="text-align: center; border-radius: 13px; background: radial-gradient(circle at top left, #9bb8ed, #a4eaff)">';
-                    if (value.id) {
-                        listujian += '<h4><a href="<?= base_url() ?>ujianEksperimen/?key=' + value.id_soal + '" style="text-decoration: none; color: black">' + value.judul + '</a></i></h4>';
-                    } else {
-                        listujian += '<h4><a href="<?= base_url() ?>ujianEksperimen/?key=' + value.id_soal + '" style="text-decoration: none; color: black">' + value.judul + '</a></i></h4>';
-                    }
-                    listujian += '<span class="d-block"> ' + value.nama + '</span>';
+
+                    var lockedImage = '<?= base_url() ?>assets/dist/img/puzzle.png';
+                    var successImage = '<?= base_url() ?>assets/dist/img/success.png';
+                    var imageUrl = value.id ? lockedImage : successImage;
+
+                    // Mengambil nama file gambar secara acak dari array imageNames
+                    var randomImageName = imageNames[Math.floor(Math.random() * imageNames.length)];
+                    // Membuat URL lengkap gambar dengan base_url dan nama file yang dipilih secara acak
+                    var randomImageUrl = '<?= base_url() ?>assets/frontend/images/' + randomImageName;
+
+                    var truncatedTitle = value.judul.length > 35 ? value.judul.substring(0, 35) + '...' : value.judul;
+
+                    listujian += '<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">'; // Menyesuaikan lebar kartu dengan ukuran layar
+                    listujian += '<div class="card shadow" style="width: 100%; height: auto;">'; // Sesuaikan lebar kartu dengan kolom
+                    listujian += '<img src="' + randomImageUrl + '" class="img-thumbnail mt-4" alt="Top Image">';// Menambahkan gambar di atas gambar status
+                    listujian += '<img src="' + imageUrl + '" class="card-img-top mt-3 " alt="Status Image" style="width: 25px; height: 25px;">';
+                    listujian += '<div class="card-body">';
+                    listujian += '<h5 class="card-title text-bold"><a href="<?= base_url() ?>ujian/?key=' + value.id_soal + '">' + truncatedTitle + '</a></h5>';
+                    listujian += '<p class="card-text">' + value.nama + '</p>';
                     listujian += '</div>';
                     listujian += '</div>';
+                    listujian += '</div>';
+
+                    if ((key + 1) % 3 == 0 || key == json.length - 1) { // Menutup baris setiap tiga item atau ketika loop mencapai item terakhir
+                        listujian += '</div>'; // Menutup baris
+                    }
                 });
                 $('#ujian').append(listujian);
             },

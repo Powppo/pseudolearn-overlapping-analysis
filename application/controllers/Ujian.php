@@ -360,18 +360,20 @@ class Ujian extends CI_Controller
 			
 					<p class="description__question">';
 			$html .= '<div class="text-center"><div class="w-25"></div></div>' . $s->soal . '<div class="funkyradio"></p>';
-			$html .= '<div class="description__data-type data-type" style="margin-left: -3px; width:350px; background-color: #ffe3c5;border-color:#75251e">
-				<h4 class="data-type__title" style="background-color: #ab372d;"><b>Tipe Data</b></h4>
+			// ubah warna disini
+			$html .= '<div class="description__data-type data-type" style="margin-left: -3px; width:auto; background-color: #ECF0F5;border-color:#102C57">
+				<h4 class="data-type__title" style="background-color: #102C57;"><b>Tipe Data</b></h4>
 				<ul class="data-type__items">';
 			for ($i = 0; $i < $var_count; $i++) {
 				$var = "jenis_data_v" . $var_opsi[$i];
-				!empty($s->$var) ? $html .= '<li class="data-type__item draggable" id="opsi_jenis_' . $var_opsi[$i] . '" value="' . $s->$var . '">' . $s->$var . '</li>' : '';
+				!empty($s->$var) ? $html .= '<li class="data-type__item draggable" style="color: white; margin: 2px;" id="opsi_jenis_' . $var_opsi[$i] . '" value="' . $s->$var . '">' . $s->$var . '</li>' : '';
 			}
 			$html .= '</ul>
 						</div>';
-			$html .= '<div class="description__algorithm algorithm" style="margin-left: -3px; width:350px; background-color: #ffe3c5;border-color:#75251e">
-						<h4 class="algorithm__title" style="background-color: #ab372d"><b>Algoritma</b></h4>
-						<ul class="algorithm__items" style="margin-right:35px;">';
+							// ubah warna disini
+			$html .= '<div class="description__algorithm algorithm" style="margin-left: -3px; width:auto; background-color: #ECF0F5;border-color:#102C57">
+						<h4 class="algorithm__title" style="background-color: #102C57;"><b>Algoritma</b></h4>
+						<ul class="algorithm__items">';
 			for ($j = 0; $j < $this->config->item('jml_opsi'); $j++) {
 				$array_clues = [];
 				for ($k = 0; $k < $this->config->item('jml_opsi'); $k++) {
@@ -386,7 +388,7 @@ class Ujian extends CI_Controller
 				if (!in_array($opsi, $array_clues)) {
 					$pilihan_opsi 	= !empty($s->$opsi) ? $s->$opsi : "";
 
-					!empty($s->$opsi) ? $html .= '<li class="algorithm__item draggable dsdsd" style="width:300px;" id="opsi_' . strtolower($arr_opsi[$j]) . '">' . $pilihan_opsi . '</li>' : '';
+					!empty($s->$opsi) ? $html .= '<li class="algorithm__item draggable" style="width:300px; margin-bottom: 5px; margin-top: 5px; color: white;" id="opsi_' . strtolower($arr_opsi[$j]) . '">' . $pilihan_opsi . '</li>' : '';
 				}
 			}
 			$html .= '</ul>
@@ -394,21 +396,19 @@ class Ujian extends CI_Controller
 						
 					</div>
 					</div>
-					<div class="quiz__answer answer">
+					<div class="quiz__answer answer" style="width: 40rem; margin-top: 1.4rem;">
 						<table class="answer__content">
 							<tbody>
-								<tr>
-									<th><span style="background-color: #FF6D60">Judul</span></th>
-									<td>' . $s->judul . '</td>
+								<tr>  
+									<td style="background: #ECF0F5;">Tipe Data</td>
 								</tr>
-								<tr>
-									<th><span style="background-color: #FF6D60">Deklarasi</span></th>
-									<td>
+								<tr> 
+									<td style="background: #ECF0F5;">
 										<table>
 											<tbody>';
 			for ($i = 0; $i < $jenis_count; $i++) {
 				$var = "variable_" . $jenis_opsi[$i];
-				!empty($s->$var) ? $html .= '<tr style="height: 40px;"><th>' . $s->$var . '</th><td class="drop-zone" id="jenis_' . $jenis_opsi[$i] . '"></td>
+				!empty($s->$var) ? $html .= '<tr style="height: 40px;"><th>' . $s->$var . '</th><td class="drop-zone" style="background: #ECF0F5;" id="jenis_' . $jenis_opsi[$i] . '"></td>
 											</tr>' : '';
 			}
 			$html .= '</tbody>
@@ -418,9 +418,12 @@ class Ujian extends CI_Controller
 							</tbody>
 						</table>
 						<table class="answer__content">
+							<div style="width: 100%; background: #102C57;  text-align: center; padding: 1px; color: white; border-radius: 10px;">
+							<h4 style="font-weight: bold;">Algoritma</h4>
+							</div>
 							<tbody>
 								<tr>
-									<th rowspan="40"><span style="background-color: #FF6D60">DeskripsiAlgoritma</span></th>
+								
 									
 								</tr>';
 			if ($s->clue_a) {
@@ -428,45 +431,45 @@ class Ujian extends CI_Controller
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_a) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" id="jawaban_' . $s->urut_a . '"></td></tr>' : '';
+				!empty($s->urut_a) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_a . '"></td></tr>' : '';
 			}
 			if ($s->clue_b) {
 				$clue = $s->clue_b;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_b) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_b . '"></td></tr>' : '';
+				!empty($s->urut_b) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;"  id="jawaban_' . $s->urut_b . '"></td></tr>' : '';
 			}
 			if ($s->clue_c) {
 				$clue = $s->clue_c;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_c) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_c . '"></td></tr>' : '';
+				!empty($s->urut_c) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;"  id="jawaban_' . $s->urut_c . '"></td></tr>' : '';
 			}
 			if ($s->clue_d) {
 				$clue = $s->clue_d;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_d) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_d . '"></td></tr>' : '';
+				!empty($s->urut_d) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;"  id="jawaban_' . $s->urut_d . '"></td></tr>' : '';
 			}
 			if ($s->clue_e) {
 				$clue = $s->clue_e;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_e) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_e . '"></td></tr>' : '';
+				!empty($s->urut_e) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;"  id="jawaban_' . $s->urut_e . '"></td></tr>' : '';
 			}
 
 			if ($s->clue_f) {
@@ -474,9 +477,9 @@ class Ujian extends CI_Controller
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_f) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_f . '"></td></tr>' : '';
+				!empty($s->urut_f) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;"  id="jawaban_' . $s->urut_f . '"></td></tr>' : '';
 			}
 
 			if ($s->clue_g) {
@@ -484,9 +487,9 @@ class Ujian extends CI_Controller
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_g) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_g . '"></td></tr>' : '';
+				!empty($s->urut_g) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;"  id="jawaban_' . $s->urut_g . '"></td></tr>' : '';
 			}
 
 			if ($s->clue_h) {
@@ -494,9 +497,9 @@ class Ujian extends CI_Controller
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_h) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_h . '"></td></tr>' : '';
+				!empty($s->urut_h) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;"  id="jawaban_' . $s->urut_h . '"></td></tr>' : '';
 			}
 
 			if ($s->clue_i) {
@@ -504,9 +507,9 @@ class Ujian extends CI_Controller
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_i) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_i . '"></td></tr>' : '';
+				!empty($s->urut_i) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_i . '"></td></tr>' : '';
 			}
 
 			if ($s->clue_j) {
@@ -514,175 +517,182 @@ class Ujian extends CI_Controller
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_j) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_j . '"></td></tr>' : '';
+				!empty($s->urut_j) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_j . '"></td></tr>' : '';
 			}
 			if ($s->clue_k) {
 				$clue = $s->clue_k;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_k) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_k . '"></td></tr>' : '';
+				!empty($s->urut_k) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_k . '"></td></tr>' : '';
 			}
 			if ($s->clue_l) {
 				$clue = $s->clue_l;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_l) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_l . '"></td></tr>' : '';
+				!empty($s->urut_l) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_l . '"></td></tr>' : '';
 			}
 			if ($s->clue_m) {
 				$clue = $s->clue_m;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_m) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_m . '"></td></tr>' : '';
+				!empty($s->urut_m) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_m . '"></td></tr>' : '';
 			}
 			if ($s->clue_n) {
 				$clue = $s->clue_n;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_n) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_n . '"></td></tr>' : '';
+				!empty($s->urut_n) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_n . '"></td></tr>' : '';
 			}
 			if ($s->clue_o) {
 				$clue = $s->clue_o;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_o) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_o . '"></td></tr>' : '';
+				!empty($s->urut_o) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_o . '"></td></tr>' : '';
 			}
 			if ($s->clue_p) {
 				$clue = $s->clue_p;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_p) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_p . '"></td></tr>' : '';
+				!empty($s->urut_p) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_p . '"></td></tr>' : '';
 			}
 			if ($s->clue_q) {
 				$clue = $s->clue_q;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_q) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_q . '"></td></tr>' : '';
+				!empty($s->urut_q) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_q . '"></td></tr>' : '';
 			}
 			if ($s->clue_r) {
 				$clue = $s->clue_r;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_r) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_r . '"></td></tr>' : '';
+				!empty($s->urut_r) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_r . '"></td></tr>' : '';
 			}
 			if ($s->clue_s) {
 				$clue = $s->clue_s;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_s) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_s . '"></td></tr>' : '';
+				!empty($s->urut_s) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_s . '"></td></tr>' : '';
 			}
 			if ($s->clue_t) {
 				$clue = $s->clue_t;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_t) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_t . '"></td></tr>' : '';
+				!empty($s->urut_t) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_t . '"></td></tr>' : '';
 			}
 			if ($s->clue_u) {
 				$clue = $s->clue_u;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_u) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_u . '"></td></tr>' : '';
+				!empty($s->urut_u) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_u . '"></td></tr>' : '';
 			}
 			if ($s->clue_v) {
 				$clue = $s->clue_v;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_v) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_v . '"></td></tr>' : '';
+				!empty($s->urut_v) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_v . '"></td></tr>' : '';
 			}
 			if ($s->clue_w) {
 				$clue = $s->clue_w;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_w) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_w . '"></td></tr>' : '';
+				!empty($s->urut_w) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_w . '"></td></tr>' : '';
 			}
 			if ($s->clue_x) {
 				$clue = $s->clue_x;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_x) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_x . '"></td></tr>' : '';
+				!empty($s->urut_x) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  style="background: #ECF0F5;" id="jawaban_' . $s->urut_x . '"></td></tr>' : '';
 			}
 			if ($s->clue_y) {
 				$clue = $s->clue_y;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_y) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_y . '"></td></tr>' : '';
+				!empty($s->urut_y) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;" id="jawaban_' . $s->urut_y . '"></td></tr>' : '';
 			}
 			if ($s->clue_z) {
 				$clue = $s->clue_z;
 				$clue = $s->$clue;
 				$clue = "opsi_" . $clue;
 				$clue = $s->$clue;
-				$html .= '<tr style="height: 50px;"><td><span>' . $clue . '</span></td></tr>';
+				$html .= '<tr style="height: 50px;"><td style="background: #ECF0F5;"><span>' . $clue . '</span></td></tr>';
 			} else {
-				!empty($s->urut_z) ? $html .= '<tr style="height: 50px;"><td class="drop-zone"  id="jawaban_' . $s->urut_z . '"></td></tr>' : '';
+				!empty($s->urut_z) ? $html .= '<tr style="height: 50px;"><td class="drop-zone" style="background: #ECF0F5;"  id="jawaban_' . $s->urut_z . '"></td></tr>' : '';
 			}
 			$html .= '</tbody>
 						</table>
 					</div>
 					<!-- ALERT -->
-					<div id="success-alert" class="alert" style="display: none; ">
-						<h4>Jawaban Anda benar, silahkan lanjut ke studi kasus berikutnya!</h4>
-						<img src="' . base_url() . 'template/images/success.png" alt="success" />
-						<button type="button" id="btn_corrects" onclick="return submit_nilai(' . $s->id_soal . ',' . $s->id_level . ');" class="btn btn-m btn-info"><b>Close</b></button>
+					<div id="success-alert" class="alert" style="display: none; height: auto;">
+						<div style="display: flex; flex-direction: column; justify-content: center;">
+						<div style="display: flex; flex-direction: row; align-items: center;">
+						<h4 style="color: #40A578;">Wah Keren, Logika Kamu Benar!🥳</h4>
+						<img src="' . base_url() . 'template/images/success.png" alt="success" style="width: 200px; height: auto;" />
+						</div>
+						<div class="modal-footer">
+						<button type="button" id="btn_corrects" onclick="return submit_nilai(' . $s->id_soal . ',' . $s->id_level . ');" class="btn btn-m btn-info"><b>Lanjut </b><i class="fa fa-caret-right"></i></button>
+						</div>
+						</div>
 					</div>
-					<div id="fail-alert" class="alert" style="display: none;height:550px; width: 700px">
+					<div id="fail-alert" class="alert" style="display: none;height:auto; width: 800px;">
 					<span>
-						<h2 style="color: red;"><b>Jawaban Anda masih salah, silahkan menyusun ulang!</b></h2></br>
-						<small id="tipe_data_feedback" style="display:none;"><b>Teliti kembali tipe data Anda :<b>' . $feedback['tipe_data'] . '</small>
-						<small id="input_feedback" style="display:none;">Teliti kembali inputan Anda : ' . $feedback['input'] . '</small>
-						<small id="process_feedback" style="display:none;">Teliti kembali proses Anda :' . $feedback['process'] . '</small>
-						<small id="output_feedback" style="display:none;">Ups! Outputnya salah : ' . $feedback['output'] . '</small>
+						<h2 style="color: #C40C0C; margin-bottom: 120px;"><b>Yah...Jawaban Kamu masih salah, coba susun lagi ya 😥</b></h2>
+						<p id="tipe_data_feedback" style="display:none; font-size: 20px;"><b>Teliti kembali tipe data Kamu <b>' . $feedback['tipe_data'] . '</p>
+						<p id="input_feedback" style="display:none; font-size: 20px;">Teliti kembali inputan Kamu ' . $feedback['input'] . '</p>
+						<p id="process_feedback" style="display:none; font-size: 20px;">Teliti kembali proses Kamu ' . $feedback['process'] . '</p>
+						<p id="output_feedback" style="display:none; font-size: 20px;">Outputnya salah ' . $feedback['output'] . '</p></br>
 						</p>
 						</span>
-						<img src="' . base_url() . 'template/images/fail.jpeg" style="width:120px;" alt="fail" /></br><br>
-						
-						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-m btn-info"><b>Close<b></button>
+						<img src="' . base_url() . 'template/images/fail.jpeg" style="width:220px; height: auto; margin-top: 20px" alt="fail" /></br>
+						<div class="modal-footer" style="margin-top: 150px;">
+						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-m btn-secondary"><b>Close<b></button>
+						</div>
 					</div>
 					</main>';
 		}

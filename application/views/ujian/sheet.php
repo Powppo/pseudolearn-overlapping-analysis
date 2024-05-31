@@ -3,18 +3,19 @@
 //     //redirect('ujian/list', 'location', 301);
 // }
 ?>
-<link rel="stylesheet" href="<?= base_url() ?>template/css/base.css" />
-<link rel="stylesheet" href="<?= base_url() ?>template/css/quiz.css" />
-<link rel="stylesheet" href="<?= base_url() ?>template/css/alert.css" />
 <style>
     .draggable {
-        background: #FF6D60;
+        background: #102C57;
         border-radius: 10px;
-        border: 1px solid #67140c;
+        /* border: 1px solid #FF5F00; */
         width: 200px;
         padding: 5px;
-        margin: 3px;
+        margin: auto;
         text-align: center;
+        color: black;
+        box-shadow: 5px 4px 16px -2px rgba(0,0,0,0.25);
+-webkit-box-shadow: 5px 4px 16px -2px rgba(0,0,0,0.25);
+-moz-box-shadow: 5px 4px 16px -2px rgba(0,0,0,0.25);
     }
 
     .drop-zone {
@@ -27,27 +28,24 @@
         min-height: 36px;
     }
 
-    /* Dragged source element style */
     .dragged {
         opacity: .6;
         border-style: dashed;
     }
 
-    /* Drag feedback image style */
     .drag-feedback {
         background: lightskyblue;
         border: 1px solid dodgerblue;
     }
 
-    /* drop zone highlights */
     .active-zone {
-        background: #fffad6;
+        background: #EAD196;
         border: 2px solid #aaa479;
     }
 
     .over-zone {
         background: #ffc6c6;
-        border: 2px solid #931414;
+        border: 2px solid #EADBC8;
     }
 
     /* Style for text drag test area */
@@ -61,7 +59,230 @@
         padding: 10px;
         height: 36px;
     }
+    .quiz {
+  /* padding: 6rem; */
+    display: flex;
+    justify-content: space-between;
+    /* width: 65%; */
+    margin: 0 auto;
+    flex-wrap: wrap;
+    }
+
+    .quiz > * + * {
+    margin-left: 4rem;
+    }
+
+    .quiz__description { 
+    flex: 1; 
+    margin-left: 2rem;
+    margin-right: 2rem;
+    }
+
+    .quiz__description > * + * {
+    margin-top: 2rem;
+    text-align: justify;
+    margin: auto;
+    }
+
+    .description__question {
+    font-weight: 600;
+    }
+
+    .description__algorithm,
+    .description__data-type {
+    margin: 20px;
+    border-radius: 13px;
+    position: relative;
+    width: 100%;
+    background-color: var(--quiz-algorithm);
+    display: flex;
+    border-style: solid;
+    border-width: 4px 4px 4px 4px; 
+    border-color: #314d63;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .algorithm__title,
+    .data-type__title {
+    background-color: var(--header-answer);
+    width: 100%;
+    color: #fff;
+    padding: 0.25rem 0;
+    text-align: center;
+    }
+ 
+    /* .data-type__items {
+    width: 80%;
+    padding: 0.75rem 0;
+    display: grid;
+    gap: 0.75rem;
+    } */
+
+    /* .algorithm__items{
+        width: 80%;
+        padding: 0.75rem 0;
+        display: grid;
+        gap: 0.75rem;
+    } */
+
+    .algorithm__items{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .algorithm__item > button {
+    width: 100%;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    background-color: var(--answer-item);
+    font-size: 16px;
+    }
+
+    .data-type__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .data-type__item > button {
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: var(--answer-item);
+    }
+
+    .quiz__answer {
+    width: auto;
+    padding: auto;
+    margin-left: -0.2rem;
+    }
+
+    .quiz__answer > * + * {
+    margin-top: 2rem;
+    }
+
+    .answer__content {
+    width: 100%;
+    border-spacing: 0.5rem; 
+    }
+
+    .answer__content th {
+    font-weight: bold;
+    width: 14rem;
+    text-align: center;
+    vertical-align: top;
+    }
+
+    .answer__content th > span {
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    display: inline-block;
+    background-color: var(--answer-heading);
+    }
+
+    .answer__content td {
+    padding: 0.25rem 0.5rem;
+    width: 16rem;
+    border-color: #52412d;
+    border-width: 2px;
+    border-style: solid;
+    font-weight: bold;
+    text-align: center;
+    background-color: var(--incompleted-status);
+    }
+
+    .answer__content td > span {
+    font-weight: bold;
+    }
+
+    .answer__item--user {
+    color: white;
+    width: 100%;
+    font-size: 16px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: var(--answer-item);
+    }
+
+    .answer__tools {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    }
+
+    .tools__button {
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    }
+
+    .tools__button--check {
+    background-color: var(--check);
+    }
+
+    .tools__button--submit {
+    background-color: var(--submit);
+    }
+
+    /* Alerts */
+    .alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, -55%);
+    /* width: 40%; */
+    height: 25rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem;
+    border: 2px solid white;
+    border-radius: 10px;
+    opacity: 0;
+    box-shadow: 2px 6px 11px -1px rgba(0,0,0,0.75);
+-webkit-box-shadow: 2px 6px 11px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 6px 11px -1px rgba(0,0,0,0.75);
+    }
+
+    .alert.show {
+    opacity: 1;
+    }
+
+    .alert > * + * {
+    margin-left: 2rem;
+    }
+
+    .alert > h4 {
+    font-size: 2rem;
+    color: #000;
+    text-align: center;
+    }
+
+    .alert > img {
+    width: 20rem;
+    flex-grow: 1;
+    }
+
 </style>
+
 <div class="row">
     <div class="col-sm-3">
 
@@ -80,7 +301,9 @@
 
     <!-- front end waktu pengerjaan -->
     <div class="col-lg-12 col-xs-12">
-        <?= form_open('', array('id' => 'ujian')); ?>
+        <?= form_open('', array('id' => 'ujian', 'style' => 'box-shadow: 0px 14px 24px -1px rgba(166,166,166,0.75);
+-webkit-box-shadow: 0px 14px 24px -1px rgba(166,166,166,0.75);
+-moz-box-shadow: 0px 14px 24px -1px rgba(166,166,166,0.75);')); ?>
         <div class="box box-primary">
             <div class="box-header with-border">
                 <label>Waktu Pengerjaan</label>
@@ -100,8 +323,8 @@
             </div>
             <div class="box-footer text-center">
                 <a class="action back btn btn-info" rel="0" onclick="return back();"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
-                <a class="check btn btn-success" href="#" data-toggle="modal" data-target="#ModalaAdd" rel="1" onclick="check_percobaan();">Check</a>
-                <a class="check btn btn-danger" rel="1" onclick="return refresh();">Reload</a>
+                <a class="check btn btn-success" href="#" data-toggle="modal" data-target="#ModalaAdd" rel="1" onclick="check_percobaan();"><i class="fa fa-check"></i> Check Jawaban</a>
+                <a class="check btn btn-warning" rel="1" onclick="return refresh();"><i class="fa fa-refresh"></i> Reload</a>
                 <a class="action next btn btn-info" rel="2" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
                 <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
                 <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
@@ -117,29 +340,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel" style="font-family: cursive; font-size: 18px;">Apakah yakin dengan jawaban Anda ?</h4>
-                <center><img src="<?php echo base_url(); ?>template/images/image1.png" style="width:180px; height:180px; text-align:center"></center>
+                <h4 class="modal-title" id="myModalLabel" style="font-family: cursive; font-size: 18px;">Apakah kamu yakin dengan jawaban kamu?</h4>
             </div>
             <form class="form-horizontal">
                 <div class="modal-body">
                     <div class="form-group">
-                        <div class="form-check">
+                        <center><img src="<?php echo base_url(); ?>template/images/curious.jpg" style="width:180px; height:180px; text-align:center; scale: 1.4;"></center>
 
-                            <label class="form-check-label">
-                                <button style="margin-left:20px;" class="btn btn-info" id="btn_simpan" name="btn_simpan" value="yakin" onclick="check_jawaban();">
-                                    <h8 style="font-family: cursive;">Yakin</h8>
-                                </button>
-                                <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8> -->
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <button style="margin-left:20px;" class="btn btn-danger" id="btn_simpan2" name="btn_simpan2" value="tidak yakin" onclick="check_jawaban_notsure();">
-                                    <h8 style="font-family: cursive;">Tidak Yakin</h8>
-                                </button>
-                                <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8> -->
-                            </label>
-                        </div>
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="hidden" class="form-check-input" id="waktu">
@@ -147,16 +354,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button style="margin-left:20px;" class="btn btn-secondary" id="btn_simpan2" name="btn_simpan2" value="tidak yakin" data-bs-dismiss="modal">
+                        <h8 style="font-family: cursive;">Tutup</h8>
+                    </button>
+                    <button style="margin-left:20px;" class="btn btn-success" id="btn_simpan" name="btn_simpan" value="yakin" onclick="check_jawaban();">
+                        <h8>Submit</h8>
+                    </button>
+                </div>
                 <!--             
             <div class="modal-footer">
                 <p align="left">Klik button <strong>"Yakin"</strong> jika Anda memilih <b>"Ya"</b></p>
                 <p align="left">Klik button <b>"Tidak Yakin"</b> jika Anda memilih <b>"Tidak"</b></p>
             </div> -->
-                <div class="modal-footer">
-                    <!-- <button class="btn" data-dismiss="modal" aria-hidden="true"><h8 style="font-family: cursive;">Tutup</h8></button> -->
-                    <!-- <button class="btn btn-info" id="btn_simpan2" onclick="check_jawaban_notsure();"><h8 style="font-family: cursive;">Tidak Yakin</h8></button>
-                    <button class="btn btn-info" id="btn_simpan" onclick="check_jawaban();"><h8 style="font-family: cursive;">Yakin</h8></button> -->
-                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true"><h8 style="font-family: cursive;">Tutup</h8></button>
+                    <button class="btn btn-info" id="btn_simpan2" onclick="check_jawaban_notsure();"><h8 style="font-family: cursive;">Tidak Yakin</h8></button>
+                    <button class="btn btn-info" id="btn_simpan" onclick="check_jawaban();"><h8 style="font-family: cursive;">Yakin</h8></button>
+                </div> -->
             </form>
         </div>
     </div>
@@ -419,8 +634,6 @@
         var semuaJawaban = {};
         var detailJawabanAlgoritma = {};
         var detailJawabanTipedata = {};
-        // var tipeDataJawaban = {};
-        // var algoritmaJawaban = {};
 
         let tipe_data = 0;
         let input = 0;
@@ -3174,7 +3387,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#ee0e0e')
+                    $('#jenis_8').css('background', '#efff00')
                     detailJawabanTipedata['jenis_8'] = 0;
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
@@ -3186,7 +3399,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#ee0e0e')
+                    $('#jenis_8').css('background', '#efff00')
                     detailJawabanTipedata['jenis_8'] = 0;
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
@@ -3198,7 +3411,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#ee0e0e')
+                    $('#jenis_8').css('background', '#efff00')
                     detailJawabanTipedata['jenis_8'] = 0;
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
@@ -3210,7 +3423,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#ee0e0e')
+                    $('#jenis_8').css('background', '#efff00')
                     detailJawabanTipedata['jenis_8'] = 0;
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
@@ -3222,7 +3435,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#ee0e0e')
+                    $('#jenis_8').css('background', '#efff00')
                     detailJawabanTipedata['jenis_8'] = 0;
                     // alert("Tipe data yang dimasukkan kedua salah"); 
                 } else {
@@ -3234,7 +3447,7 @@
                     err = 1
                     tipe_data++;
                     // alert('Urutan ketiga salah')
-                    $('#jenis_8').css('background', '#ee0e0e')
+                    $('#jenis_8').css('background', '#efff00')
                     detailJawabanTipedata['jenis_8'] = 0;
                 } else {
                     $('#jenis_8').css('background', '#efff00')
@@ -3250,7 +3463,7 @@
                 err = 1
                 input++
                 // alert('Urutan Pertama salah')
-                $('#jawaban_a').css('background', '#ee0e0e')
+                $('#jawaban_a').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_a'] = 0;
             } else {
                 $('#jawaban_a').css('background', '#efff00');
@@ -3265,7 +3478,7 @@
                 err = 1
                 input++;
                 // alert('Urutan Kedua salah')
-                $('#jawaban_b').css('background', '#ee0e0e')
+                $('#jawaban_b').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_b'] = 0;
             } else {
                 $('#jawaban_b').css('background', '#efff00');
@@ -3280,7 +3493,7 @@
                 err = 1
                 proc++;
                 // alert('Urutan ketiga salah')
-                $('#jawaban_c').css('background', '#ee0e0e')
+                $('#jawaban_c').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_c'] = 0;
             } else {
                 $('#jawaban_c').css('background', '#efff00');
@@ -3295,7 +3508,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_d').css('background', '#ee0e0e')
+                $('#jawaban_d').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_d'] = 0;
             } else {
                 $('#jawaban_d').css('background', '#efff00');
@@ -3310,7 +3523,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_e').css('background', '#ee0e0e')
+                $('#jawaban_e').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_e'] = 0;
             } else {
                 $('#jawaban_e').css('background', '#efff00');
@@ -3325,7 +3538,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_f').css('background', '#ee0e0e')
+                $('#jawaban_f').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_f'] = 0;
             } else {
                 $('#jawaban_f').css('background', '#efff00');
@@ -3340,7 +3553,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_g').css('background', '#ee0e0e')
+                $('#jawaban_g').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_g'] = 0;
             } else {
                 $('#jawaban_g').css('background', '#efff00');
@@ -3355,7 +3568,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_h').css('background', '#ee0e0e')
+                $('#jawaban_h').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_h'] = 0;
             } else {
                 $('#jawaban_h').css('background', '#efff00');
@@ -3370,7 +3583,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_i').css('background', '#ee0e0e')
+                $('#jawaban_i').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_i'] = 0;
             } else {
                 $('#jawaban_i').css('background', '#efff00');
@@ -3385,7 +3598,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_j').css('background', '#ee0e0e')
+                $('#jawaban_j').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_j'] = 0;
             } else {
                 $('#jawaban_j').css('background', '#efff00');
@@ -3400,7 +3613,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_k').css('background', '#ee0e0e')
+                $('#jawaban_k').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_k'] = 0;
             } else {
                 $('#jawaban_k').css('background', '#efff00');
@@ -3415,7 +3628,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_l').css('background', '#ee0e0e')
+                $('#jawaban_l').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_l'] = 0;
             } else {
                 $('#jawaban_l').css('background', '#efff00');
@@ -3430,7 +3643,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_m').css('background', '#ee0e0e')
+                $('#jawaban_m').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_m'] = 0;
             } else {
                 $('#jawaban_m').css('background', '#efff00');
@@ -3445,7 +3658,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_n').css('background', '#ee0e0e')
+                $('#jawaban_n').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_n'] = 0;
             } else {
                 $('#jawaban_n').css('background', '#efff00');
@@ -3460,7 +3673,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_o').css('background', '#ee0e0e')
+                $('#jawaban_o').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_o'] = 0;
             } else {
                 $('#jawaban_o').css('background', '#efff00');
@@ -3475,7 +3688,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_p').css('background', '#ee0e0e')
+                $('#jawaban_p').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_p'] = 0;
             } else {
                 $('#jawaban_p').css('background', '#efff00');
@@ -3490,7 +3703,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_q').css('background', '#ee0e0e')
+                $('#jawaban_q').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_q'] = 0;
             } else {
                 $('#jawaban_q').css('background', '#efff00');
@@ -3505,7 +3718,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_r').css('background', '#ee0e0e')
+                $('#jawaban_r').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_r'] = 0;
             } else {
                 $('#jawaban_r').css('background', '#efff00');
@@ -3520,7 +3733,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_s').css('background', '#ee0e0e')
+                $('#jawaban_s').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_s'] = 0;
             } else {
                 $('#jawaban_s').css('background', '#efff00');
@@ -3535,7 +3748,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_t').css('background', '#ee0e0e')
+                $('#jawaban_t').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_t'] = 0;
             } else {
                 $('#jawaban_t').css('background', '#efff00');
@@ -3550,7 +3763,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_u').css('background', '#ee0e0e')
+                $('#jawaban_u').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_u'] = 0;
             } else {
                 $('#jawaban_u').css('background', '#efff00');
@@ -3565,7 +3778,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_v').css('background', '#ee0e0e')
+                $('#jawaban_v').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_v'] = 0;
             } else {
                 $('#jawaban_v').css('background', '#efff00');
@@ -3580,7 +3793,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_w').css('background', '#ee0e0e')
+                $('#jawaban_w').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_w'] = 0;
             } else {
                 $('#jawaban_w').css('background', '#efff00');
@@ -3595,7 +3808,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_x').css('background', '#ee0e0e')
+                $('#jawaban_x').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_x'] = 0;
             } else {
                 $('#jawaban_x').css('background', '#efff00');
@@ -3610,7 +3823,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_y').css('background', '#ee0e0e')
+                $('#jawaban_y').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_y'] = 0;
             } else {
                 $('#jawaban_y').css('background', '#efff00');
@@ -3625,7 +3838,7 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_z').css('background', '#ee0e0e')
+                $('#jawaban_z').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_z'] = 0;
             } else {
                 $('#jawaban_z').css('background', '#efff00');
@@ -3640,7 +3853,3456 @@
                 err = 1
                 output++; //output
                 // alert('Urutan Keempat salah')
-                $('#jawaban_v').css('background', '#ee0e0e')
+                $('#jawaban_v').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_v'] = 0;
+            } else {
+                $('#jawaban_v').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_v'] = 1;
+            }
+        }
+
+        if (err == 1) {
+            $('#fail-alert').css('display', 'flex');
+            $('#fail-alert').css('opacity', '1');
+            if (tipe_data > 0) {
+                $('#tipe_data_feedback').css('display', '');
+            }
+            if (input > 0) {
+                $('#input_feedback').css('display', '');
+            }
+            if (proc > 0) {
+                $('#process_feedback').css('display', '');
+            }
+            if (output > 0) {
+                $('#output_feedback').css('display', '');
+            }
+        } else {
+            $('#success-alert').css('display', 'flex');
+            $('#success-alert').css('opacity', '1');
+        }
+
+        // Variabel untuk menyimpan status jawaban tipe data dan algoritma
+        var status_jawaban_tipedata = 1; // Default 1
+        var status_jawaban_algoritma = 1; // Default 1
+
+        // Logika untuk menentukan status jawaban berdasarkan feedback
+        if (tipe_data > 0 && input == 0 && proc == 0 && output == 0) {
+            status_jawaban_tipedata = 0; // Jawaban salah untuk tipe data
+        }
+
+        if ((input > 0 || proc > 0 || output > 0) && tipe_data == 0) {
+            status_jawaban_algoritma = 0; // Jawaban salah untuk algoritma
+        }
+
+        // if ((input > 0 || proc > 0 || output > 0 || tipe_data > 0)) {
+        //     status_jawaban_algoritma = 1; // Jawaban salah untuk algoritma
+        //     status_jawaban_tipedata = 1; // Jawaban salah untuk tipe data
+        // }
+
+        var idsoal = $('#id_soal').val();
+        var iduser = $('#id_user').val();
+        $.ajax({
+            url: base_url + 'ujian/save_history/' + idsoal + '/' + iduser,
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                if (data.status) {
+                    $(this).removeAttr('disabled');
+                    reload_ajax();
+                }
+            }
+        });
+
+        $(document).ready(function() {
+            $('#btn_incorrects').on('click', function() {
+                var id_user = $('#id_user').val();
+                var id_soal = $('#id_soal').val();
+                var condition = $('#incorrects').val();
+                var status_jawaban = $('#status_jawaban').val();
+                var waktu = $('#waktu').val();
+                var is_submit = 1;
+
+                var tipeDataJawaban = {};
+                var algoritmaJawaban = {};
+
+                // Iterasi melalui setiap .drop-zone
+                $('.drop-zone').each(function() {
+                    var dropZoneId = $(this).attr('id'); // Mendapatkan ID .drop-zone
+                    var idJawaban = dropZoneId.replace('jawaban_', '');
+                    var jawaban = $(this).text().trim(); // Mengambil nilai jawaban dari .drop-zone
+
+                    // Memisahkan jawaban berdasarkan pola ID
+                    if (dropZoneId.startsWith('jenis_')) {
+
+                        var nilai = detailJawabanTipedata[dropZoneId] === 1 ? 1 : 0;
+
+                        detailJawabanTipedata[dropZoneId] = {
+                            'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
+                            'nilai': nilai // Nilai 1 jika benar, 0 jika salah
+                        };
+                        tipeDataJawaban[dropZoneId] = jawaban; // Menyimpan jawaban tipe data
+                    } else if (dropZoneId.startsWith('jawaban_')) {
+
+                        var nilai = detailJawabanAlgoritma[dropZoneId] === 1 ? 1 : 0;
+
+                        detailJawabanAlgoritma[idJawaban] = {
+                            'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
+                            'nilai': nilai // Nilai 1 jika benar, 0 jika salah
+                        };
+                        algoritmaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban algoritma
+
+                    }
+
+                });
+                // Mengirimkan data ke server melalui AJAX
+                $.ajax({
+                    type: "POST",
+                    url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
+                    dataType: "JSON",
+                    data: {
+                        id_user: id_user,
+                        id_soal: id_soal,
+                        condition: condition,
+                        status_jawaban: status_jawaban,
+                        tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
+                        jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
+                        status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
+                        status_jawaban_algoritma: status_jawaban_algoritma, // Menyimpan jawaban algoritma
+                        detail_jawaban_tipedata: JSON.stringify(detailJawabanTipedata), // Jawaban tipe data
+                        detail_jawaban_algoritma: JSON.stringify(detailJawabanAlgoritma), // Jawaban algoritma
+                        waktu: waktu,
+                        is_submit: is_submit
+                    },
+                    success: function(data) {
+                        $('[name="id_user"]').val("");
+                        $('[name="id_soal"]').val("");
+                        window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
+                        location.reload(); //reload
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+                return false;
+            });
+        });
+
+        $(document).ready(function() {
+            $('#btn_corrects').on('click', function() {
+                var id_user = $('#id_user').val();
+                var id_soal = $('#id_soal').val();
+                var condition = $('#corrects').val();
+                var status_jawaban = $('#status_jawaban').val();
+                var waktu = $('#waktu').val();
+                var is_submit = 1;
+
+                var tipeDataJawaban = {};
+                var algoritmaJawaban = {};
+
+                // Iterasi melalui setiap .drop-zone
+                $('.drop-zone').each(function() {
+                    var dropZoneId = $(this).attr('id'); // Mendapatkan ID .drop-zone
+                    var idJawaban = dropZoneId.replace('jawaban_', '');
+                    var jawaban = $(this).text().trim(); // Mengambil nilai jawaban dari .drop-zone
+
+                    // Memisahkan jawaban berdasarkan pola ID
+                    if (dropZoneId.startsWith('jenis_')) {
+
+                        var nilai = detailJawabanTipedata[dropZoneId] === 1 ? 1 : 0;
+
+                        detailJawabanTipedata[dropZoneId] = {
+                            'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
+                            'nilai': nilai // Nilai 1 jika benar, 0 jika salah
+                        };
+                        tipeDataJawaban[dropZoneId] = jawaban; // Menyimpan jawaban tipe data
+                    } else if (dropZoneId.startsWith('jawaban_')) {
+
+                        var nilai = detailJawabanAlgoritma[dropZoneId] === 1 ? 1 : 0;
+
+                        detailJawabanAlgoritma[idJawaban] = {
+                            'jawaban': jawaban, // Jawaban yang di-drop oleh pengguna
+                            'nilai': nilai // Nilai 1 jika benar, 0 jika salah
+                        };
+                        algoritmaJawaban[dropZoneId] = jawaban; // Menyimpan jawaban algoritma
+
+                    }
+
+                });
+                // Mengirimkan data ke server melalui AJAX
+                $.ajax({
+                    type: "POST",
+                    url: base_url + 'overlappinganalysis/save_history_overlapping/' + id_soal + '/' + id_user,
+                    dataType: "JSON",
+                    data: {
+                        id_user: id_user,
+                        id_soal: id_soal,
+                        condition: condition,
+                        status_jawaban: status_jawaban,
+                        tipe_data_jawaban: JSON.stringify(tipeDataJawaban), // Jawaban tipe data
+                        jawaban: JSON.stringify(algoritmaJawaban), // Jawaban algoritma
+                        status_jawaban_tipedata: status_jawaban_tipedata, // Status jawaban tipe data
+                        status_jawaban_algoritma: status_jawaban_algoritma, // Menyimpan jawaban algoritma
+                        detail_jawaban_tipedata: JSON.stringify(detailJawabanTipedata), // Jawaban tipe data
+                        detail_jawaban_algoritma: JSON.stringify(detailJawabanAlgoritma), // Jawaban algoritma
+                        waktu: waktu,
+                        is_submit: is_submit
+                    },
+                    success: function(data) {
+                        $('[name="id_user"]').val("");
+                        $('[name="id_soal"]').val("");
+                        window.localStorage.removeItem('taken_time_quiz_' + '<?= $id_tes; ?>');
+                        location.reload(); //reload
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+                return false;
+            });
+        });
+
+
+
+        // var idsoal = $('#id_soal').val();
+        // var iduser = $('#id_user').val();
+        // $.ajax({
+        //     url: base_url+'ujian/save_detail_confidence/' + idsoal + '/' + iduser,
+        //     type: 'get',
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         if (data.status) {
+        //             $(this).removeAttr('disabled');
+        //             reload_ajax();
+        //         }
+        //     }
+        // });
+    }
+
+    function check_jawaban2() {
+
+        var semuaJawaban = {};
+        var detailJawabanAlgoritma = {};
+        var detailJawabanTipedata = {};
+
+        let tipe_data = 0;
+        let input = 0;
+        let proc = 0;
+        let output = 0;
+        // get value of elemen opsi tipe data
+        var jd1 = $('#opsi_jenis_1').attr("value");
+        var jd2 = $('#opsi_jenis_2').attr("value");
+        var jd3 = $('#opsi_jenis_3').attr("value");
+        var jd4 = $('#opsi_jenis_4').attr("value");
+        var jd5 = $('#opsi_jenis_5').attr("value");
+        var jd6 = $('#opsi_jenis_6').attr("value");
+        var jd7 = $('#opsi_jenis_7').attr("value");
+        var jd8 = $('#opsi_jenis_8').attr("value");
+        if ($('#jenis_1').length > 0) {
+            if ((jd1 == jd2) && (jd1 == jd3)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd2) && (jd1 == jd4)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd2) && (jd1 == jd5)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd2) && (jd1 == jd6)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd2) && (jd1 == jd7)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd2) && (jd1 == jd8)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd3) && (jd1 == jd4)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd3) && (jd1 == jd5)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd3) && (jd1 == jd6)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd3) && (jd1 == jd7)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd3) && (jd1 == jd8)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd4) && (jd1 == jd5)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd4) && (jd1 == jd6)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd4) && (jd1 == jd7)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd4) && (jd1 == jd8)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd5) && (jd1 == jd6)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd5) && (jd1 == jd7)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd5) && (jd1 == jd8)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd6) && (jd1 == jd7)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd6) && (jd1 == jd8)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if ((jd1 == jd7) && (jd1 == jd8)) {
+                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if (jd1 == jd2) {
+                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if (jd1 == jd3) {
+                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if (jd1 == jd4) {
+                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if (jd1 == jd5) {
+                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if (jd1 == jd6) {
+                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if (jd1 == jd7) {
+                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else if (jd1 == jd8) {
+                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            } else {
+                if ($('#jenis_1 #opsi_jenis_1').length < 1) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan ketiga salah')
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 0;
+                } else {
+                    $('#jenis_1').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_1'] = 1;
+                }
+            }
+        }
+
+        if ($('#jenis_2').length > 0) {
+            if ((jd2 == jd1) && (jd2 == jd3)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd1) && (jd2 == jd4)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd1) && (jd2 == jd5)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd1) && (jd2 == jd6)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd1) && (jd2 == jd7)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd1) && (jd2 == jd8)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd3) && (jd2 == jd4)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd3) && (jd2 == jd5)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd3) && (jd2 == jd6)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd3) && (jd2 == jd7)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd3) && (jd2 == jd8)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd4) && (jd2 == jd5)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd4) && (jd2 == jd6)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd4) && (jd2 == jd7)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd4) && (jd2 == jd8)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd5) && (jd2 == jd6)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd5) && (jd2 == jd7)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd5) && (jd2 == jd8)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd6) && (jd2 == jd7)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd6) && (jd2 == jd8)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if ((jd2 == jd7) && (jd2 == jd8)) {
+                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if (jd2 == jd1) {
+                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if (jd2 == jd3) {
+                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if (jd2 == jd4) {
+                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if (jd2 == jd5) {
+                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if (jd2 == jd6) {
+                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if (jd2 == jd7) {
+                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else if (jd2 == jd8) {
+                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            } else {
+                if ($('#jenis_2 #opsi_jenis_2').length < 1) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan ketiga salah')
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 0;
+                } else {
+                    $('#jenis_2').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_2'] = 1;
+                }
+            }
+        }
+
+        if ($('#jenis_3').length > 0) {
+            if ((jd3 == jd1) && (jd3 == jd2)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd1) && (jd3 == jd4)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd1) && (jd3 == jd5)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd1) && (jd3 == jd6)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd1) && (jd3 == jd7)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd1) && (jd3 == jd8)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd2) && (jd3 == jd4)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd2) && (jd3 == jd5)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd2) && (jd3 == jd6)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd2) && (jd3 == jd7)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd2) && (jd3 == jd8)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd4) && (jd3 == jd5)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd4) && (jd3 == jd6)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd4) && (jd3 == jd7)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd4) && (jd3 == jd8)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd5) && (jd3 == jd6)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd5) && (jd3 == jd7)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd5) && (jd3 == jd8)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd6) && (jd3 == jd7)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd6) && (jd3 == jd8)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if ((jd3 == jd7) && (jd3 == jd8)) {
+                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if (jd3 == jd1) {
+                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if (jd3 == jd2) {
+                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if (jd3 == jd4) {
+                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if (jd3 == jd5) {
+                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if (jd3 == jd6) {
+                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if (jd3 == jd7) {
+                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else if (jd3 == jd8) {
+                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            } else {
+                if ($('#jenis_3 #opsi_jenis_3').length < 1) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan ketiga salah')
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 0;
+                } else {
+                    $('#jenis_3').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_3'] = 1;
+                }
+            }
+        }
+
+        if ($('#jenis_4').length > 0) {
+            if ((jd4 == jd1) && (jd4 == jd2)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd1) && (jd4 == jd3)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd1) && (jd4 == jd5)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd1) && (jd4 == jd6)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd1) && (jd4 == jd7)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd1) && (jd4 == jd8)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd2) && (jd4 == jd3)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd2) && (jd4 == jd5)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd2) && (jd4 == jd6)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd2) && (jd4 == jd7)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd2) && (jd4 == jd8)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd3) && (jd4 == jd5)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd3) && (jd4 == jd6)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd3) && (jd4 == jd7)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd3) && (jd4 == jd8)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd5) && (jd4 == jd6)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd5) && (jd4 == jd7)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd5) && (jd4 == jd8)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd6) && (jd4 == jd7)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd6) && (jd4 == jd8)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if ((jd4 == jd7) && (jd4 == jd8)) {
+                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if (jd4 == jd1) {
+                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if (jd4 == jd2) {
+                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if (jd4 == jd3) {
+                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if (jd4 == jd5) {
+                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if (jd4 == jd6) {
+                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if (jd4 == jd7) {
+                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else if (jd4 == jd8) {
+                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            } else {
+                if ($('#jenis_4 #opsi_jenis_4').length < 1) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan ketiga salah')
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 0;
+                } else {
+                    $('#jenis_4').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_4'] = 1;
+                }
+            }
+        }
+
+        if ($('#jenis_5').length > 0) {
+            if ((jd5 == jd1) && (jd5 == jd2)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd1) && (jd5 == jd3)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd1) && (jd5 == jd4)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd1) && (jd5 == jd6)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd1) && (jd5 == jd7)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd1) && (jd5 == jd8)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd2) && (jd5 == jd3)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd2) && (jd5 == jd4)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd2) && (jd5 == jd6)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd2) && (jd5 == jd7)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd2) && (jd5 == jd8)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd3) && (jd5 == jd4)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd3) && (jd5 == jd6)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd3) && (jd5 == jd7)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd3) && (jd5 == jd8)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd4) && (jd5 == jd6)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd4) && (jd5 == jd7)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd4) && (jd5 == jd8)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd6) && (jd5 == jd7)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd6) && (jd5 == jd8)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if ((jd5 == jd7) && (jd5 == jd8)) {
+                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if (jd5 == jd1) {
+                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if (jd5 == jd2) {
+                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if (jd5 == jd3) {
+                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if (jd5 == jd4) {
+                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if (jd5 == jd6) {
+                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if (jd5 == jd7) {
+                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else if (jd5 == jd8) {
+                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            } else {
+                if ($('#jenis_5 #opsi_jenis_5').length < 1) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan ketiga salah')
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 0;
+                } else {
+                    $('#jenis_5').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_5'] = 1;
+                }
+            }
+        }
+
+        if ($('#jenis_6').length > 0) {
+            if ((jd6 == jd1) && (jd6 == jd2)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd1) && (jd6 == jd3)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd1) && (jd6 == jd4)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd1) && (jd6 == jd5)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd1) && (jd6 == jd7)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd1) && (jd6 == jd8)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd2) && (jd6 == jd3)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd2) && (jd6 == jd4)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd2) && (jd6 == jd5)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd2) && (jd6 == jd7)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd2) && (jd6 == jd8)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd3) && (jd6 == jd4)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd3) && (jd6 == jd5)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd3) && (jd6 == jd7)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd3) && (jd6 == jd8)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd4) && (jd6 == jd5)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd4) && (jd6 == jd7)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd4) && (jd6 == jd8)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd5) && (jd6 == jd7)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd5) && (jd6 == jd8)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if ((jd6 == jd7) && (jd6 == jd8)) {
+                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if (jd6 == jd1) {
+                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if (jd6 == jd2) {
+                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if (jd6 == jd3) {
+                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if (jd6 == jd4) {
+                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if (jd6 == jd5) {
+                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if (jd6 == jd7) {
+                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else if (jd6 == jd8) {
+                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            } else {
+                if ($('#jenis_6 #opsi_jenis_6').length < 1) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan ketiga salah')
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 0;
+                } else {
+                    $('#jenis_6').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_6'] = 1;
+                }
+            }
+        }
+
+        if ($('#jenis_7').length > 0) {
+            if ((jd7 == jd1) && (jd7 == jd2)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd1) && (jd7 == jd3)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd1) && (jd7 == jd4)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd1) && (jd7 == jd5)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd1) && (jd7 == jd6)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd1) && (jd7 == jd8)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd2) && (jd7 == jd3)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd2) && (jd7 == jd4)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd2) && (jd7 == jd5)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd2) && (jd7 == jd6)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd2) && (jd7 == jd8)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd3) && (jd7 == jd4)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd3) && (jd7 == jd5)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd3) && (jd7 == jd6)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd3) && (jd7 == jd8)) {
+                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1))) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd4) && (jd7 == jd5)) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd4) && (jd7 == jd6)) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd4) && (jd7 == jd8)) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd5) && (jd7 == jd6)) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd5) && (jd7 == jd8)) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if ((jd7 == jd6) && (jd7 == jd8)) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if (jd7 == jd1) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if (jd7 == jd2) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if (jd7 == jd3) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if (jd7 == jd4) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if (jd7 == jd5) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if (jd7 == jd6) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else if (jd7 == jd8) {
+                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            } else {
+                if ($('#jenis_7 #opsi_jenis_7').length < 1) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan ketiga salah')
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 0;
+                } else {
+                    $('#jenis_7').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_7'] = 1;
+                }
+            }
+        }
+
+        if ($('#jenis_8').length > 0) {
+            if ((jd8 == jd1) && (jd8 == jd2)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd1) && (jd8 == jd3)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd1) && (jd8 == jd4)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd1) && (jd8 == jd5)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd1) && (jd8 == jd6)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd1) && (jd8 == jd7)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd2) && (jd8 == jd3)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd2) && (jd8 == jd4)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd2) && (jd8 == jd5)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd2) && (jd8 == jd6)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd2) && (jd8 == jd7)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd3) && (jd8 == jd4)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd3) && (jd8 == jd5)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd3) && (jd8 == jd6)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd3) && (jd8 == jd7)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd4) && (jd8 == j5)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd4) && (jd8 == j6)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd4) && (jd8 == j7)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd5) && (jd8 == j6)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd5) && (jd8 == j7)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if ((jd8 == jd6) && (jd8 == j7)) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Pertama salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan pertama salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if (jd8 == jd1) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if (jd8 == jd2) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if (jd8 == jd3) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if (jd8 == jd4) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if (jd8 == jd5) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if (jd8 == jd6) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else if (jd8 == jd7) {
+                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan Kedua salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                    // alert("Tipe data yang dimasukkan kedua salah"); 
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            } else {
+                if ($('#jenis_8 #opsi_jenis_8').length < 1) { //tipe data
+                    err = 1
+                    tipe_data++;
+                    // alert('Urutan ketiga salah')
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 0;
+                } else {
+                    $('#jenis_8').css('background', '#efff00')
+                    detailJawabanTipedata['jenis_8'] = 1;
+                }
+            }
+        }
+
+        if ($('#jawaban_a').length > 0) {
+            var jawabanA = $('#jawaban_a #opsi_a').val();
+            semuaJawaban['a'] = jawabanA;
+            if ($('#jawaban_a #opsi_a').length < 1) { //input data
+                err = 1
+                input++
+                // alert('Urutan Pertama salah')
+                $('#jawaban_a').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_a'] = 0;
+            } else {
+                $('#jawaban_a').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_a'] = 1;
+            }
+        }
+
+        if ($('#jawaban_b').length > 0) {
+            var jawabanB = $('#jawaban_b #opsi_b').val();
+            semuaJawaban['b'] = jawabanB;
+            if ($('#jawaban_b #opsi_b').length < 1) { //input data
+                err = 1
+                input++;
+                // alert('Urutan Kedua salah')
+                $('#jawaban_b').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_b'] = 0;
+            } else {
+                $('#jawaban_b').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_b'] = 1;
+            }
+        }
+
+        if ($('#jawaban_c').length > 0) {
+            var jawabanC = $('#jawaban_c #opsi_c').val();
+            semuaJawaban['c'] = jawabanC;
+            if ($('#jawaban_c #opsi_c').length < 1) { //process
+                err = 1
+                proc++;
+                // alert('Urutan ketiga salah')
+                $('#jawaban_c').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_c'] = 0;
+            } else {
+                $('#jawaban_c').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_c'] = 1;
+            }
+        }
+
+        if ($('#jawaban_d').length > 0) {
+            var jawabanD = $('#jawaban_d #opsi_d').val();
+            semuaJawaban['d'] = jawabanD;
+            if ($('#jawaban_d #opsi_d').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_d').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_d'] = 0;
+            } else {
+                $('#jawaban_d').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_d'] = 1;
+            }
+        }
+
+        if ($('#jawaban_e').length > 0) {
+            var jawabanE = $('#jawaban_e #opsi_e').val();
+            semuaJawaban['e'] = jawabanE;
+            if ($('#jawaban_e #opsi_e').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_e').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_e'] = 0;
+            } else {
+                $('#jawaban_e').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_e'] = 1;
+            }
+        }
+
+        if ($('#jawaban_f').length > 0) {
+            var jawabanF = $('#jawaban_f #opsi_f').val();
+            semuaJawaban['f'] = jawabanF;
+            if ($('#jawaban_f #opsi_f').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_f').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_f'] = 0;
+            } else {
+                $('#jawaban_f').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_f'] = 1;
+            }
+        }
+
+        if ($('#jawaban_g').length > 0) {
+            var jawabanG = $('#jawaban_g #opsi_g').val();
+            semuaJawaban['g'] = jawabanG;
+            if ($('#jawaban_g #opsi_g').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_g').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_g'] = 0;
+            } else {
+                $('#jawaban_g').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_g'] = 1;
+            }
+        }
+
+        if ($('#jawaban_h').length > 0) {
+            var jawabanH = $('#jawaban_h #opsi_h').val();
+            semuaJawaban['h'] = jawabanH;
+            if ($('#jawaban_h #opsi_h').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_h').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_h'] = 0;
+            } else {
+                $('#jawaban_h').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_h'] = 1;
+            }
+        }
+
+        if ($('#jawaban_i').length > 0) {
+            var jawabanI = $('#jawaban_i #opsi_i').val();
+            semuaJawaban['i'] = jawabanI;
+            if ($('#jawaban_i #opsi_i').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_i').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_i'] = 0;
+            } else {
+                $('#jawaban_i').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_i'] = 1;
+            }
+        }
+
+        if ($('#jawaban_j').length > 0) {
+            var jawabanJ = $('#jawaban_j #opsi_j').val();
+            semuaJawaban['j'] = jawabanJ;
+            if ($('#jawaban_j #opsi_j').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_j').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_j'] = 0;
+            } else {
+                $('#jawaban_j').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_j'] = 1;
+            }
+        }
+
+        if ($('#jawaban_k').length > 0) {
+            var jawabanK = $('#jawaban_k #opsi_k').val();
+            semuaJawaban['k'] = jawabanK;
+            if ($('#jawaban_k #opsi_k').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_k').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_k'] = 0;
+            } else {
+                $('#jawaban_k').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_k'] = 1;
+            }
+        }
+
+        if ($('#jawaban_l').length > 0) {
+            var jawabanL = $('#jawaban_l #opsi_l').val();
+            semuaJawaban['l'] = jawabanL;
+            if ($('#jawaban_l #opsi_l').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_l').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_l'] = 0;
+            } else {
+                $('#jawaban_l').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_l'] = 1;
+            }
+        }
+
+        if ($('#jawaban_m').length > 0) {
+            var jawabanM = $('#jawaban_m #opsi_m').val();
+            semuaJawaban['m'] = jawabanM;
+            if ($('#jawaban_m #opsi_m').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_m').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_m'] = 0;
+            } else {
+                $('#jawaban_m').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_m'] = 1;
+            }
+        }
+
+        if ($('#jawaban_n').length > 0) {
+            var jawabanN = $('#jawaban_n #opsi_n').val();
+            semuaJawaban['n'] = jawabanN;
+            if ($('#jawaban_n #opsi_n').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_n').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_n'] = 0;
+            } else {
+                $('#jawaban_n').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_n'] = 1;
+            }
+        }
+
+        if ($('#jawaban_o').length > 0) {
+            var jawabanO = $('#jawaban_o #opsi_o').val();
+            semuaJawaban['o'] = jawabanO;
+            if ($('#jawaban_o #opsi_o').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_o').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_o'] = 0;
+            } else {
+                $('#jawaban_o').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_o'] = 1;
+            }
+        }
+
+        if ($('#jawaban_p').length > 0) {
+            var jawabanP = $('#jawaban_p #opsi_p').val();
+            semuaJawaban['p'] = jawabanP;
+            if ($('#jawaban_p #opsi_p').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_p').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_p'] = 0;
+            } else {
+                $('#jawaban_p').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_p'] = 1;
+            }
+        }
+
+        if ($('#jawaban_q').length > 0) {
+            var jawabanQ = $('#jawaban_q #opsi_q').val();
+            semuaJawaban['q'] = jawabanQ;
+            if ($('#jawaban_q #opsi_q').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_q').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_q'] = 0;
+            } else {
+                $('#jawaban_q').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_q'] = 1;
+            }
+        }
+
+        if ($('#jawaban_r').length > 0) {
+            var jawabanR = $('#jawaban_r #opsi_r').val();
+            semuaJawaban['r'] = jawabanR;
+            if ($('#jawaban_r #opsi_r').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_r').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_r'] = 0;
+            } else {
+                $('#jawaban_r').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_r'] = 1;
+            }
+        }
+
+        if ($('#jawaban_s').length > 0) {
+            var jawabanS = $('#jawaban_s #opsi_s').val();
+            semuaJawaban['s'] = jawabanS;
+            if ($('#jawaban_s #opsi_s').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_s').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_s'] = 0;
+            } else {
+                $('#jawaban_s').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_s'] = 1;
+            }
+        }
+
+        if ($('#jawaban_t').length > 0) {
+            var jawabanT = $('#jawaban_t #opsi_t').val();
+            semuaJawaban['t'] = jawabanT;
+            if ($('#jawaban_t #opsi_t').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_t').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_t'] = 0;
+            } else {
+                $('#jawaban_t').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_t'] = 1;
+            }
+        }
+
+        if ($('#jawaban_u').length > 0) {
+            var jawabanU = $('#jawaban_u #opsi_u').val();
+            semuaJawaban['u'] = jawabanU;
+            if ($('#jawaban_u #opsi_u').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_u').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_u'] = 0;
+            } else {
+                $('#jawaban_u').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_u'] = 1;
+            }
+        }
+
+        if ($('#jawaban_v').length > 0) {
+            var jawabanV = $('#jawaban_v #opsi_v').val();
+            semuaJawaban['v'] = jawabanV;
+            if ($('#jawaban_v #opsi_v').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_v').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_v'] = 0;
+            } else {
+                $('#jawaban_v').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_v'] = 1;
+            }
+        }
+
+        if ($('#jawaban_w').length > 0) {
+            var jawabanW = $('#jawaban_w #opsi_w').val();
+            semuaJawaban['w'] = jawabanW;
+            if ($('#jawaban_w #opsi_w').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_w').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_w'] = 0;
+            } else {
+                $('#jawaban_w').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_w'] = 1;
+            }
+        }
+
+        if ($('#jawaban_x').length > 0) {
+            var jawabanX = $('#jawaban_x #opsi_x').val();
+            semuaJawaban['x'] = jawabanX;
+            if ($('#jawaban_x #opsi_x').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_x').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_x'] = 0;
+            } else {
+                $('#jawaban_x').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_x'] = 1;
+            }
+        }
+
+        if ($('#jawaban_y').length > 0) {
+            var jawabanY = $('#jawaban_y #opsi_y').val();
+            semuaJawaban['y'] = jawabanY;
+            if ($('#jawaban_y #opsi_y').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_y').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_y'] = 0;
+            } else {
+                $('#jawaban_y').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_y'] = 1;
+            }
+        }
+
+        if ($('#jawaban_z').length > 0) {
+            var jawabanZ = $('#jawaban_z #opsi_z').val();
+            semuaJawaban['z'] = jawabanZ;
+            if ($('#jawaban_z #opsi_z').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_z').css('background', '#efff00')
+                detailJawabanAlgoritma['jawaban_z'] = 0;
+            } else {
+                $('#jawaban_z').css('background', '#efff00');
+                detailJawabanAlgoritma['jawaban_z'] = 1;
+            }
+        }
+
+        if ($('#jawaban_v').length > 0) {
+            var jawabanV = $('#jawaban_v #opsi_v').val();
+            semuaJawaban['v'] = jawabanV;
+            if ($('#jawaban_v #opsi_v').length < 1) {
+                err = 1
+                output++; //output
+                // alert('Urutan Keempat salah')
+                $('#jawaban_v').css('background', '#efff00')
                 detailJawabanAlgoritma['jawaban_v'] = 0;
             } else {
                 $('#jawaban_v').css('background', '#efff00')
@@ -3914,8 +7576,8 @@
         $('#fail-alert').css('opacity', '0');
     }
 
-    function submit_nilai(id, level) {
-        $.getJSON(base_url + 'ujian/simpan_hasil/' + id, function(data) {
+    function submit_nilai(id, level, status) {
+        $.getJSON(base_url + 'ujian/simpan_hasil/' + id + '/' + status, function(data) {
             window.localStorage.clear();
             window.location.href = '<?php echo site_url("ujian/list_ujian"); ?>/' + level
         });
@@ -4227,2713 +7889,7 @@
 </script>
 <!-- end waktu pengerjaan -->
 <script>
-    function check_jawaban_notsure() {
-        var err = 0;
-        let tipe_data = 0;
-        let input = 0;
-        let proc = 0;
-        let output = 0;
-        // get value of elemen opsi tipe data
-        var jd1 = $('#opsi_jenis_1').attr("value");
-        var jd2 = $('#opsi_jenis_2').attr("value");
-        var jd3 = $('#opsi_jenis_3').attr("value");
-        var jd4 = $('#opsi_jenis_4').attr("value");
-        var jd5 = $('#opsi_jenis_5').attr("value");
-        var jd6 = $('#opsi_jenis_6').attr("value");
-        var jd7 = $('#opsi_jenis_7').attr("value");
-        var jd8 = $('#opsi_jenis_8').attr("value");
-        if ($('#jenis_1').length > 0) {
-            if ((jd1 == jd2) && (jd1 == jd3)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd2) && (jd1 == jd4)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd2) && (jd1 == jd5)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd2) && (jd1 == jd6)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd2) && (jd1 == jd7)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd2) && (jd1 == jd8)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd3) && (jd1 == jd4)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd3) && (jd1 == jd5)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd3) && (jd1 == jd6)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd3) && (jd1 == jd7)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd3) && (jd1 == jd8)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd4) && (jd1 == jd5)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd4) && (jd1 == jd6)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd4) && (jd1 == jd7)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd4) && (jd1 == jd8)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd5) && (jd1 == jd6)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd5) && (jd1 == jd7)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd5) && (jd1 == jd8)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd6) && (jd1 == jd7)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd6) && (jd1 == jd8)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if ((jd1 == jd7) && (jd1 == jd8)) {
-                if ((($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1)) && (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if (jd1 == jd2) {
-                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_2').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if (jd1 == jd3) {
-                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if (jd1 == jd4) {
-                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if (jd1 == jd5) {
-                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if (jd1 == jd6) {
-                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if (jd1 == jd7) {
-                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else if (jd1 == jd8) {
-                if (($('#jenis_1 #opsi_jenis_1').length < 1) == ($('#jenis_1 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_1').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            } else {
-                if ($('#jenis_1 #opsi_jenis_1').length < 1) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan ketiga salah')
-                    $('#jenis_1').css('background', '#efff00')
-                } else {
-                    $('#jenis_1').css('background', '#efff00')
-                }
-            }
-        }
-
-        if ($('#jenis_2').length > 0) {
-            if ((jd2 == jd1) && (jd2 == jd3)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd1) && (jd2 == jd4)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd1) && (jd2 == jd5)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd1) && (jd2 == jd6)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd1) && (jd2 == jd7)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd1) && (jd2 == jd8)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd3) && (jd2 == jd4)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd3) && (jd2 == jd5)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd3) && (jd2 == jd6)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd3) && (jd2 == jd7)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd3) && (jd2 == jd8)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd4) && (jd2 == jd5)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd4) && (jd2 == jd6)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd4) && (jd2 == jd7)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd4) && (jd2 == jd8)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd5) && (jd2 == jd6)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd5) && (jd2 == jd7)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd5) && (jd2 == jd8)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd6) && (jd2 == jd7)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd6) && (jd2 == jd8)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if ((jd2 == jd7) && (jd2 == jd8)) {
-                if ((($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1)) && (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if (jd2 == jd1) {
-                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_1').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if (jd2 == jd3) {
-                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if (jd2 == jd4) {
-                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if (jd2 == jd5) {
-                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if (jd2 == jd6) {
-                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if (jd2 == jd7) {
-                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else if (jd2 == jd8) {
-                if (($('#jenis_2 #opsi_jenis_2').length < 1) == ($('#jenis_2 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_2').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            } else {
-                if ($('#jenis_2 #opsi_jenis_2').length < 1) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan ketiga salah')
-                    $('#jenis_2').css('background', '#efff00')
-                } else {
-                    $('#jenis_2').css('background', '#efff00')
-                }
-            }
-        }
-
-        if ($('#jenis_3').length > 0) {
-            if ((jd3 == jd1) && (jd3 == jd2)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd1) && (jd3 == jd4)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd1) && (jd3 == jd5)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd1) && (jd3 == jd6)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd1) && (jd3 == jd7)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd1) && (jd3 == jd8)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd2) && (jd3 == jd4)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd2) && (jd3 == jd5)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd2) && (jd3 == jd6)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd2) && (jd3 == jd7)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd2) && (jd3 == jd8)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd4) && (jd3 == jd5)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd4) && (jd3 == jd6)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd4) && (jd3 == jd7)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd4) && (jd3 == jd8)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd5) && (jd3 == jd6)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd5) && (jd3 == jd7)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd5) && (jd3 == jd8)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd6) && (jd3 == jd7)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd6) && (jd3 == jd8)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if ((jd3 == jd7) && (jd3 == jd8)) {
-                if ((($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1)) && (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if (jd3 == jd1) {
-                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_1').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if (jd3 == jd2) {
-                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_2').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if (jd3 == jd4) {
-                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if (jd3 == jd5) {
-                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if (jd3 == jd6) {
-                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if (jd3 == jd7) {
-                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else if (jd3 == jd8) {
-                if (($('#jenis_3 #opsi_jenis_3').length < 1) == ($('#jenis_3 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_3').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            } else {
-                if ($('#jenis_3 #opsi_jenis_3').length < 1) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan ketiga salah')
-                    $('#jenis_3').css('background', '#efff00')
-                } else {
-                    $('#jenis_3').css('background', '#efff00')
-                }
-            }
-        }
-
-        if ($('#jenis_4').length > 0) {
-            if ((jd4 == jd1) && (jd4 == jd2)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd1) && (jd4 == jd3)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd1) && (jd4 == jd5)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd1) && (jd4 == jd6)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd1) && (jd4 == jd7)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd1) && (jd4 == jd8)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd2) && (jd4 == jd3)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd2) && (jd4 == jd5)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd2) && (jd4 == jd6)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd2) && (jd4 == jd7)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd2) && (jd4 == jd8)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd3) && (jd4 == jd5)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd3) && (jd4 == jd6)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd3) && (jd4 == jd7)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd3) && (jd4 == jd8)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd5) && (jd4 == jd6)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd5) && (jd4 == jd7)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd5) && (jd4 == jd8)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd6) && (jd4 == jd7)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd6) && (jd4 == jd8)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if ((jd4 == jd7) && (jd4 == jd8)) {
-                if ((($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1)) && (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if (jd4 == jd1) {
-                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_1').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if (jd4 == jd2) {
-                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_2').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if (jd4 == jd3) {
-                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if (jd4 == jd5) {
-                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if (jd4 == jd6) {
-                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if (jd4 == jd7) {
-                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else if (jd4 == jd8) {
-                if (($('#jenis_4 #opsi_jenis_4').length < 1) == ($('#jenis_4 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_4').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            } else {
-                if ($('#jenis_4 #opsi_jenis_4').length < 1) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan ketiga salah')
-                    $('#jenis_4').css('background', '#efff00')
-                } else {
-                    $('#jenis_4').css('background', '#efff00')
-                }
-            }
-        }
-
-        if ($('#jenis_5').length > 0) {
-            if ((jd5 == jd1) && (jd5 == jd2)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd1) && (jd5 == jd3)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd1) && (jd5 == jd4)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd1) && (jd5 == jd6)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd1) && (jd5 == jd7)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd1) && (jd5 == jd8)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd2) && (jd5 == jd3)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd2) && (jd5 == jd4)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd2) && (jd5 == jd6)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd2) && (jd5 == jd7)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd2) && (jd5 == jd8)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd3) && (jd5 == jd4)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd3) && (jd5 == jd6)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd3) && (jd5 == jd7)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd3) && (jd5 == jd8)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd4) && (jd5 == jd6)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd4) && (jd5 == jd7)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd4) && (jd5 == jd8)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd6) && (jd5 == jd7)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd6) && (jd5 == jd8)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if ((jd5 == jd7) && (jd5 == jd8)) {
-                if ((($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1)) && (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if (jd5 == jd1) {
-                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_1').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if (jd5 == jd2) {
-                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_2').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if (jd5 == jd3) {
-                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if (jd5 == jd4) {
-                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if (jd5 == jd6) {
-                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if (jd5 == jd7) {
-                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else if (jd5 == jd8) {
-                if (($('#jenis_5 #opsi_jenis_5').length < 1) == ($('#jenis_5 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_5').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            } else {
-                if ($('#jenis_5 #opsi_jenis_5').length < 1) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan ketiga salah')
-                    $('#jenis_5').css('background', '#efff00')
-                } else {
-                    $('#jenis_5').css('background', '#efff00')
-                }
-            }
-        }
-
-        if ($('#jenis_6').length > 0) {
-            if ((jd6 == jd1) && (jd6 == jd2)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd1) && (jd6 == jd3)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd1) && (jd6 == jd4)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd1) && (jd6 == jd5)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd1) && (jd6 == jd7)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd1) && (jd6 == jd8)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd2) && (jd6 == jd3)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd2) && (jd6 == jd4)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd2) && (jd6 == jd5)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd2) && (jd6 == jd7)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd2) && (jd6 == jd8)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd3) && (jd6 == jd4)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd3) && (jd6 == jd5)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd3) && (jd6 == jd7)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd3) && (jd6 == jd8)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd4) && (jd6 == jd5)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd4) && (jd6 == jd7)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd4) && (jd6 == jd8)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd5) && (jd6 == jd7)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd5) && (jd6 == jd8)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if ((jd6 == jd7) && (jd6 == jd8)) {
-                if ((($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1)) && (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if (jd6 == jd1) {
-                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_1').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if (jd6 == jd2) {
-                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_2').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if (jd6 == jd3) {
-                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if (jd6 == jd4) {
-                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if (jd6 == jd5) {
-                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if (jd6 == jd7) {
-                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else if (jd6 == jd8) {
-                if (($('#jenis_6 #opsi_jenis_6').length < 1) == ($('#jenis_6 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_6').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            } else {
-                if ($('#jenis_6 #opsi_jenis_6').length < 1) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan ketiga salah')
-                    $('#jenis_6').css('background', '#efff00')
-                } else {
-                    $('#jenis_6').css('background', '#efff00')
-                }
-            }
-        }
-
-        if ($('#jenis_7').length > 0) {
-            if ((jd7 == jd1) && (jd7 == jd2)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd1) && (jd7 == jd3)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd1) && (jd7 == jd4)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd1) && (jd7 == jd5)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd1) && (jd7 == jd6)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd1) && (jd7 == jd8)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd2) && (jd7 == jd3)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd2) && (jd7 == jd4)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd2) && (jd7 == jd5)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd2) && (jd7 == jd6)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd2) && (jd7 == jd8)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd3) && (jd7 == jd4)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd3) && (jd7 == jd5)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd3) && (jd7 == jd6)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd3) && (jd7 == jd8)) {
-                if ((($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) && (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1))) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd4) && (jd7 == jd5)) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd4) && (jd7 == jd6)) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd4) && (jd7 == jd8)) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd5) && (jd7 == jd6)) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd5) && (jd7 == jd8)) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if ((jd7 == jd6) && (jd7 == jd8)) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if (jd7 == jd1) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_1').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if (jd7 == jd2) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_2').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if (jd7 == jd3) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if (jd7 == jd4) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if (jd7 == jd5) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if (jd7 == jd6) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else if (jd7 == jd8) {
-                if (($('#jenis_7 #opsi_jenis_7').length < 1) == ($('#jenis_7 #opsi_jenis_8').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_7').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            } else {
-                if ($('#jenis_7 #opsi_jenis_7').length < 1) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan ketiga salah')
-                    $('#jenis_7').css('background', '#efff00')
-                } else {
-                    $('#jenis_7').css('background', '#efff00')
-                }
-            }
-        }
-
-        if ($('#jenis_8').length > 0) {
-            if ((jd8 == jd1) && (jd8 == jd2)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd1) && (jd8 == jd3)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd1) && (jd8 == jd4)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd1) && (jd8 == jd5)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd1) && (jd8 == jd6)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd1) && (jd8 == jd7)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd2) && (jd8 == jd3)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd2) && (jd8 == jd4)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd2) && (jd8 == jd5)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd2) && (jd8 == jd6)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd2) && (jd8 == jd7)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd3) && (jd8 == jd4)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd3) && (jd8 == jd5)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd3) && (jd8 == jd6)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd3) && (jd8 == jd7)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd4) && (jd8 == j5)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd4) && (jd8 == j6)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd4) && (jd8 == j7)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd5) && (jd8 == j6)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd5) && (jd8 == j7)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if ((jd8 == jd6) && (jd8 == j7)) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Pertama salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan pertama salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if (jd8 == jd1) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_1').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if (jd8 == jd2) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_2').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if (jd8 == jd3) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_3').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if (jd8 == jd4) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_4').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if (jd8 == jd5) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_5').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if (jd8 == jd6) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_6').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else if (jd8 == jd7) {
-                if (($('#jenis_8 #opsi_jenis_8').length < 1) == ($('#jenis_8 #opsi_jenis_7').length < 1)) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan Kedua salah')
-                    $('#jenis_8').css('background', '#efff00')
-                    // alert("Tipe data yang dimasukkan kedua salah"); 
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            } else {
-                if ($('#jenis_8 #opsi_jenis_8').length < 1) { //tipe data
-                    err = 1
-                    tipe_data++;
-                    // alert('Urutan ketiga salah')
-                    $('#jenis_8').css('background', '#efff00')
-                } else {
-                    $('#jenis_8').css('background', '#efff00')
-                }
-            }
-        }
-
-        if ($('#jawaban_a').length > 0) {
-            if ($('#jawaban_a #opsi_a').length < 1) { //input data
-                err = 1
-                input++
-                // alert('Urutan Pertama salah')
-                $('#jawaban_a').css('background', '#efff00')
-            } else {
-                $('#jawaban_a').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_b').length > 0) {
-            if ($('#jawaban_b #opsi_b').length < 1) { //input data
-                err = 1
-                input++;
-                // alert('Urutan Kedua salah')
-                $('#jawaban_b').css('background', '#efff00')
-            } else {
-                $('#jawaban_b').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_c').length > 0) {
-            if ($('#jawaban_c #opsi_c').length < 1) { //process
-                err = 1
-                proc++;
-                // alert('Urutan ketiga salah')
-                $('#jawaban_c').css('background', '#efff00')
-            } else {
-                $('#jawaban_c').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_d').length > 0) {
-            if ($('#jawaban_d #opsi_d').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_d').css('background', '#efff00')
-            } else {
-                $('#jawaban_d').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_e').length > 0) {
-            if ($('#jawaban_e #opsi_e').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_e').css('background', '#efff00')
-            } else {
-                $('#jawaban_e').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_f').length > 0) {
-            if ($('#jawaban_f #opsi_f').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_f').css('background', '#efff00')
-            } else {
-                $('#jawaban_f').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_g').length > 0) {
-            if ($('#jawaban_g #opsi_g').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_g').css('background', '#efff00')
-            } else {
-                $('#jawaban_g').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_h').length > 0) {
-            if ($('#jawaban_h #opsi_h').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_h').css('background', '#efff00')
-            } else {
-                $('#jawaban_h').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_i').length > 0) {
-            if ($('#jawaban_i #opsi_i').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_i').css('background', '#efff00')
-            } else {
-                $('#jawaban_i').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_j').length > 0) {
-            if ($('#jawaban_j #opsi_j').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_j').css('background', '#efff00')
-            } else {
-                $('#jawaban_j').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_k').length > 0) {
-            if ($('#jawaban_k #opsi_k').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_k').css('background', '#efff00')
-            } else {
-                $('#jawaban_k').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_l').length > 0) {
-            if ($('#jawaban_l #opsi_l').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_l').css('background', '#efff00')
-            } else {
-                $('#jawaban_l').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_m').length > 0) {
-            if ($('#jawaban_m #opsi_m').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_m').css('background', '#efff00')
-            } else {
-                $('#jawaban_m').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_n').length > 0) {
-            if ($('#jawaban_n #opsi_n').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_n').css('background', '#efff00')
-            } else {
-                $('#jawaban_n').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_o').length > 0) {
-            if ($('#jawaban_o #opsi_o').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_o').css('background', '#efff00')
-            } else {
-                $('#jawaban_o').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_p').length > 0) {
-            if ($('#jawaban_p #opsi_p').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_p').css('background', '#efff00')
-            } else {
-                $('#jawaban_p').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_q').length > 0) {
-            if ($('#jawaban_q #opsi_q').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_q').css('background', '#efff00')
-            } else {
-                $('#jawaban_q').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_r').length > 0) {
-            if ($('#jawaban_r #opsi_r').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_r').css('background', '#efff00')
-            } else {
-                $('#jawaban_r').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_s').length > 0) {
-            if ($('#jawaban_s #opsi_s').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_s').css('background', '#efff00')
-            } else {
-                $('#jawaban_s').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_t').length > 0) {
-            if ($('#jawaban_t #opsi_t').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_t').css('background', '#efff00')
-            } else {
-                $('#jawaban_t').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_u').length > 0) {
-            if ($('#jawaban_u #opsi_u').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_u').css('background', '#efff00')
-            } else {
-                $('#jawaban_u').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_v').length > 0) {
-            if ($('#jawaban_v #opsi_v').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_v').css('background', '#efff00')
-            } else {
-                $('#jawaban_v').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_w').length > 0) {
-            if ($('#jawaban_w #opsi_w').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_w').css('background', '#efff00')
-            } else {
-                $('#jawaban_w').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_x').length > 0) {
-            if ($('#jawaban_x #opsi_x').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_x').css('background', '#efff00')
-            } else {
-                $('#jawaban_x').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_y').length > 0) {
-            if ($('#jawaban_y #opsi_y').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_y').css('background', '#efff00')
-            } else {
-                $('#jawaban_y').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_z').length > 0) {
-            if ($('#jawaban_z #opsi_z').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_z').css('background', '#efff00')
-            } else {
-                $('#jawaban_z').css('background', '#efff00')
-            }
-        }
-
-        if ($('#jawaban_v').length > 0) {
-            if ($('#jawaban_v #opsi_v').length < 1) {
-                err = 1
-                output++; //output
-                // alert('Urutan Keempat salah')
-                $('#jawaban_v').css('background', '#efff00')
-            } else {
-                $('#jawaban_v').css('background', '#efff00')
-            }
-        }
-
-        if (err == 1) {
-            $('#fail-alert').css('display', 'flex');
-            $('#fail-alert').css('opacity', '1');
-        } else {
-            $('#success-alert').css('display', 'flex');
-            $('#success-alert').css('opacity', '1');
-        }
-
-        var idsoal = $('#id_soal').val();
-        var iduser = $('#id_user').val();
-        $.ajax({
-            url: base_url + 'ujian/save_history/' + idsoal + '/' + iduser,
-            type: 'get',
-            dataType: 'json',
-            success: function(data) {
-                if (data.status) {
-                    $(this).removeAttr('disabled');
-                    reload_ajax();
-                }
-            }
-        });
-
-        // var idsoal = $('#id_soal').val();
-        // var iduser = $('#id_user').val();
-        // $.ajax({
-        //     url: base_url+'ujian/save_detail_confidence/' + idsoal + '/' + iduser,
-        //     type: 'get',
-        //     dataType: 'json',
-        //     success: function (data) {
-        //         if (data.status) {
-        //             $(this).removeAttr('disabled');
-        //             reload_ajax();
-        //         }
-        //     }
-        // });
-
-        // var idsoal = $('#id_soal').val();
-        // var iduser = $('#id_user').val();
-        // var idlevel = $('#id_level').val();
-        // $.ajax({
-        //     url: base_url+'ujian/save_percobaan/' + '<?= $id_tes; ?>' + '/' + '<?php echo $levelId ?>',
-        //     type: 'get',
-        //     dataType: 'json',
-        //     success: function (data) {
-        //         if (data.status) {
-        //             $(this).removeAttr('disabled');
-        //             reload_ajax();
-        //         }
-        //     }
-        // });
-    }
+    
     var seconds = 0;
     var timerInterval;
     var firstAnswerDropped = false;
