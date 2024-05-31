@@ -45,6 +45,25 @@ class OverlappingAnalysis extends CI_Controller
         $this->load->view('_templates/dashboard/_footer.php');
     }
 
+    // public function detail($id_soal)
+    // {
+    //     $results = $this->ujian->detailOverlappingAnalysis($id_soal);
+    //     $data = [
+    //         'user'      => $this->user,
+    //         'informasi' => $results,
+    //         'judul'    => 'Hasil Overlapping Analysis',
+    //         'subjudul' => 'Analisis Hasil Ujian Mahasiswa',
+    //     ];
+    //     if ($this->ion_auth->is_admin()) {
+    //         //Jika admin maka tampilkan semua matkul
+    //         $data['kelas'] = $this->db->query('select * from tb_kelas')->result();
+    //     }
+
+    //     $this->load->view('_templates/dashboard/_header.php', $data);
+    //     $this->load->view('ujian/detail_overlapping_analysis');
+    //     $this->load->view('_templates/dashboard/_footer.php');
+    // }
+
     public function detail($id_soal)
     {
         $id_kelas = $this->input->post('id_kelas');
@@ -72,6 +91,13 @@ class OverlappingAnalysis extends CI_Controller
         $this->load->view('ujian/detail_overlapping_analysis');
         $this->load->view('_templates/dashboard/_footer.php');
     }
+
+<<<<<<< HEAD
+    public function detail_jawaban($id_soal, $encodedUniqueKey, $id_kelas = 'all')
+    {
+=======
+
+>>>>>>> 53a6d588f81aecb4006b4c3511638d10d876d9bf
 
     public function detail_jawaban($id_soal, $encodedUniqueKey, $id_kelas = 'all')
     {

@@ -347,6 +347,24 @@
                     <div class="form-group">
                         <center><img src="<?php echo base_url(); ?>template/images/curious.jpg" style="width:180px; height:180px; text-align:center; scale: 1.4;"></center>
 
+<<<<<<< HEAD
+=======
+                            <label class="form-check-label">
+                                <button style="margin-left:20px;" class="btn btn-info" id="btn_simpan" name="btn_simpan" value="yakin" onclick="check_jawaban();">
+                                    <h8 style="font-family: cursive;">Yakin</h8>
+                                </button>
+                                <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8> -->
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <button style="margin-left:20px;" class="btn btn-danger" id="btn_simpan2" name="btn_simpan2" value="tidak yakin" onclick="check_jawaban2();">
+                                    <h8 style="font-family: cursive;">Tidak Yakin</h8>
+                                </button>
+                                <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8> -->
+                            </label>
+                        </div>
+>>>>>>> 53a6d588f81aecb4006b4c3511638d10d876d9bf
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="hidden" class="form-check-input" id="waktu">

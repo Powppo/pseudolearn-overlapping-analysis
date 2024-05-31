@@ -12,7 +12,11 @@
                 <a href="<?= base_url() ?>'overlappinganalysis/detail/ (ini id soal)" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div> -->
             <div class="col-lg-4 col-xs-4 mb-4">
+<<<<<<< HEAD
                 <a href="#" class="btn btn-flat btn-sm btn-default">
+=======
+                <a href="<?= $_SERVER['HTTP_REFERER'] ?>" class="btn btn-flat btn-sm btn-default">
+>>>>>>> 53a6d588f81aecb4006b4c3511638d10d876d9bf
                     <i class="fa fa-arrow-left"></i> Kembali
                 </a>
             </div>

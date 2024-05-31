@@ -18,7 +18,11 @@
     <div class="box-body">
         <div class="row">
             <div class="col-lg-4 col-xs-4 mb-4">
+<<<<<<< HEAD
                 <a href="#" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+=======
+                <a href="<?= $_SERVER['HTTP_REFERER'] ?>" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+>>>>>>> 53a6d588f81aecb4006b4c3511638d10d876d9bf
             </div>
             <form method="POST" action="<?= base_url('overlappinganalysis/detail/' . $id_soal) ?>">
                 <div class="form-group col-lg-4 col-xs-6 text-center">
