@@ -25,14 +25,14 @@
                                         <?php endif; ?>
                                     </div> -->
                                     <div class="form-group col-sm-12">
-                                        <textarea name="soal" id="soal" ><?= $soal->soal ?></textarea>
+                                        <textarea name="soal" id="soal" class="form-control froala-editor"><?= $soal->soal ?></textarea>
                                         <small class="help-block" style="color: #dc3545"><?= form_error('soal') ?></small>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-sm-12">
                                 <label for="bobot" class="control-label">Judul Soal</label>
-                                <textarea name="judul" id="judul" ><?= $soal->judul ?></textarea>
+                                <textarea name="judul" id="judul" class="form-control froala-editor"><?= $soal->judul ?></textarea>
                                 <!-- <input required="required" type="text" name="judul" placeholder="Judul Soal" id="judul" class="form-control"> -->
                                 <small class="help-block" style="color: #dc3545"><?= form_error('judul') ?></small>
                             </div>
@@ -98,7 +98,7 @@
                                                 <?php endif; ?>
                                             </div> -->
                                             <div class="form-group col-sm-8">
-                                                <textarea name="jawaban_<?= $abj; ?>" id="jawaban_<?= $abj; ?>" ><?= $soal->$opsi ?></textarea>
+                                                <textarea name="jawaban_<?= $abj; ?>" id="jawaban_<?= $abj; ?>" class="form-control froala-editor"><?= $soal->$opsi ?></textarea>
                                                 <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_' . $abj) ?></small>
                                             </div>
                                             <div class="form-group col-sm-4">
@@ -207,6 +207,14 @@
                                 
                             </div>
                              -->
+                            <div class="form-group col-sm-12 ">
+                                <label for="jenis_program" class="control-label">Pilih Jenis Program</label>
+                                <select required="required" name="jenis_program" class="select2 form-group" style="width:100% !important">
+                                    <option value="" disabled selected>Pilih Jenis Program</option>
+                                    <option <?= $soal->jenis_program === "0" ? "selected" : "" ?> value="0">Tanpa Inputan</option>
+                                    <option <?= $soal->jenis_program === "1" ? "selected" : "" ?> value="1">Dengan Inputan</option>
+                                </select>
+                            </div>
                             <div class="form-group col-sm-12">
                                 <label for="bobot" class="control-label">Bobot Nilai</label>
                                 <input required="required" value="<?= $soal->bobot ?>" type="number" name="bobot" placeholder="Bobot Soal" id="bobot" class="form-control">
@@ -270,11 +278,10 @@
             const elmt = `<div class="" id="formanswer_${answer}">
                 <label for="file">Jawaban ${answer}</label>
                 <div class="form-group">
-                    <textarea name="jawaban_${answer}" id="jawaban_${answer}" ><?= set_value('jawaban_${answer}') ?></textarea>
+                    <textarea name="jawaban_${answer}" id="jawaban_${answer}" class="form-control froala-editor"><?= set_value('jawaban_${answer}') ?></textarea>
                     <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_${answer}') ?></small>
                 </div>
             </div>`;
-        
             $("#wrappertwo").append(elmt);
             $('.froala-editor').froalaEditor({
                 theme: 'royal',

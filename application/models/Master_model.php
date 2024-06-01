@@ -283,21 +283,4 @@ class Master_model extends CI_Model {
         $query = $this->db->get()->result();
         return $query;
     }
-    
-    public function getKriteria()
-    {
-        $this->db->select('*');
-        $this->db->from('kriteria');
-        $query = $this->db->get()->result_array();
-        return $query;
-    }
-
-    public function checkKriteria($data)
-    {
-        $this->db->select('*');
-        $this->db->from('kriteria');
-        $this->db->where('kriteria', $data);
-        $query = $this->db->get()->result_array();
-        return $query;
-    }
 }

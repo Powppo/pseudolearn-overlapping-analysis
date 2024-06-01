@@ -19,7 +19,7 @@
                                 <small class="help-block" style="color: #dc3545"><?= form_error('file_soal') ?></small>
                             </div>
                             <div class="form-group">
-                                <textarea name="soal" id="soal"><?= set_value('soal') ?></textarea>
+                                <textarea name="soal" id="soal" class="form-control froala-editor"><?= set_value('soal') ?></textarea>
                                 <small class="help-block" style="color: #dc3545"><?= form_error('soal') ?></small>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     <label for="file">Jawaban a</label>
                                     <div class="row">
                                     <div class="form-group col-sm-8">
-                                        <textarea name="jawaban_a" id="jawaban_a"><?= set_value('jawaban_a') ?></textarea>
+                                        <textarea name="jawaban_a" id="jawaban_a" class="form-control froala-editor"><?= set_value('jawaban_a') ?></textarea>
                                         <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_a') ?></small>
                                     </div>
                                     <div class="form-group col-sm-4">
@@ -94,6 +94,17 @@
                                             <option value="m">M</option>
                                             <option value="n">N</option>
                                             <option value="o">O</option>
+                                            <option value="p">P</option>
+                                            <option value="q">Q</option>
+                                            <option value="r">R</option>
+                                            <option value="s">S</option>
+                                            <option value="t">T</option>
+                                            <option value="u">U</option>
+                                            <option value="v">V</option>
+                                            <option value="w">W</option>
+                                            <option value="x">X</option>
+                                            <option value="y">Y</option>
+                                            <option value="z">Z</option>
                                         </select>
                                         <small class="help-block" style="color: #dc3545"><?= form_error('urut_1') ?></small>
                                     </div>
@@ -167,6 +178,14 @@
                         </div>
                          -->
                         
+                        <div class="form-group col-sm-12 ">
+                            <label for="jenis_program" class="control-label">Pilih Jenis Program</label>
+                            <select required="required" name="jenis_program" class="select2 form-group" style="width:100% !important">
+                                <option value="" disabled selected>Pilih Jenis Program</option>
+                                <option value="0">Tanpa Inputan</option>
+                                <option value="1">Dengan Inputan</option>
+                            </select>
+                        </div>
                         <div class="form-group col-sm-12">
                             <label for="bobot" class="control-label">Bobot Soal</label>
                             <input required="required" value="1" type="number" name="bobot" placeholder="Bobot Soal" id="bobot" class="form-control">
@@ -229,7 +248,7 @@
                 <label for="file">Jawaban ${answer}</label>
                 <div class="row">
                 <div class="form-group col-sm-8">
-                    <textarea name="jawaban_${answer}" id="jawaban_${answer}"><?= set_value('jawaban_${answer}') ?></textarea>
+                    <textarea name="jawaban_${answer}" id="jawaban_${answer}" class="form-control froala-editor"><?= set_value('jawaban_${answer}') ?></textarea>
                     <small class="help-block" style="color: #dc3545"><?= form_error('jawaban_${answer}') ?></small>
                 </div>
                 

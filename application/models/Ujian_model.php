@@ -10,7 +10,7 @@ class Ujian_model extends CI_Model
         $this->db->select("a.id_soal, a.judul, l.nama, u.id");
         $this->db->from('tb_soal a');
         $this->db->join('tb_level l', 'a.id_level = l.id_level');
-        $this->db->join('history_ujian u', 'u.idsoal = a.id_soal and u.iduser = ' . $id_user, 'left');
+        $this->db->join('history_ujian u', 'u.idsoal = a.id_soal and u.iduser = '.$id_user, 'left');
         $this->db->where('a.id_level', $id_level);
         return $this->db->get()->result();
     }
@@ -36,7 +36,7 @@ class Ujian_model extends CI_Model
     {
         $soal_first = $this->db->query('select * from tb_soal where id_soal = ?', $id)->row();
         return $this->db->query('select * from tb_soal where id_soal = ? union all
-        select  * from tb_soal where id_soal != ? and id_level = ?', [$id, $id, $soal_first->id_soal])->result();
+        select  * from tb_soal where id_soal != ? and id_essay = ?', [$id, $id, $soal_first->id_soal])->result();
         // return $this->db->get()->result();
     }
 
@@ -246,23 +246,6 @@ class Ujian_model extends CI_Model
         $this->db->join('tb_level l', 's.id_level = l.id_level');
         return $this->db->get()->result_array();
     }
-    
-    public function get_filtered_data($id_soal, $id_kelas)
-    {
-        $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
-        $this->db->select("oa.id as id, u.id_kelas as id_kelas, oa.id_soal as soal, oa.id_user as id_user, oa.is_submit as is_submit, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas, s.soal as studi_kasus, oa.jawaban as jawaban,oa.tipe_data_jawaban as tipe_data_jawaban, oa.waktu as waktu, oa.status_jawaban as status_jawaban, l.nama as level");
-        $this->db->from('log_data oa');
-        $this->db->join('users u', 'oa.id_user = u.id');
-        $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
-        $this->db->join('tb_soal s', 'oa.id_soal = s.id_soal');
-        $this->db->join('tb_level l', 's.id_level = l.id_level');
-        $this->db->where('s.id_soal', $id_soal);
-        if ($id_kelas) {
-            $this->db->where('k.id_kelas', $id_kelas);
-        }
-        $query = $this->db->get();
-        return $query->result_array();
-    }
 
     public function detailOverlappingAnalysis($id_soal)
     {
@@ -323,8 +306,6 @@ class Ujian_model extends CI_Model
     // }
 
     public function detailMhsOverlappingAnalysis($id_soal, $unique_keys, $id_kelas)
-<<<<<<< HEAD
-=======
     {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
         $this->db->select("oa.id as id, u.id_kelas as id_kelas, oa.id_soal as soal, oa.id_user as id_user, u.username as nim, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas");
@@ -397,7 +378,6 @@ class Ujian_model extends CI_Model
         return $dataByUser;
     }
     public function getAllMhsOverlappingAnalysis($id_soal, $unique_keys)
->>>>>>> 53a6d588f81aecb4006b4c3511638d10d876d9bf
     {
         $this->db->select("CONCAT(u.first_name, ' ', u.last_name) AS nama_mahasiswa", FALSE);
         $this->db->select("oa.id as id, u.id_kelas as id_kelas, oa.id_soal as soal, oa.id_user as id_user, u.username as nim, oa.detail_jawaban_algoritma as detail_jawaban_algoritma, oa.detail_jawaban_tipedata as detail_jawaban_tipedata, k.nama as nama_kelas");
@@ -406,7 +386,6 @@ class Ujian_model extends CI_Model
         $this->db->join('tb_kelas k', 'u.id_kelas = k.id_kelas');
         $this->db->join('tb_soal s', 'oa.id_soal = s.id_soal');
         $this->db->where('oa.id_soal', $id_soal);
-        $this->db->where('k.id_kelas', $id_kelas);
         $results = $this->db->get()->result_array();
 
         // Memproses hasil untuk menyiapkan unique_key
@@ -494,6 +473,16 @@ class Ujian_model extends CI_Model
         $this->db->from('confidence_tag');
         $this->db->where('id_user', $user_id);
         $this->db->where('id_soal', $key);
+        $this->db->order_by('waktu', 'DESC');
+        return $this->db->get()->row();
+    }
+
+    function getTimeEssay($key, $user_id)
+    {
+        $this->db->select('waktu');
+        $this->db->from('nilai_essay');
+        $this->db->where('id_user', $user_id);
+        $this->db->where('id_essay', $key);
         $this->db->order_by('waktu', 'DESC');
         return $this->db->get()->row();
     }

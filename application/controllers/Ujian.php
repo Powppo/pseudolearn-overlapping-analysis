@@ -88,14 +88,17 @@ class Ujian extends CI_Controller
 		$this->akses_mahasiswa();
 
 		$user = $this->ion_auth->user()->row();
-
+    
 		$data = [
 			'user' 		=> $user,
 			'judul'		=> 'Soal',
 			'subjudul'	=> 'List Soal',
 			'mhs' 		=> $this->ujian->getIdMahasiswa($user->username),
-			'total'     => $this->db->query('select sum(nilai) as total from nilai where id_user = ?', $user->id)->row_array()['total']
-
+			'total'     => $this->db->query('select sum(nilai) as total from nilai where id_user = ?', $user->id)->row_array()['total'],
+			'totalessay' => $this->db->query('select sum(nilaiessay) as totalessay from nilai_essay where id_user = ?', $user->id)->row_array()['totalessay'],
+			'totalnilai' => $this->db->query('select sum(bobot) as totalnilai from tb_essay')->row_array()['totalnilai'],
+			'totaldnd' => $this->db->query('select sum(bobot) as totaldnd from tb_soal')->row_array()['totaldnd']
+			
 		];
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('ujian/list');
@@ -113,7 +116,10 @@ class Ujian extends CI_Controller
 			'judul'		=> 'Soal',
 			'subjudul'	=> 'List Soal',
 			'mhs' 		=> $this->ujian->getIdMahasiswa($user->username),
-			'total'     => $this->db->query('select sum(nilai) as total from nilai where id_user = ?', $user->id)->row_array()['total']
+			'total'     => $this->db->query('select sum(nilai) as total from nilai where id_user = ?', $user->id)->row_array()['total'],
+			'totalessay' => $this->db->query('select sum(nilaiessay) as totalessay from nilai_essay where id_user = ?', $user->id)->row_array()['totalessay'],
+			'totalnilai' => $this->db->query('select sum(bobot) as totalnilai from tb_essay')->row_array()['totalnilai'],
+			'totaldnd' => $this->db->query('select sum(bobot) as totaldnd from tb_soal')->row_array()['totaldnd']
 		];
 		$this->load->view('_templates/dashboard/_header.php', $data);
 		$this->load->view('ujian/list_ujian');
@@ -669,30 +675,23 @@ class Ujian extends CI_Controller
 						</table>
 					</div>
 					<!-- ALERT -->
-					<div id="success-alert" class="alert" style="display: none; height: auto;">
-						<div style="display: flex; flex-direction: column; justify-content: center;">
-						<div style="display: flex; flex-direction: row; align-items: center;">
-						<h4 style="color: #40A578;">Wah Keren, Logika Kamu Benar!🥳</h4>
-						<img src="' . base_url() . 'template/images/success.png" alt="success" style="width: 200px; height: auto;" />
-						</div>
-						<div class="modal-footer">
-						<button type="button" id="btn_corrects" onclick="return submit_nilai(' . $s->id_soal . ',' . $s->id_level . ');" class="btn btn-m btn-info"><b>Lanjut </b><i class="fa fa-caret-right"></i></button>
-						</div>
-						</div>
+					<div id="success-alert" class="alert" style="display: none; ">
+						<h4>Jawaban Anda benar, silahkan lanjut ke studi kasus berikutnya!</h4>
+						<img src="'.base_url().'template/images/success.png" alt="success" />
+						<button type="button" id="btn_corrects" onclick="return submit_nilai('.$s->id_soal.','.$s->id_soal.');" class="btn btn-m btn-info"><b>Lanjut</b></button>
 					</div>
-					<div id="fail-alert" class="alert" style="display: none;height:auto; width: 800px;">
+					<div id="fail-alert" class="alert" style="display: none;height:550px; width: 700px">
 					<span>
-						<h2 style="color: #C40C0C; margin-bottom: 120px;"><b>Yah...Jawaban Kamu masih salah, coba susun lagi ya 😥</b></h2>
-						<p id="tipe_data_feedback" style="display:none; font-size: 20px;"><b>Teliti kembali tipe data Kamu <b>' . $feedback['tipe_data'] . '</p>
-						<p id="input_feedback" style="display:none; font-size: 20px;">Teliti kembali inputan Kamu ' . $feedback['input'] . '</p>
-						<p id="process_feedback" style="display:none; font-size: 20px;">Teliti kembali proses Kamu ' . $feedback['process'] . '</p>
-						<p id="output_feedback" style="display:none; font-size: 20px;">Outputnya salah ' . $feedback['output'] . '</p></br>
+						<h2 style="color: red;"><b>Jawaban Anda masih salah, silahkan menyusun ulang!</b></h2></br>
+						<small id="tipe_data_feedback" style="display:none;"><b>Teliti kembali tipe data Anda :<b>'.$feedback['tipe_data'].'</small>
+						<small id="input_feedback" style="display:none;">Teliti kembali inputan Anda : '.$feedback['input'].'</small>
+						<small id="process_feedback" style="display:none;">Teliti kembali proses Anda :'.$feedback['process'].'</small>
+						<small id="output_feedback" style="display:none;">Ups! Outputnya salah : '.$feedback['output'].'</small>
 						</p>
 						</span>
-						<img src="' . base_url() . 'template/images/fail.jpeg" style="width:220px; height: auto; margin-top: 20px" alt="fail" /></br>
-						<div class="modal-footer" style="margin-top: 150px;">
-						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-m btn-secondary"><b>Close<b></button>
-						</div>
+						<img src="'.base_url().'template/images/fail.jpeg" style="width:120px;" alt="fail" /></br><br>
+						
+						<button type="button" id="btn_incorrects" onclick="return close_alert();" class="btn btn-m btn-info"><b>Close<b></button>
 					</div>
 					</main>';
 		}

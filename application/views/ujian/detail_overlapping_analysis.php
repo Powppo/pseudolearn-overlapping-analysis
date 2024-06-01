@@ -18,11 +18,7 @@
     <div class="box-body">
         <div class="row">
             <div class="col-lg-4 col-xs-4 mb-4">
-<<<<<<< HEAD
-                <a href="#" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
-=======
                 <a href="<?= $_SERVER['HTTP_REFERER'] ?>" class="btn btn-flat btn-sm btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
->>>>>>> 53a6d588f81aecb4006b4c3511638d10d876d9bf
             </div>
             <form method="POST" action="<?= base_url('overlappinganalysis/detail/' . $id_soal) ?>">
                 <div class="form-group col-lg-4 col-xs-6 text-center">
@@ -325,7 +321,7 @@
                         $background_color = ($nilai == 1) ? '#69C751' : '#CD4747';
 
                         echo '<div class="item-container"> ';
-                        echo '<a class="circle" href="javascript:void(0);" onclick="openInNewWindow(\'' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $encoded_unique_key . '/' . ($id_kelas ?: 'all') . '\');">';
+                        echo '<a class="circle" href="' . base_url() . 'overlappinganalysis/detail_jawaban/' . $id_soal . '/' . $encoded_unique_key . '">';
                         echo '<div>';
                         if (isset($user_counts[$unique_key])) {
                             echo $user_counts[$unique_key];

@@ -248,17 +248,38 @@ class Soal extends CI_Controller
                 $data['id_level'] = $this->input->post('id_level', true);
             }
 
+            $essay = array(
+                'id_level' => $this->input->post('id_level', true),
+                'jenis_program' => $this->input->post('jenis_program', true),
+            );
+
             if ($method === 'add') {
                 //push array
                 $data['created_on'] = time();
                 $data['updated_on'] = time();
+                $data['jenis_program'] = $this->input->post('jenis_program', true);
+
+                $this->soal->insert_soal($data);
+
+                $insert_data = array(
+                    'id_soal' => $this->db->insert_id($data),
+                    'id_level' => $this->input->post('id_level', true),
+                    'status' => 0,
+                    'jenis_program' => $this->input->post('jenis_program', true),
+                    'created_on' => time(),
+                    'updated_on' => time(),
+                );
+
+                $this->db->insert('tb_essay', $insert_data);
                 //insert data
-                $this->master->create('tb_soal', $data);
+                // $this->master->create('tb_soal', $data);
             } else if ($method === 'edit') {
                 //push array
                 $data['updated_on'] = time();
+                $data['jenis_program'] = $this->input->post('jenis_program', true);
                 //update data
                 $id_soal = $this->input->post('id_soal', true);
+                $this->master->update('tb_essay', $essay, 'id_soal', $id_soal);
                 $this->master->update('tb_soal', $data, 'id_soal', $id_soal);
             } else {
                 show_error('Method tidak diketahui', 404);

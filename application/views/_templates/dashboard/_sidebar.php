@@ -64,6 +64,19 @@
 						<i class="fa fa-graduation-cap"></i> <span>Kategori Soal</span>
 					</a>
 				</li>
+			<?php endif; ?><?php if ($this->ion_auth->is_admin() || $this->ion_auth->in_group('dosen')) : ?>
+				<li class="<?= $page === 'essay' ? "active" : "" ?>">
+					<a href="<?= base_url('essay') ?>" rel="noopener noreferrer">
+						<i class="fa fa-file-text-o"></i> <span>Essay</span>
+					</a>
+				</li>
+			<?php endif; ?>
+			<?php if ($this->ion_auth->is_admin() || $this->ion_auth->in_group('dosen')) : ?>
+				<li class="<?= $page === 'nilai' ? "active" : "" ?>">
+					<a href="<?= base_url('nilai') ?>" rel="noopener noreferrer">
+						<i class="fa fa-file-text-o"></i> <span>Nilai Mahasiswa</span>
+					</a>
+				</li>
 			<?php endif; ?>
 			<?php if ($this->ion_auth->in_group('dosen')) : ?>
 				<li class="<?= $page === 'ujian' ? "active" : "" ?>">

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class OverlappingAnalysis extends CI_Controller
 {
@@ -92,12 +92,7 @@ class OverlappingAnalysis extends CI_Controller
         $this->load->view('_templates/dashboard/_footer.php');
     }
 
-<<<<<<< HEAD
-    public function detail_jawaban($id_soal, $encodedUniqueKey, $id_kelas = 'all')
-    {
-=======
 
->>>>>>> 53a6d588f81aecb4006b4c3511638d10d876d9bf
 
     public function detail_jawaban($id_soal, $encodedUniqueKey, $id_kelas = 'all')
     {

@@ -334,84 +334,67 @@
     </div>
 </div>
 
-<!-- MODAL ADD -->
-<div class="modal fade" id="ModalaAdd" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-    <div class="modal-dialog" style="width:500px; height:300px;">
-        <div class="modal-content">
+ <!-- MODAL ADD -->
+ <div class="modal fade" id="ModalaAdd" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog" style="width:500px; height:300px;">
+            <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel" style="font-family: cursive; font-size: 18px;">Apakah kamu yakin dengan jawaban kamu?</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel" style="font-family: cursive; font-size: 18px;">Apakah yakin dengan jawaban Anda ?</h4>
+                <center><img src="<?php echo base_url(); ?>template/images/image1.png" style="width:180px; height:180px; text-align:center"></center>
             </div>
             <form class="form-horizontal">
                 <div class="modal-body">
                     <div class="form-group">
-                        <center><img src="<?php echo base_url(); ?>template/images/curious.jpg" style="width:180px; height:180px; text-align:center; scale: 1.4;"></center>
+                    <div class="form-check">
 
-<<<<<<< HEAD
-=======
-                            <label class="form-check-label">
-                                <button style="margin-left:20px;" class="btn btn-info" id="btn_simpan" name="btn_simpan" value="yakin" onclick="check_jawaban();">
-                                    <h8 style="font-family: cursive;">Yakin</h8>
-                                </button>
-                                <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8> -->
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <button style="margin-left:20px;" class="btn btn-danger" id="btn_simpan2" name="btn_simpan2" value="tidak yakin" onclick="check_jawaban2();">
-                                    <h8 style="font-family: cursive;">Tidak Yakin</h8>
-                                </button>
-                                <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8> -->
-                            </label>
-                        </div>
->>>>>>> 53a6d588f81aecb4006b4c3511638d10d876d9bf
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="hidden" class="form-check-input" id="waktu">
-                            </label>
-                        </div>
+                        <label class="form-check-label">
+                            <button style="margin-left:20px;" class="btn btn-info" id="btn_simpan" name="btn_simpan" value="yakin" onclick="check_jawaban();"><h8 style="font-family: cursive;">Yakin</h8></button>
+                            <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Ya</h8> -->
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <button style="margin-left:20px;" class="btn btn-danger" id="btn_simpan2" name="btn_simpan2" value="tidak yakin" onclick="check_jawaban_notsure();"><h8 style="font-family: cursive;">Tidak Yakin</h8></button>
+                            <!-- <input type="radio" class="form-check-input" id="confidence" name="confidence" value="tidak yakin" style="margin-left: 15px;"><h8 style="font-family: cursive;"> Tidak</h8> -->
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="hidden" class="form-check-input" id="waktu">
+                        </label>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button style="margin-left:20px;" class="btn btn-secondary" id="btn_simpan2" name="btn_simpan2" value="tidak yakin" data-bs-dismiss="modal">
-                        <h8 style="font-family: cursive;">Tutup</h8>
-                    </button>
-                    <button style="margin-left:20px;" class="btn btn-success" id="btn_simpan" name="btn_simpan" value="yakin" onclick="check_jawaban();">
-                        <h8>Submit</h8>
-                    </button>
-                </div>
-                <!--             
+            </div>
+<!--             
             <div class="modal-footer">
                 <p align="left">Klik button <strong>"Yakin"</strong> jika Anda memilih <b>"Ya"</b></p>
                 <p align="left">Klik button <b>"Tidak Yakin"</b> jika Anda memilih <b>"Tidak"</b></p>
             </div> -->
-                <!-- <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true"><h8 style="font-family: cursive;">Tutup</h8></button>
-                    <button class="btn btn-info" id="btn_simpan2" onclick="check_jawaban_notsure();"><h8 style="font-family: cursive;">Tidak Yakin</h8></button>
-                    <button class="btn btn-info" id="btn_simpan" onclick="check_jawaban();"><h8 style="font-family: cursive;">Yakin</h8></button>
-                </div> -->
+            <div class="modal-footer">
+                    <!-- <button class="btn" data-dismiss="modal" aria-hidden="true"><h8 style="font-family: cursive;">Tutup</h8></button> -->
+                    <!-- <button class="btn btn-info" id="btn_simpan2" onclick="check_jawaban_notsure();"><h8 style="font-family: cursive;">Tidak Yakin</h8></button>
+                    <button class="btn btn-info" id="btn_simpan" onclick="check_jawaban();"><h8 style="font-family: cursive;">Yakin</h8></button> -->
+                </div>
             </form>
+            </div>
+            </div>
         </div>
-    </div>
-</div>
-<div class="form-group">
-    <label class="form-check-label">
-        <input type="hidden" class="form-check-input" id="corrects" name="corrects" value="benar" style="margin-left: 15px;">
-        <h8 style="font-family: cursive;">
-    </label>
-</div>
-<div class="form-group">
-    <label class="form-check-label">
-        <input type="hidden" class="form-check-input" id="incorrects" name="incorrects" value="salah" style="margin-left: 15px;">
-        <h8 style="font-family: cursive;">
-    </label>
-</div>
-<div class="form-group">
-    <label class="form-check-label">
-        <input type="hidden" class="form-check-input" id="waktu" name="waktu" style="margin-left: 15px;">
-        <h8 style="font-family: cursive;">
-    </label>
-</div>
+        <div class="form-group">
+                <label class="form-check-label">
+                    <input type="hidden" class="form-check-input" id="corrects" name="corrects" value="benar" style="margin-left: 15px;"><h8 style="font-family: cursive;">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input type="hidden" class="form-check-input" id="incorrects" name="incorrects" value="salah" style="margin-left: 15px;"><h8 style="font-family: cursive;">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input type="hidden" class="form-check-input" id="waktu" name="waktu" style="margin-left: 15px;"><h8 style="font-family: cursive;">
+                </label>
+            </div>
 <!--END MODAL ADD-->
 <script>
     // function counterFunc(){
@@ -7594,12 +7577,13 @@
         $('#fail-alert').css('opacity', '0');
     }
 
-    function submit_nilai(id, level, status) {
+    function submit_nilai(id, soal, level, status) {
         $.getJSON(base_url + 'ujian/simpan_hasil/' + id + '/' + status, function(data) {
             window.localStorage.clear();
-            window.location.href = '<?php echo site_url("ujian/list_ujian"); ?>/' + level
+            window.location.href = '<?php echo site_url("ujianessay/essay"); ?>/?key='+ soal
         });
     }
+
     initDragAndDrop();
 
     function initDragAndDrop() {

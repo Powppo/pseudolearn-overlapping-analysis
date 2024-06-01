@@ -17,6 +17,18 @@
             <span class="d-block"> <span><?= $total ?></span></span>
         </div>
     </div>
+    <div class="col-sm-3">
+        <div class="alert bg-green">
+            <h4>Point DnD<i class="pull-right fa fa-check"></i></h4>
+            <span class="d-block"> <span><strong><?= $total ?></strong> / </span><span><?=$totaldnd?></span></span>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="alert bg-green">
+            <h4>Point Essay<i class="pull-right fa fa-check"></i></h4>
+            <span class="d-block"> <span><strong><?= $totalessay ?></strong> / </span><span><?=$totalnilai?></span></span>
+        </div>
+    </div>
     <div class="col-sm-12">
         <div class="box">
             <div class="box-header with-border">

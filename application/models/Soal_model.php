@@ -45,4 +45,17 @@ class Soal_model extends CI_Model
         $this->db->join('matkul b', 'a.matkul_id=b.id_matkul');
         return $this->db->get()->result();
     }
+
+    public function getAllSoal()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_soal');
+        return $this->db->get()->result();
+    }
+
+    public function insert_soal($data)
+    {
+        $this->db->insert('tb_soal', $data);
+        return $this->db->insert_id();
+    }
 }
